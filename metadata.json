@@ -1,0 +1,8 @@
+{
+  "name": "QIntellect Technologies",
+  "description": "High-end enterprise technology agency website specializing in AI, ERP, IoT, and Digital Transformation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

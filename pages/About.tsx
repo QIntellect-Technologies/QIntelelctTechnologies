@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { TEAM } from '../constants';
+import useSEO from '../hooks/useSEO';
 import {
   Shield,
   Trophy,
@@ -215,6 +216,20 @@ const TimelineItem = ({ year, title, desc, index }: any) => {
 };
 
 const About: React.FC = () => {
+  useSEO({
+    title: 'About QIntellect Technologies | AI & Enterprise Software Experts',
+    description: 'Learn about QIntellect Technologies — a leading AI solutions company delivering custom chatbots, Microsoft Dynamics 365, ERP, EDI, and web development services to enterprises worldwide.',
+    keywords: 'about QIntellect Technologies, AI company, enterprise software company, Microsoft Dynamics 365 partner, ERP experts, chatbot development team',
+    canonical: 'https://www.qintellecttechnologies.com/about',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'About QIntellect Technologies',
+      url: 'https://www.qintellecttechnologies.com/about',
+      description: 'QIntellect Technologies is a leading AI and enterprise software company delivering innovative solutions worldwide.',
+    }
+  });
+
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -894,40 +909,40 @@ const About: React.FC = () => {
           {/* Services Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
             {[
-              { 
-                name: { line1: 'Artificial', line2: 'Intelligence' }, 
+              {
+                name: { line1: 'Artificial', line2: 'Intelligence' },
                 logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDM3QzI5LjM4ODggMzcgMzcgMjkuMzg4OCAzNyAyMEM0NyAxMC42MDE4IDI5LjM4ODggMyAyMCAzQzEwLjYxNzcgMyAzIDEwLjYwMTIgMyAyMEMzIDI5LjM4ODggMTAuNjA0OCAzNyAyMCAzN1oiIGZpbGw9IiM2MjVERjYiLz4KPHBhdGggZD0iTTE0IDE4SDE2VjIySDE0VjE4WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTI0IDE4SDI2VjIySDI0VjE4WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDI2SDE0VjI4SDI2VjI2SDE2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+',
-                color: 'from-purple-500 to-purple-600' 
+                color: 'from-purple-500 to-purple-600'
               },
-              { 
-                name: { line1: 'Customized', line2: 'Chatbots' }, 
+              {
+                name: { line1: 'Customized', line2: 'Chatbots' },
                 logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iMTAiIGZpbGw9IiMzQjgyRjYiLz4KPGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iMiIgZmlsbD0id2hpdGUiLz4KPGNpcmNsZSBjeD0iMjYiIGN5PSIxNiIgcj0iMiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEzIDI1SDI3QzI3LjU1MjMgMjUgMjggMjQuNTUyMyAyOCAyNFMxMy40NDc3IDI0IDEzIDI0VjI1WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+',
-                color: 'from-blue-500 to-blue-600' 
+                color: 'from-blue-500 to-blue-600'
               },
-              { 
-                name: { line1: 'Customer', line2: 'Representative' }, 
+              {
+                name: { line1: 'Customer', line2: 'Representative' },
                 logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iMTAiIGZpbGw9IiMxMEI5ODEiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNCIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4QzEyIDI0LjY4NjMgMTQuNjg2MyAyMiAxOCAyMkgyMkMyNS4zMTM3IDIyIDI4IDI0LjY4NjMgMjggMjhIMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8Y2lyY2xlIGN4PSI4IiBjeT0iMTAiIHI9IjMiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjciLz4KPGNpcmNsZSBjeD0iMzIiIGN5PSIxMCIgcj0iMyIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNyIvPgo8L3N2Zz4=',
-                color: 'from-green-500 to-green-600' 
+                color: 'from-green-500 to-green-600'
               },
-              { 
-                name: { line1: 'Dynamics', line2: '365' }, 
+              {
+                name: { line1: 'Dynamics', line2: '365' },
                 logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNiIgZmlsbD0iI0Y1OTEwRSIvPgo8cGF0aCBkPSJNMTAgMTBIMzBWMTJIMTRWMjhIMTJWMTBIMTBaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMjggMzBIMTBWMjhIMjZWMTJIMjhWMzBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=',
-                color: 'from-orange-500 to-orange-600' 
+                color: 'from-orange-500 to-orange-600'
               },
-              { 
+              {
                 name: { line1: 'Web', line2: 'Development' },
                 logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNiIgZmlsbD0iI0VDNDE3NyIvPgo8cGF0aCBkPSJNMTIgMTZMMTYgMjBMMTIgMjQiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0yMCAyNEgyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+',
-                color: 'from-pink-500 to-pink-600' 
+                color: 'from-pink-500 to-pink-600'
               },
-              { 
+              {
                 name: { line1: 'EDI', line2: 'Solutions' },
                 logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNiIgZmlsbD0iIzA2QjZENSIvPgo8cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8Y2lyY2xlIGN4PSIxNCIgY3k9IjE0IiByPSIyIiBmaWxsPSIjMDZCNkQ1Ii8+CjxjaXJjbGUgY3g9IjI2IiBjeT0iMTQiIHI9IjIiIGZpbGw9IiMwNkI2RDUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyNiIgcj0iMiIgZmlsbD0iIzA2QjZENSIvPgo8cGF0aCBkPSJNMTQgMTZMMTggMjBMMjYgMTYiIHN0cm9rZT0iIzA2QjZENSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+',
-                color: 'from-cyan-500 to-cyan-600' 
+                color: 'from-cyan-500 to-cyan-600'
               },
-              { 
+              {
                 name: { line1: 'ERP', line2: 'Systems' },
                 logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNiIgZmlsbD0iI0VCQUI0MSIvPgo8cGF0aCBkPSJNOCAxMkg4VjMySDE2VjI4SDEyVjE2SDI4VjI4SDI0VjMySDMyVjEySDE2VjE2SDE2VjEySDhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=',
-                color: 'from-yellow-500 to-yellow-600' 
+                color: 'from-yellow-500 to-yellow-600'
               }
             ].map((service, i) => (
               <motion.div
@@ -945,8 +960,8 @@ const About: React.FC = () => {
                     transition={{ duration: 0.6 }}
                     className={`w-14 h-14 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-lg p-2`}
                   >
-                    <img 
-                      src={service.logo} 
+                    <img
+                      src={service.logo}
                       alt={`${service.name.line1} ${service.name.line2}`}
                       className="w-8 h-8 object-contain"
                     />
@@ -984,7 +999,7 @@ const About: React.FC = () => {
       {/* 6. HISTORY: THE SCROLLING CHRONOLOGY - POWERFUL ANIMATED VERSION */}
       {/* <section className="py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden relative">
         {/* Animated Background Elements */}
-        {/* <div className="absolute inset-0 overflow-hidden">
+      {/* <div className="absolute inset-0 overflow-hidden">
           <motion.div
             animate={{
               rotate: 360,
@@ -1010,11 +1025,11 @@ const About: React.FC = () => {
         </div>
 
         {/* Grid Pattern Overlay */}
-        {/* <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle, #3b82f6 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      {/* <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle, #3b82f6 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           {/* Header Section */}
-          {/* <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+      {/* <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1052,7 +1067,7 @@ const About: React.FC = () => {
             </motion.div>
 
             {/* Stats Badge */}
-            {/* <motion.div
+      {/* <motion.div
               initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               viewport={{ once: true }}
@@ -1081,9 +1096,9 @@ const About: React.FC = () => {
           </div>
 
           {/* Timeline */}
-          {/* <div className="relative max-w-6xl mx-auto py-12">
+      {/* <div className="relative max-w-6xl mx-auto py-12">
             {/* Center Line Glow */}
-            {/* <motion.div
+      {/* <motion.div
               initial={{ height: 0 }}
               whileInView={{ height: "100%" }}
               viewport={{ once: true }}
@@ -1212,8 +1227,8 @@ const TeamSection: React.FC = () => {
                 onClick={() => setSelectedMember(index)}
                 whileHover={{ x: 8 }}
                 className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${selectedMember === index
-                    ? 'bg-slate-50 shadow-md ring-2 ring-blue-500/20'
-                    : 'bg-white hover:bg-slate-50 shadow-sm'
+                  ? 'bg-slate-50 shadow-md ring-2 ring-blue-500/20'
+                  : 'bg-white hover:bg-slate-50 shadow-sm'
                   }`}
               >
                 <div className="relative flex-shrink-0">

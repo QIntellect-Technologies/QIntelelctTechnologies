@@ -33,6 +33,7 @@ import {
   Laptop
 } from 'lucide-react';
 import { INDUSTRIES } from '../constants';
+import useSEO from '../hooks/useSEO';
 
 // ========== INDUSTRY IMAGES ==========
 const industryImages: Record<string, { overview: string; features: string[]; cta: string }> = {
@@ -165,6 +166,20 @@ const IndustryDetail: React.FC = () => {
   const [industry, setIndustry] = useState<typeof INDUSTRIES[0] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const heroRef = useRef<HTMLDivElement>(null);
+
+  useSEO({
+    title: industry ? `${industry.title} | QIntellect Technologies` : 'Industry Solutions | QIntellect Technologies',
+    description: industry ? industry.shortDescription : 'QIntellect Technologies delivers AI, ERP, and enterprise solutions across all major industries worldwide.',
+    keywords: industry ? `${industry.title}, ${industry.technologies?.join(', ') || ''}, QIntellect Technologies, enterprise solutions` : 'industry solutions, AI, ERP, enterprise software',
+    canonical: industry ? `https://www.qintellecttechnologies.com/industries/${industry.id}` : 'https://www.qintellecttechnologies.com/industries',
+    structuredData: industry ? {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: `${industry.title} Solutions`,
+      description: industry.shortDescription,
+      url: `https://www.qintellecttechnologies.com/industries/${industry.id}`,
+    } : undefined,
+  });
 
   useEffect(() => {
     if (id) {
@@ -321,7 +336,7 @@ const IndustryDetail: React.FC = () => {
               <p className="text-xl text-slate-600 mb-8 leading-relaxed">
                 {industry.longDescription}
               </p>
-              
+
               <div className="grid grid-cols-2 gap-6 mb-8">
                 {industry.features.slice(0, 4).map((feature, index) => (
                   <motion.div
@@ -352,7 +367,7 @@ const IndustryDetail: React.FC = () => {
                   className="w-full h-96 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                
+
                 {/* Floating Stats */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -475,7 +490,7 @@ const IndustryDetail: React.FC = () => {
                     </div>
                     <h3 className="text-3xl font-bold text-slate-900">{solution.title}</h3>
                   </div>
-                  
+
                   <p className="text-lg text-slate-600 mb-8 leading-relaxed">
                     {solution.description}
                   </p>
@@ -670,7 +685,7 @@ const IndustryDetail: React.FC = () => {
               <h2 className="text-4xl md:text-6xl font-bold font-heading mb-6">
                 Ready to Transform Your <span className="text-blue-400">{industry.title}</span> Business?
               </h2>
-              
+
               <p className="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-12">
                 Let's discuss how QIntellect Technologies can help you overcome challenges and achieve your goals.
               </p>
@@ -683,7 +698,7 @@ const IndustryDetail: React.FC = () => {
                   Start Your Project
                   <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                
+
                 <a
                   href="tel:+1234567890"
                   className="group bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center gap-3 justify-center"

@@ -62,6 +62,7 @@ import {
   Banknote
 } from 'lucide-react';
 import { SERVICES } from '../constants';
+import useSEO from '../hooks/useSEO';
 
 // ========== SERVICE IMAGES (Features, Process, etc.) ==========
 const serviceImages: Record<string, { overview: string; features: string[]; cta: string }> = {
@@ -717,8 +718,8 @@ const AnimatedChatDemo: React.FC<{ conversation: { from: 'user' | 'bot'; text: s
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.2 }}
                     className={`px-5 py-4 rounded-2xl ${msg.from === 'user'
-                        ? 'bg-blue-600 text-white rounded-br-md'
-                        : 'bg-white text-slate-700 rounded-bl-md shadow-lg border border-slate-100'
+                      ? 'bg-blue-600 text-white rounded-br-md'
+                      : 'bg-white text-slate-700 rounded-bl-md shadow-lg border border-slate-100'
                       }`}
                   >
                     <p className="text-sm leading-relaxed">{msg.text}</p>
@@ -864,6 +865,21 @@ const ServiceDetail: React.FC = () => {
   const service = SERVICES.find(s => s.id === id);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  useSEO({
+    title: service ? `${service.title} | QIntellect Technologies` : 'Service | QIntellect Technologies',
+    description: service ? service.shortDescription : 'Explore QIntellect Technologies enterprise services including AI, chatbots, ERP, Dynamics 365, and web development.',
+    keywords: service ? `${service.title}, ${service.technologies?.join(', ') || ''}, QIntellect Technologies, enterprise software` : 'AI services, ERP, chatbot, Dynamics 365',
+    canonical: service ? `https://www.qintellecttechnologies.com/services/${service.id}` : 'https://www.qintellecttechnologies.com/services',
+    structuredData: service ? {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: service.title,
+      description: service.shortDescription,
+      provider: { '@type': 'Organization', name: 'QIntellect Technologies' },
+      url: `https://www.qintellecttechnologies.com/services/${service.id}`,
+    } : undefined,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
@@ -880,7 +896,7 @@ const ServiceDetail: React.FC = () => {
   }
 
   const images = serviceImages[service.id] || serviceImages['artificial-intelligence'];
-  const content = serviceContent[service.id] || serviceContent['artificial-intelligence'];
+  const content = serviceContent[service.id] || serviceContent['artificial-intelligence']; // eslint-disable-line
 
   const getIcon = (iconName: string, size: string = "w-8 h-8") => {
     const iconMap: Record<string, any> = {

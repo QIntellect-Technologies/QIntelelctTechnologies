@@ -2,27 +2,41 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock } from 'lucide-react';
+import useSEO from '../hooks/useSEO';
 
 const Contact: React.FC = () => {
+  useSEO({
+    title: 'Contact QIntellect Technologies | Get a Free AI Consultation',
+    description: 'Contact QIntellect Technologies for a free consultation on AI solutions, chatbots, Microsoft Dynamics 365, ERP, EDI, and web development. Our experts are ready to help your business grow.',
+    keywords: 'contact QIntellect Technologies, hire AI developers, AI consultation, Dynamics 365 experts, ERP consultants, chatbot development company',
+    canonical: 'https://www.qintellecttechnologies.com/contact',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact QIntellect Technologies',
+      url: 'https://www.qintellecttechnologies.com/contact',
+      description: 'Get in touch with QIntellect Technologies for AI, chatbot, ERP, and Dynamics 365 solutions.',
+    }
+  });
   return (
     <div className="pt-32 pb-20 bg-slate-50">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center mb-16 space-y-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-bold"
           >
             CONTACT OUR TEAM
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-medium text-slate-900 font-heading leading-tight"
           >
             Let's Build the <span className="text-blue-600">Exceptional</span>.
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -81,7 +95,7 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="lg:col-span-2">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}

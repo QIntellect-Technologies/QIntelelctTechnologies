@@ -2,9 +2,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, animate } from 'framer-motion';
 import { useMouseParallax, useMouse3D } from '../hooks/useMousePosition';
-import { 
-  ChevronRight, 
-  Play, 
+import useSEO from '../hooks/useSEO';
+import {
+  ChevronRight,
+  Play,
   BrainCircuit,
   MessageSquare,
   UserCheck,
@@ -52,7 +53,7 @@ import MagneticButton from '../components/MagneticButton';
 // --- Neural Hero Background Component ---
 const HeroNeuralBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -61,7 +62,7 @@ const HeroNeuralBackground: React.FC = () => {
 
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
-    
+
     interface Node {
       x: number;
       y: number;
@@ -97,7 +98,7 @@ const HeroNeuralBackground: React.FC = () => {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      
+
       // Draw Connections (Lighter stroke)
       ctx.lineWidth = 0.5;
       for (let i = 0; i < nodes.length; i++) {
@@ -182,15 +183,15 @@ const HeroNeuralBackground: React.FC = () => {
       {/* Background Radial Overlays */}
       <div className="absolute top-0 right-0 w-[80%] h-[80%] bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.08)_0%,transparent_70%)]" />
       <div className="absolute bottom-0 left-0 w-[60%] h-[60%] bg-[radial-gradient(circle_at_30%_70%,rgba(168,85,247,0.05)_0%,transparent_70%)]" />
-      
-      <canvas 
-        ref={canvasRef} 
+
+      <canvas
+        ref={canvasRef}
         className="w-full h-full opacity-60"
       />
-      
+
       {/* Mesh Noise Texture */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
-        style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }} 
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}
       />
     </div>
   );
@@ -247,9 +248,9 @@ const AnimatedCounter: React.FC<{ value: number; duration?: number }> = React.me
       { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
-    
+
     const unsubscribe = rounded.on("change", (latest) => setDisplay(latest));
-    
+
     return () => {
       observer.disconnect();
       unsubscribe();
@@ -297,7 +298,7 @@ const WebDevBentoCard: React.FC = () => {
   ];
 
   return (
-    <motion.div 
+    <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -312,53 +313,53 @@ const WebDevBentoCard: React.FC = () => {
       className="md:col-span-5 group relative overflow-visible rounded-2xl bg-white border border-slate-200/60 p-6 md:p-8 flex flex-col justify-between shadow-2xl transition-all duration-300 hover:shadow-blue-200/40 will-change-transform"
     >
       {/* 3D Depth Elements */}
-      <div 
+      <div
         style={{ transform: "translateZ(75px)", transformStyle: "preserve-3d" }}
         className="relative z-20 space-y-6"
       >
         <div className="flex justify-between items-start">
-           <div className="space-y-1">
-              <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.5em] flex items-center">
-                <Monitor className="w-3 h-3 mr-3" /> Technical Core
-              </span>
-              <h3 className="text-3xl md:text-4xl font-medium font-heading text-slate-900 tracking-tighter leading-none">
-                Web <br /> <span className="text-blue-600">Architectures.</span>
-              </h3>
-              <div className="flex items-center space-x-2 mt-4">
-                 <div className="px-3 py-1 bg-slate-900 text-[8px] font-mono text-blue-400 rounded-full border border-slate-700">
-                  BUILD_MANIFEST_V4.2
-                 </div>
-                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          <div className="space-y-1">
+            <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.5em] flex items-center">
+              <Monitor className="w-3 h-3 mr-3" /> Technical Core
+            </span>
+            <h3 className="text-3xl md:text-4xl font-medium font-heading text-slate-900 tracking-tighter leading-none">
+              Web <br /> <span className="text-blue-600">Architectures.</span>
+            </h3>
+            <div className="flex items-center space-x-2 mt-4">
+              <div className="px-3 py-1 bg-slate-900 text-[8px] font-mono text-blue-400 rounded-full border border-slate-700">
+                BUILD_MANIFEST_V4.2
               </div>
-           </div>
-           <div className="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-xl group-hover:shadow-blue-500/40 transition-all duration-500 group-hover:rotate-6">
-              <Code className="w-6 h-6" />
-           </div>
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            </div>
+          </div>
+          <div className="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-xl group-hover:shadow-blue-500/40 transition-all duration-500 group-hover:rotate-6">
+            <Code className="w-6 h-6" />
+          </div>
         </div>
-        
+
         <p className="text-slate-500 font-light text-sm md:text-base leading-relaxed max-w-sm">
           Engineering high-performance web platforms at QIntellect — from Progressive Web Apps and API-first architectures to SEO-optimized enterprise portals that integrate with your AI and ERP stack.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {features.map((f, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               whileHover={{ scale: 1.02, y: -2 }}
               className="flex flex-col p-4 bg-slate-50/80 backdrop-blur-sm rounded-2xl border border-slate-100 group/feat hover:bg-white hover:border-blue-200 hover:shadow-lg transition-all duration-300"
             >
-               <div className={`w-8 h-8 ${f.bg} ${f.color} rounded-lg flex items-center justify-center mb-3 transition-transform group-hover/feat:rotate-3`}>
-                  <f.icon className="w-4 h-4" />
-               </div>
-               <span className="text-[10px] text-slate-900 font-black uppercase tracking-widest leading-tight mb-1">{f.label}</span>
-               <span className="text-[9px] text-slate-400 font-medium uppercase tracking-wider">{f.detail}</span>
+              <div className={`w-8 h-8 ${f.bg} ${f.color} rounded-lg flex items-center justify-center mb-3 transition-transform group-hover/feat:rotate-3`}>
+                <f.icon className="w-4 h-4" />
+              </div>
+              <span className="text-[10px] text-slate-900 font-black uppercase tracking-widest leading-tight mb-1">{f.label}</span>
+              <span className="text-[9px] text-slate-400 font-medium uppercase tracking-wider">{f.detail}</span>
             </motion.div>
           ))}
         </div>
       </div>
 
       {/* Background Decor */}
-      <div 
+      <div
         style={{ transform: "translateZ(20px)" }}
         className="absolute inset-0 opacity-[0.03] pointer-events-none p-4 font-mono text-[8px] overflow-hidden whitespace-nowrap z-0"
       >
@@ -368,16 +369,16 @@ const WebDevBentoCard: React.FC = () => {
       </div>
 
       {/* Button with 3D Pop */}
-      <div 
+      <div
         style={{ transform: "translateZ(50px)" }}
         className="pt-6 relative z-20"
       >
-         <Link to="/service/web-development" className="w-full py-4 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.3em] text-center block hover:bg-blue-600 transition-all shadow-2xl relative overflow-hidden group/btn">
-            <span className="relative z-10 flex items-center justify-center">
-              Explore Technical Specs <ChevronRight className="w-3 h-3 ml-3" />
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
-         </Link>
+        <Link to="/service/web-development" className="w-full py-4 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.3em] text-center block hover:bg-blue-600 transition-all shadow-2xl relative overflow-hidden group/btn">
+          <span className="relative z-10 flex items-center justify-center">
+            Explore Technical Specs <ChevronRight className="w-3 h-3 ml-3" />
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
+        </Link>
       </div>
     </motion.div>
   );
@@ -413,31 +414,31 @@ const WhyChooseUs: React.FC = () => {
     <section className="py-24 bg-slate-50 relative overflow-hidden">
       {/* Decorative patterns */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-white skew-x-12 translate-x-1/4 pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-          
+
           {/* Left: Image Side */}
           <div className="lg:w-1/2 relative">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-10"
             >
-              <img 
-                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop" 
-                alt="Digital Agency Expertise" 
+              <img
+                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+                alt="Digital Agency Expertise"
                 className="w-full aspect-square object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-blue-900/10 pointer-events-none" />
             </motion.div>
-            
+
             {/* Background pattern matching the image vibe */}
             <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:20px_20px] opacity-20 -z-0" />
-            
+
             {/* Floating Experience Badge */}
-            <motion.div 
+            <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
               className="absolute -top-6 -right-6 p-6 bg-blue-600 text-white rounded-2xl shadow-2xl z-20"
@@ -454,18 +455,18 @@ const WhyChooseUs: React.FC = () => {
                 <span className="text-[11px] font-black text-blue-600 uppercase tracking-[0.5em]">Way To Success</span>
                 <div className="w-12 h-0.5 bg-blue-600" />
               </div>
-              
+
               <h2 className="text-4xl md:text-6xl font-medium text-slate-900 leading-tight tracking-tighter font-heading">
                 Why Enterprises Choose <br /> <span className="text-blue-600 italic uppercase">QIntellect.</span>
               </h2>
-              
+
               <p className="text-base text-slate-500 font-light leading-relaxed max-w-xl">
                 We provide smart AI solutions and all types of custom chatbots, along with Dynamics 365, web development, EDI, and ERP — everything your business needs to grow and succeed.              </p>
             </div>
 
             <div className="space-y-8">
               {features.map((f, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -498,40 +499,40 @@ const ServiceVisualizer = ({ id }: { id: string }) => {
   if (id === 'artificial-intelligence') {
     return (
       <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
-        <motion.div 
+        <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 5, repeat: Infinity }}
-          className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500 rounded-full blur-[40px]" 
+          className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500 rounded-full blur-[40px]"
         />
         <svg className="w-full h-full" viewBox="0 0 200 200">
-           <motion.circle cx="100" cy="100" r="40" stroke="rgba(37, 99, 235, 0.3)" fill="none" strokeWidth="0.5" />
-           <motion.circle cx="100" cy="100" r="60" stroke="rgba(37, 99, 235, 0.2)" fill="none" strokeWidth="0.5" />
-           {[0, 60, 120, 180, 240, 300].map(deg => {
-              const x1 = 100 + Math.cos(deg * Math.PI / 180) * 40;
-              const y1 = 100 + Math.sin(deg * Math.PI / 180) * 40;
-              return (
-                <motion.line 
-                  key={deg}
-                  x1={x1} y1={y1} x2="100" y2="100" 
-                  stroke="rgba(37, 99, 235, 0.4)" 
-                  strokeWidth="0.5" 
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              );
-           })}
+          <motion.circle cx="100" cy="100" r="40" stroke="rgba(37, 99, 235, 0.3)" fill="none" strokeWidth="0.5" />
+          <motion.circle cx="100" cy="100" r="60" stroke="rgba(37, 99, 235, 0.2)" fill="none" strokeWidth="0.5" />
+          {[0, 60, 120, 180, 240, 300].map(deg => {
+            const x1 = 100 + Math.cos(deg * Math.PI / 180) * 40;
+            const y1 = 100 + Math.sin(deg * Math.PI / 180) * 40;
+            return (
+              <motion.line
+                key={deg}
+                x1={x1} y1={y1} x2="100" y2="100"
+                stroke="rgba(37, 99, 235, 0.4)"
+                strokeWidth="0.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            );
+          })}
         </svg>
       </div>
     );
   }
-  
+
   if (id === 'customized-chatbots') {
     return (
       <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-indigo-500/30 rounded-full animate-ping" />
         <div className="flex items-center justify-center h-full">
-           <MessageSquare className="w-24 h-24 text-indigo-500/20" />
+          <MessageSquare className="w-24 h-24 text-indigo-500/20" />
         </div>
       </div>
     );
@@ -542,7 +543,7 @@ const ServiceVisualizer = ({ id }: { id: string }) => {
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_20%,rgba(99,102,241,0.2),transparent_50%)]" />
         <div className="flex items-center justify-center h-full space-x-4">
-           {[1,2,3].map(i => <motion.div key={i} animate={{ height: [10, 40, 10] }} transition={{ duration: 1, delay: i*0.2, repeat: Infinity }} className="w-1.5 bg-indigo-500/40 rounded-full" />)}
+          {[1, 2, 3].map(i => <motion.div key={i} animate={{ height: [10, 40, 10] }} transition={{ duration: 1, delay: i * 0.2, repeat: Infinity }} className="w-1.5 bg-indigo-500/40 rounded-full" />)}
         </div>
       </div>
     );
@@ -550,17 +551,17 @@ const ServiceVisualizer = ({ id }: { id: string }) => {
 
   return (
     <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
-       <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-slate-900 rounded-full blur-[40px]" />
-       <div className="grid grid-cols-6 gap-2 rotate-12 -translate-y-4">
-          {Array.from({ length: 24 }).map((_, i) => (
-            <motion.div 
-              key={i} 
-              animate={{ opacity: [0.1, 0.4, 0.1] }}
-              transition={{ duration: 2, delay: i * 0.1, repeat: Infinity }}
-              className="w-full aspect-square bg-slate-900/40 rounded-sm" 
-            />
-          ))}
-       </div>
+      <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-slate-900 rounded-full blur-[40px]" />
+      <div className="grid grid-cols-6 gap-2 rotate-12 -translate-y-4">
+        {Array.from({ length: 24 }).map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{ opacity: [0.1, 0.4, 0.1] }}
+            transition={{ duration: 2, delay: i * 0.1, repeat: Infinity }}
+            className="w-full aspect-square bg-slate-900/40 rounded-sm"
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -640,47 +641,47 @@ const FeatureEcosystem: React.FC = () => {
     <section className="py-32 bg-white relative overflow-hidden">
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:40px_40px] opacity-30 pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-20 space-y-4">
-           <motion.span 
-             initial={{ opacity: 0, y: 10 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             className="px-4 py-1.5 rounded-full bg-slate-100 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500"
-           >
-             Unified Ecosystem
-           </motion.span>
-           <h2 className="text-5xl md:text-7xl font-medium text-slate-900 tracking-tighter font-heading italic uppercase">Our Core Solutions.</h2>
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="px-4 py-1.5 rounded-full bg-slate-100 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500"
+          >
+            Unified Ecosystem
+          </motion.span>
+          <h2 className="text-5xl md:text-7xl font-medium text-slate-900 tracking-tighter font-heading italic uppercase">Our Core Solutions.</h2>
         </div>
 
         <div className="relative max-w-7xl mx-auto">
           {/* Desktop Central Hub & Lines Overlay */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none">
-             <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
-                {/* Connecting Lines */}
-                {features.map((f, i) => {
-                   const isLeft = f.side === 'left';
-                   const sideIndex = isLeft ? features.filter(feat => feat.side === 'left').findIndex(feat => feat.id === f.id) : features.filter(feat => feat.side === 'right').findIndex(feat => feat.id === f.id);
-                   // Points are calibrated for a 1000x600 viewBox with 4 cards per side
-                   const x1 = isLeft ? 400 : 600;
-                   const y1 = 300;
-                   const x2 = isLeft ? 300 : 700;
-                   const y2 = sideIndex * 135 + 90;
-                   
-                   return (
-                      <motion.path
-                        key={f.id}
-                        d={`M ${x1} ${y1} C ${isLeft ? x1-50 : x1+50} ${y1}, ${isLeft ? x2+50 : x2-50} ${y2}, ${x2} ${y2}`}
-                        stroke={hoveredId === f.id ? "#2563eb" : "#e2e8f0"}
-                        strokeWidth={hoveredId === f.id ? "3" : "1.5"}
-                        strokeOpacity={hoveredId === f.id ? "1" : "0.5"}
-                        initial={{ pathLength: 0, opacity: 0 }}
-                        whileInView={{ pathLength: 1, opacity: 1 }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
-                      />
-                   );
-                })}
-             </svg>
+            <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
+              {/* Connecting Lines */}
+              {features.map((f, i) => {
+                const isLeft = f.side === 'left';
+                const sideIndex = isLeft ? features.filter(feat => feat.side === 'left').findIndex(feat => feat.id === f.id) : features.filter(feat => feat.side === 'right').findIndex(feat => feat.id === f.id);
+                // Points are calibrated for a 1000x600 viewBox with 4 cards per side
+                const x1 = isLeft ? 400 : 600;
+                const y1 = 300;
+                const x2 = isLeft ? 300 : 700;
+                const y2 = sideIndex * 135 + 90;
+
+                return (
+                  <motion.path
+                    key={f.id}
+                    d={`M ${x1} ${y1} C ${isLeft ? x1 - 50 : x1 + 50} ${y1}, ${isLeft ? x2 + 50 : x2 - 50} ${y2}, ${x2} ${y2}`}
+                    stroke={hoveredId === f.id ? "#2563eb" : "#e2e8f0"}
+                    strokeWidth={hoveredId === f.id ? "3" : "1.5"}
+                    strokeOpacity={hoveredId === f.id ? "1" : "0.5"}
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                  />
+                );
+              })}
+            </svg>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-0 items-center">
@@ -695,13 +696,13 @@ const FeatureEcosystem: React.FC = () => {
                   className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:mr-12"
                 >
                   <div className="flex items-start gap-4">
-                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:rotate-6 transition-all duration-500 shadow-lg">
-                        <f.icon className="w-6 h-6" />
-                     </div>
-                     <div className="space-y-2">
-                        <h3 className="text-xl font-medium font-heading tracking-tight group-hover:text-blue-600 transition-colors uppercase italic">{f.title}</h3>
-                        <p className="text-sm text-slate-500 leading-relaxed font-light">{f.desc}</p>
-                     </div>
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                      <f.icon className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-medium font-heading tracking-tight group-hover:text-blue-600 transition-colors uppercase italic">{f.title}</h3>
+                      <p className="text-sm text-slate-500 leading-relaxed font-light">{f.desc}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -709,29 +710,29 @@ const FeatureEcosystem: React.FC = () => {
 
             {/* Center Hub */}
             <div className="flex justify-center z-10">
-               <motion.div 
-                 initial={{ opacity: 0, scale: 0.8 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 className="w-56 h-56 sm:w-64 sm:h-64 rounded-[3.5rem] bg-gradient-to-br from-blue-600 to-indigo-700 p-1.5 shadow-[0_0_50px_rgba(37,99,235,0.2)] flex items-center justify-center relative group"
-               >
-                  <div className="absolute inset-0 bg-blue-600 rounded-[3.5rem] blur-3xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse" />
-                  <div className="w-full h-full bg-white rounded-[3.2rem] flex flex-col items-center justify-center p-8 text-center space-y-4 relative overflow-hidden">
-                     {/* Subtle Internal Grid */}
-                     <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.05)_1px,transparent_1px)] bg-[size:15px_15px]" />
-                     
-                     <motion.div 
-                       animate={{ rotate: 360 }}
-                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                       className="w-20 h-20 bg-slate-900 rounded-2xl flex items-center justify-center relative z-10"
-                     >
-                        <Rocket className="w-10 h-10 text-white" />
-                     </motion.div>
-                     <div className="relative z-10">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">QIntellect</span>
-                        <h4 className="text-2xl font-bold font-heading text-slate-900 mt-1">Q-Engine</h4>
-                     </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                className="w-56 h-56 sm:w-64 sm:h-64 rounded-[3.5rem] bg-gradient-to-br from-blue-600 to-indigo-700 p-1.5 shadow-[0_0_50px_rgba(37,99,235,0.2)] flex items-center justify-center relative group"
+              >
+                <div className="absolute inset-0 bg-blue-600 rounded-[3.5rem] blur-3xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse" />
+                <div className="w-full h-full bg-white rounded-[3.2rem] flex flex-col items-center justify-center p-8 text-center space-y-4 relative overflow-hidden">
+                  {/* Subtle Internal Grid */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.05)_1px,transparent_1px)] bg-[size:15px_15px]" />
+
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="w-20 h-20 bg-slate-900 rounded-2xl flex items-center justify-center relative z-10"
+                  >
+                    <Rocket className="w-10 h-10 text-white" />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">QIntellect</span>
+                    <h4 className="text-2xl font-bold font-heading text-slate-900 mt-1">Q-Engine</h4>
                   </div>
-               </motion.div>
+                </div>
+              </motion.div>
             </div>
 
             {/* Right Column */}
@@ -745,13 +746,13 @@ const FeatureEcosystem: React.FC = () => {
                   className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:ml-12"
                 >
                   <div className="flex items-start gap-4">
-                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:-rotate-6 transition-all duration-500 shadow-lg">
-                        <f.icon className="w-6 h-6" />
-                     </div>
-                     <div className="space-y-2">
-                        <h3 className="text-xl font-medium font-heading tracking-tight group-hover:text-blue-600 transition-colors uppercase italic">{f.title}</h3>
-                        <p className="text-sm text-slate-500 leading-relaxed font-light">{f.desc}</p>
-                     </div>
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:-rotate-6 transition-all duration-500 shadow-lg">
+                      <f.icon className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-medium font-heading tracking-tight group-hover:text-blue-600 transition-colors uppercase italic">{f.title}</h3>
+                      <p className="text-sm text-slate-500 leading-relaxed font-light">{f.desc}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -845,156 +846,156 @@ const TestimonialSection: React.FC = () => {
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-           {/* Left Section - Header + Cards */}
-           <div className="lg:col-span-7">
-              {/* Header */}
-              <div className="mb-8">
-                 <div className="flex items-center space-x-2.5 text-[#FF5722] mb-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-current" />
-                    <span className="text-[11px] font-bold uppercase tracking-[0.35em]">TESTIMONIAL</span>
-                 </div>
-                 <h2 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight font-heading">
-                   What our clients say about <br /> QIntellect Technologies
-                 </h2>
+          {/* Left Section - Header + Cards */}
+          <div className="lg:col-span-7">
+            {/* Header */}
+            <div className="mb-8">
+              <div className="flex items-center space-x-2.5 text-[#FF5722] mb-4">
+                <div className="w-1.5 h-1.5 rounded-full bg-current" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.35em]">TESTIMONIAL</span>
               </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight font-heading">
+                What our clients say about <br /> QIntellect Technologies
+              </h2>
+            </div>
 
-              {/* Cards Section */}
-              <div className="relative">
-                 <div className="relative overflow-hidden pb-20">
-                    <motion.div 
-                      animate={{ x: -activeIndex * 380 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
-                      className="flex gap-6"
+            {/* Cards Section */}
+            <div className="relative">
+              <div className="relative overflow-hidden pb-20">
+                <motion.div
+                  animate={{ x: -activeIndex * 380 }}
+                  transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
+                  className="flex gap-6"
+                >
+                  {testimonials.map((t, i) => (
+                    <div
+                      key={i}
+                      className="flex-shrink-0 w-[360px] bg-white p-8 rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-100"
                     >
-                      {testimonials.map((t, i) => (
-                         <div
-                            key={i}
-                            className="flex-shrink-0 w-[360px] bg-white p-8 rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-100"
-                         >
-                            {/* Stars */}
-                            <div className="flex gap-1 mb-5">
-                               {[1,2,3,4,5].map(s => (
-                                 <StarIcon key={s} className="w-4 h-4 text-[#FF5722] fill-[#FF5722]" />
-                               ))}
-                            </div>
-
-                            {/* Testimonial Text */}
-                            <p className="text-[15px] text-slate-700 leading-relaxed mb-8 min-h-[140px]">
-                               {t.text}
-                            </p>
-
-                            {/* Author Info */}
-                            <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                               <div className="flex items-center gap-3">
-                                  <img 
-                                    src={t.avatar} 
-                                    alt={t.name} 
-                                    className="w-11 h-11 rounded-full object-cover"
-                                  />
-                                  <div>
-                                     <h4 className="text-sm font-bold text-slate-900">{t.name}</h4>
-                                     <p className="text-[11px] text-slate-400">{t.role}</p>
-                                  </div>
-                               </div>
-                               <Quote className="w-8 h-8 text-[#FF5722] opacity-20" />
-                            </div>
-                         </div>
-                      ))}
-                    </motion.div>
-                 </div>
-
-                 {/* Navigation Buttons */}
-                 <div className="absolute bottom-0 left-0 flex gap-3">
-                     <button 
-                       onClick={prev}
-                       className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all shadow-sm"
-                     >
-                       <ArrowRight className="w-4 h-4 rotate-180" />
-                     </button>
-                     <button 
-                       onClick={next}
-                       className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all shadow-sm"
-                     >
-                       <ArrowRight className="w-4 h-4" />
-                     </button>
-                 </div>
-              </div>
-           </div>
-
-           {/* AI Image - Modern Tailwind Design - Aligned with card height */}
-           <div className="lg:col-span-5 hidden lg:block">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                whileHover={{ y: -8 }}
-                className="relative h-[520px] group cursor-pointer"
-              >
-                {/* Main Card */}
-                <div className="relative h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-slate-100 via-white to-slate-50 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)] hover:shadow-[0_30px_80px_rgba(255,87,34,0.15)] transition-all duration-500 ring-1 ring-slate-200/50 hover:ring-[#FF5722]/30 hover:ring-2">
-                  
-                  {/* Inner Image Container */}
-                  <div className="relative h-full rounded-[2rem] overflow-hidden bg-slate-900">
-                    <motion.img 
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-                      src="/images/testimonial-img.jpg" 
-                      alt="AI Professional" 
-                      className="w-full h-full object-cover filter grayscale-[10%] group-hover:grayscale-0 transition-all duration-700"
-                    />
-                    
-                    {/* Gradient Overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-[#FF5722]/20 via-transparent to-[#FFC107]/10 opacity-40 group-hover:opacity-60 transition-opacity duration-500 mix-blend-overlay" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/30 group-hover:to-slate-900/50 transition-all duration-500" />
-                    
-                    {/* Animated Corner Indicators */}
-                    <motion.div 
-                      initial={{ scale: 0, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.3, duration: 0.5 }}
-                      className="absolute top-5 left-5 w-12 h-12 border-l-[3px] border-t-[3px] border-[#FF5722] rounded-tl-xl opacity-70 group-hover:opacity-100 group-hover:w-16 group-hover:h-16 transition-all duration-500"
-                    />
-                    <motion.div 
-                      initial={{ scale: 0, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                      className="absolute bottom-5 right-5 w-12 h-12 border-r-[3px] border-b-[3px] border-[#FF9800] rounded-br-xl opacity-70 group-hover:opacity-100 group-hover:w-16 group-hover:h-16 transition-all duration-500"
-                    />
-                    
-                    {/* Floating Badge */}
-                    <motion.div 
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 }}
-                      className="absolute top-6 right-6 backdrop-blur-md bg-white/90 px-4 py-2 rounded-full shadow-lg border border-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    >
-                      <span className="text-xs font-bold text-[#FF5722] tracking-wider">AI POWERED</span>
-                    </motion.div>
-                    
-                    {/* Bottom Info Bar */}
-                    <motion.div 
-                      initial={{ y: 100, opacity: 0 }}
-                      whileInView={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.6 }}
-                      className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-900/95 via-slate-900/80 to-transparent backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse" />
-                        <span className="text-white text-sm font-medium">Innovation in Action</span>
+                      {/* Stars */}
+                      <div className="flex gap-1 mb-5">
+                        {[1, 2, 3, 4, 5].map(s => (
+                          <StarIcon key={s} className="w-4 h-4 text-[#FF5722] fill-[#FF5722]" />
+                        ))}
                       </div>
-                    </motion.div>
-                  </div>
-                  
+
+                      {/* Testimonial Text */}
+                      <p className="text-[15px] text-slate-700 leading-relaxed mb-8 min-h-[140px]">
+                        {t.text}
+                      </p>
+
+                      {/* Author Info */}
+                      <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={t.avatar}
+                            alt={t.name}
+                            className="w-11 h-11 rounded-full object-cover"
+                          />
+                          <div>
+                            <h4 className="text-sm font-bold text-slate-900">{t.name}</h4>
+                            <p className="text-[11px] text-slate-400">{t.role}</p>
+                          </div>
+                        </div>
+                        <Quote className="w-8 h-8 text-[#FF5722] opacity-20" />
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Navigation Buttons */}
+              <div className="absolute bottom-0 left-0 flex gap-3">
+                <button
+                  onClick={prev}
+                  className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all shadow-sm"
+                >
+                  <ArrowRight className="w-4 h-4 rotate-180" />
+                </button>
+                <button
+                  onClick={next}
+                  className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all shadow-sm"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* AI Image - Modern Tailwind Design - Aligned with card height */}
+          <div className="lg:col-span-5 hidden lg:block">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              whileHover={{ y: -8 }}
+              className="relative h-[520px] group cursor-pointer"
+            >
+              {/* Main Card */}
+              <div className="relative h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-slate-100 via-white to-slate-50 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)] hover:shadow-[0_30px_80px_rgba(255,87,34,0.15)] transition-all duration-500 ring-1 ring-slate-200/50 hover:ring-[#FF5722]/30 hover:ring-2">
+
+                {/* Inner Image Container */}
+                <div className="relative h-full rounded-[2rem] overflow-hidden bg-slate-900">
+                  <motion.img
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
+                    src="/images/testimonial-img.jpg"
+                    alt="AI Professional"
+                    className="w-full h-full object-cover filter grayscale-[10%] group-hover:grayscale-0 transition-all duration-700"
+                  />
+
+                  {/* Gradient Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#FF5722]/20 via-transparent to-[#FFC107]/10 opacity-40 group-hover:opacity-60 transition-opacity duration-500 mix-blend-overlay" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/30 group-hover:to-slate-900/50 transition-all duration-500" />
+
+                  {/* Animated Corner Indicators */}
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    className="absolute top-5 left-5 w-12 h-12 border-l-[3px] border-t-[3px] border-[#FF5722] rounded-tl-xl opacity-70 group-hover:opacity-100 group-hover:w-16 group-hover:h-16 transition-all duration-500"
+                  />
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                    className="absolute bottom-5 right-5 w-12 h-12 border-r-[3px] border-b-[3px] border-[#FF9800] rounded-br-xl opacity-70 group-hover:opacity-100 group-hover:w-16 group-hover:h-16 transition-all duration-500"
+                  />
+
+                  {/* Floating Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="absolute top-6 right-6 backdrop-blur-md bg-white/90 px-4 py-2 rounded-full shadow-lg border border-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  >
+                    <span className="text-xs font-bold text-[#FF5722] tracking-wider">AI POWERED</span>
+                  </motion.div>
+
+                  {/* Bottom Info Bar */}
+                  <motion.div
+                    initial={{ y: 100, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-900/95 via-slate-900/80 to-transparent backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse" />
+                      <span className="text-white text-sm font-medium">Innovation in Action</span>
+                    </div>
+                  </motion.div>
                 </div>
-                
-                {/* Floating Background Glow */}
-                <div className="absolute inset-0 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[#FF5722]/10 via-[#FF9800]/5 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                {/* Subtle Outer Ring on Hover */}
-                <div className="absolute -inset-1 rounded-[2.8rem] bg-gradient-to-br from-[#FF5722]/20 via-[#FF9800]/10 to-transparent opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 -z-10" />
-              </motion.div>
-           </div>
+
+              </div>
+
+              {/* Floating Background Glow */}
+              <div className="absolute inset-0 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[#FF5722]/10 via-[#FF9800]/5 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+              {/* Subtle Outer Ring on Hover */}
+              <div className="absolute -inset-1 rounded-[2.8rem] bg-gradient-to-br from-[#FF5722]/20 via-[#FF9800]/10 to-transparent opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 -z-10" />
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -1104,15 +1105,14 @@ const TeamSection: React.FC = () => {
                 key={index}
                 onClick={() => setSelectedMember(index)}
                 whileHover={{ x: 8 }}
-                className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${
-                  selectedMember === index
+                className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${selectedMember === index
                     ? 'bg-slate-50 shadow-md ring-2 ring-[#FF5722]/20'
                     : 'bg-white hover:bg-slate-50 shadow-sm'
-                }`}
+                  }`}
               >
                 <div className="relative flex-shrink-0">
-                  <img 
-                    src={member.image} 
+                  <img
+                    src={member.image}
                     alt={member.name}
                     className="w-16 h-16 rounded-xl object-cover ring-2 ring-white"
                   />
@@ -1138,14 +1138,14 @@ const TeamSection: React.FC = () => {
               className="relative"
             >
               <div className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 p-2 shadow-2xl">
-                <img 
-                  src={currentMember.image} 
+                <img
+                  src={currentMember.image}
                   alt={currentMember.name}
                   className="w-full aspect-[3/4] object-cover rounded-[2.7rem]"
                 />
-                
+
                 {/* Experience Badge */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
@@ -1190,7 +1190,7 @@ const TeamSection: React.FC = () => {
                       <span className="text-sm font-bold text-slate-900">{skill.level}%</span>
                     </div>
                     <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <motion.div 
+                      <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
                         transition={{ duration: 1, delay: 0.3 }}
@@ -1222,12 +1222,12 @@ const TeamSection: React.FC = () => {
       </div>
 
       {/* Decorative 3D Element (Bottom Right) */}
-      <motion.div 
-        animate={{ 
+      <motion.div
+        animate={{
           rotate: [0, 10, 0],
           y: [0, -20, 0]
         }}
-        transition={{ 
+        transition={{
           duration: 6,
           repeat: Infinity,
           ease: "easeInOut"
@@ -1256,13 +1256,13 @@ const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus("loading");
-    
+
     // Simulate form submission
     setTimeout(() => {
       console.log("Form submitted:", formData);
       setSubmitStatus("success");
       setFormData({ name: "", phone: "", email: "", message: "" });
-      
+
       // Reset status after 3 seconds
       setTimeout(() => setSubmitStatus("idle"), 3000);
     }, 1500);
@@ -1273,7 +1273,7 @@ const ContactSection: React.FC = () => {
       {/* Animated Background Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{ 
+          animate={{
             rotate: 360,
             scale: [1, 1.1, 1]
           }}
@@ -1281,7 +1281,7 @@ const ContactSection: React.FC = () => {
           className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-[100px]"
         />
         <motion.div
-          animate={{ 
+          animate={{
             rotate: -360,
             scale: [1, 1.15, 1]
           }}
@@ -1476,7 +1476,7 @@ const LatestBlogSection: React.FC = () => {
       {/* Animated Background Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{ 
+          animate={{
             rotate: 360,
             scale: [1, 1.1, 1]
           }}
@@ -1484,7 +1484,7 @@ const LatestBlogSection: React.FC = () => {
           className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-[100px]"
         />
         <motion.div
-          animate={{ 
+          animate={{
             rotate: -360,
             scale: [1, 1.15, 1]
           }}
@@ -1507,7 +1507,7 @@ const LatestBlogSection: React.FC = () => {
             <span className="text-sm font-semibold text-red-600 tracking-widest uppercase">Latest Blog</span>
           </motion.div>
 
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -1531,8 +1531,8 @@ const LatestBlogSection: React.FC = () => {
             >
               {/* Image Container */}
               <div className="relative h-56 overflow-hidden bg-slate-900">
-                <img 
-                  src={blog.image} 
+                <img
+                  src={blog.image}
                   alt={blog.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -1560,7 +1560,7 @@ const LatestBlogSection: React.FC = () => {
 
                 {/* Read More Link */}
                 <div className="pt-4">
-                  <Link 
+                  <Link
                     to={`/blog/${blog.id}`}
                     className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors group-hover:gap-3 gap-2"
                   >
@@ -1587,13 +1587,13 @@ const Home: React.FC = () => {
   const heroParallaxY = useTransform(heroScroll, [0, 1], [0, 200]);
   const heroScale = useTransform(heroScroll, [0, 1], [1, 0.95]);
   const heroOpacity = useTransform(heroScroll, [0, 1], [1, 0.5]);
-  
+
   const philImageY = useTransform(philScroll, [0, 1], [100, -100]);
   const philCardY = useTransform(philScroll, [0, 1], [50, -50]);
 
   return (
     <div className="bg-transparent text-slate-900 font-light selection:bg-blue-100 selection:text-blue-700 overflow-x-hidden">
-      
+
       {/* 1. HERO SECTION */}
       <section ref={heroRef} className="relative min-h-[95vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-white">
         {/* Animated Background */}
@@ -1604,15 +1604,15 @@ const Home: React.FC = () => {
           <div className="absolute top-1/4 right-[15%] w-64 h-64 bg-blue-500/5 rounded-full blur-[80px]" />
           <div className="absolute bottom-1/4 left-[10%] w-96 h-96 bg-indigo-500/5 rounded-full blur-[100px]" />
         </div>
-        
+
         {/* Left Social Sidebar */}
         <div className="hidden lg:flex flex-col items-center absolute left-12 top-1/2 -translate-y-1/2 z-20">
           <div className="flex flex-col items-center space-y-8">
             <div className="flex flex-col items-center space-y-6 mb-4">
-               <span className="text-[11px] font-bold text-slate-900 [writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.3em]">
-                 Follow Us
-               </span>
-               <div className="w-px h-12 bg-slate-900" />
+              <span className="text-[11px] font-bold text-slate-900 [writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.3em]">
+                Follow Us
+              </span>
+              <div className="w-px h-12 bg-slate-900" />
             </div>
             <div className="flex flex-col space-y-6">
               <a href="#" className="text-slate-900 hover:text-blue-600 transition-colors"><Globe className="w-4 h-4" /></a>
@@ -1632,21 +1632,21 @@ const Home: React.FC = () => {
             <div className="w-24 h-px bg-slate-900 ml-auto" />
           </div>
           <div className="relative">
-             <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
-                <div className="w-8 h-16 bg-blue-600 rounded-r-full ml-auto" />
-             </div>
+            <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+              <div className="w-8 h-16 bg-blue-600 rounded-r-full ml-auto" />
+            </div>
           </div>
         </div>
 
-        <motion.div 
+        <motion.div
           style={{ y: heroParallaxY, scale: heroScale, opacity: heroOpacity }}
           className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10 will-change-transform"
         >
           <div className="flex flex-col space-y-16 max-w-7xl">
-            
+
             <div className="space-y-6">
               {/* Blue Badge Pill */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 className="inline-flex items-center space-x-4 px-4 py-2 rounded-full bg-blue-600 text-white shadow-xl shadow-blue-500/20"
@@ -1655,10 +1655,10 @@ const Home: React.FC = () => {
                 <div className="w-8 h-px bg-white/30" />
                 <ArrowRight className="w-3 h-3" />
               </motion.div>
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                 <div className="lg:col-span-12">
-                  <motion.h1 
+                  <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -1673,69 +1673,69 @@ const Home: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
-               {/* Left Group: Avatars & Play Button */}
-               <div className="flex flex-col md:flex-row items-start md:items-center space-y-10 md:space-y-0 md:space-x-12">
-                  <div className="flex flex-col space-y-4">
-                     <div className="flex -space-x-4">
-                        {[1, 2, 3, 4].map((i) => (
-                           <motion.div 
-                            key={i} 
-                            whileHover={{ y: -5, scale: 1.1 }}
-                            className="w-12 h-12 rounded-full border-4 border-white overflow-hidden bg-slate-200 shadow-lg"
-                           >
-                              <img src={`https://i.pravatar.cc/150?u=qintellect_${i}`} alt="user" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
-                           </motion.div>
-                        ))}
-                     </div>
-                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
-                        Trusted by <span className="text-slate-900">500+</span> <br /> Global Enterprises.
-                     </p>
+              {/* Left Group: Avatars & Play Button */}
+              <div className="flex flex-col md:flex-row items-start md:items-center space-y-10 md:space-y-0 md:space-x-12">
+                <div className="flex flex-col space-y-4">
+                  <div className="flex -space-x-4">
+                    {[1, 2, 3, 4].map((i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ y: -5, scale: 1.1 }}
+                        className="w-12 h-12 rounded-full border-4 border-white overflow-hidden bg-slate-200 shadow-lg"
+                      >
+                        <img src={`https://i.pravatar.cc/150?u=qintellect_${i}`} alt="user" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
+                      </motion.div>
+                    ))}
                   </div>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
+                    Trusted by <span className="text-slate-900">500+</span> <br /> Global Enterprises.
+                  </p>
+                </div>
 
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center space-x-6 cursor-pointer group"
-                  >
-                     <div className="w-16 h-16 rounded-full bg-slate-900 flex items-center justify-center text-white transition-all shadow-2xl relative overflow-hidden">
-                        <Play className="w-6 h-6 fill-white relative z-10" />
-                        <motion.div 
-                          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="absolute inset-0 bg-white/20 rounded-full" 
-                        />
-                     </div>
-                     <div className="flex flex-col">
-                        <span className="text-[10px] font-bold text-slate-900 uppercase tracking-widest leading-tight">
-                           AI & Enterprise <br /> Technology Partner.
-                        </span>
-                     </div>
-                  </motion.div>
-               </div>
-
-               {/* Right Group: Description & Button */}
-               <div className="flex flex-col space-y-10">
-                  <motion.p 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 1 }}
-                    className="text-base md:text-lg text-slate-500 leading-relaxed font-light max-w-lg"
-                  >
-                    From Artificial Intelligence and Customized Chatbots to Dynamics 365, ERP, EDI, Web & Mobile Development — QIntellect delivers end-to-end enterprise technology solutions that transform how you operate.
-                  </motion.p>
-                  
-                  <div className="flex items-center">
-                     <MagneticButton to="/contact" className="px-12 py-5 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-[0.4em] hover:bg-blue-600 transition-all shadow-2xl group flex items-center">
-                        Lets Talk
-                        <ArrowRight className="w-4 h-4 ml-4 group-hover:translate-x-2 transition-transform" />
-                     </MagneticButton>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-6 cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-full bg-slate-900 flex items-center justify-center text-white transition-all shadow-2xl relative overflow-hidden">
+                    <Play className="w-6 h-6 fill-white relative z-10" />
+                    <motion.div
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="absolute inset-0 bg-white/20 rounded-full"
+                    />
                   </div>
-               </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold text-slate-900 uppercase tracking-widest leading-tight">
+                      AI & Enterprise <br /> Technology Partner.
+                    </span>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right Group: Description & Button */}
+              <div className="flex flex-col space-y-10">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 1 }}
+                  className="text-base md:text-lg text-slate-500 leading-relaxed font-light max-w-lg"
+                >
+                  From Artificial Intelligence and Customized Chatbots to Dynamics 365, ERP, EDI, Web & Mobile Development — QIntellect delivers end-to-end enterprise technology solutions that transform how you operate.
+                </motion.p>
+
+                <div className="flex items-center">
+                  <MagneticButton to="/contact" className="px-12 py-5 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-[0.4em] hover:bg-blue-600 transition-all shadow-2xl group flex items-center">
+                    Lets Talk
+                    <ArrowRight className="w-4 h-4 ml-4 group-hover:translate-x-2 transition-transform" />
+                  </MagneticButton>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
 
         {/* Floating Indicator */}
-        <motion.div 
+        <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-300"
@@ -1748,11 +1748,11 @@ const Home: React.FC = () => {
       <section ref={philosophyRef} className="py-32 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-20 xl:gap-32">
-            
+
             {/* Left Content */}
             <div className="lg:w-1/2 space-y-12 relative z-10">
               <div className="space-y-6">
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   className="flex items-center space-x-3"
@@ -1763,7 +1763,7 @@ const Home: React.FC = () => {
                   <span className="text-[11px] font-black text-slate-900 uppercase tracking-[0.4em]">About QIntellect</span>
                 </motion.div>
 
-                <motion.h2 
+                <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
@@ -1780,7 +1780,7 @@ const Home: React.FC = () => {
                   <p className="text-lg text-slate-500 font-light leading-relaxed max-w-4xl">
                     QIntellect Technologies empowers enterprises with AI-driven automation, Customized Chatbots, AI Customer Representatives, Dynamics 365 solutions, modern Web Development, EDI integration, and full-scale ERP systems — all under one roof. Our comprehensive approach delivers seamless integration across all platforms, ensuring your business operations run efficiently while leveraging cutting-edge technologies that drive measurable results and sustainable growth for your organization.
                   </p>
-                  
+
                   <MagneticButton to="/about" className="inline-flex items-center space-x-4 bg-slate-900 text-white px-10 py-5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-blue-600 transition-all shadow-xl group">
                     <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-slate-900 -rotate-45 group-hover:rotate-0 transition-transform">
                       <ArrowRight className="w-3 h-3" />
@@ -1793,36 +1793,36 @@ const Home: React.FC = () => {
 
             {/* Right Image with Decor */}
             <div className="lg:w-1/2 relative">
-                <motion.div 
-                  style={{ y: philImageY }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1 }}
-                  className="relative rounded-[3rem] overflow-hidden shadow-3xl z-10 will-change-transform"
-                >
-                  <img 
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Team Collaboration" 
-                    className="w-full aspect-square object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+              <motion.div
+                style={{ y: philImageY }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+                className="relative rounded-[3rem] overflow-hidden shadow-3xl z-10 will-change-transform"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+                  alt="Team Collaboration"
+                  className="w-full aspect-square object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-blue-600/5 mix-blend-multiply" />
               </motion.div>
 
               {/* Decorative Squiggle SVG */}
               <svg className="absolute -top-12 -left-12 w-48 h-48 text-blue-100 -rotate-12 z-0" viewBox="0 0 200 200">
-                <motion.path 
+                <motion.path
                   initial={{ pathLength: 0 }}
                   whileInView={{ pathLength: 1 }}
                   transition={{ duration: 2 }}
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  d="M40,100 C40,40 160,40 160,100 C160,160 40,160 40,100 C40,70 100,70 100,100 C100,130 70,130 70,100" 
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  d="M40,100 C40,40 160,40 160,100 C160,160 40,160 40,100 C40,70 100,70 100,100 C100,130 70,130 70,100"
                 />
               </svg>
 
               {/* Floating Element */}
-              <motion.div 
+              <motion.div
                 style={{ y: philCardY }}
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -1849,65 +1849,65 @@ const Home: React.FC = () => {
       {/* 5. INDUSTRY SECTOR EXPERTISE */}
       <section className="py-48">
         <div className="container mx-auto px-4 md:px-8">
-           <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-12">
-              <div className="space-y-6 max-w-3xl">
-                 <span className="text-[11px] font-black text-blue-600 uppercase tracking-[0.5em]">Industries We Serve</span>
-                 <h2 className="text-5xl md:text-8xl font-medium text-slate-900 leading-tight tracking-tighter font-heading">Transforming Industries.</h2>
-              </div>
-              <Link to="/industries" className="px-12 py-6 glass-card border-2 border-slate-200 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all mb-4">Explore All Sectors</Link>
-           </div>
+          <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-12">
+            <div className="space-y-6 max-w-3xl">
+              <span className="text-[11px] font-black text-blue-600 uppercase tracking-[0.5em]">Industries We Serve</span>
+              <h2 className="text-5xl md:text-8xl font-medium text-slate-900 leading-tight tracking-tighter font-heading">Transforming Industries.</h2>
+            </div>
+            <Link to="/industries" className="px-12 py-6 glass-card border-2 border-slate-200 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all mb-4">Explore All Sectors</Link>
+          </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-              {[
-                { 
-                  name: 'Hospitality & Customer Support', 
-                  icon: Activity, 
-                  color: 'text-blue-500', 
-                  bg: 'bg-blue-50', 
-                  img: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=80&w=2070&auto=format&fit=crop',
-                  desc: 'AI Customer Representatives providing 24/7 support, voice-enabled service agents, and intelligent chatbots for seamless guest experiences.'
-                },
-                { 
-                  name: 'Retail & E-Commerce', 
-                  icon: ShoppingCart, 
-                  color: 'text-purple-500', 
-                  bg: 'bg-purple-50', 
-                  img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop',
-                  desc: 'Customized Chatbots for customer engagement, Dynamics 365 Commerce, and intelligent web platforms that drive conversions.'
-                },
-                { 
-                  name: 'Manufacturing & Supply Chain', 
-                  icon: Factory, 
-                  color: 'text-orange-500', 
-                  bg: 'bg-orange-50', 
-                  img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop',
-                  desc: 'AI-driven predictive maintenance, ERP-unified production lines, and EDI-powered supply chain automation for Industry 4.0.'
-                }
-              ].map(ind => (
-                <motion.div 
-                  key={ind.name} 
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="group rounded-2xl overflow-hidden glass-card border border-white hover:shadow-2xl transition-all duration-1000 flex flex-col"
-                >
-                   <div className="h-48 overflow-hidden relative bg-slate-900">
-                      <img src={ind.img} alt={ind.name} className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-90" />
-                      <div className="absolute inset-0 bg-blue-900/10" />
-                   </div>
-                   <div className="p-6 space-y-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${ind.bg} ${ind.color} shadow-lg border border-white/50 group-hover:scale-110 transition-transform`}>
-                        <ind.icon className="w-6 h-6" />
-                      </div>
-                      <h4 className="text-2xl font-medium text-slate-900 font-heading tracking-tight">{ind.name}</h4>
-                      <p className="text-sm text-slate-500 font-light leading-relaxed">
-                        {ind.desc}
-                      </p>
-                      <Link to="/contact" className="inline-flex items-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-900 group-hover:text-blue-600 transition-colors">Strategic Roadmap <ArrowRight className="w-4 h-4 ml-4" /></Link>
-                   </div>
-                </motion.div>
-              ))}
-           </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+            {[
+              {
+                name: 'Hospitality & Customer Support',
+                icon: Activity,
+                color: 'text-blue-500',
+                bg: 'bg-blue-50',
+                img: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=80&w=2070&auto=format&fit=crop',
+                desc: 'AI Customer Representatives providing 24/7 support, voice-enabled service agents, and intelligent chatbots for seamless guest experiences.'
+              },
+              {
+                name: 'Retail & E-Commerce',
+                icon: ShoppingCart,
+                color: 'text-purple-500',
+                bg: 'bg-purple-50',
+                img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop',
+                desc: 'Customized Chatbots for customer engagement, Dynamics 365 Commerce, and intelligent web platforms that drive conversions.'
+              },
+              {
+                name: 'Manufacturing & Supply Chain',
+                icon: Factory,
+                color: 'text-orange-500',
+                bg: 'bg-orange-50',
+                img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop',
+                desc: 'AI-driven predictive maintenance, ERP-unified production lines, and EDI-powered supply chain automation for Industry 4.0.'
+              }
+            ].map(ind => (
+              <motion.div
+                key={ind.name}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="group rounded-2xl overflow-hidden glass-card border border-white hover:shadow-2xl transition-all duration-1000 flex flex-col"
+              >
+                <div className="h-48 overflow-hidden relative bg-slate-900">
+                  <img src={ind.img} alt={ind.name} className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-90" />
+                  <div className="absolute inset-0 bg-blue-900/10" />
+                </div>
+                <div className="p-6 space-y-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${ind.bg} ${ind.color} shadow-lg border border-white/50 group-hover:scale-110 transition-transform`}>
+                    <ind.icon className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-2xl font-medium text-slate-900 font-heading tracking-tight">{ind.name}</h4>
+                  <p className="text-sm text-slate-500 font-light leading-relaxed">
+                    {ind.desc}
+                  </p>
+                  <Link to="/contact" className="inline-flex items-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-900 group-hover:text-blue-600 transition-colors">Strategic Roadmap <ArrowRight className="w-4 h-4 ml-4" /></Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BLOGS } from '../constants';
-import { 
-  Calendar, 
-  User, 
-  Clock, 
-  ArrowLeft, 
-  Share2, 
-  ChevronRight, 
-  Tag, 
-  Mail, 
+import {
+  Calendar,
+  User,
+  Clock,
+  ArrowLeft,
+  Share2,
+  ChevronRight,
+  Tag,
+  Mail,
   TrendingUp,
   ArrowRight,
   Bookmark,
@@ -23,10 +23,30 @@ import {
   Search,
   Star
 } from 'lucide-react';
+import useSEO from '../hooks/useSEO';
 
 const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const post = BLOGS.find(p => p.id === id);
+
+  useSEO({
+    title: post ? `${post.title} | QIntellect Technologies Blog` : 'Blog Post | QIntellect Technologies',
+    description: post ? post.excerpt : 'Read expert insights on AI, chatbots, ERP, and enterprise technology from QIntellect Technologies.',
+    keywords: post ? post.tags.join(', ') + ', QIntellect Technologies, AI blog, enterprise technology' : 'AI blog, enterprise technology, QIntellect Technologies',
+    canonical: post ? `https://www.qintellecttechnologies.com/blog/${post.id}` : 'https://www.qintellecttechnologies.com/blog',
+    structuredData: post ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      author: { '@type': 'Person', name: post.author },
+      datePublished: post.date,
+      publisher: { '@type': 'Organization', name: 'QIntellect Technologies' },
+      url: `https://www.qintellecttechnologies.com/blog/${post.id}`,
+      image: post.image,
+      keywords: post.tags.join(', '),
+    } : undefined,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -55,16 +75,16 @@ const BlogDetail: React.FC = () => {
   // Format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
 
   return (
     <div className="bg-white min-h-screen">
-      
+
       {/* Breadcrumb */}
       <div className="bg-gray-50 pt-32 pb-8 border-b">
         <div className="container mx-auto px-4 md:px-8">
@@ -80,11 +100,11 @@ const BlogDetail: React.FC = () => {
 
       <div className="container mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          
+
           {/* Main Content */}
           <div className="lg:col-span-3">
             <article className="bg-white">
-              
+
               {/* Article Header */}
               <header className="mb-8">
                 <div className="mb-4">
@@ -92,11 +112,11 @@ const BlogDetail: React.FC = () => {
                     {post.category}
                   </span>
                 </div>
-                
+
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                   {post.title}
                 </h1>
-                
+
                 <div className="flex items-center gap-6 text-sm text-gray-600 mb-6">
                   <div className="flex items-center gap-2">
                     <User className="w-4 h-4" />
@@ -119,8 +139,8 @@ const BlogDetail: React.FC = () => {
 
               {/* Featured Image */}
               <div className="mb-12">
-                <img 
-                  src={post.image} 
+                <img
+                  src={post.image}
                   alt={post.title}
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
                 />
@@ -203,8 +223,8 @@ const BlogDetail: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {post.galleryImages.map((image, index) => (
                       <div key={index} className="rounded-xl overflow-hidden shadow-lg">
-                        <img 
-                          src={image} 
+                        <img
+                          src={image}
                           alt={`Gallery image ${index + 1}`}
                           className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
                         />
@@ -234,8 +254,8 @@ const BlogDetail: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map(tag => (
-                    <span 
-                      key={tag} 
+                    <span
+                      key={tag}
                       className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-600 transition-colors cursor-pointer"
                     >
                       #{tag}
@@ -247,8 +267,8 @@ const BlogDetail: React.FC = () => {
               {/* Author Info */}
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12">
                 <div className="flex items-start gap-6">
-                  <img 
-                    src={post.authorImage} 
+                  <img
+                    src={post.authorImage}
                     alt={post.author}
                     className="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-lg"
                   />
@@ -256,7 +276,7 @@ const BlogDetail: React.FC = () => {
                     <h3 className="text-xl font-bold text-gray-900 mb-2">{post.author}</h3>
                     <p className="text-blue-600 font-medium mb-3">{post.authorRole}</p>
                     <p className="text-gray-600 leading-relaxed">
-                      {post.author} is a seasoned expert in {post.category.toLowerCase()} with extensive experience in enterprise solutions and digital transformation. 
+                      {post.author} is a seasoned expert in {post.category.toLowerCase()} with extensive experience in enterprise solutions and digital transformation.
                       They regularly contribute insights on cutting-edge technologies and industry best practices.
                     </p>
                   </div>
@@ -290,12 +310,12 @@ const BlogDetail: React.FC = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-8 space-y-8">
-              
+
               {/* Author Card */}
               <div className="bg-white rounded-xl shadow-lg p-6 border">
                 <div className="text-center">
-                  <img 
-                    src={post.authorImage} 
+                  <img
+                    src={post.authorImage}
                     alt={post.author}
                     className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
                   />
@@ -315,14 +335,14 @@ const BlogDetail: React.FC = () => {
                 </h3>
                 <div className="space-y-4">
                   {sidebarPosts.slice(0, 4).map(relatedPost => (
-                    <Link 
-                      key={relatedPost.id} 
+                    <Link
+                      key={relatedPost.id}
                       to={`/blog/${relatedPost.id}`}
                       className="group block hover:bg-gray-50 rounded-lg p-3 transition-colors -mx-3"
                     >
                       <div className="flex gap-3">
-                        <img 
-                          src={relatedPost.image} 
+                        <img
+                          src={relatedPost.image}
                           alt={relatedPost.title}
                           className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
                         />
@@ -337,7 +357,7 @@ const BlogDetail: React.FC = () => {
                   ))}
                 </div>
                 <div className="mt-6 pt-6 border-t">
-                  <Link 
+                  <Link
                     to="/blog"
                     className="flex items-center justify-center gap-2 w-full py-2 text-blue-600 hover:text-blue-700 transition-colors font-medium text-sm"
                   >
@@ -366,7 +386,7 @@ const BlogDetail: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {['AI', 'Machine Learning', 'Automation', 'Cloud', 'Security', 'Integration', 'Analytics', 'Innovation'].map(tag => (
-                    <span 
+                    <span
                       key={tag}
                       className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-600 transition-colors cursor-pointer"
                     >
@@ -389,14 +409,14 @@ const BlogDetail: React.FC = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.slice(0, 3).map(relatedPost => (
-                <Link 
+                <Link
                   key={relatedPost.id}
                   to={`/blog/${relatedPost.id}`}
                   className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border"
                 >
                   <div className="aspect-video overflow-hidden">
-                    <img 
-                      src={relatedPost.image} 
+                    <img
+                      src={relatedPost.image}
                       alt={relatedPost.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />

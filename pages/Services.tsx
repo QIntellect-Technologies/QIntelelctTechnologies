@@ -45,6 +45,7 @@ import {
   Home
 } from 'lucide-react';
 import { SERVICES } from '../constants';
+import useSEO from '../hooks/useSEO';
 
 // Animated Typewriter Component
 const ServiceTypewriter: React.FC = React.memo(() => {
@@ -108,6 +109,21 @@ const AnimatedCounter: React.FC<{ target: number; suffix?: string; duration?: nu
 };
 
 const Services: React.FC = () => {
+  useSEO({
+    title: 'Our Services | AI, Chatbots, ERP, Dynamics 365 & Web Development',
+    description: 'Explore QIntellect Technologies services: AI solutions, custom chatbots, Microsoft Dynamics 365, ERP & EDI systems, web development, and mobile apps. Enterprise-grade technology for your business.',
+    keywords: 'AI services, chatbot development, Microsoft Dynamics 365 implementation, ERP solutions, EDI integration, web development services, mobile app development, enterprise software services',
+    canonical: 'https://www.qintellecttechnologies.com/services',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'QIntellect Technologies Services',
+      provider: { '@type': 'Organization', name: 'QIntellect Technologies' },
+      description: 'AI solutions, chatbots, ERP, Dynamics 365, web and mobile development services.',
+      url: 'https://www.qintellecttechnologies.com/services',
+    }
+  });
+
   const [activeStep, setActiveStep] = useState(0);
 
   const getIcon = (iconName: string, size: string = "w-8 h-8") => {

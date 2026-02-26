@@ -50,152 +50,7 @@ import { Link } from 'react-router-dom';
 import { SERVICES, BLOGS } from '../constants';
 import MagneticButton from '../components/MagneticButton';
 
-// --- Neural Hero Background Component ---
-const HeroNeuralBackground: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    interface Node {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-    }
-
-    interface Pulse {
-      startNode: Node;
-      endNode: Node;
-      progress: number;
-      speed: number;
-    }
-
-    const nodes: Node[] = [];
-    const pulses: Pulse[] = [];
-    const nodeCount = Math.min(Math.floor((width * height) / 45000) + 10, 45); // Further reduced node count
-    const connectionDist = 160; // Slightly tighter connections
-
-    // Initialize Nodes
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.3, // Slower nodes
-        vy: (Math.random() - 0.5) * 0.3,
-        radius: Math.random() * 1.5 + 0.5
-      });
-    }
-
-    let frameId: number;
-
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      // Draw Connections (Lighter stroke)
-      ctx.lineWidth = 0.5;
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        node.x += node.vx;
-        node.y += node.vy;
-
-        if (node.x < 0 || node.x > width) node.vx *= -1;
-        if (node.y < 0 || node.y > height) node.vy *= -1;
-
-        for (let j = i + 1; j < nodes.length; j++) {
-          const other = nodes[j];
-          const dx = node.x - other.x;
-          const dy = node.y - other.y;
-          const distSq = dx * dx + dy * dy;
-
-          if (distSq < connectionDist * connectionDist) {
-            const dist = Math.sqrt(distSq);
-            ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
-            ctx.lineTo(other.x, other.y);
-            const alpha = (1 - dist / connectionDist) * 0.15;
-            ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-            ctx.stroke();
-
-            if (Math.random() < 0.0005 && pulses.length < 15) {
-              pulses.push({
-                startNode: node,
-                endNode: other,
-                progress: 0,
-                speed: 0.005 + Math.random() * 0.01
-              });
-            }
-          }
-        }
-
-        // Draw Node (Simplified)
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(37, 99, 235, 0.3)';
-        ctx.fill();
-      }
-
-      // Update & Draw Pulses (Removed ShadowBlur)
-      for (let i = pulses.length - 1; i >= 0; i--) {
-        const p = pulses[i];
-        p.progress += p.speed;
-
-        if (p.progress >= 1) {
-          pulses.splice(i, 1);
-          continue;
-        }
-
-        const px = p.startNode.x + (p.endNode.x - p.startNode.x) * p.progress;
-        const py = p.startNode.y + (p.endNode.y - p.startNode.y) * p.progress;
-
-        ctx.beginPath();
-        ctx.arc(px, py, 2, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(168, 85, 247, 0.8)';
-        ctx.fill();
-      }
-
-      frameId = requestAnimationFrame(draw);
-    };
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-    draw();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(frameId);
-    };
-  }, []);
-
-  return (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-slate-50">
-      {/* Background Radial Overlays */}
-      <div className="absolute top-0 right-0 w-[80%] h-[80%] bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.08)_0%,transparent_70%)]" />
-      <div className="absolute bottom-0 left-0 w-[60%] h-[60%] bg-[radial-gradient(circle_at_30%_70%,rgba(168,85,247,0.05)_0%,transparent_70%)]" />
-
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full opacity-60"
-      />
-
-      {/* Mesh Noise Texture */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}
-      />
-    </div>
-  );
-};
+import QuantumNetwork from '../components/QuantumNetwork';
 
 // --- Typewriter Component for Hero ---
 const TypewriterHeadline: React.FC = React.memo(() => {
@@ -1106,8 +961,8 @@ const TeamSection: React.FC = () => {
                 onClick={() => setSelectedMember(index)}
                 whileHover={{ x: 8 }}
                 className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${selectedMember === index
-                    ? 'bg-slate-50 shadow-md ring-2 ring-[#FF5722]/20'
-                    : 'bg-white hover:bg-slate-50 shadow-sm'
+                  ? 'bg-slate-50 shadow-md ring-2 ring-[#FF5722]/20'
+                  : 'bg-white hover:bg-slate-50 shadow-sm'
                   }`}
               >
                 <div className="relative flex-shrink-0">
@@ -1597,7 +1452,7 @@ const Home: React.FC = () => {
       {/* 1. HERO SECTION */}
       <section ref={heroRef} className="relative min-h-[95vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-white">
         {/* Animated Background */}
-        <HeroNeuralBackground />
+        <QuantumNetwork />
 
         {/* Floating Modern Shapes (Optimized: Removed expensive blur animation) */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

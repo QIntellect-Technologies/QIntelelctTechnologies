@@ -45,60 +45,62 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         group.add(headGroup);
 
         // Main sphere head - Adjusted for high visibility
-        const headGeo = new THREE.SphereGeometry(0.5, 64, 64);
+        const headGeo = new THREE.SphereGeometry(0.48, 64, 64);
         const headMat = new THREE.MeshStandardMaterial({
             color: 0xffffff,
             emissive: color,
-            emissiveIntensity: 0.2, // Increased glow
-            roughness: 0.1,
+            emissiveIntensity: 0.2,
+            roughness: 0.2,
             metalness: 0.8,
             transparent: true,
-            opacity: 0.98
+            opacity: 0.95
         });
         const head = new THREE.Mesh(headGeo, headMat);
         headGroup.add(head);
 
         // Sub-glow (Inner core)
         const glowGeo = new THREE.SphereGeometry(0.4, 32, 32);
-        const glowMatInner = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.5 });
+        const glowMatInner = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.4 });
         const innerGlow = new THREE.Mesh(glowGeo, glowMatInner);
         headGroup.add(innerGlow);
 
-        // Dark Visor / Face Area
-        const visorGeo = new THREE.SphereGeometry(0.46, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
-        const visorMat = new THREE.MeshBasicMaterial({ color: 0x050505 });
+        // Dark Visor / Face Area - Moved slightly out
+        const visorGeo = new THREE.SphereGeometry(0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
+        const visorMat = new THREE.MeshBasicMaterial({ color: 0x050505, transparent: true, opacity: 0.9 });
         const visor = new THREE.Mesh(visorGeo, visorMat);
         visor.rotation.x = -Math.PI / 2.5;
         visor.position.z = 0.05;
         headGroup.add(visor);
 
         // 2. Animated Light Bars (Eyes & Mouth)
-        const barGeo = new THREE.PlaneGeometry(0.15, 0.03);
+        const barGeo = new THREE.PlaneGeometry(0.15, 0.04);
         const barMat = new THREE.MeshBasicMaterial({
             color: color,
             transparent: true,
             opacity: 0.9,
-            blending: THREE.AdditiveBlending
+            blending: THREE.AdditiveBlending,
+            side: THREE.DoubleSide
         });
 
         const eyeL = new THREE.Mesh(barGeo, barMat);
-        eyeL.position.set(-0.18, 0.1, 0.48);
+        eyeL.position.set(-0.18, 0.1, 0.52);
         headGroup.add(eyeL);
 
         const eyeR = new THREE.Mesh(barGeo, barMat);
-        eyeR.position.set(0.18, 0.1, 0.48);
+        eyeR.position.set(0.18, 0.1, 0.52);
         headGroup.add(eyeR);
 
         // Mouth Bar (The "Talking" element)
-        const mouthGeo = new THREE.PlaneGeometry(0.2, 0.02);
+        const mouthGeo = new THREE.PlaneGeometry(0.2, 0.03);
         const mouthMat = new THREE.MeshBasicMaterial({
             color: color,
             transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
+            opacity: 0.9,
+            blending: THREE.AdditiveBlending,
+            side: THREE.DoubleSide
         });
         const mouth = new THREE.Mesh(mouthGeo, mouthMat);
-        mouth.position.set(0, -0.15, 0.48);
+        mouth.position.set(0, -0.15, 0.52);
         headGroup.add(mouth);
 
         // 3. Digital Halo / Orbitals
@@ -272,7 +274,9 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                             if (mouth) {
                                 const pulse = Math.abs(Math.sin(time * 18)) * (0.3 + Math.random() * 0.7);
                                 mouth.scale.y = 1 + pulse * 5;
-                                mouth.material.opacity = 0.5 + pulse * 0.5;
+                                if (mouth.material && 'opacity' in mouth.material) {
+                                    (mouth.material as any).opacity = 0.6 + pulse * 0.4;
+                                }
                             }
 
                             if (eyeL && eyeR) {

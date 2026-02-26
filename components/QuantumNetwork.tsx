@@ -116,6 +116,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
         // Store references for animation
         (group as any).userData = {
+            isRobot: true,
             headGroup,
             eyeL,
             eyeR,
@@ -124,61 +125,46 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
             ring2
         };
 
-        return { group };
+        return group;
     };
 
     const createDomainModel = (index: number) => {
-        const group = new THREE.Group();
-        let geo: THREE.BufferGeometry | null = null;
         const color = DOMAIN_COLORS[index % DOMAIN_COLORS.length];
 
-        // Specific "Wow" Models (v11 Fixes & Upgrades)
+        // AI Section
         if (index === 0) {
-            // AI: Advanced Neural Neural Lattice
-            geo = new THREE.IcosahedronGeometry(0.85, 3);
-        } else if (index === 1) {
-            // Chatbot: Premium 3D Robot
-            const { group: robot } = createRobotModel(color);
-            group.add(robot);
-            return { group, geo: null };
-        } else if (index === 3 || index === 4 || index === 6) {
-            // Dynamics/ERP: High-Visibility Tech Crystal
-            geo = new THREE.OctahedronGeometry(1.0, 1);
-        } else {
-            const geometries = [
-                new THREE.IcosahedronGeometry(0.85, 2),
-                new THREE.TorusKnotGeometry(0.6, 0.25, 100, 16),
-                new THREE.OctahedronGeometry(0.95, 1),
-                new THREE.TorusGeometry(0.75, 0.3, 16, 50),
-                new THREE.BoxGeometry(1.2, 1.2, 1.2, 2, 2, 2),
-                new THREE.DodecahedronGeometry(0.85, 0),
-                new THREE.SphereGeometry(0.85, 16, 16),
-                new THREE.IcosahedronGeometry(0.85, 0)
-            ];
-            geo = geometries[index % geometries.length];
+            const group = new THREE.Group();
+            const geo = new THREE.IcosahedronGeometry(0.85, 3);
+            const edges = new THREE.EdgesGeometry(geo);
+            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.6 }));
+            const nodes = new THREE.Points(geo, new THREE.PointsMaterial({ color, size: 0.025, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending }));
+            group.add(line, nodes);
+            return { group, geo };
         }
 
+        // Chatbot Section - RETURN ROBOT DIRECTLY
+        if (index === 1) {
+            const robotGroup = createRobotModel(color);
+            return { group: robotGroup, geo: null };
+        }
+
+        // Other Sections
+        const group = new THREE.Group();
+        const geometries = [
+            new THREE.IcosahedronGeometry(0.85, 2),
+            new THREE.TorusKnotGeometry(0.6, 0.25, 100, 16),
+            new THREE.OctahedronGeometry(0.95, 1),
+            new THREE.TorusGeometry(0.75, 0.3, 16, 50),
+            new THREE.BoxGeometry(1.2, 1.2, 1.2, 2, 2, 2),
+            new THREE.DodecahedronGeometry(0.85, 0),
+            new THREE.SphereGeometry(0.85, 16, 16),
+            new THREE.IcosahedronGeometry(0.85, 0)
+        ];
+        const geo = geometries[index % geometries.length];
         const edges = new THREE.EdgesGeometry(geo);
-        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
-            color: color,
-            transparent: true,
-            opacity: 0.6,
-            linewidth: 1 // Only works on some drivers, but good to have
-        }));
-
-        const nodes = new THREE.Points(geo, new THREE.PointsMaterial({
-            color: color,
-            size: 0.025,
-            transparent: true,
-            opacity: 0.9,
-            blending: THREE.AdditiveBlending
-        }));
-
-        group.add(line);
-        group.add(nodes);
-
-        // Cleanup the temporary geometry used for edges/points
-        // Note: We don't dispose the geo here because it's shared by Points and Edges
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.6 }));
+        const nodes = new THREE.Points(geo, new THREE.PointsMaterial({ color, size: 0.025, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending }));
+        group.add(line, nodes);
         return { group, geo };
     };
 
@@ -275,32 +261,28 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                     coreGroupRef.current.position.x += Math.cos(time * 0.8) * 0.0006;
 
                     // Animate Procedural Robot
-                    if (coreGroupRef.current.children[0]) {
-                        const robot = coreGroupRef.current.children[0];
-                        const { headGroup, eyeL, eyeR, mouth, ring1, ring2 } = (robot as any).userData || {};
+                    const robot = coreGroupRef.current.children[0];
+                    if (robot && (robot as any).userData?.isRobot) {
+                        const { headGroup, mouth, eyeL, eyeR, ring1, ring2 } = (robot as any).userData;
 
                         if (headGroup) {
-                            // Gaze Tracking (Head follows mouse)
-                            headGroup.rotation.y = THREE.MathUtils.lerp(headGroup.rotation.y, mouseX * 0.4, 0.1);
-                            headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, -mouseY * 0.2, 0.1);
+                            headGroup.rotation.y = THREE.MathUtils.lerp(headGroup.rotation.y, mouseX * 0.6, 0.1);
+                            headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, -mouseY * 0.3, 0.1);
 
-                            // "Talking" Pulse (Mouth bar scale & opacity flicker)
                             if (mouth) {
-                                const talkLevel = Math.abs(Math.sin(time * 20)) * (0.5 + Math.random() * 0.5);
-                                mouth.scale.y = 0.5 + talkLevel * 2.5;
-                                mouth.material.opacity = 0.5 + talkLevel * 0.4;
+                                const pulse = Math.abs(Math.sin(time * 18)) * (0.3 + Math.random() * 0.7);
+                                mouth.scale.y = 1 + pulse * 5;
+                                mouth.material.opacity = 0.5 + pulse * 0.5;
                             }
 
-                            // Blink effect
                             if (eyeL && eyeR) {
-                                const blink = Math.sin(time * 0.5) > 0.98 ? 0 : 1;
+                                const blink = Math.sin(time * 0.8) > 0.98 ? 0.1 : 1;
                                 eyeL.scale.y = blink;
                                 eyeR.scale.y = blink;
                             }
 
-                            // Halo/Ring animation
-                            if (ring1) ring1.rotation.z += delta * 0.5;
-                            if (ring2) ring2.rotation.z -= delta * 0.3;
+                            if (ring1) ring1.rotation.z += delta * 0.4;
+                            if (ring2) ring2.rotation.z -= delta * 0.2;
                         }
                     }
                 } else {

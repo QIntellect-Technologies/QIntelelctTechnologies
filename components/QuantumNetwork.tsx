@@ -44,18 +44,25 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         const headGroup = new THREE.Group();
         group.add(headGroup);
 
-        // Main sphere head
+        // Main sphere head - Adjusted for high visibility
         const headGeo = new THREE.SphereGeometry(0.5, 64, 64);
-        const headMat = new THREE.MeshPhongMaterial({
+        const headMat = new THREE.MeshStandardMaterial({
             color: 0xffffff,
             emissive: color,
-            emissiveIntensity: 0.1,
-            shininess: 100,
+            emissiveIntensity: 0.2, // Increased glow
+            roughness: 0.1,
+            metalness: 0.8,
             transparent: true,
-            opacity: 0.95
+            opacity: 0.98
         });
         const head = new THREE.Mesh(headGeo, headMat);
         headGroup.add(head);
+
+        // Sub-glow (Inner core)
+        const glowGeo = new THREE.SphereGeometry(0.4, 32, 32);
+        const glowMatInner = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.5 });
+        const innerGlow = new THREE.Mesh(glowGeo, glowMatInner);
+        headGroup.add(innerGlow);
 
         // Dark Visor / Face Area
         const visorGeo = new THREE.SphereGeometry(0.46, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
@@ -205,6 +212,18 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         const coreGroup = new THREE.Group();
         scene.add(coreGroup);
         coreGroupRef.current = coreGroup;
+
+        // Add Essential Scene Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 1.5, 10);
+        pointLight.position.set(2, 2, 5);
+        scene.add(pointLight);
+
+        const chatbotLight = new THREE.PointLight(DOMAIN_COLORS[1], 2, 5);
+        chatbotLight.position.set(0, 0, 1);
+        scene.add(chatbotLight);
 
         const { group: initialModel } = createDomainModel(domainIndex);
         coreGroup.add(initialModel);

@@ -100,6 +100,7 @@ const ChatBot: React.FC = () => {
   ]);
   const [input, setInput] = useState('');
   const [isThinking, setIsThinking] = useState(false);
+  const [isReasoning, setIsReasoning] = useState(false);
   const [isTalking, setIsTalking] = useState(false);
   const [amplitude, setAmplitude] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
@@ -174,15 +175,31 @@ const ChatBot: React.FC = () => {
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
-      // Step 1: Generate Text Response with standard model
+      // Step 1: Deep Reasoning with Pro model
+      setIsReasoning(true);
+      const reasoningResponse = await ai.models.generateContent({
+        model: 'gemini-2.0-pro-exp-02-05',
+        contents: [{ 
+          parts: [{ 
+            text: `System Context: You are the deep reasoning core of QIntelligence.
+            Analyze this technical query and provide a high-level strategy for a response.
+            Query: ${userMessage}` 
+          }] 
+        }]
+      });
+      const reasoningStrategy = reasoningResponse.text || "Standard architectural protocols apply.";
+      setIsReasoning(false);
+
+      // Step 2: Generate Final User Response with standard model
       const textResponse = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: [{ 
           parts: [{ 
             text: `You are QIntelligence, the highly advanced AI spokesperson for QIntellect Technologies. 
             Services: AI, ERP, IoT, EDI, Web Architecture. 
+            Deep Reasoning Strategy: ${reasoningStrategy}
             User asks: ${userMessage}. 
-            Provide a professional, concise technical response.` 
+            Provide a professional, concise technical response based on the strategy.` 
           }] 
         }]
       });
@@ -311,11 +328,13 @@ const ChatBot: React.FC = () => {
                 <div className="flex justify-start">
                   <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl rounded-tl-none flex items-center space-x-3">
                     <div className="flex space-x-1">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                      <div className={`w-1.5 h-1.5 ${isReasoning ? 'bg-purple-500' : 'bg-blue-500'} rounded-full animate-bounce`} style={{ animationDelay: '0ms' }} />
+                      <div className={`w-1.5 h-1.5 ${isReasoning ? 'bg-purple-500' : 'bg-blue-500'} rounded-full animate-bounce`} style={{ animationDelay: '150ms' }} />
+                      <div className={`w-1.5 h-1.5 ${isReasoning ? 'bg-purple-500' : 'bg-blue-500'} rounded-full animate-bounce`} style={{ animationDelay: '300ms' }} />
                     </div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Processing_Logic...</span>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                      {isReasoning ? 'Consulting_Sovereign_Core...' : 'Processing_Logic...'}
+                    </span>
                   </div>
                 </div>
               )}

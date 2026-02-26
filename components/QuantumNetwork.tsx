@@ -40,65 +40,20 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     const createRobotModel = (color: number) => {
         const group = new THREE.Group();
 
-        // Materials
-        const primaryMat = new THREE.MeshPhongMaterial({
-            color: color,
+        // High-Fidelity Robot Sprite
+        const textureLoader = new THREE.TextureLoader();
+        const robotTexture = textureLoader.load('/images/chatbot-robot.png');
+        const spriteMat = new THREE.SpriteMaterial({
+            map: robotTexture,
             transparent: true,
-            opacity: 0.8,
-            shininess: 100
+            opacity: 0.95
         });
-        const glowMat = new THREE.MeshBasicMaterial({
-            color: color,
-            transparent: true,
-            opacity: 0.9,
-            blending: THREE.AdditiveBlending
-        });
-        const darkMat = new THREE.MeshPhongMaterial({ color: 0x111111 });
+        const sprite = new THREE.Sprite(spriteMat);
+        sprite.scale.set(1.5, 1.5, 1);
+        sprite.position.y = 0.1;
+        group.add(sprite);
 
-        // Head (Capsule/Sphere hybrid look)
-        const headGeo = new THREE.SphereGeometry(0.4, 32, 24);
-        headGeo.scale(1, 1.1, 0.9);
-        const head = new THREE.Mesh(headGeo, primaryMat);
-        head.position.y = 0.2;
-        group.add(head);
-
-        // Visor/Eyes area
-        const visorGeo = new THREE.SphereGeometry(0.35, 32, 24, 0, Math.PI * 2, 0.5, 0.8);
-        const visor = new THREE.Mesh(visorGeo, darkMat);
-        visor.position.y = 0.25;
-        visor.position.z = 0.1;
-        visor.scale.set(1, 0.4, 1);
-        group.add(visor);
-
-        // Glowing Eyes
-        const eyeGeo = new THREE.SphereGeometry(0.04, 16, 16);
-        const eyeL = new THREE.Mesh(eyeGeo, glowMat);
-        eyeL.position.set(-0.15, 0.25, 0.4);
-        group.add(eyeL);
-
-        const eyeR = new THREE.Mesh(eyeGeo, glowMat);
-        eyeR.position.set(0.15, 0.25, 0.4);
-        group.add(eyeR);
-
-        // Body / Base
-        const bodyGeo = new THREE.CylinderGeometry(0.25, 0.4, 0.5, 32);
-        const body = new THREE.Mesh(bodyGeo, primaryMat);
-        body.position.y = -0.3;
-        group.add(body);
-
-        // Floating Ears/Antennae
-        const earGeo = new THREE.TorusGeometry(0.1, 0.02, 16, 32);
-        const earL = new THREE.Mesh(earGeo, primaryMat);
-        earL.position.set(-0.45, 0.25, 0);
-        earL.rotation.y = Math.PI / 2;
-        group.add(earL);
-
-        const earR = new THREE.Mesh(earGeo, primaryMat);
-        earR.position.set(0.45, 0.25, 0);
-        earR.rotation.y = Math.PI / 2;
-        group.add(earR);
-
-        // Speech Bubbles (3D Planes with Glow)
+        // Speech Bubbles (3D Planes with Glow) - Refined positioning
         const createBubble = (x: number, y: number, z: number, scale: number) => {
             const bGeo = new THREE.PlaneGeometry(0.4 * scale, 0.25 * scale);
             const bMat = new THREE.MeshBasicMaterial({
@@ -124,9 +79,9 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
             return b;
         };
 
-        const bubble1 = createBubble(-0.8, 0.6, 0.2, 1);
-        const bubble2 = createBubble(-1.0, 0.2, -0.2, 0.8);
-        const bubble3 = createBubble(-0.7, -0.2, 0.3, 0.6);
+        const bubble1 = createBubble(-0.8, 0.7, 0.2, 1);
+        const bubble2 = createBubble(-1.0, 0.3, -0.2, 0.8);
+        const bubble3 = createBubble(-0.7, -0.1, 0.3, 0.6);
 
         group.add(bubble1, bubble2, bubble3);
         (group as any).userData = { bubbles: [bubble1, bubble2, bubble3] };
@@ -266,7 +221,8 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 // Specific animation for Chatbot
                 if (domainIndex === 1) {
                     // Floating effect
-                    coreGroupRef.current.position.y += Math.sin(time * 1.5) * 0.001;
+                    coreGroupRef.current.position.y += Math.sin(time * 1.5) * 0.0015;
+                    coreGroupRef.current.position.x += Math.cos(time * 0.8) * 0.0008;
 
                     // Animate bubbles
                     if (coreGroupRef.current.children[0]) {
@@ -275,7 +231,9 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                         if (bubbles) {
                             bubbles.forEach((b: THREE.Mesh, i: number) => {
                                 b.position.y += Math.sin(time * 2 + i) * 0.002;
-                                b.lookAt(camera.position);
+                                if (cameraRef.current) {
+                                    b.lookAt(cameraRef.current.position);
+                                }
                             });
                         }
                     }

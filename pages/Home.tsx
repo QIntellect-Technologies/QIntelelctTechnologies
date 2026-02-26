@@ -89,9 +89,9 @@ const TypewriterHeadline: React.FC<{ index: number }> = React.memo(({ index }) =
   }, [subIndex, index, reverse]);
 
   return (
-    <span className="relative inline-block text-blue-600">
+    <span className="relative inline-block text-cyan-400">
       {words[index].substring(0, subIndex)}
-      <span className="inline-block w-[3px] h-[0.9em] bg-blue-600 ml-1 animate-pulse align-middle" />
+      <span className="inline-block w-[3px] h-[0.9em] bg-cyan-400 ml-1 animate-pulse align-middle" />
     </span>
   );
 });
@@ -1481,8 +1481,8 @@ const Home: React.FC = () => {
     <div className="bg-transparent text-slate-900 font-light selection:bg-blue-100 selection:text-blue-700 overflow-x-hidden">
 
       {/* 1. HERO SECTION */}
-      <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-white">
-        {/* Hybrid Animated Background (Video + 3D Particles) */}
+      <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-[#030712]">
+        {/* Hybrid Animated Background (Video + Neon 3D Particles) */}
         <QuantumNetwork domainIndex={domainIndex} videoUrl={domainVideos[domainIndex]} />
 
         {/* Floating Modern Shapes (Optimized: Removed expensive blur animation) */}
@@ -1495,16 +1495,16 @@ const Home: React.FC = () => {
         <div className="hidden lg:flex flex-col items-center absolute left-12 top-1/2 -translate-y-1/2 z-20">
           <div className="flex flex-col items-center space-y-8">
             <div className="flex flex-col items-center space-y-6 mb-4">
-              <span className="text-[11px] font-bold text-slate-900 [writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.3em]">
+              <span className="text-[11px] font-bold text-white [writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.3em]">
                 Follow Us
               </span>
-              <div className="w-px h-12 bg-slate-900" />
+              <div className="w-px h-12 bg-white/30" />
             </div>
             <div className="flex flex-col space-y-6">
-              <a href="#" className="text-slate-900 hover:text-blue-600 transition-colors"><Globe className="w-4 h-4" /></a>
-              <a href="#" className="text-slate-900 hover:text-blue-600 transition-colors"><Linkedin className="w-4 h-4" /></a>
-              <a href="#" className="text-slate-900 hover:text-blue-600 transition-colors"><Twitter className="w-4 h-4" /></a>
-              <a href="#" className="text-slate-900 hover:text-blue-600 transition-colors"><Instagram className="w-4 h-4" /></a>
+              <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors"><Globe className="w-4 h-4" /></a>
+              <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors"><Linkedin className="w-4 h-4" /></a>
+              <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors"><Twitter className="w-4 h-4" /></a>
+              <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors"><Instagram className="w-4 h-4" /></a>
             </div>
           </div>
         </div>
@@ -1512,14 +1512,14 @@ const Home: React.FC = () => {
         {/* Right Sidebar Decoration */}
         <div className="hidden lg:flex flex-col items-end absolute right-12 top-1/2 -translate-y-1/2 space-y-20 z-20">
           <div className="text-right space-y-4">
-            <h4 className="text-sm font-black text-slate-900 leading-snug font-heading uppercase tracking-tighter">
+            <h4 className="text-sm font-black text-white leading-snug font-heading uppercase tracking-tighter">
               Artificial Intelligence, <br /> Custom ERPS <br /> & Dynamics 365 Solutions.
             </h4>
-            <div className="w-24 h-px bg-slate-900 ml-auto" />
+            <div className="w-24 h-px bg-cyan-500/50 ml-auto" />
           </div>
           <div className="relative">
-            <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
-              <div className="w-8 h-16 bg-blue-600 rounded-r-full ml-auto" />
+            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center overflow-hidden border border-white/10">
+              <div className="w-8 h-16 bg-cyan-500 rounded-r-full ml-auto shadow-[0_0_20px_rgba(6,182,212,0.5)]" />
             </div>
           </div>
         </div>
@@ -1535,7 +1535,7 @@ const Home: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center space-x-4 px-5 py-2.5 rounded-full bg-[#2563eb] text-white shadow-2xl shadow-blue-500/30"
+                className="inline-flex items-center space-x-4 px-5 py-2.5 rounded-full bg-cyan-500 text-white shadow-2xl shadow-cyan-500/40"
               >
                 <span className="text-[12px] font-black uppercase tracking-[0.4em]">Enterprise Intelligence</span>
                 <div className="w-10 h-px bg-white/40" />
@@ -1548,7 +1548,7 @@ const Home: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-black text-slate-900 tracking-tighter leading-[0.82] font-heading uppercase"
+                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-black text-white tracking-tighter leading-[0.82] font-heading uppercase"
                   >
                     We Engineer <br />
                     Your Enterprise <br />
@@ -1573,8 +1573,8 @@ const Home: React.FC = () => {
                       </motion.div>
                     ))}
                   </div>
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
-                    Trusted by <span className="text-slate-900">500+</span> <br /> Global Enterprises.
+                  <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-relaxed">
+                    Trusted by <span className="text-white">500+</span> <br /> Global Enterprises.
                   </p>
                 </div>
 
@@ -1604,7 +1604,7 @@ const Home: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 1 }}
-                  className="text-base md:text-xl text-slate-600 leading-relaxed font-medium max-w-lg"
+                  className="text-base md:text-xl text-white/80 leading-relaxed font-medium max-w-lg"
                 >
                   From Artificial Intelligence and Customized Chatbots to Dynamics 365, ERP, EDI, Web & Mobile Development — QIntellect delivers end-to-end enterprise technology solutions that transform how you operate.
                 </motion.p>

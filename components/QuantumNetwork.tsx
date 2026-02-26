@@ -10,14 +10,14 @@ interface QuantumNetworkProps {
 }
 
 const DOMAIN_COLORS = [
-    0x3b82f6, // AI - Blue
-    0x6366f1, // Chatbots - Indigo
-    0x8b5cf6, // AI Reps - Violet
-    0x2563eb, // AX - Deep Blue
-    0x4f46e5, // D365 - Indigo
-    0x0ea5e9, // Web - Sky
-    0x0284c7, // ERP - Deep Sky
-    0x6366f1, // Mobile - Indigo
+    0x00f2ff, // AI - Electric Cyan
+    0x7000ff, // Chatbots - Neon Violet
+    0x00ff9d, // AI Reps - Spring Green
+    0x0066ff, // AX - Vivid Blue
+    0xbd00ff, // D365 - Magenta
+    0x00d8ff, // Web - Sky Blue
+    0x3decff, // ERP - Bright Cyan
+    0x7000ff, // Mobile - Neon Violet
 ];
 
 const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }) => {
@@ -34,7 +34,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     const pointsRef = useRef<THREE.Points | null>(null);
     const geometryRef = useRef<THREE.BufferGeometry | null>(null);
 
-    const particleCount = 12000;
+    const particleCount = 15000;
     const positionsRef = useRef(new Float32Array(particleCount * 3));
     const targetPositionsRef = useRef(new Float32Array(particleCount * 3));
     const colorsRef = useRef(new Float32Array(particleCount * 3));
@@ -90,7 +90,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
         const composer = new EffectComposer(renderer);
         const renderPass = new RenderPass(scene, camera);
-        const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 0.5, 0.4, 0.95);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 1.2, 0.4, 0.85); // High bloom for WOW effect
         composer.addPass(renderPass);
         composer.addPass(bloomPass);
         composerRef.current = composer;
@@ -113,10 +113,10 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         geometryRef.current = geometry;
 
         const material = new THREE.PointsMaterial({
-            size: 0.007,
+            size: 0.012, // Larger particles
             vertexColors: true,
             transparent: true,
-            opacity: 0.5,
+            opacity: 0.8,
             blending: THREE.AdditiveBlending // Glow effect on top of video
         });
 
@@ -139,7 +139,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
             if (geometryRef.current && pointsRef.current) {
                 const posAttr = geometryRef.current.getAttribute('position');
                 const colAttr = geometryRef.current.getAttribute('color');
-                const targetColor = new THREE.Color(DOMAIN_COLORS[domainIndex]);
+                const targetColor = new THREE.Color(DOMAIN_COLORS[domainIndex % DOMAIN_COLORS.length]);
 
                 for (let i = 0; i < particleCount; i++) {
                     const ix = i * 3, iy = i * 3 + 1, iz = i * 3 + 2;
@@ -156,10 +156,10 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 posAttr.needsUpdate = true;
                 colAttr.needsUpdate = true;
 
-                pointsRef.current.rotation.y += delta * 0.1;
-                pointsRef.current.rotation.x += delta * 0.05;
-                pointsRef.current.position.x += (mouseX * 0.15 - pointsRef.current.position.x) * 0.1;
-                pointsRef.current.position.y += (-mouseY * 0.15 - pointsRef.current.position.y) * 0.1;
+                pointsRef.current.rotation.y += delta * 0.15;
+                pointsRef.current.rotation.x += delta * 0.08;
+                pointsRef.current.position.x += (mouseX * 0.2 - pointsRef.current.position.x) * 0.1;
+                pointsRef.current.position.y += (-mouseY * 0.2 - pointsRef.current.position.y) * 0.1;
             }
 
             composerRef.current?.render();
@@ -208,7 +208,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     }, [domainIndex, videoUrl]);
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-white">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#030712]">
             {/* Background Video Layer */}
             <video
                 ref={videoRef}
@@ -216,19 +216,19 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 muted
                 loop
                 playsInline
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${fade ? 'opacity-0' : 'opacity-40'}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${fade ? 'opacity-0' : 'opacity-50'}`}
                 src={videoUrl}
             />
 
-            {/* Cinematic Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/20 to-white z-10" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(255,255,255,0.6)_100%)] z-10" />
+            {/* Dark Cinematic Vignette */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(3,7,18,0.8)_100%)] z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] z-10" />
 
             {/* 3D Particle Layer */}
             <div ref={containerRef} className="w-full h-full relative z-20" />
 
             {/* Mesh Noise for Film Look */}
-            <div className="absolute inset-0 opacity-[0.015] pointer-events-none z-30"
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-30"
                 style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}
             />
         </div>

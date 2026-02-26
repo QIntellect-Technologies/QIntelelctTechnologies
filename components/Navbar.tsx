@@ -36,7 +36,7 @@ const StatusTypewriter: React.FC = React.memo(() => {
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
       </div>
-      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest min-w-[150px]">
+      <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest min-w-[150px]">
         {statuses[index].substring(0, subIndex)}
         <span className="inline-block w-[1px] h-[0.9em] bg-emerald-500 ml-0.5 animate-pulse align-middle" />
       </span>
@@ -88,21 +88,21 @@ const Navbar: React.FC = () => {
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-10">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 to={link.path}
-                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:text-blue-600 relative group ${location.pathname === link.path ? 'text-blue-600' : 'text-slate-900'}`}
+                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:text-cyan-400 relative group ${location.pathname === link.path ? 'text-cyan-400' : (scrolled || needsSolidNavbar ? 'text-slate-900' : 'text-white')}`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-500 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`} />
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-500 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`} />
               </Link>
             ))}
-            
-            <div className="flex items-center space-x-6 border-l border-slate-200 pl-10">
-              <button className="text-slate-900 hover:text-blue-600 transition-colors">
-                <Search className="w-5 h-5 text-slate-400 hover:text-blue-600" />
+
+            <div className="flex items-center space-x-6 border-l border-white/10 pl-10">
+              <button className="text-white/70 hover:text-cyan-400 transition-colors">
+                <Search className="w-5 h-5" />
               </button>
-              <MagneticButton to="/contact" className="bg-slate-900 text-white px-8 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-blue-600 transition-all shadow-xl flex items-center group">
+              <MagneticButton to="/contact" className={`${scrolled || needsSolidNavbar ? 'bg-slate-900' : 'bg-cyan-500'} text-white px-8 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-cyan-600 transition-all shadow-xl flex items-center group`}>
                 LET&apos;S TALK
                 <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </MagneticButton>
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <button className="lg:hidden text-slate-900" onClick={() => setIsOpen(!isOpen)}>
+          <button className={`${scrolled || needsSolidNavbar ? 'text-slate-900' : 'text-white'}`} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
@@ -119,7 +119,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -127,8 +127,8 @@ const Navbar: React.FC = () => {
           >
             <div className="flex flex-col items-center space-y-8">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
+                <Link
+                  key={link.name}
                   to={link.path}
                   className="text-3xl font-medium text-slate-900 hover:text-blue-600 transition-colors"
                 >

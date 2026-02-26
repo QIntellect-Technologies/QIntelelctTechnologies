@@ -16,10 +16,10 @@ const DOMAIN_COLORS = [
 const createAIBrainModel = (color: number) => {
     const group = new THREE.Group();
     const brainGeo = new THREE.IcosahedronGeometry(0.7, 4);
-    const brain = new THREE.Mesh(brainGeo, new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.15, wireframe: true, transparent: true, opacity: 0.3 }));
+    const brain = new THREE.Mesh(brainGeo, new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.06, wireframe: true, transparent: true, opacity: 0.25 }));
     group.add(brain);
     const innerGeo = new THREE.IcosahedronGeometry(0.45, 2);
-    const inner = new THREE.Mesh(innerGeo, new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.4, wireframe: true, transparent: true, opacity: 0.5 }));
+    const inner = new THREE.Mesh(innerGeo, new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.2, wireframe: true, transparent: true, opacity: 0.35 }));
     group.add(inner);
     const pGeo = new THREE.BufferGeometry();
     const pos = brainGeo.attributes.position;
@@ -49,8 +49,8 @@ const createChatbotModel = (color: number) => {
     const group = new THREE.Group();
     const headGroup = new THREE.Group();
     group.add(headGroup);
-    headGroup.add(new THREE.Mesh(new THREE.SphereGeometry(0.48, 64, 64), new THREE.MeshStandardMaterial({ color: 0xccddff, emissive: color, emissiveIntensity: 0.3, roughness: 0.15, metalness: 0.9 })));
-    headGroup.add(new THREE.Mesh(new THREE.SphereGeometry(0.4, 32, 32), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending })));
+    headGroup.add(new THREE.Mesh(new THREE.SphereGeometry(0.48, 64, 64), new THREE.MeshStandardMaterial({ color: 0xccddff, emissive: color, emissiveIntensity: 0.1, roughness: 0.2, metalness: 0.85 })));
+    headGroup.add(new THREE.Mesh(new THREE.SphereGeometry(0.4, 32, 32), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.18, blending: THREE.AdditiveBlending })));
     const visor = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6), new THREE.MeshBasicMaterial({ color: 0x020410, transparent: true, opacity: 0.92 }));
     visor.rotation.x = -Math.PI / 2.5; visor.position.z = 0.05;
     headGroup.add(visor);
@@ -67,7 +67,7 @@ const createChatbotModel = (color: number) => {
 // ── AI REP ────────────────────────────────────────────────
 const createAIRepModel = (color: number) => {
     const group = new THREE.Group();
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.19, 32, 32), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.5, wireframe: true, transparent: true, opacity: 0.7 }));
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.19, 32, 32), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.2, wireframe: true, transparent: true, opacity: 0.6 }));
     head.position.y = 0.65; group.add(head);
     const body = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.22, 0.7, 16, 1, true), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.35, side: THREE.DoubleSide, wireframe: true, blending: THREE.AdditiveBlending }));
     body.position.y = 0.15; group.add(body);
@@ -86,7 +86,7 @@ const createAIRepModel = (color: number) => {
 // ── DYNAMICS AX ───────────────────────────────────────────
 const createDynamicsAxModel = (color: number) => {
     const group = new THREE.Group();
-    const gMat = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.3, metalness: 0.8, roughness: 0.2, transparent: true, opacity: 0.7 });
+    const gMat = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.1, metalness: 0.75, roughness: 0.3, transparent: true, opacity: 0.65 });
     const gear1 = new THREE.Mesh(new THREE.TorusGeometry(0.45, 0.07, 8, 14), gMat.clone()); group.add(gear1);
     for (let i = 0; i < 14; i++) { const a = (i / 14) * Math.PI * 2; const t = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.09, 0.06), gMat.clone()); t.position.set(Math.cos(a) * 0.52, Math.sin(a) * 0.52, 0); t.rotation.z = a; gear1.add(t); }
     const gear2 = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.055, 8, 10), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.3, metalness: 0.8, roughness: 0.2, transparent: true, opacity: 0.6 }));
@@ -106,7 +106,7 @@ const createDynamicsAxModel = (color: number) => {
 // ── CRM ───────────────────────────────────────────────────
 const createCRMModel = (color: number) => {
     const group = new THREE.Group();
-    const hub = new THREE.Mesh(new THREE.SphereGeometry(0.27, 32, 32), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.6, metalness: 0.9, roughness: 0.1 }));
+    const hub = new THREE.Mesh(new THREE.SphereGeometry(0.27, 32, 32), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.25, metalness: 0.85, roughness: 0.15 }));
     group.add(hub);
     group.add(new THREE.Mesh(new THREE.SphereGeometry(0.38, 32, 32), new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.12 })));
     const satellites: { pivot: THREE.Group; speed: number }[] = [];
@@ -119,7 +119,7 @@ const createCRMModel = (color: number) => {
         const pivot = new THREE.Group();
         const orb = new THREE.Mesh(new THREE.TorusGeometry(radius, 0.003, 8, 80), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.13 }));
         orb.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), axis.clone().normalize()); group.add(orb);
-        const sat = new THREE.Mesh(new THREE.OctahedronGeometry(0.065, 0), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.7, metalness: 0.8, roughness: 0.2 }));
+        const sat = new THREE.Mesh(new THREE.OctahedronGeometry(0.065, 0), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.3, metalness: 0.75, roughness: 0.25 }));
         sat.position.set(radius, 0, 0); pivot.add(sat);
         const connPts = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(radius, 0, 0)];
         pivot.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(connPts), new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.22 })));
@@ -167,7 +167,7 @@ const createERPModel = (color: number) => {
     for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
         const pos = new THREE.Vector3((c - 1) * 0.65, (r - 1) * 0.55, 0);
         nodePosList.push(pos.clone());
-        const box = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.15, 0.15), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.4, metalness: 0.7, roughness: 0.3, transparent: true, opacity: 0.5 }));
+        const box = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.15, 0.15), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.15, metalness: 0.65, roughness: 0.35, transparent: true, opacity: 0.5 }));
         box.position.copy(pos);
         const edges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.15, 0.15, 0.15)), new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.9 }));
         edges.position.copy(pos); group.add(box, edges); nodeBoxes.push(box);
@@ -214,11 +214,11 @@ const createMobileModel = (color: number) => {
 const createQIntellectModel = (color: number) => {
     const group = new THREE.Group();
     const lattices: THREE.Mesh[] = [];
-    [{ s: 0.38, op: 0.45 }, { s: 0.58, op: 0.3 }, { s: 0.78, op: 0.18 }].forEach(({ s, op }) => {
-        const l = new THREE.Mesh(new THREE.IcosahedronGeometry(s, 1), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.15, wireframe: true, transparent: true, opacity: op }));
+    [{ s: 0.38, op: 0.35 }, { s: 0.58, op: 0.22 }, { s: 0.78, op: 0.12 }].forEach(({ s, op }) => {
+        const l = new THREE.Mesh(new THREE.IcosahedronGeometry(s, 1), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.06, wireframe: true, transparent: true, opacity: op }));
         group.add(l); lattices.push(l);
     });
-    const core = new THREE.Mesh(new THREE.SphereGeometry(0.13, 32, 32), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 1.5, metalness: 1.0, roughness: 0.0 }));
+    const core = new THREE.Mesh(new THREE.SphereGeometry(0.13, 32, 32), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.7, metalness: 1.0, roughness: 0.0 }));
     group.add(core);
     const ptGeo = new THREE.BufferGeometry(); const pp: number[] = [];
     for (let i = 0; i < 250; i++) { const r = 0.55 + Math.random() * 0.5, t = Math.random() * Math.PI * 2, p2 = Math.acos(2 * Math.random() - 1); pp.push(r * Math.sin(p2) * Math.cos(t), r * Math.sin(p2) * Math.sin(t), r * Math.cos(p2)); }
@@ -248,7 +248,7 @@ const createServerNexusModel = (color: number) => {
     });
     group.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.2, 1.45, 0.68)), new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.09 })));
     const nodes: THREE.Mesh[] = [[-0.52, 0.77, 0], [0.52, 0.77, 0], [0.52, -0.77, 0], [-0.52, -0.77, 0]].map(([x, y, z]) => {
-        const n = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 8), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.8, transparent: true, opacity: 0.9 }));
+        const n = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 8), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.3, transparent: true, opacity: 0.9 }));
         n.position.set(x, y, z); group.add(n); return n;
     });
     (group as any).userData = { isServer: true, serverPlanes, beams, nodes };
@@ -310,21 +310,21 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         renderer.setSize(width, height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.1;
+        renderer.toneMappingExposure = 0.9;
         container.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
         const composer = new EffectComposer(renderer);
         composer.addPass(new RenderPass(scene, camera));
-        const bloom = new UnrealBloomPass(new THREE.Vector2(width, height), 1.8, 0.6, 0.2);
+        const bloom = new UnrealBloomPass(new THREE.Vector2(width, height), 0.65, 0.4, 0.55);
         composer.addPass(bloom);
         composerRef.current = composer;
 
         // Lighting
-        scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-        const keyLight = new THREE.PointLight(DOMAIN_COLORS[0], 3.5, 18);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+        const keyLight = new THREE.PointLight(DOMAIN_COLORS[0], 1.5, 18);
         keyLight.position.set(2.5, 3, 5); scene.add(keyLight); keyLightRef.current = keyLight;
-        const fillLight = new THREE.PointLight(DOMAIN_COLORS[0], 1.5, 12);
+        const fillLight = new THREE.PointLight(DOMAIN_COLORS[0], 0.6, 12);
         fillLight.position.set(-3, -2, 3); scene.add(fillLight); fillLightRef.current = fillLight;
 
         // Global ambient particle star-field
@@ -429,7 +429,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 ud.pts.rotation.y += delta * 0.18; cg.rotation.y += delta * 0.1; cg.rotation.x += delta * 0.04;
             } else if (dIdx === 4 && ud.isCRM) {
                 const p = Math.sin(time * 3) * 0.5 + 0.5;
-                (ud.hub.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.3 + p * 0.9;
+                (ud.hub.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.15 + p * 0.35;
                 ud.satellites.forEach(({ pivot, speed }: any) => { pivot.rotation.y += delta * speed * 0.5; pivot.rotation.x += delta * speed * 0.18; });
                 cg.rotation.y += delta * 0.09;
             } else if (dIdx === 5 && ud.isWebDev) {
@@ -439,7 +439,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 });
                 ud.core.rotation.x += delta * 2; ud.core.rotation.y += delta * 1.5; cg.rotation.y += delta * 0.07;
             } else if (dIdx === 6 && ud.isERP) {
-                ud.nodeBoxes.forEach((box: THREE.Mesh, i: number) => { const p = Math.sin(time * 2 + i * 0.7) * 0.5 + 0.5; (box.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.2 + p * 0.6; box.rotation.y += delta * 0.35; });
+                ud.nodeBoxes.forEach((box: THREE.Mesh, i: number) => { const p = Math.sin(time * 2 + i * 0.7) * 0.5 + 0.5; (box.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.08 + p * 0.2; box.rotation.y += delta * 0.35; });
                 ud.packets.forEach((pk: any) => { pk.progress += delta * pk.speed; if (pk.progress > 1) pk.progress = 0; pk.mesh.position.lerpVectors(ud.nodePosList[pk.aIdx], ud.nodePosList[pk.bIdx], pk.progress); });
                 cg.rotation.y += delta * 0.09;
             } else if (dIdx === 7 && ud.isMobile) {
@@ -451,15 +451,15 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
             } else if (dIdx === 8 && ud.isQIntellect) {
                 ud.lattices.forEach((l: THREE.Mesh, i: number) => { l.rotation.y += delta * (0.22 + i * 0.14) * (i % 2 === 0 ? 1 : -1); l.rotation.x += delta * (0.1 + i * 0.05); });
                 const cp = Math.sin(time * 4) * 0.5 + 0.5;
-                (ud.core.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.8 + cp * 1.0;
-                ud.core.scale.setScalar(1 + cp * 0.25);
+                (ud.core.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.4 + cp * 0.4;
+                ud.core.scale.setScalar(1 + cp * 0.12);
                 ud.particles.rotation.y += delta * 0.28; ud.particles.rotation.x += delta * 0.1;
                 ud.arcs.forEach((arc: THREE.Mesh, i: number) => { arc.rotation.z += delta * (0.35 + i * 0.1) * (i % 2 === 0 ? 1 : -1); });
                 cg.rotation.y += delta * 0.11;
             } else if (dIdx === 9 && ud.isServer) {
                 ud.serverPlanes.forEach((s: THREE.LineSegments, i: number) => { const p = Math.sin(time * 3 + i * 0.55) * 0.5 + 0.5; (s.material as THREE.LineBasicMaterial).opacity = 0.18 + p * 0.5; });
                 ud.beams.forEach((bm: any) => { bm.progress += delta * bm.speed; if (bm.progress > 1) bm.progress = 0; (bm.line.material as THREE.LineBasicMaterial).opacity = Math.sin(bm.progress * Math.PI) * 0.95; });
-                ud.nodes.forEach((n: THREE.Mesh, i: number) => { const p = Math.sin(time * 4 + i * 1.5) * 0.5 + 0.5; (n.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.4 + p * 0.8; n.scale.setScalar(0.8 + p * 0.5); });
+                ud.nodes.forEach((n: THREE.Mesh, i: number) => { const p = Math.sin(time * 4 + i * 1.5) * 0.5 + 0.5; (n.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.15 + p * 0.3; n.scale.setScalar(0.9 + p * 0.25); });
                 cg.rotation.y += delta * 0.09; cg.rotation.x = Math.sin(time * 0.3) * 0.07;
             }
 

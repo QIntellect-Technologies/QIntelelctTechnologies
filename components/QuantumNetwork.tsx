@@ -188,27 +188,160 @@ const createERPModel = (color: number) => {
 // ── MOBILE ────────────────────────────────────────────────
 const createMobileModel = (color: number) => {
     const group = new THREE.Group();
-    group.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.46, 0.88, 0.065)), new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.85 })));
-    const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.37, 0.68), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.06, side: THREE.DoubleSide }));
-    screen.position.z = 0.036; group.add(screen);
-    const btn = new THREE.Mesh(new THREE.RingGeometry(0.03, 0.045, 32), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.7 }));
-    btn.position.set(0, -0.39, 0.04); group.add(btn);
-    const appIcons: THREE.Mesh[] = [];
-    for (let r = 0; r < 4; r++) for (let c = 0; c < 3; c++) {
-        const icon = new THREE.Mesh(new THREE.PlaneGeometry(0.085, 0.085), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.25 + Math.random() * 0.4, blending: THREE.AdditiveBlending }));
-        icon.position.set((c - 1) * 0.12, 0.19 - r * 0.14, 0.04); group.add(icon); appIcons.push(icon);
+
+    // ── Phone body shell (solid metallic frame)
+    const bodyGeo = new THREE.BoxGeometry(0.48, 0.96, 0.055);
+    const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, metalness: 0.95, roughness: 0.1 });
+    const body = new THREE.Mesh(bodyGeo, bodyMat);
+    group.add(body);
+
+    // Phone frame outline (bright edge highlight)
+    const frameEdge = new THREE.LineSegments(
+        new THREE.EdgesGeometry(bodyGeo),
+        new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.6 })
+    );
+    group.add(frameEdge);
+
+    // ── Screen glass surface
+    const screenGeo = new THREE.PlaneGeometry(0.4, 0.82);
+    const screenMat = new THREE.MeshStandardMaterial({ color: 0x0a0a1a, metalness: 0.0, roughness: 0.05, transparent: true, opacity: 0.95 });
+    const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+    screenMesh.position.z = 0.03;
+    group.add(screenMesh);
+
+    // Screen glow (subtle color wash behind screen)
+    const glowGeo = new THREE.PlaneGeometry(0.38, 0.78);
+    const glowMat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.04, side: THREE.DoubleSide, blending: THREE.AdditiveBlending });
+    const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+    glowMesh.position.z = 0.032;
+    group.add(glowMesh);
+
+    // ── Dynamic Island / Notch (pill shape at top)
+    const notch = new THREE.Mesh(
+        new THREE.CapsuleGeometry(0.025, 0.06, 8, 16),
+        new THREE.MeshBasicMaterial({ color: 0x000000 })
+    );
+    notch.rotation.z = Math.PI / 2;
+    notch.position.set(0, 0.37, 0.035);
+    group.add(notch);
+
+    // ── UI Card rows on screen (simulated app UI)
+    const uiCards: THREE.Mesh[] = [];
+    const cardConfigs = [
+        { y: 0.22, w: 0.32, h: 0.1, op: 0.18 },
+        { y: 0.09, w: 0.32, h: 0.07, op: 0.12 },
+        { y: -0.02, w: 0.28, h: 0.07, op: 0.10 },
+        { y: -0.13, w: 0.32, h: 0.09, op: 0.14 },
+        { y: -0.24, w: 0.26, h: 0.06, op: 0.09 },
+    ];
+    cardConfigs.forEach(({ y, w, h, op }) => {
+        const card = new THREE.Mesh(
+            new THREE.PlaneGeometry(w, h),
+            new THREE.MeshBasicMaterial({ color, transparent: true, opacity: op, blending: THREE.AdditiveBlending, side: THREE.DoubleSide })
+        );
+        card.position.set(0, y, 0.034);
+        group.add(card);
+        uiCards.push(card);
+    });
+
+    // Small accent dots on cards (like notification dots, icons)
+    for (let i = 0; i < 5; i++) {
+        const dot = new THREE.Mesh(
+            new THREE.CircleGeometry(0.018, 12),
+            new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending })
+        );
+        dot.position.set(-0.13, cardConfigs[i].y, 0.036);
+        group.add(dot);
     }
-    const ripples: { mesh: THREE.Mesh; age: number; speed: number }[] = [];
-    for (let i = 0; i < 3; i++) {
-        const rp = new THREE.Mesh(new THREE.RingGeometry(0, 0.04, 32), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.0 }));
-        rp.position.set((Math.random() - 0.5) * 0.3, (Math.random() - 0.5) * 0.5, 0.05); group.add(rp);
-        ripples.push({ mesh: rp, age: i * 1.4, speed: 0.75 + Math.random() * 0.5 });
-    }
-    const orbit = new THREE.Mesh(new THREE.TorusGeometry(0.68, 0.004, 8, 80), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.14 }));
-    orbit.rotation.x = Math.PI / 4; group.add(orbit);
-    (group as any).userData = { isMobile: true, appIcons, ripples, orbit };
+
+    // ── Bottom home bar indicator
+    const homeBar = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.12, 0.01),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending })
+    );
+    homeBar.position.set(0, -0.38, 0.035);
+    group.add(homeBar);
+
+    // ── Side volume buttons (left side)
+    [-0.14, -0.06].forEach(y => {
+        const btn = new THREE.Mesh(
+            new THREE.BoxGeometry(0.015, 0.07, 0.03),
+            new THREE.MeshStandardMaterial({ color: 0x333355, metalness: 0.9, roughness: 0.1 })
+        );
+        btn.position.set(-0.252, y, 0);
+        group.add(btn);
+    });
+
+    // ── Power button (right side)
+    const pwrBtn = new THREE.Mesh(
+        new THREE.BoxGeometry(0.015, 0.1, 0.03),
+        new THREE.MeshStandardMaterial({ color: 0x333355, metalness: 0.9, roughness: 0.1 })
+    );
+    pwrBtn.position.set(0.252, 0.05, 0);
+    group.add(pwrBtn);
+
+    // ── 4 Floating UI component panels orbiting the phone
+    const floatingPanels: { pivot: THREE.Group; speed: number; panel: THREE.Mesh }[] = [];
+    const panelDefs = [
+        { radius: 0.75, y: 0.25, speed: 0.5, w: 0.24, h: 0.16, startAngle: 0 },
+        { radius: 0.82, y: -0.1, speed: -0.4, w: 0.20, h: 0.12, startAngle: Math.PI * 0.5 },
+        { radius: 0.70, y: 0.05, speed: 0.65, w: 0.22, h: 0.14, startAngle: Math.PI },
+        { radius: 0.78, y: -0.25, speed: -0.55, w: 0.18, h: 0.10, startAngle: Math.PI * 1.5 },
+    ];
+    panelDefs.forEach(({ radius, y, speed, w, h, startAngle }) => {
+        const pivot = new THREE.Group();
+        pivot.rotation.y = startAngle;
+
+        // Panel background
+        const panel = new THREE.Mesh(
+            new THREE.PlaneGeometry(w, h),
+            new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.12, side: THREE.DoubleSide, blending: THREE.AdditiveBlending })
+        );
+        panel.position.set(radius, y, 0);
+
+        // Panel frame edge
+        const pEdge = new THREE.LineSegments(
+            new THREE.EdgesGeometry(new THREE.PlaneGeometry(w, h)),
+            new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.55 })
+        );
+        pEdge.position.set(radius, y, 0);
+
+        // Small code lines on panel
+        for (let j = 0; j < 3; j++) {
+            const lineW = (0.4 + Math.random() * 0.5) * w;
+            const lineMesh = new THREE.Mesh(
+                new THREE.PlaneGeometry(lineW, 0.008),
+                new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending })
+            );
+            lineMesh.position.set(radius - (w - lineW) * 0.5, y + (j - 1) * 0.035, 0.001);
+            pivot.add(lineMesh);
+        }
+
+        // Connecting line from phone to panel
+        const connPts = [new THREE.Vector3(0.24, y, 0), new THREE.Vector3(radius - w * 0.5, y, 0)];
+        const conn = new THREE.Line(
+            new THREE.BufferGeometry().setFromPoints(connPts),
+            new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.2 })
+        );
+        pivot.add(panel, pEdge, conn);
+        group.add(pivot);
+        floatingPanels.push({ pivot, speed, panel });
+    });
+
+    // ── Outer glow ring around phone
+    const glowRing = new THREE.Mesh(
+        new THREE.TorusGeometry(0.55, 0.003, 8, 80),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending })
+    );
+    glowRing.rotation.x = Math.PI / 2;
+    group.add(glowRing);
+
+    (group as any).userData = {
+        isMobile: true, uiCards, floatingPanels, glowRing, glowMesh, frameEdge
+    };
     return group;
 };
+
 
 // ── QINTELLECT ────────────────────────────────────────────
 const createQIntellectModel = (color: number) => {
@@ -469,11 +602,23 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 ud.packets.forEach((pk: any) => { pk.progress += delta * pk.speed; if (pk.progress > 1) pk.progress = 0; pk.mesh.position.lerpVectors(ud.nodePosList[pk.aIdx], ud.nodePosList[pk.bIdx], pk.progress); });
                 cg.rotation.y += delta * 0.09;
             } else if (dIdx === 7 && ud.isMobile) {
-                ud.appIcons.forEach((icon: THREE.Mesh, i: number) => { const p = Math.sin(time * 2 + i * 0.8) * 0.5 + 0.5; (icon.material as THREE.MeshBasicMaterial).opacity = 0.12 + p * 0.55; });
-                ud.ripples.forEach((rp: any) => { rp.age += delta * rp.speed; if (rp.age > 3) rp.age = 0; const p = rp.age / 3; rp.mesh.scale.setScalar(1 + p * 4.5); (rp.mesh.material as THREE.MeshBasicMaterial).opacity = (1 - p) * 0.55; });
-                ud.orbit.rotation.z += delta * 0.45;
-                cg.position.y += Math.sin(time * 1.2) * 0.0006;
-                cg.rotation.x = Math.sin(time * 0.5) * 0.08; cg.rotation.y += delta * 0.09;
+                // Animate floating UI panels orbiting the phone
+                ud.floatingPanels.forEach(({ pivot, speed }: any) => {
+                    pivot.rotation.y += delta * speed;
+                });
+                // Animate UI cards — sequential opacity waves
+                ud.uiCards.forEach((card: THREE.Mesh, i: number) => {
+                    const p = Math.sin(time * 1.5 + i * 0.7) * 0.5 + 0.5;
+                    (card.material as THREE.MeshBasicMaterial).opacity = 0.06 + p * 0.16;
+                });
+                // Screen glow breathe
+                if (ud.glowMesh) (ud.glowMesh.material as THREE.MeshBasicMaterial).opacity = 0.03 + Math.sin(time * 2) * 0.02;
+                // Glow ring slow spin
+                if (ud.glowRing) ud.glowRing.rotation.z += delta * 0.2;
+                // Gentle float and slight tilt
+                cg.position.y += Math.sin(time * 1.1) * 0.0007;
+                cg.rotation.y += delta * 0.08;
+                cg.rotation.x = Math.sin(time * 0.4) * 0.06;
             } else if (dIdx === 8 && ud.isQIntellect) {
                 ud.lattices.forEach((l: THREE.Mesh, i: number) => { l.rotation.y += delta * (0.22 + i * 0.14) * (i % 2 === 0 ? 1 : -1); l.rotation.x += delta * (0.1 + i * 0.05); });
                 const cp = Math.sin(time * 4) * 0.5 + 0.5;

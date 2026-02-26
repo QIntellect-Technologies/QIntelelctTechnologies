@@ -1481,8 +1481,8 @@ const Home: React.FC = () => {
     <div className="bg-transparent text-slate-900 font-light selection:bg-blue-100 selection:text-blue-700 overflow-x-hidden">
 
       {/* 1. HERO SECTION */}
-      <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-[#030712]">
-        {/* Hybrid Animated Background (Video + Neon 3D Particles) */}
+      <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-[#0a0f1e]">
+        {/* Minimalist Hybrid Background (Subtle Video + Sharp 3D Particles) */}
         <QuantumNetwork domainIndex={domainIndex} videoUrl={domainVideos[domainIndex]} />
 
         {/* Floating Modern Shapes (Optimized: Removed expensive blur animation) */}
@@ -1535,10 +1535,10 @@ const Home: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center space-x-4 px-5 py-2.5 rounded-full bg-cyan-500 text-white shadow-2xl shadow-cyan-500/40"
+                className="inline-flex items-center space-x-4 px-5 py-2.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400"
               >
                 <span className="text-[12px] font-black uppercase tracking-[0.4em]">Enterprise Intelligence</span>
-                <div className="w-10 h-px bg-white/40" />
+                <div className="w-10 h-px bg-cyan-500/20" />
                 <ArrowRight className="w-3.5 h-3.5" />
               </motion.div>
 
@@ -1548,7 +1548,7 @@ const Home: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-black text-white tracking-tighter leading-[0.82] font-heading uppercase"
+                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-black text-white tracking-tighter leading-[0.85] font-heading uppercase"
                   >
                     We Engineer <br />
                     Your Enterprise <br />

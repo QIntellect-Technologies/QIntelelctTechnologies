@@ -10,14 +10,14 @@ interface QuantumNetworkProps {
 }
 
 const DOMAIN_COLORS = [
-    0x5E62FF, // Nebula Indigo
-    0x9966FF, // Nebula Purple
-    0x00f2ff, // Electric Cyan
-    0x7000ff, // Neon Violet
-    0x00ff9d, // Spring Green
-    0x0066ff, // Vivid Blue
-    0xbd00ff, // Magenta
-    0x5E62FF, // Nebula Indigo
+    0x5E62FF, // AI - Nebula Indigo
+    0x9966FF, // Chatbots - Nebula Purple
+    0x00f2ff, // AI Reps - Electric Cyan
+    0x7000ff, // AX - Neon Violet
+    0x00ff9d, // D365 - Spring Green
+    0x0066ff, // Web - Vivid Blue
+    0xbd00ff, // ERP - Magenta
+    0x5E62FF, // Mobile - Nebula Indigo
 ];
 
 const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }) => {
@@ -34,8 +34,66 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
     // Objects for morphing & animation
     const coreGroupRef = useRef<THREE.Group | null>(null);
-    const latticeRef = useRef<THREE.LineSegments | null>(null);
+    const latticeRef = useRef<THREE.Object3D | null>(null);
     const ringsRef = useRef<THREE.Group | null>(null);
+
+    const createDomainModel = (index: number) => {
+        const group = new THREE.Group();
+        let geo: THREE.BufferGeometry;
+        const color = DOMAIN_COLORS[index % DOMAIN_COLORS.length];
+
+        // Specific "Wow" Models (v11 Fixes & Upgrades)
+        if (index === 0) {
+            // AI: Advanced Neural Neural Lattice
+            geo = new THREE.IcosahedronGeometry(0.85, 3);
+        } else if (index === 1) {
+            // Chatbot: "Wow" Double-Knot with Core
+            geo = new THREE.TorusKnotGeometry(0.65, 0.22, 150, 20);
+            // Add inner core for chatbots
+            const coreGeo = new THREE.SphereGeometry(0.3, 32, 32);
+            const coreMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.8 });
+            const core = new THREE.Mesh(coreGeo, coreMat);
+            group.add(core);
+        } else if (index === 3 || index === 4 || index === 6) {
+            // Dynamics/ERP: High-Visibility Tech Crystal
+            geo = new THREE.OctahedronGeometry(1.0, 1);
+        } else {
+            const geometries = [
+                new THREE.IcosahedronGeometry(0.85, 2),
+                new THREE.TorusKnotGeometry(0.6, 0.25, 100, 16),
+                new THREE.OctahedronGeometry(0.95, 1),
+                new THREE.TorusGeometry(0.75, 0.3, 16, 50),
+                new THREE.BoxGeometry(1.2, 1.2, 1.2, 2, 2, 2),
+                new THREE.DodecahedronGeometry(0.85, 0),
+                new THREE.SphereGeometry(0.85, 16, 16),
+                new THREE.IcosahedronGeometry(0.85, 0)
+            ];
+            geo = geometries[index % geometries.length];
+        }
+
+        const edges = new THREE.EdgesGeometry(geo);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.6,
+            linewidth: 1 // Only works on some drivers, but good to have
+        }));
+
+        const nodes = new THREE.Points(geo, new THREE.PointsMaterial({
+            color: color,
+            size: 0.025,
+            transparent: true,
+            opacity: 0.9,
+            blending: THREE.AdditiveBlending
+        }));
+
+        group.add(line);
+        group.add(nodes);
+
+        // Cleanup the temporary geometry used for edges/points
+        // Note: We don't dispose the geo here because it's shared by Points and Edges
+        return { group, geo };
+    };
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -48,7 +106,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         sceneRef.current = scene;
 
         const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        camera.position.z = 2.4; // Precision distance
+        camera.position.z = 2.4;
         cameraRef.current = camera;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -64,61 +122,14 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         composer.addPass(bloomPass);
         composerRef.current = composer;
 
-        // --- Core Group ---
         const coreGroup = new THREE.Group();
         scene.add(coreGroup);
         coreGroupRef.current = coreGroup;
 
-        const createDomainModel = (index: number) => {
-            let geo: THREE.BufferGeometry;
-
-            // Domain-Specific Models
-            if (index === 0) {
-                // AI: Neural Network Brain
-                geo = new THREE.IcosahedronGeometry(0.85, 3);
-            } else if (index === 1) {
-                // Chatbots: Conversational Orb (Double Torus structure)
-                geo = new THREE.TorusKnotGeometry(0.65, 0.2, 120, 24);
-            } else {
-                const geometries = [
-                    new THREE.IcosahedronGeometry(0.85, 2),
-                    new THREE.TorusKnotGeometry(0.6, 0.25, 100, 16),
-                    new THREE.OctahedronGeometry(0.95, 1),
-                    new THREE.TorusGeometry(0.75, 0.3, 16, 50),
-                    new THREE.BoxGeometry(1.2, 1.2, 1.2, 2, 2, 2),
-                    new THREE.DodecahedronGeometry(0.85, 0),
-                    new THREE.SphereGeometry(0.85, 16, 16),
-                    new THREE.IcosahedronGeometry(0.85, 0)
-                ];
-                geo = geometries[index % geometries.length];
-            }
-
-            const edges = new THREE.EdgesGeometry(geo);
-            const color = DOMAIN_COLORS[index % DOMAIN_COLORS.length];
-            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
-                color: color,
-                transparent: true,
-                opacity: 0.5
-            }));
-
-            // Glowing nodes
-            const nodes = new THREE.Points(geo, new THREE.PointsMaterial({
-                color: color,
-                size: 0.02,
-                transparent: true,
-                opacity: 0.8,
-                blending: THREE.AdditiveBlending
-            }));
-            line.add(nodes);
-
-            return line;
-        };
-
-        const initialModel = createDomainModel(domainIndex);
+        const { group: initialModel } = createDomainModel(domainIndex);
         coreGroup.add(initialModel);
         latticeRef.current = initialModel;
 
-        // --- Precision Orbital Rings (Downscaled) ---
         const ringsGroup = new THREE.Group();
         scene.add(ringsGroup);
         ringsRef.current = ringsGroup;
@@ -140,7 +151,6 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         addRing(1.3, -Math.PI / 3.5, -0.002);
         addRing(1.5, Math.PI / 6, 0.001);
 
-        // --- Animation Loop ---
         let mouseX = 0, mouseY = 0;
         const onMouseMove = (e: MouseEvent) => {
             mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -150,11 +160,11 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
         const clock = new THREE.Clock();
         const animate = () => {
-            requestAnimationFrame(animate);
+            const id = requestAnimationFrame(animate);
             const delta = clock.getDelta();
 
             if (coreGroupRef.current) {
-                coreGroupRef.current.rotation.y += delta * 0.25; // Smoother, faster auto-motion
+                coreGroupRef.current.rotation.y += delta * 0.25;
                 coreGroupRef.current.rotation.x += delta * 0.1;
                 coreGroupRef.current.position.x += (mouseX * 0.15 - coreGroupRef.current.position.x) * 0.1;
                 coreGroupRef.current.position.y += (-mouseY * 0.15 - coreGroupRef.current.position.y) * 0.1;
@@ -188,50 +198,39 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
             window.removeEventListener('resize', onResize);
             container.removeChild(renderer.domElement);
             renderer.dispose();
+            // Deep cleanup when component unmounts
+            scene.traverse((obj) => {
+                if (obj instanceof THREE.Mesh || obj instanceof THREE.LineSegments || obj instanceof THREE.Points) {
+                    obj.geometry.dispose();
+                    if (Array.isArray(obj.material)) {
+                        obj.material.forEach(m => m.dispose());
+                    } else {
+                        obj.material.dispose();
+                    }
+                }
+            });
         };
     }, []);
 
-    // Morph Logic
+    // Morph Logic with DEEP Disposal Fix
     useEffect(() => {
         if (coreGroupRef.current && latticeRef.current) {
-            coreGroupRef.current.remove(latticeRef.current);
-            latticeRef.current.children.forEach(c => {
-                if (c instanceof THREE.Points) (c.material as THREE.Material).dispose();
-            });
-            latticeRef.current.geometry.dispose();
-            (latticeRef.current.material as THREE.Material).dispose();
+            const oldLattice = latticeRef.current;
+            coreGroupRef.current.remove(oldLattice);
 
-            const createDomainModel = (index: number) => {
-                let geo: THREE.BufferGeometry;
-                if (index === 0) geo = new THREE.IcosahedronGeometry(0.85, 3);
-                else if (index === 1) geo = new THREE.TorusKnotGeometry(0.65, 0.2, 120, 24);
-                else {
-                    const geometries = [
-                        new THREE.IcosahedronGeometry(0.85, 2),
-                        new THREE.TorusKnotGeometry(0.6, 0.25, 100, 16),
-                        new THREE.OctahedronGeometry(0.95, 1),
-                        new THREE.TorusGeometry(0.75, 0.3, 16, 50),
-                        new THREE.BoxGeometry(1.2, 1.2, 1.2, 2, 2, 2),
-                        new THREE.DodecahedronGeometry(0.85, 0),
-                        new THREE.SphereGeometry(0.85, 16, 16),
-                        new THREE.IcosahedronGeometry(0.85, 0)
-                    ];
-                    geo = geometries[index % geometries.length];
+            // Deep disposal of the old model to fix the "invisible/leaking" bug
+            oldLattice.traverse((obj) => {
+                if (obj instanceof THREE.Mesh || obj instanceof THREE.LineSegments || obj instanceof THREE.Points) {
+                    obj.geometry.dispose();
+                    if (Array.isArray(obj.material)) {
+                        obj.material.forEach(m => m.dispose());
+                    } else {
+                        obj.material.dispose();
+                    }
                 }
+            });
 
-                const edges = new THREE.EdgesGeometry(geo);
-                const color = DOMAIN_COLORS[index % DOMAIN_COLORS.length];
-                const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
-                    color: color, transparent: true, opacity: 0.5
-                }));
-                const nodes = new THREE.Points(geo, new THREE.PointsMaterial({
-                    color: color, size: 0.02, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
-                }));
-                line.add(nodes);
-                return line;
-            };
-
-            const nextLattice = createDomainModel(domainIndex);
+            const { group: nextLattice } = createDomainModel(domainIndex);
             coreGroupRef.current.add(nextLattice);
             latticeRef.current = nextLattice;
         }
@@ -252,7 +251,6 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
     return (
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-black">
-            {/* Background Video Layer - Subtle */}
             <video
                 ref={videoRef}
                 autoPlay
@@ -263,7 +261,6 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 src={videoUrl}
             />
 
-            {/* 3D PERSPECTIVE GRID */}
             <div className="absolute inset-0 z-10 opacity-15 pointer-events-none"
                 style={{
                     backgroundImage: `linear-gradient(rgba(94, 98, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(94, 98, 255, 0.1) 1px, transparent 1px)`,
@@ -275,14 +272,11 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 }}
             />
 
-            {/* NEBULA AMBIENT LIGHTS */}
             <div className="absolute top-[10%] right-[15%] w-[35%] h-[35%] bg-[#5E62FF]/10 blur-[140px] rounded-full z-10" />
             <div className="absolute bottom-[15%] left-[10%] w-[30%] h-[30%] bg-[#9966FF]/10 blur-[120px] rounded-full z-10" />
 
-            {/* MAIN 3D CANVAS LAYER */}
             <div ref={containerRef} className="w-full h-full relative z-20" />
 
-            {/* SCIFI SCANLINES */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.02] z-30"
                 style={{
                     background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #fff 3px)',

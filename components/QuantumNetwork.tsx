@@ -3,10 +3,25 @@ import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
-const QuantumNetwork: React.FC = () => {
+interface QuantumNetworkProps {
+    domainIndex?: number;
+}
+
+const DOMAIN_COLORS = [
+    0x2563eb, // 0: AI - Blue 600
+    0x4f46e5, // 1: Chatbots - Indigo 600
+    0x7c3aed, // 2: AI Reps - Violet 600
+    0x2563eb, // 3: Dynamics AX - Blue 600
+    0x4f46e5, // 4: Dynamics 365 - Indigo 600
+    0x0891b2, // 5: Web Dev - Cyan 600
+    0x0284c7, // 6: EDI & ERP - Sky 600
+    0x4f46e5, // 7: Mobile Dev - Indigo 600
+];
+
+const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex = 0 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const globeColorRef = useRef(new THREE.Color(DOMAIN_COLORS[0]));
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -31,9 +46,9 @@ const QuantumNetwork: React.FC = () => {
         const renderScene = new RenderPass(scene, camera);
         const bloomPass = new UnrealBloomPass(
             new THREE.Vector2(width, height),
-            1.5, // strength
-            0.4, // radius
-            0.85 // threshold
+            0.8, // reduced strength for light theme
+            0.3, // radius
+            0.9  // threshold - keep it high to only bloom brightest parts
         );
 
         const composer = new EffectComposer(renderer);
@@ -44,34 +59,25 @@ const QuantumNetwork: React.FC = () => {
         const globeGroup = new THREE.Group();
         scene.add(globeGroup);
 
-        const pointCount = 12000;
+        const pointCount = 10000;
         const positions = new Float32Array(pointCount * 3);
         const colors = new Float32Array(pointCount * 3);
         const sizes = new Float32Array(pointCount);
 
-        const color1 = new THREE.Color(0x3b82f6); // blue-500
-        const color2 = new THREE.Color(0x8b5cf6); // violet-500
-
         for (let i = 0; i < pointCount; i++) {
-            // Spherical distribution
             const phi = Math.acos(-1 + (2 * i) / pointCount);
             const theta = Math.sqrt(pointCount * Math.PI) * phi;
             const r = 1;
 
-            const x = r * Math.cos(theta) * Math.sin(phi);
-            const y = r * Math.sin(theta) * Math.sin(phi);
-            const z = r * Math.cos(phi);
+            positions[i * 3] = r * Math.cos(theta) * Math.sin(phi);
+            positions[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
+            positions[i * 3 + 2] = r * Math.cos(phi);
 
-            // Add some noise to make it look "quantum"
-            const noise = (Math.random() - 0.5) * 0.02;
-            positions[i * 3] = x + noise;
-            positions[i * 3 + 1] = y + noise;
-            positions[i * 3 + 2] = z + noise;
-
-            const mixedColor = color1.clone().lerp(color2, Math.random());
-            colors[i * 3] = mixedColor.r;
-            colors[i * 3 + 1] = mixedColor.g;
-            colors[i * 3 + 2] = mixedColor.b;
+            // Initial color
+            const c = globeColorRef.current;
+            colors[i * 3] = c.r;
+            colors[i * 3 + 1] = c.g;
+            colors[i * 3 + 2] = c.b;
             sizes[i] = Math.random() * 2 + 1;
         }
 
@@ -81,115 +87,79 @@ const QuantumNetwork: React.FC = () => {
         globeGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
         const globeMaterial = new THREE.PointsMaterial({
-            size: 0.008,
+            size: 0.007,
             vertexColors: true,
             transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending,
+            opacity: 0.4, // lower opacity for light theme
+            blending: THREE.NormalBlending, // use normal blending for light theme
         });
 
         const globePoints = new THREE.Points(globeGeometry, globeMaterial);
         globeGroup.add(globePoints);
 
-        // --- Dynamic Connections & Pulses ---
+        // --- Dynamic Connections ---
         const connectionsGroup = new THREE.Group();
         globeGroup.add(connectionsGroup);
 
-        const pulseMaterial = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-
         const arcs: { curve: THREE.QuadraticBezierCurve3; line: THREE.Line; pulse: THREE.Mesh; progress: number; speed: number }[] = [];
+        const arcMaterial = new THREE.LineBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.1 });
+        const pulseMaterial = new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.6 });
 
-        for (let i = 0; i < 40; i++) {
-            const startPhi = Math.random() * Math.PI * 2;
-            const startTheta = Math.random() * Math.PI;
-            const endPhi = Math.random() * Math.PI * 2;
-            const endTheta = Math.random() * Math.PI;
-
-            const v1 = new THREE.Vector3().setFromSphericalCoords(1.01, startTheta, startPhi);
-            const v2 = new THREE.Vector3().setFromSphericalCoords(1.01, endTheta, endPhi);
-
-            const mid = v1.clone().lerp(v2, 0.5).normalize().multiplyScalar(1.3);
+        for (let i = 0; i < 35; i++) {
+            const v1 = new THREE.Vector3().setFromSphericalCoords(1.01, Math.random() * Math.PI, Math.random() * Math.PI * 2);
+            const v2 = new THREE.Vector3().setFromSphericalCoords(1.01, Math.random() * Math.PI, Math.random() * Math.PI * 2);
+            const mid = v1.clone().lerp(v2, 0.5).normalize().multiplyScalar(1.25);
             const curve = new THREE.QuadraticBezierCurve3(v1, mid, v2);
 
             const points = curve.getPoints(50);
             const geometry = new THREE.BufferGeometry().setFromPoints(points);
-            const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
-                color: 0x3b82f6,
-                transparent: true,
-                opacity: 0.2
-            }));
+            const line = new THREE.Line(geometry, arcMaterial.clone());
             connectionsGroup.add(line);
 
-            const pulseGeometry = new THREE.SphereGeometry(0.008, 8, 8);
-            const pulse = new THREE.Mesh(pulseGeometry, pulseMaterial);
+            const pulse = new THREE.Mesh(new THREE.SphereGeometry(0.006, 8, 8), pulseMaterial.clone());
             connectionsGroup.add(pulse);
 
-            arcs.push({
-                curve,
-                line,
-                pulse,
-                progress: Math.random(),
-                speed: 0.002 + Math.random() * 0.003
-            });
+            arcs.push({ curve, line, pulse, progress: Math.random(), speed: 0.002 + Math.random() * 0.002 });
         }
-
-        // --- Starfield ---
-        const starCount = 2000;
-        const starPositions = new Float32Array(starCount * 3);
-        for (let i = 0; i < starCount; i++) {
-            starPositions[i * 3] = (Math.random() - 0.5) * 10;
-            starPositions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-            starPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-        }
-        const starGeometry = new THREE.BufferGeometry();
-        starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-        const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.005, transparent: true, opacity: 0.4 });
-        const stars = new THREE.Points(starGeometry, starMaterial);
-        scene.add(stars);
 
         // --- Interaction ---
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-
-        const handleMouseMove = (event: MouseEvent) => {
-            mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
-            mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+        let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         };
-
         window.addEventListener('mousemove', handleMouseMove);
 
         // --- Animation Loop ---
         const clock = new THREE.Clock();
-
         const animate = () => {
             requestAnimationFrame(animate);
             const delta = clock.getDelta();
 
-            // Rotation
-            globeGroup.rotation.y += delta * 0.1;
-            globeGroup.rotation.x += delta * 0.05;
+            globeGroup.rotation.y += delta * 0.08;
+            globeGroup.rotation.x += delta * 0.04;
 
-            // Parallax
             targetX += (mouseX - targetX) * 0.05;
             targetY += (mouseY - targetY) * 0.05;
-            globeGroup.position.x = targetX * 0.15;
-            globeGroup.position.y = -targetY * 0.15;
-            stars.position.x = targetX * 0.05;
-            stars.position.y = -targetY * 0.05;
+            globeGroup.position.x = targetX * 0.12;
+            globeGroup.position.y = -targetY * 0.12;
 
-            // Update Pulses
+            // Smooth color transition
+            const targetColor = new THREE.Color(DOMAIN_COLORS[domainIndex % DOMAIN_COLORS.length]);
+            globeColorRef.current.lerp(targetColor, 0.05);
+
+            const colorAttr = globeGeometry.getAttribute('color') as THREE.BufferAttribute;
+            for (let i = 0; i < pointCount; i++) {
+                colorAttr.setXYZ(i, globeColorRef.current.r, globeColorRef.current.g, globeColorRef.current.b);
+            }
+            colorAttr.needsUpdate = true;
+
             arcs.forEach(arc => {
                 arc.progress += arc.speed;
                 if (arc.progress >= 1) arc.progress = 0;
-                const pos = arc.curve.getPointAt(arc.progress);
-                arc.pulse.position.copy(pos);
+                arc.pulse.position.copy(arc.curve.getPointAt(arc.progress));
+                (arc.pulse.material as THREE.MeshBasicMaterial).color.copy(globeColorRef.current);
+                (arc.line.material as THREE.LineBasicMaterial).color.copy(globeColorRef.current);
             });
 
             composer.render();
@@ -197,16 +167,12 @@ const QuantumNetwork: React.FC = () => {
 
         animate();
 
-        // --- Resize ---
         const handleResize = () => {
-            const w = container.clientWidth;
-            const h = container.clientHeight;
-            camera.aspect = w / h;
+            camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(w, h);
-            composer.setSize(w, h);
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            composer.setSize(container.clientWidth, container.clientHeight);
         };
-
         window.addEventListener('resize', handleResize);
 
         return () => {
@@ -216,25 +182,21 @@ const QuantumNetwork: React.FC = () => {
             renderer.dispose();
             globeGeometry.dispose();
             globeMaterial.dispose();
-            starGeometry.dispose();
-            starMaterial.dispose();
-            pulseMaterial.dispose();
             arcs.forEach(arc => {
                 arc.pulse.geometry.dispose();
+                (arc.pulse.material as THREE.Material).dispose();
                 arc.line.geometry.dispose();
+                (arc.line.material as THREE.Material).dispose();
             });
         };
-    }, []);
+    }, [domainIndex]);
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#0a0f1e]">
-            {/* Dark Cinematic Vignette */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,15,30,0.4)_100%)] z-10" />
-
-            <div ref={containerRef} className="w-full h-full opacity-80" />
-
-            {/* Mesh Noise Texture for Film Grain Feel */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-20"
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-slate-50">
+            {/* Soft Light Vignette */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(248,250,252,0.8)_100%)] z-10" />
+            <div ref={containerRef} className="w-full h-full opacity-60" />
+            <div className="absolute inset-0 opacity-[0.015] pointer-events-none z-20"
                 style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}
             />
         </div>

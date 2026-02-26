@@ -53,23 +53,33 @@ import MagneticButton from '../components/MagneticButton';
 import QuantumNetwork from '../components/QuantumNetwork';
 
 // --- Typewriter Component for Hero ---
-const TypewriterHeadline: React.FC = React.memo(() => {
-  const words = ["AI Solutions.", "Smart Chatbots.", "ERP Systems.", "EDI Networks.", "Web Platforms.", "D365 Power."];
-  const [index, setIndex] = useState(0);
+const TypewriterHeadline: React.FC<{ index: number }> = React.memo(({ index }) => {
+  const words = [
+    "AI Solutions.",
+    "Smart Chatbots.",
+    "AI Reps.",
+    "Dynamics AX.",
+    "D365 Power.",
+    "Web Platforms.",
+    "EDI & ERP.",
+    "Mobile Apps."
+  ];
+
   const [subIndex, setSubIndex] = useState(0);
   const [reverse, setReverse] = useState(false);
 
   useEffect(() => {
+    setSubIndex(0);
+    setReverse(false);
+  }, [index]);
+
+  useEffect(() => {
     if (subIndex === words[index].length + 1 && !reverse) {
-      setTimeout(() => setReverse(true), 1500);
+      setTimeout(() => setReverse(true), 2000);
       return;
     }
 
-    if (subIndex === 0 && reverse) {
-      setReverse(false);
-      setIndex((prev) => (prev + 1) % words.length);
-      return;
-    }
+    if (subIndex === 0 && reverse) return;
 
     const timeout = setTimeout(() => {
       setSubIndex((prev) => prev + (reverse ? -1 : 1));
@@ -1446,13 +1456,22 @@ const Home: React.FC = () => {
   const philImageY = useTransform(philScroll, [0, 1], [100, -100]);
   const philCardY = useTransform(philScroll, [0, 1], [50, -50]);
 
+  const [domainIndex, setDomainIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDomainIndex((prev) => (prev + 1) % 8);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-transparent text-slate-900 font-light selection:bg-blue-100 selection:text-blue-700 overflow-x-hidden">
 
       {/* 1. HERO SECTION */}
-      <section ref={heroRef} className="relative min-h-[95vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-white">
+      <section ref={heroRef} className="relative min-h-[95vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-slate-50">
         {/* Animated Background */}
-        <QuantumNetwork />
+        <QuantumNetwork domainIndex={domainIndex} />
 
         {/* Floating Modern Shapes (Optimized: Removed expensive blur animation) */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -1521,7 +1540,7 @@ const Home: React.FC = () => {
                   >
                     We Engineer <br />
                     Your Enterprise <br />
-                    <TypewriterHeadline />
+                    <TypewriterHeadline index={domainIndex} />
                   </motion.h1>
                 </div>
               </div>

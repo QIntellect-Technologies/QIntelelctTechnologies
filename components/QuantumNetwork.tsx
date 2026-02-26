@@ -603,16 +603,16 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 cg.rotation.y += delta * 0.09;
             } else if (dIdx === 7 && ud.isMobile) {
                 // Animate floating UI panels orbiting the phone
-                ud.floatingPanels.forEach(({ pivot, speed }: any) => {
+                ud.floatingPanels?.forEach(({ pivot, speed }: any) => {
                     pivot.rotation.y += delta * speed;
                 });
                 // Animate UI cards — sequential opacity waves
-                ud.uiCards.forEach((card: THREE.Mesh, i: number) => {
+                ud.uiCards?.forEach((card: THREE.Mesh, i: number) => {
                     const p = Math.sin(time * 1.5 + i * 0.7) * 0.5 + 0.5;
                     (card.material as THREE.MeshBasicMaterial).opacity = 0.06 + p * 0.16;
                 });
                 // Screen glow breathe
-                if (ud.glowMesh) (ud.glowMesh.material as THREE.MeshBasicMaterial).opacity = 0.03 + Math.sin(time * 2) * 0.02;
+                if (ud.glowMesh?.material) (ud.glowMesh.material as THREE.MeshBasicMaterial).opacity = 0.03 + Math.sin(time * 2) * 0.02;
                 // Glow ring slow spin
                 if (ud.glowRing) ud.glowRing.rotation.z += delta * 0.2;
                 // Gentle float and slight tilt

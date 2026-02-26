@@ -25,7 +25,6 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     const videoRef = useRef<HTMLVideoElement>(null);
     const prevVideoUrl = useRef(videoUrl);
     const [fade, setFade] = useState(false);
-    const domainIndexRef = useRef(domainIndex);
 
     // Three.js Refs
     const sceneRef = useRef<THREE.Scene | null>(null);
@@ -41,121 +40,143 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     const createRobotModel = (color: number) => {
         const group = new THREE.Group();
 
-        // 0. Base / Neck
-        const neckGeo = new THREE.CylinderGeometry(0.12, 0.18, 0.25, 32);
-        const neckMat = new THREE.MeshStandardMaterial({ color: 0x333333, metalness: 0.9, roughness: 0.1 });
-        const neck = new THREE.Mesh(neckGeo, neckMat);
-        neck.position.y = -0.65;
-        group.add(neck);
-
-        // 1. External Glass Head (Semi-transparent)
+        // 1. Sleek Head Assembly
         const headGroup = new THREE.Group();
         group.add(headGroup);
 
-        const headGeo = new THREE.SphereGeometry(0.5, 64, 64);
+        // Main sphere head - Adjusted for high visibility
+        const headGeo = new THREE.SphereGeometry(0.48, 64, 64);
         const headMat = new THREE.MeshStandardMaterial({
-            color: 0xeeeeee,
+            color: 0xffffff,
             emissive: color,
-            emissiveIntensity: 0.1,
-            metalness: 0.9,
-            roughness: 0.1,
+            emissiveIntensity: 0.2,
+            roughness: 0.2,
+            metalness: 0.8,
             transparent: true,
-            opacity: 0.8
+            opacity: 0.95
         });
         const head = new THREE.Mesh(headGeo, headMat);
         headGroup.add(head);
 
-        // 2. Internal Glowing 'Brain' (Visible through head)
-        const brainGeo = new THREE.SphereGeometry(0.22, 32, 32);
-        const brainMat = new THREE.MeshStandardMaterial({
-            color: color,
-            emissive: color,
-            emissiveIntensity: 4,
-            transparent: true,
-            opacity: 0.9
-        });
-        const brain = new THREE.Mesh(brainGeo, brainMat);
-        headGroup.add(brain);
+        // Sub-glow (Inner core)
+        const glowGeo = new THREE.SphereGeometry(0.4, 32, 32);
+        const glowMatInner = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.4 });
+        const innerGlow = new THREE.Mesh(glowGeo, glowMatInner);
+        headGroup.add(innerGlow);
 
-        // 3. Face Visor (Black area)
-        const visorGeo = new THREE.SphereGeometry(0.51, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.55);
-        const visorMat = new THREE.MeshBasicMaterial({ color: 0x010101, transparent: true, opacity: 0.65 });
+        // Dark Visor / Face Area - Moved slightly out
+        const visorGeo = new THREE.SphereGeometry(0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
+        const visorMat = new THREE.MeshBasicMaterial({ color: 0x050505, transparent: true, opacity: 0.9 });
         const visor = new THREE.Mesh(visorGeo, visorMat);
-        visor.rotation.x = -Math.PI / 2.3;
-        visor.position.z = 0.02;
+        visor.rotation.x = -Math.PI / 2.5;
+        visor.position.z = 0.05;
         headGroup.add(visor);
 
-        // 4. Digital Face Components (Must be VERY visible)
-        const faceMat = new THREE.MeshBasicMaterial({
+        // 2. Animated Light Bars (Eyes & Mouth)
+        const barGeo = new THREE.PlaneGeometry(0.15, 0.04);
+        const barMat = new THREE.MeshBasicMaterial({
             color: color,
             transparent: true,
-            opacity: 1,
+            opacity: 0.9,
             blending: THREE.AdditiveBlending,
             side: THREE.DoubleSide
         });
 
-        const eyeGeo = new THREE.PlaneGeometry(0.15, 0.05);
-        const eyeL = new THREE.Mesh(eyeGeo, faceMat);
-        eyeL.position.set(-0.18, 0.12, 0.53);
+        const eyeL = new THREE.Mesh(barGeo, barMat);
+        eyeL.position.set(-0.18, 0.1, 0.52);
         headGroup.add(eyeL);
 
-        const eyeR = new THREE.Mesh(eyeGeo, faceMat);
-        eyeR.position.set(0.18, 0.12, 0.53);
+        const eyeR = new THREE.Mesh(barGeo, barMat);
+        eyeR.position.set(0.18, 0.1, 0.52);
         headGroup.add(eyeR);
 
-        const mouthGeo = new THREE.PlaneGeometry(0.25, 0.04);
-        const mouth = new THREE.Mesh(mouthGeo, faceMat);
-        mouth.position.set(0, -0.15, 0.53);
+        // Mouth Bar (The "Talking" element)
+        const mouthGeo = new THREE.PlaneGeometry(0.2, 0.03);
+        const mouthMat = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.9,
+            blending: THREE.AdditiveBlending,
+            side: THREE.DoubleSide
+        });
+        const mouth = new THREE.Mesh(mouthGeo, mouthMat);
+        mouth.position.set(0, -0.15, 0.52);
         headGroup.add(mouth);
 
-        // 5. Orbital Halo
-        const ringGeo = new THREE.TorusGeometry(0.7, 0.008, 16, 100);
-        const ringMat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.5 });
-        const ring1 = new THREE.Mesh(ringGeo, ringMat);
-        ring1.rotation.x = Math.PI / 2.2;
-        group.add(ring1);
+        // 3. Digital Halo / Orbitals
+        const createRing = (radius: number, rotationX: number, opacity: number) => {
+            const rGeo = new THREE.TorusGeometry(radius, 0.005, 16, 100);
+            const rMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity });
+            const r = new THREE.Mesh(rGeo, rMat);
+            r.rotation.x = rotationX;
+            return r;
+        };
 
-        (group as any).userData = { isRobot: true, headGroup, brain, mouth, eyeL, eyeR, ring1 };
+        const ring1 = createRing(0.7, Math.PI / 2.2, 0.2);
+        const ring2 = createRing(0.8, -Math.PI / 3, 0.1);
+        group.add(ring1, ring2);
+
+        // Store references for animation
+        (group as any).userData = {
+            isRobot: true,
+            headGroup,
+            eyeL,
+            eyeR,
+            mouth,
+            ring1,
+            ring2
+        };
+
         return group;
     };
 
     const createCodeModel = (color: number) => {
         const group = new THREE.Group();
+        const codeStrips: THREE.Group[] = [];
 
-        // 1. Digital Matrix Tunnel (3D Depth)
-        const strips: THREE.Group[] = [];
-        for (let i = 0; i < 45; i++) {
+        // 1. Digital Terminal Frame
+        const frameGeo = new THREE.BoxGeometry(1.6, 1.0, 0.1);
+        const frameEdges = new THREE.EdgesGeometry(frameGeo);
+        const frameLine = new THREE.LineSegments(frameEdges, new THREE.LineBasicMaterial({
+            color,
+            transparent: true,
+            opacity: 0.4
+        }));
+        group.add(frameLine);
+
+        // 2. Scrolling Code Strips
+        const charGeo = new THREE.PlaneGeometry(0.08, 0.08);
+        for (let i = 0; i < 15; i++) {
             const strip = new THREE.Group();
-            const x = (Math.random() - 0.5) * 3.5;
-            const z = (Math.random() - 0.5) * 2.5;
+            const x = (i - 7) * 0.12;
             const speed = 0.5 + Math.random() * 1.5;
 
-            for (let j = 0; j < 15; j++) {
-                const charGeo = new THREE.PlaneGeometry(0.1, 0.1);
+            for (let j = 0; j < 12; j++) {
                 const charMat = new THREE.MeshBasicMaterial({
-                    color: Math.random() > 0.3 ? 0x00f2ff : 0xffffff,
+                    color,
                     transparent: true,
-                    opacity: 1 - (j / 15),
+                    opacity: 0.1 + (j / 12) * 0.8,
                     blending: THREE.AdditiveBlending,
                     side: THREE.DoubleSide
                 });
                 const char = new THREE.Mesh(charGeo, charMat);
-                char.position.y = (j / 15) - 0.5;
+                char.position.set(0, (j - 6) * 0.1, 0);
                 strip.add(char);
             }
-            strip.position.set(x, 0, z);
-            (strip as any).userData = { speed };
+
+            strip.position.set(x, 0, 0.02);
+            (strip as any).userData = { speed, offset: Math.random() * Math.PI * 2 };
             group.add(strip);
-            strips.push(strip);
+            codeStrips.push(strip);
         }
 
-        // 2. Center "Logic Core"
-        const coreGeo = new THREE.IcosahedronGeometry(0.35, 0);
-        const coreMat = new THREE.MeshBasicMaterial({ color: 0x00f2ff, wireframe: true, transparent: true, opacity: 0.8 });
+        // 3. Central "Core" Code Fragment
+        const coreGeo = new THREE.IcosahedronGeometry(0.15, 0);
+        const coreMat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.8 });
         const core = new THREE.Mesh(coreGeo, coreMat);
         group.add(core);
 
-        (group as any).userData = { isCode: true, strips, core };
+        (group as any).userData = { isCode: true, strips: codeStrips, core };
         return group;
     };
 
@@ -284,11 +305,15 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         const animate = () => {
             const id = requestAnimationFrame(animate);
             const delta = clock.getDelta();
-            const time = performance.now() * 0.001;
 
             if (coreGroupRef.current) {
+                const time = clock.getElapsedTime();
+
+                // General rotation
+                coreGroupRef.current.rotation.y += delta * 0.25;
+
                 // Specific animation for Chatbot
-                if (domainIndexRef.current === 1) {
+                if (domainIndex === 1) {
                     // Floating effect
                     coreGroupRef.current.position.y += Math.sin(time * 1.5) * 0.0012;
                     coreGroupRef.current.position.x += Math.cos(time * 0.8) * 0.0006;
@@ -317,13 +342,10 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                             }
 
                             if (ring1) ring1.rotation.z += delta * 0.4;
-                            if ((robot as any).userData?.brain) {
-                                (robot as any).userData.brain.scale.setScalar(1 + Math.sin(time * 5) * 0.12);
-                                (robot as any).userData.brain.material.emissiveIntensity = 2 + Math.sin(time * 3) * 1;
-                            }
+                            if (ring2) ring2.rotation.z -= delta * 0.2;
                         }
                     }
-                } else if (domainIndexRef.current === 5) {
+                } else if (domainIndex === 5) {
                     // Web Development - Code Animation
                     const code = coreGroupRef.current.children[0];
                     if (code && (code as any).userData?.isCode) {
@@ -344,14 +366,12 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                         if (core) {
                             core.rotation.x += delta * 2;
                             core.rotation.y += delta * 1.5;
-                            core.scale.setScalar(1 + Math.sin(time * 4) * 0.1);
                         }
                     }
-                    coreGroupRef.current.rotation.y += delta * 0.2;
-                    coreGroupRef.current.rotation.x -= delta * 0.1;
+                    coreGroupRef.current.rotation.y += delta * 0.1;
+                    coreGroupRef.current.rotation.x -= delta * 0.05;
                 } else {
                     coreGroupRef.current.rotation.x += delta * 0.1;
-                    coreGroupRef.current.rotation.y += delta * 0.05;
                 }
 
                 coreGroupRef.current.position.x += (mouseX * 0.15 - coreGroupRef.current.position.x) * 0.1;
@@ -402,9 +422,6 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
     // Morph Logic with DEEP Disposal Fix
     useEffect(() => {
-        domainIndexRef.current = domainIndex;
-        console.log(`[QuantumNetwork] Morphing to Domain: ${domainIndex} - ${DOMAIN_COLORS[domainIndex % DOMAIN_COLORS.length].toString(16)}`);
-
         if (coreGroupRef.current && latticeRef.current) {
             const oldLattice = latticeRef.current;
             coreGroupRef.current.remove(oldLattice);

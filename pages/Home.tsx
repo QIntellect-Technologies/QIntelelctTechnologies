@@ -50,7 +50,8 @@ import { Link } from 'react-router-dom';
 import { SERVICES, BLOGS } from '../constants';
 import MagneticButton from '../components/MagneticButton';
 
-import QuantumNetwork from '../components/QuantumNetwork';
+import HeroCanvas from '../components/HeroCanvas';
+
 
 // --- Typewriter Component for Hero ---
 const TypewriterHeadline: React.FC<{ index: number }> = React.memo(({ index }) => {
@@ -1483,7 +1484,8 @@ const Home: React.FC = () => {
       {/* 1. HERO SECTION */}
       <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-black">
         {/* Hyper-Futuristic Visual Engine (Lattice Globe + Orbital Rings) */}
-        <QuantumNetwork domainIndex={domainIndex} videoUrl={domainVideos[domainIndex]} />
+        <HeroCanvas domainIndex={domainIndex} />
+
 
         {/* Floating Modern Shapes (Optimized: Removed expensive blur animation) */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

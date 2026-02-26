@@ -40,51 +40,82 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     const createRobotModel = (color: number) => {
         const group = new THREE.Group();
 
-        // High-Fidelity Robot Sprite
-        const textureLoader = new THREE.TextureLoader();
-        const robotTexture = textureLoader.load('/images/chatbot-robot.png');
-        const spriteMat = new THREE.SpriteMaterial({
-            map: robotTexture,
+        // 1. Sleek Head Assembly
+        const headGroup = new THREE.Group();
+        group.add(headGroup);
+
+        // Main sphere head
+        const headGeo = new THREE.SphereGeometry(0.5, 64, 64);
+        const headMat = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            emissive: color,
+            emissiveIntensity: 0.1,
+            shininess: 100,
             transparent: true,
             opacity: 0.95
         });
-        const sprite = new THREE.Sprite(spriteMat);
-        sprite.scale.set(1.5, 1.5, 1);
-        sprite.position.y = 0.1;
-        group.add(sprite);
+        const head = new THREE.Mesh(headGeo, headMat);
+        headGroup.add(head);
 
-        // Speech Bubbles (3D Planes with Glow) - Refined positioning
-        const createBubble = (x: number, y: number, z: number, scale: number) => {
-            const bGeo = new THREE.PlaneGeometry(0.4 * scale, 0.25 * scale);
-            const bMat = new THREE.MeshBasicMaterial({
-                color: color,
-                transparent: true,
-                opacity: 0.15,
-                side: THREE.DoubleSide
-            });
-            const b = new THREE.Mesh(bGeo, bMat);
-            b.position.set(x, y, z);
+        // Dark Visor / Face Area
+        const visorGeo = new THREE.SphereGeometry(0.46, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
+        const visorMat = new THREE.MeshBasicMaterial({ color: 0x050505 });
+        const visor = new THREE.Mesh(visorGeo, visorMat);
+        visor.rotation.x = -Math.PI / 2.5;
+        visor.position.z = 0.05;
+        headGroup.add(visor);
 
-            // Edges for bubble
-            const bEdges = new THREE.EdgesGeometry(bGeo);
-            const bLine = new THREE.LineSegments(bEdges, new THREE.LineBasicMaterial({ color: color, opacity: 0.4, transparent: true }));
-            b.add(bLine);
+        // 2. Animated Light Bars (Eyes & Mouth)
+        const barGeo = new THREE.PlaneGeometry(0.15, 0.03);
+        const barMat = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.9,
+            blending: THREE.AdditiveBlending
+        });
 
-            // Three dots inside
-            for (let i = 0; i < 3; i++) {
-                const dot = new THREE.Mesh(new THREE.CircleGeometry(0.02 * scale, 16), new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.8, transparent: true }));
-                dot.position.set((i - 1) * 0.1 * scale, 0, 0.01);
-                b.add(dot);
-            }
-            return b;
+        const eyeL = new THREE.Mesh(barGeo, barMat);
+        eyeL.position.set(-0.18, 0.1, 0.48);
+        headGroup.add(eyeL);
+
+        const eyeR = new THREE.Mesh(barGeo, barMat);
+        eyeR.position.set(0.18, 0.1, 0.48);
+        headGroup.add(eyeR);
+
+        // Mouth Bar (The "Talking" element)
+        const mouthGeo = new THREE.PlaneGeometry(0.2, 0.02);
+        const mouthMat = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        const mouth = new THREE.Mesh(mouthGeo, mouthMat);
+        mouth.position.set(0, -0.15, 0.48);
+        headGroup.add(mouth);
+
+        // 3. Digital Halo / Orbitals
+        const createRing = (radius: number, rotationX: number, opacity: number) => {
+            const rGeo = new THREE.TorusGeometry(radius, 0.005, 16, 100);
+            const rMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity });
+            const r = new THREE.Mesh(rGeo, rMat);
+            r.rotation.x = rotationX;
+            return r;
         };
 
-        const bubble1 = createBubble(-0.8, 0.7, 0.2, 1);
-        const bubble2 = createBubble(-1.0, 0.3, -0.2, 0.8);
-        const bubble3 = createBubble(-0.7, -0.1, 0.3, 0.6);
+        const ring1 = createRing(0.7, Math.PI / 2.2, 0.2);
+        const ring2 = createRing(0.8, -Math.PI / 3, 0.1);
+        group.add(ring1, ring2);
 
-        group.add(bubble1, bubble2, bubble3);
-        (group as any).userData = { bubbles: [bubble1, bubble2, bubble3] };
+        // Store references for animation
+        (group as any).userData = {
+            headGroup,
+            eyeL,
+            eyeR,
+            mouth,
+            ring1,
+            ring2
+        };
 
         return { group };
     };
@@ -221,20 +252,36 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 // Specific animation for Chatbot
                 if (domainIndex === 1) {
                     // Floating effect
-                    coreGroupRef.current.position.y += Math.sin(time * 1.5) * 0.0015;
-                    coreGroupRef.current.position.x += Math.cos(time * 0.8) * 0.0008;
+                    coreGroupRef.current.position.y += Math.sin(time * 1.5) * 0.0012;
+                    coreGroupRef.current.position.x += Math.cos(time * 0.8) * 0.0006;
 
-                    // Animate bubbles
+                    // Animate Procedural Robot
                     if (coreGroupRef.current.children[0]) {
-                        const robotGroup = coreGroupRef.current.children[0];
-                        const bubbles = (robotGroup as any).userData?.bubbles;
-                        if (bubbles) {
-                            bubbles.forEach((b: THREE.Mesh, i: number) => {
-                                b.position.y += Math.sin(time * 2 + i) * 0.002;
-                                if (cameraRef.current) {
-                                    b.lookAt(cameraRef.current.position);
-                                }
-                            });
+                        const robot = coreGroupRef.current.children[0];
+                        const { headGroup, eyeL, eyeR, mouth, ring1, ring2 } = (robot as any).userData || {};
+
+                        if (headGroup) {
+                            // Gaze Tracking (Head follows mouse)
+                            headGroup.rotation.y = THREE.MathUtils.lerp(headGroup.rotation.y, mouseX * 0.4, 0.1);
+                            headGroup.rotation.x = THREE.MathUtils.lerp(headGroup.rotation.x, -mouseY * 0.2, 0.1);
+
+                            // "Talking" Pulse (Mouth bar scale & opacity flicker)
+                            if (mouth) {
+                                const talkLevel = Math.abs(Math.sin(time * 20)) * (0.5 + Math.random() * 0.5);
+                                mouth.scale.y = 0.5 + talkLevel * 2.5;
+                                mouth.material.opacity = 0.5 + talkLevel * 0.4;
+                            }
+
+                            // Blink effect
+                            if (eyeL && eyeR) {
+                                const blink = Math.sin(time * 0.5) > 0.98 ? 0 : 1;
+                                eyeL.scale.y = blink;
+                                eyeR.scale.y = blink;
+                            }
+
+                            // Halo/Ring animation
+                            if (ring1) ring1.rotation.z += delta * 0.5;
+                            if (ring2) ring2.rotation.z -= delta * 0.3;
                         }
                     }
                 } else {

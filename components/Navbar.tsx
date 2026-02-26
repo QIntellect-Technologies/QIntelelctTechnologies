@@ -72,9 +72,9 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || needsSolidNavbar ? 'py-2' : 'py-6'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || needsSolidNavbar ? 'py-2' : 'py-4'}`}>
       <div className="container mx-auto px-4 md:px-8">
-        <div className={`relative transition-all duration-300 rounded-2xl px-6 py-3 flex items-center justify-between ${scrolled || needsSolidNavbar ? 'bg-white/95 backdrop-blur-md shadow-xl shadow-slate-200/40 border border-slate-100' : 'bg-transparent'}`}>
+        <div className={`relative transition-all duration-300 rounded-2xl px-6 py-3 flex items-center justify-between ${scrolled || needsSolidNavbar || location.pathname === '/' ? 'bg-white/80 backdrop-blur-lg shadow-xl shadow-slate-200/20 border border-white/40' : 'bg-transparent'}`}>
           <div className="flex items-center space-x-12">
             <Link to="/" className="flex items-center space-x-3 group">
               <img src="/images/logo.png" alt="QIntellect Technologies" className="h-10 w-auto" />
@@ -91,18 +91,18 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:text-cyan-400 relative group ${location.pathname === link.path ? 'text-cyan-400' : (scrolled || needsSolidNavbar ? 'text-slate-900' : 'text-white')}`}
+                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:text-[#5E62FF] relative group ${location.pathname === link.path ? 'text-[#5E62FF]' : 'text-slate-900'}`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-500 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`} />
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5E62FF] transition-all duration-500 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`} />
               </Link>
             ))}
 
-            <div className="flex items-center space-x-6 border-l border-white/10 pl-10">
-              <button className="text-white/70 hover:text-cyan-400 transition-colors">
+            <div className="flex items-center space-x-6 border-l border-slate-200 pl-10">
+              <button className="text-slate-400 hover:text-[#5E62FF] transition-colors">
                 <Search className="w-5 h-5" />
               </button>
-              <MagneticButton to="/contact" className={`${scrolled || needsSolidNavbar ? 'bg-slate-900' : 'bg-cyan-500'} text-white px-8 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-cyan-600 transition-all shadow-xl flex items-center group`}>
+              <MagneticButton to="/contact" className="bg-slate-900 text-white px-8 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-[#5E62FF] transition-all shadow-xl flex items-center group">
                 LET&apos;S TALK
                 <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </MagneticButton>
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <button className={`${scrolled || needsSolidNavbar ? 'text-slate-900' : 'text-white'}`} onClick={() => setIsOpen(!isOpen)}>
+          <button className="text-slate-900" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>

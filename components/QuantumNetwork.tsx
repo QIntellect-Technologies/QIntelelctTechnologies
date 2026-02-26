@@ -130,6 +130,56 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         return group;
     };
 
+    const createCodeModel = (color: number) => {
+        const group = new THREE.Group();
+        const codeStrips: THREE.Group[] = [];
+
+        // 1. Digital Terminal Frame
+        const frameGeo = new THREE.BoxGeometry(1.6, 1.0, 0.1);
+        const frameEdges = new THREE.EdgesGeometry(frameGeo);
+        const frameLine = new THREE.LineSegments(frameEdges, new THREE.LineBasicMaterial({
+            color,
+            transparent: true,
+            opacity: 0.4
+        }));
+        group.add(frameLine);
+
+        // 2. Scrolling Code Strips
+        const charGeo = new THREE.PlaneGeometry(0.08, 0.08);
+        for (let i = 0; i < 15; i++) {
+            const strip = new THREE.Group();
+            const x = (i - 7) * 0.12;
+            const speed = 0.5 + Math.random() * 1.5;
+
+            for (let j = 0; j < 12; j++) {
+                const charMat = new THREE.MeshBasicMaterial({
+                    color,
+                    transparent: true,
+                    opacity: 0.1 + (j / 12) * 0.8,
+                    blending: THREE.AdditiveBlending,
+                    side: THREE.DoubleSide
+                });
+                const char = new THREE.Mesh(charGeo, charMat);
+                char.position.set(0, (j - 6) * 0.1, 0);
+                strip.add(char);
+            }
+
+            strip.position.set(x, 0, 0.02);
+            (strip as any).userData = { speed, offset: Math.random() * Math.PI * 2 };
+            group.add(strip);
+            codeStrips.push(strip);
+        }
+
+        // 3. Central "Core" Code Fragment
+        const coreGeo = new THREE.IcosahedronGeometry(0.15, 0);
+        const coreMat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.8 });
+        const core = new THREE.Mesh(coreGeo, coreMat);
+        group.add(core);
+
+        (group as any).userData = { isCode: true, strips: codeStrips, core };
+        return group;
+    };
+
     const createDomainModel = (index: number) => {
         const color = DOMAIN_COLORS[index % DOMAIN_COLORS.length];
 
@@ -148,6 +198,12 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         if (index === 1) {
             const robotGroup = createRobotModel(color);
             return { group: robotGroup, geo: null };
+        }
+
+        // Web Development Section - NEW CODE MATRIX
+        if (index === 5) {
+            const codeGroup = createCodeModel(color);
+            return { group: codeGroup, geo: null };
         }
 
         // Other Sections
@@ -289,6 +345,31 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                             if (ring2) ring2.rotation.z -= delta * 0.2;
                         }
                     }
+                } else if (domainIndex === 5) {
+                    // Web Development - Code Animation
+                    const code = coreGroupRef.current.children[0];
+                    if (code && (code as any).userData?.isCode) {
+                        const { strips, core } = (code as any).userData;
+
+                        strips.forEach((strip: THREE.Group) => {
+                            const { speed } = (strip as any).userData;
+                            strip.children.forEach((char: any) => {
+                                char.position.y -= delta * speed;
+                                if (char.position.y < -0.5) char.position.y = 0.5;
+
+                                // Random flicker
+                                if (Math.random() > 0.99) char.visible = !char.visible;
+                                else if (Math.random() > 0.5) char.visible = true;
+                            });
+                        });
+
+                        if (core) {
+                            core.rotation.x += delta * 2;
+                            core.rotation.y += delta * 1.5;
+                        }
+                    }
+                    coreGroupRef.current.rotation.y += delta * 0.1;
+                    coreGroupRef.current.rotation.x -= delta * 0.05;
                 } else {
                     coreGroupRef.current.rotation.x += delta * 0.1;
                 }

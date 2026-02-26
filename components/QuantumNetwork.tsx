@@ -316,15 +316,15 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
         const composer = new EffectComposer(renderer);
         composer.addPass(new RenderPass(scene, camera));
-        const bloom = new UnrealBloomPass(new THREE.Vector2(width, height), 0.65, 0.4, 0.55);
+        const bloom = new UnrealBloomPass(new THREE.Vector2(width, height), 0.3, 0.4, 0.88);
         composer.addPass(bloom);
         composerRef.current = composer;
 
-        // Lighting
-        scene.add(new THREE.AmbientLight(0xffffff, 0.35));
-        const keyLight = new THREE.PointLight(DOMAIN_COLORS[0], 1.5, 18);
-        keyLight.position.set(2.5, 3, 5); scene.add(keyLight); keyLightRef.current = keyLight;
-        const fillLight = new THREE.PointLight(DOMAIN_COLORS[0], 0.6, 12);
+        // Lighting — single neutral key light (no neon colors)
+        scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+        const keyLight = new THREE.PointLight(0xffffff, 1.2, 20);
+        keyLight.position.set(3, 4, 5); scene.add(keyLight); keyLightRef.current = keyLight;
+        const fillLight = new THREE.PointLight(0xffffff, 0.4, 15);
         fillLight.position.set(-3, -2, 3); scene.add(fillLight); fillLightRef.current = fillLight;
 
         // Global ambient particle star-field
@@ -332,7 +332,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         const starPos: number[] = [];
         for (let i = 0; i < 300; i++) starPos.push((Math.random() - 0.5) * 6, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 4 - 1.5);
         starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
-        const starField = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xaaaaff, size: 0.012, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending }));
+        const starField = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x8899cc, size: 0.01, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending }));
         scene.add(starField);
 
         // Global thin orbital rings
@@ -374,11 +374,8 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 cameraRef.current.lookAt(0, 0, 0);
             }
 
-            // ── Dynamic light color lerp ──────────────────────
-            targetLightColor.setHex(DOMAIN_COLORS[dIdx % DOMAIN_COLORS.length]);
-            currentLightColor.lerp(targetLightColor, 0.04);
-            if (keyLightRef.current) keyLightRef.current.color.copy(currentLightColor);
-            if (fillLightRef.current) fillLightRef.current.color.copy(currentLightColor);
+            // ── Dynamic light: keep lights neutral, do NOT colorize them
+            // (Removing colored light lerp to avoid the neon overlit look)
 
             // ── Star field drift ──────────────────────────────
             starField.rotation.y += delta * 0.015;

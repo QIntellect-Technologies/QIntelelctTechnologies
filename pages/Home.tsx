@@ -1500,7 +1500,7 @@ const Home: React.FC = () => {
         {/* Right Sidebar Decoration */}
         <div className="hidden lg:flex flex-col items-end absolute right-12 top-1/2 -translate-y-1/2 space-y-20 z-20">
           <div className="text-right space-y-4">
-            <h4 className="text-sm font-bold text-slate-900 leading-snug font-heading uppercase tracking-tighter">
+            <h4 className="text-sm font-black text-slate-900 leading-snug font-heading uppercase tracking-tighter">
               Artificial Intelligence, <br /> Custom ERPS <br /> & Dynamics 365 Solutions.
             </h4>
             <div className="w-24 h-px bg-slate-900 ml-auto" />
@@ -1536,7 +1536,7 @@ const Home: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-medium text-slate-900 tracking-tighter leading-[0.85] font-heading uppercase"
+                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-black text-slate-900 tracking-tighter leading-[0.82] font-heading uppercase"
                   >
                     We Engineer <br />
                     Your Enterprise <br />
@@ -1592,7 +1592,7 @@ const Home: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 1 }}
-                  className="text-base md:text-lg text-slate-500 leading-relaxed font-light max-w-lg"
+                  className="text-base md:text-xl text-slate-600 leading-relaxed font-medium max-w-lg"
                 >
                   From Artificial Intelligence and Customized Chatbots to Dynamics 365, ERP, EDI, Web & Mobile Development — QIntellect delivers end-to-end enterprise technology solutions that transform how you operate.
                 </motion.p>

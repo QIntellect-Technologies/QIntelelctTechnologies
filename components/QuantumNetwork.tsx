@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -8,163 +8,167 @@ interface QuantumNetworkProps {
     domainIndex?: number;
 }
 
-const DOMAIN_COLORS = [
-    0x2563eb, // 0: AI - Blue 600
-    0x4f46e5, // 1: Chatbots - Indigo 600
-    0x7c3aed, // 2: AI Reps - Violet 600
-    0x2563eb, // 3: Dynamics AX - Blue 600
-    0x4f46e5, // 4: Dynamics 365 - Indigo 600
-    0x0891b2, // 5: Web Dev - Cyan 600
-    0x0284c7, // 6: EDI & ERP - Sky 600
-    0x4f46e5, // 7: Mobile Dev - Indigo 600
+const DOMAIN_CONFIGS = [
+    { name: "AI", color: 0x2563eb, shape: "sphere" },       // 0: AI
+    { name: "Chatbots", color: 0x4f46e5, shape: "torus" },  // 1: Chatbots
+    { name: "AI Reps", color: 0x7c3aed, shape: "knot" },    // 2: AI Reps
+    { name: "AX", color: 0x2563eb, shape: "box" },         // 3: Dynamics AX
+    { name: "D365", color: 0x4f46e5, shape: "octa" },      // 4: Dynamics 365
+    { name: "Web", color: 0x0891b2, shape: "plane" },      // 5: Web Dev
+    { name: "ERP", color: 0x0284c7, shape: "cylinder" },   // 6: EDI & ERP
+    { name: "Mobile", color: 0x4f46e5, shape: "icosa" },   // 7: Mobile Dev
 ];
 
 const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex = 0 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const globeColorRef = useRef(new THREE.Color(DOMAIN_COLORS[0]));
+    const particleCount = 15000;
+
+    // Refs for animation state
+    const positionsRef = useRef<Float32Array>(new Float32Array(particleCount * 3));
+    const targetPositionsRef = useRef<Float32Array>(new Float32Array(particleCount * 3));
+    const colorsRef = useRef<Float32Array>(new Float32Array(particleCount * 3));
+    const currentDomainRef = useRef(domainIndex);
+
+    // Generate shapes
+    const getShapePoints = (shape: string, count: number) => {
+        const pts = new Float32Array(count * 3);
+        const tempObj = new THREE.Object3D();
+
+        let sampler: THREE.BufferGeometry;
+        switch (shape) {
+            case "sphere": sampler = new THREE.SphereGeometry(1.2, 64, 64); break;
+            case "torus": sampler = new THREE.TorusGeometry(1, 0.3, 16, 100); break;
+            case "knot": sampler = new THREE.TorusKnotGeometry(0.8, 0.25, 128, 16); break;
+            case "box": sampler = new THREE.BoxGeometry(1.5, 1.5, 1.5, 20, 20, 20); break;
+            case "octa": sampler = new THREE.OctahedronGeometry(1.3, 2); break;
+            case "plane": sampler = new THREE.PlaneGeometry(2.5, 2.5, 50, 50); break;
+            case "cylinder": sampler = new THREE.CylinderGeometry(0.8, 0.8, 1.8, 32, 32); break;
+            case "icosa": sampler = new THREE.IcosahedronGeometry(1.3, 1); break;
+            default: sampler = new THREE.SphereGeometry(1.2, 32, 32);
+        }
+
+        const posAttr = sampler.getAttribute('position');
+        for (let i = 0; i < count; i++) {
+            const index = i % (posAttr.count);
+            pts[i * 3] = posAttr.getX(index);
+            pts[i * 3 + 1] = posAttr.getY(index);
+            pts[i * 3 + 2] = posAttr.getZ(index);
+
+            // Add slight randomness for "quantum" feel
+            pts[i * 3] += (Math.random() - 0.5) * 0.05;
+            pts[i * 3 + 1] += (Math.random() - 0.5) * 0.05;
+            pts[i * 3 + 2] += (Math.random() - 0.5) * 0.05;
+        }
+        sampler.dispose();
+        return pts;
+    };
 
     useEffect(() => {
         if (!containerRef.current) return;
 
         const container = containerRef.current;
-        const width = container.clientWidth;
-        const height = container.clientHeight;
-
-        // --- Scene & Camera ---
         const scene = new THREE.Scene();
-        scene.background = null;
-
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        camera.position.z = 2.5;
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 3;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(width, height);
+        renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // --- Post-Processing (Bloom) ---
-        const renderScene = new RenderPass(scene, camera);
-        const bloomPass = new UnrealBloomPass(
-            new THREE.Vector2(width, height),
-            0.8, // reduced strength for light theme
-            0.3, // radius
-            0.9  // threshold - keep it high to only bloom brightest parts
-        );
-
+        const renderPass = new RenderPass(scene, camera);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(container.clientWidth, container.clientHeight), 0.6, 0.4, 0.9);
         const composer = new EffectComposer(renderer);
-        composer.addPass(renderScene);
+        composer.addPass(renderPass);
         composer.addPass(bloomPass);
 
-        // --- Globe Point Cloud ---
-        const globeGroup = new THREE.Group();
-        scene.add(globeGroup);
+        // Initial positions and targets
+        const currentShape = DOMAIN_CONFIGS[domainIndex].shape;
+        const initialPoints = getShapePoints(currentShape, particleCount);
+        positionsRef.current.set(initialPoints);
+        targetPositionsRef.current.set(initialPoints);
 
-        const pointCount = 10000;
-        const positions = new Float32Array(pointCount * 3);
-        const colors = new Float32Array(pointCount * 3);
-        const sizes = new Float32Array(pointCount);
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positionsRef.current, 3));
 
-        for (let i = 0; i < pointCount; i++) {
-            const phi = Math.acos(-1 + (2 * i) / pointCount);
-            const theta = Math.sqrt(pointCount * Math.PI) * phi;
-            const r = 1;
-
-            positions[i * 3] = r * Math.cos(theta) * Math.sin(phi);
-            positions[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
-            positions[i * 3 + 2] = r * Math.cos(phi);
-
-            // Initial color
-            const c = globeColorRef.current;
-            colors[i * 3] = c.r;
-            colors[i * 3 + 1] = c.g;
-            colors[i * 3 + 2] = c.b;
-            sizes[i] = Math.random() * 2 + 1;
+        // Setup initial colors
+        const initialColor = new THREE.Color(DOMAIN_CONFIGS[domainIndex].color);
+        for (let i = 0; i < particleCount; i++) {
+            colorsRef.current[i * 3] = initialColor.r;
+            colorsRef.current[i * 3 + 1] = initialColor.g;
+            colorsRef.current[i * 3 + 2] = initialColor.b;
         }
+        geometry.setAttribute('color', new THREE.BufferAttribute(colorsRef.current, 3));
 
-        const globeGeometry = new THREE.BufferGeometry();
-        globeGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        globeGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        globeGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-        const globeMaterial = new THREE.PointsMaterial({
-            size: 0.007,
+        const material = new THREE.PointsMaterial({
+            size: 0.008,
             vertexColors: true,
             transparent: true,
-            opacity: 0.4, // lower opacity for light theme
-            blending: THREE.NormalBlending, // use normal blending for light theme
+            opacity: 0.7,
+            blending: THREE.NormalBlending
         });
 
-        const globePoints = new THREE.Points(globeGeometry, globeMaterial);
-        globeGroup.add(globePoints);
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
 
-        // --- Dynamic Connections ---
-        const connectionsGroup = new THREE.Group();
-        globeGroup.add(connectionsGroup);
+        // Background Starfield (Subtle)
+        const starsGeom = new THREE.BufferGeometry();
+        const starPos = new Float32Array(2000 * 3);
+        for (let i = 0; i < 2000; i++) { starPos[i * 3] = (Math.random() - 0.5) * 10; starPos[i * 3 + 1] = (Math.random() - 0.5) * 10; starPos[i * 3 + 2] = (Math.random() - 0.5) * 10; }
+        starsGeom.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        const stars = new THREE.Points(starsGeom, new THREE.PointsMaterial({ color: 0x3b82f6, size: 0.005, transparent: true, opacity: 0.2 }));
+        scene.add(stars);
 
-        const arcs: { curve: THREE.QuadraticBezierCurve3; line: THREE.Line; pulse: THREE.Mesh; progress: number; speed: number }[] = [];
-        const arcMaterial = new THREE.LineBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.1 });
-        const pulseMaterial = new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.6 });
-
-        for (let i = 0; i < 35; i++) {
-            const v1 = new THREE.Vector3().setFromSphericalCoords(1.01, Math.random() * Math.PI, Math.random() * Math.PI * 2);
-            const v2 = new THREE.Vector3().setFromSphericalCoords(1.01, Math.random() * Math.PI, Math.random() * Math.PI * 2);
-            const mid = v1.clone().lerp(v2, 0.5).normalize().multiplyScalar(1.25);
-            const curve = new THREE.QuadraticBezierCurve3(v1, mid, v2);
-
-            const points = curve.getPoints(50);
-            const geometry = new THREE.BufferGeometry().setFromPoints(points);
-            const line = new THREE.Line(geometry, arcMaterial.clone());
-            connectionsGroup.add(line);
-
-            const pulse = new THREE.Mesh(new THREE.SphereGeometry(0.006, 8, 8), pulseMaterial.clone());
-            connectionsGroup.add(pulse);
-
-            arcs.push({ curve, line, pulse, progress: Math.random(), speed: 0.002 + Math.random() * 0.002 });
-        }
-
-        // --- Interaction ---
         let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
-        const handleMouseMove = (e: MouseEvent) => {
+        const onMouseMove = (e: MouseEvent) => {
             mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
             mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         };
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousemove', onMouseMove);
 
-        // --- Animation Loop ---
         const clock = new THREE.Clock();
         const animate = () => {
-            requestAnimationFrame(animate);
+            const requestID = requestAnimationFrame(animate);
             const delta = clock.getDelta();
 
-            globeGroup.rotation.y += delta * 0.08;
-            globeGroup.rotation.x += delta * 0.04;
+            // Animation: Morph particles
+            const posAttr = geometry.getAttribute('position');
+            const colAttr = geometry.getAttribute('color');
+            const targetColor = new THREE.Color(DOMAIN_CONFIGS[currentDomainRef.current].color);
 
+            for (let i = 0; i < particleCount; i++) {
+                // Morph Position
+                const ix = i * 3, iy = i * 3 + 1, iz = i * 3 + 2;
+                positionsRef.current[ix] += (targetPositionsRef.current[ix] - positionsRef.current[ix]) * 0.05;
+                positionsRef.current[iy] += (targetPositionsRef.current[iy] - positionsRef.current[iy]) * 0.05;
+                positionsRef.current[iz] += (targetPositionsRef.current[iz] - positionsRef.current[iz]) * 0.05;
+
+                posAttr.setXYZ(i, positionsRef.current[ix], positionsRef.current[iy], positionsRef.current[iz]);
+
+                // Morph Color
+                colorsRef.current[ix] += (targetColor.r - colorsRef.current[ix]) * 0.05;
+                colorsRef.current[iy] += (targetColor.g - colorsRef.current[iy]) * 0.05;
+                colorsRef.current[iz] += (targetColor.b - colorsRef.current[iz]) * 0.05;
+                colAttr.setXYZ(i, colorsRef.current[ix], colorsRef.current[iy], colorsRef.current[iz]);
+            }
+            posAttr.needsUpdate = true;
+            colAttr.needsUpdate = true;
+
+            // Rotation & Parallax
+            points.rotation.y += delta * 0.15;
+            points.rotation.x += delta * 0.08;
             targetX += (mouseX - targetX) * 0.05;
             targetY += (mouseY - targetY) * 0.05;
-            globeGroup.position.x = targetX * 0.12;
-            globeGroup.position.y = -targetY * 0.12;
+            points.position.x = targetX * 0.2;
+            points.position.y = -targetY * 0.2;
+            stars.position.x = targetX * 0.05;
 
-            // Smooth color transition
-            const targetColor = new THREE.Color(DOMAIN_COLORS[domainIndex % DOMAIN_COLORS.length]);
-            globeColorRef.current.lerp(targetColor, 0.05);
-
-            const colorAttr = globeGeometry.getAttribute('color') as THREE.BufferAttribute;
-            for (let i = 0; i < pointCount; i++) {
-                colorAttr.setXYZ(i, globeColorRef.current.r, globeColorRef.current.g, globeColorRef.current.b);
-            }
-            colorAttr.needsUpdate = true;
-
-            arcs.forEach(arc => {
-                arc.progress += arc.speed;
-                if (arc.progress >= 1) arc.progress = 0;
-                arc.pulse.position.copy(arc.curve.getPointAt(arc.progress));
-                (arc.pulse.material as THREE.MeshBasicMaterial).color.copy(globeColorRef.current);
-                (arc.line.material as THREE.LineBasicMaterial).color.copy(globeColorRef.current);
-            });
+            // Camera movement
+            camera.position.z += (3 + Math.sin(Date.now() * 0.001) * 0.5 - camera.position.z) * 0.05;
+            camera.lookAt(scene.position);
 
             composer.render();
         };
-
         animate();
 
         const handleResize = () => {
@@ -176,27 +180,32 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex = 0 }) => {
         window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('resize', handleResize);
             container.removeChild(renderer.domElement);
             renderer.dispose();
-            globeGeometry.dispose();
-            globeMaterial.dispose();
-            arcs.forEach(arc => {
-                arc.pulse.geometry.dispose();
-                (arc.pulse.material as THREE.Material).dispose();
-                arc.line.geometry.dispose();
-                (arc.line.material as THREE.Material).dispose();
-            });
+            geometry.dispose();
+            material.dispose();
+            starsGeom.dispose();
         };
+    }, []);
+
+    // Handle domain changes (Morphing trigger)
+    useEffect(() => {
+        currentDomainRef.current = domainIndex;
+        const newTargetPoints = getShapePoints(DOMAIN_CONFIGS[domainIndex].shape, particleCount);
+        targetPositionsRef.current.set(newTargetPoints);
+
+        // Trigger a camera pulse on change
+        // We could use a ref to animate camera in the loop based on this flag
     }, [domainIndex]);
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-slate-50">
-            {/* Soft Light Vignette */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(248,250,252,0.8)_100%)] z-10" />
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-white">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(255,255,255,0.7)_100%)] z-10" />
             <div ref={containerRef} className="w-full h-full opacity-60" />
-            <div className="absolute inset-0 opacity-[0.015] pointer-events-none z-20"
+            {/* Cinematic Noise */}
+            <div className="absolute inset-0 opacity-[0.01] pointer-events-none z-20"
                 style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}
             />
         </div>

@@ -41,135 +41,106 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     const createRobotModel = (color: number) => {
         const group = new THREE.Group();
 
-        // 0. Mechanical Neck / Base
-        const neckGeo = new THREE.CylinderGeometry(0.1, 0.15, 0.2, 32);
+        // 0. Base / Neck
+        const neckGeo = new THREE.CylinderGeometry(0.12, 0.18, 0.25, 32);
         const neckMat = new THREE.MeshStandardMaterial({ color: 0x333333, metalness: 0.9, roughness: 0.1 });
         const neck = new THREE.Mesh(neckGeo, neckMat);
-        neck.position.y = -0.6;
+        neck.position.y = -0.65;
         group.add(neck);
 
-        // 1. External Glass Head
+        // 1. External Glass Head (Semi-transparent)
         const headGroup = new THREE.Group();
         group.add(headGroup);
 
-        const headGeo = new THREE.IcosahedronGeometry(0.5, 3);
-        const headMat = new THREE.MeshPhysicalMaterial({
-            color: 0xffffff,
-            metalness: 0,
-            roughness: 0,
-            transmission: 1,
-            thickness: 0.5,
+        const headGeo = new THREE.SphereGeometry(0.5, 64, 64);
+        const headMat = new THREE.MeshStandardMaterial({
+            color: 0xeeeeee,
+            emissive: color,
+            emissiveIntensity: 0.1,
+            metalness: 0.9,
+            roughness: 0.1,
             transparent: true,
-            opacity: 0.3,
-            ior: 1.5
+            opacity: 0.8
         });
         const head = new THREE.Mesh(headGeo, headMat);
         headGroup.add(head);
 
-        // 2. Internal Glowing 'Brain'
+        // 2. Internal Glowing 'Brain' (Visible through head)
         const brainGeo = new THREE.SphereGeometry(0.22, 32, 32);
         const brainMat = new THREE.MeshStandardMaterial({
             color: color,
             emissive: color,
-            emissiveIntensity: 2.5,
+            emissiveIntensity: 4,
             transparent: true,
             opacity: 0.9
         });
         const brain = new THREE.Mesh(brainGeo, brainMat);
         headGroup.add(brain);
 
-        // Dark Visor / Face Area - Moved slightly out
-        const visorGeo = new THREE.SphereGeometry(0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
-        const visorMat = new THREE.MeshBasicMaterial({ color: 0x050505, transparent: true, opacity: 0.9 });
+        // 3. Face Visor (Black area)
+        const visorGeo = new THREE.SphereGeometry(0.51, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.55);
+        const visorMat = new THREE.MeshBasicMaterial({ color: 0x010101, transparent: true, opacity: 0.65 });
         const visor = new THREE.Mesh(visorGeo, visorMat);
-        visor.rotation.x = -Math.PI / 2.5;
-        visor.position.z = 0.05;
+        visor.rotation.x = -Math.PI / 2.3;
+        visor.position.z = 0.02;
         headGroup.add(visor);
 
-        // 2. Animated Light Bars (Eyes & Mouth)
-        const barGeo = new THREE.PlaneGeometry(0.15, 0.04);
-        const barMat = new THREE.MeshBasicMaterial({
+        // 4. Digital Face Components (Must be VERY visible)
+        const faceMat = new THREE.MeshBasicMaterial({
             color: color,
             transparent: true,
-            opacity: 0.9,
+            opacity: 1,
             blending: THREE.AdditiveBlending,
             side: THREE.DoubleSide
         });
 
-        const eyeL = new THREE.Mesh(barGeo, barMat);
-        eyeL.position.set(-0.18, 0.1, 0.52);
+        const eyeGeo = new THREE.PlaneGeometry(0.15, 0.05);
+        const eyeL = new THREE.Mesh(eyeGeo, faceMat);
+        eyeL.position.set(-0.18, 0.12, 0.53);
         headGroup.add(eyeL);
 
-        const eyeR = new THREE.Mesh(barGeo, barMat);
-        eyeR.position.set(0.18, 0.1, 0.52);
+        const eyeR = new THREE.Mesh(eyeGeo, faceMat);
+        eyeR.position.set(0.18, 0.12, 0.53);
         headGroup.add(eyeR);
 
-        // Mouth Bar (The "Talking" element)
-        const mouthGeo = new THREE.PlaneGeometry(0.2, 0.03);
-        const mouthMat = new THREE.MeshBasicMaterial({
-            color: color,
-            transparent: true,
-            opacity: 0.9,
-            blending: THREE.AdditiveBlending,
-            side: THREE.DoubleSide
-        });
-        const mouth = new THREE.Mesh(mouthGeo, mouthMat);
-        mouth.position.set(0, -0.15, 0.52);
+        const mouthGeo = new THREE.PlaneGeometry(0.25, 0.04);
+        const mouth = new THREE.Mesh(mouthGeo, faceMat);
+        mouth.position.set(0, -0.15, 0.53);
         headGroup.add(mouth);
 
-        // 3. Digital Halo / Orbitals
-        const createRing = (radius: number, rotationX: number, opacity: number) => {
-            const rGeo = new THREE.TorusGeometry(radius, 0.005, 16, 100);
-            const rMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity });
-            const r = new THREE.Mesh(rGeo, rMat);
-            r.rotation.x = rotationX;
-            return r;
-        };
+        // 5. Orbital Halo
+        const ringGeo = new THREE.TorusGeometry(0.7, 0.008, 16, 100);
+        const ringMat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.5 });
+        const ring1 = new THREE.Mesh(ringGeo, ringMat);
+        ring1.rotation.x = Math.PI / 2.2;
+        group.add(ring1);
 
-        const ring1 = createRing(0.7, Math.PI / 2.2, 0.4);
-        const ring2 = createRing(0.85, -Math.PI / 3, 0.2);
-        group.add(ring1, ring2);
-
-        // Store references for animation
-        (group as any).userData = {
-            isRobot: true,
-            headGroup,
-            brain, // Brain for pulsing
-            eyeL,
-            eyeR,
-            mouth,
-            ring1,
-            ring2
-        };
-
+        (group as any).userData = { isRobot: true, headGroup, brain, mouth, eyeL, eyeR, ring1 };
         return group;
     };
 
     const createCodeModel = (color: number) => {
         const group = new THREE.Group();
-        const codeStrips: THREE.Group[] = [];
 
         // 1. Digital Matrix Tunnel (3D Depth)
         const strips: THREE.Group[] = [];
-        const chars = "010101010101ABCDEFGHIKLMNOPQRSTUVWXYZ";
-
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 45; i++) {
             const strip = new THREE.Group();
-            const x = (Math.random() - 0.5) * 2.5;
-            const z = (Math.random() - 0.5) * 1.5;
-            const speed = 0.4 + Math.random() * 0.8;
+            const x = (Math.random() - 0.5) * 3.5;
+            const z = (Math.random() - 0.5) * 2.5;
+            const speed = 0.5 + Math.random() * 1.5;
 
-            for (let j = 0; j < 12; j++) {
-                const charGeo = new THREE.PlaneGeometry(0.06, 0.06);
+            for (let j = 0; j < 15; j++) {
+                const charGeo = new THREE.PlaneGeometry(0.1, 0.1);
                 const charMat = new THREE.MeshBasicMaterial({
-                    color: Math.random() > 0.4 ? color : 0x00f2ff,
+                    color: Math.random() > 0.3 ? 0x00f2ff : 0xffffff,
                     transparent: true,
-                    opacity: 1 - (j / 12),
+                    opacity: 1 - (j / 15),
                     blending: THREE.AdditiveBlending,
                     side: THREE.DoubleSide
                 });
                 const char = new THREE.Mesh(charGeo, charMat);
-                char.position.y = (j / 12) - 0.5;
+                char.position.y = (j / 15) - 0.5;
                 strip.add(char);
             }
             strip.position.set(x, 0, z);
@@ -179,8 +150,8 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         }
 
         // 2. Center "Logic Core"
-        const coreGeo = new THREE.IcosahedronGeometry(0.25, 0);
-        const coreMat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.7 });
+        const coreGeo = new THREE.IcosahedronGeometry(0.35, 0);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0x00f2ff, wireframe: true, transparent: true, opacity: 0.8 });
         const core = new THREE.Mesh(coreGeo, coreMat);
         group.add(core);
 
@@ -373,12 +344,14 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                         if (core) {
                             core.rotation.x += delta * 2;
                             core.rotation.y += delta * 1.5;
+                            core.scale.setScalar(1 + Math.sin(time * 4) * 0.1);
                         }
                     }
-                    coreGroupRef.current.rotation.y += delta * 0.1;
-                    coreGroupRef.current.rotation.x -= delta * 0.05;
+                    coreGroupRef.current.rotation.y += delta * 0.2;
+                    coreGroupRef.current.rotation.x -= delta * 0.1;
                 } else {
                     coreGroupRef.current.rotation.x += delta * 0.1;
+                    coreGroupRef.current.rotation.y += delta * 0.05;
                 }
 
                 coreGroupRef.current.position.x += (mouseX * 0.15 - coreGroupRef.current.position.x) * 0.1;

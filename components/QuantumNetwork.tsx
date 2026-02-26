@@ -10,14 +10,14 @@ interface QuantumNetworkProps {
 }
 
 const DOMAIN_COLORS = [
-    0x00f2ff, // AI - Electric Cyan
-    0x7000ff, // Chatbots - Neon Violet
-    0x00ff9d, // AI Reps - Spring Green
-    0x0066ff, // AX - Vivid Blue
-    0xbd00ff, // D365 - Magenta
-    0x00d8ff, // Web - Sky Blue
-    0x3decff, // ERP - Bright Cyan
-    0x7000ff, // Mobile - Neon Violet
+    0x5E62FF, // Nebula Indigo
+    0x9966FF, // Nebula Purple
+    0x00f2ff, // Electric Cyan
+    0x7000ff, // Neon Violet
+    0x00ff9d, // Spring Green
+    0x0066ff, // Vivid Blue
+    0xbd00ff, // Magenta
+    0x5E62FF, // Nebula Indigo
 ];
 
 const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }) => {
@@ -29,44 +29,13 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     // Three.js Refs
     const sceneRef = useRef<THREE.Scene | null>(null);
     const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-    const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+    const rendererRef = useRef<HTMLCanvasElement | null>(null);
     const composerRef = useRef<EffectComposer | null>(null);
-    const pointsRef = useRef<THREE.Points | null>(null);
-    const geometryRef = useRef<THREE.BufferGeometry | null>(null);
 
-    const particleCount = 8000; // Reduced for SHARPNESS
-    const positionsRef = useRef(new Float32Array(particleCount * 3));
-    const targetPositionsRef = useRef(new Float32Array(particleCount * 3));
-    const colorsRef = useRef(new Float32Array(particleCount * 3));
-
-    const getShapePoints = (index: number) => {
-        const pts = new Float32Array(particleCount * 3);
-        const shapes = ['sphere', 'torus', 'knot', 'box', 'octa', 'plane', 'cylinder', 'icosa'];
-        const shape = shapes[index % shapes.length];
-
-        let sampler: THREE.BufferGeometry;
-        switch (shape) {
-            case 'sphere': sampler = new THREE.SphereGeometry(1.2, 50, 50); break;
-            case 'torus': sampler = new THREE.TorusGeometry(1, 0.3, 16, 100); break;
-            case 'knot': sampler = new THREE.TorusKnotGeometry(0.8, 0.25, 128, 16); break;
-            case 'box': sampler = new THREE.BoxGeometry(1.5, 1.5, 1.5, 20, 20, 20); break;
-            case 'octa': sampler = new THREE.OctahedronGeometry(1.3, 2); break;
-            case 'plane': sampler = new THREE.PlaneGeometry(2.5, 2.5, 40, 40); break;
-            case 'cylinder': sampler = new THREE.CylinderGeometry(0.8, 0.8, 1.8, 32, 32); break;
-            case 'icosa': sampler = new THREE.IcosahedronGeometry(1.3, 1); break;
-            default: sampler = new THREE.SphereGeometry(1.2, 32, 32);
-        }
-
-        const posAttr = sampler.getAttribute('position');
-        for (let i = 0; i < particleCount; i++) {
-            const idx = i % posAttr.count;
-            pts[i * 3] = posAttr.getX(idx) + (Math.random() - 0.5) * 0.03;
-            pts[i * 3 + 1] = posAttr.getY(idx) + (Math.random() - 0.5) * 0.03;
-            pts[i * 3 + 2] = posAttr.getZ(idx) + (Math.random() - 0.5) * 0.03;
-        }
-        sampler.dispose();
-        return pts;
-    };
+    // Objects for morphing & animation
+    const coreGroupRef = useRef<THREE.Group | null>(null);
+    const latticeRef = useRef<THREE.LineSegments | null>(null);
+    const ringsRef = useRef<THREE.Group | null>(null);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -86,46 +55,79 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         renderer.setSize(width, height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
-        rendererRef.current = renderer;
 
         const composer = new EffectComposer(renderer);
         const renderPass = new RenderPass(scene, camera);
-        // Reduced Bloom for Sharpness (v8)
-        const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 0.6, 0.4, 0.9);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 0.8, 0.3, 0.85);
         composer.addPass(renderPass);
         composer.addPass(bloomPass);
         composerRef.current = composer;
 
-        // Particle System
-        const initialPoints = getShapePoints(domainIndex);
-        positionsRef.current.set(initialPoints);
-        targetPositionsRef.current.set(initialPoints);
+        // --- Geometric Lattice Globe (The Core) ---
+        const coreGroup = new THREE.Group();
+        scene.add(coreGroup);
+        coreGroupRef.current = coreGroup;
 
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.BufferAttribute(positionsRef.current, 3));
+        const createLattice = (index: number) => {
+            const geometries = [
+                new THREE.IcosahedronGeometry(1.2, 2),
+                new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
+                new THREE.OctahedronGeometry(1.3, 1),
+                new THREE.TorusGeometry(1, 0.4, 16, 50),
+                new THREE.BoxGeometry(1.5, 1.5, 1.5, 2, 2, 2),
+                new THREE.DodecahedronGeometry(1.2, 0),
+                new THREE.SphereGeometry(1.2, 16, 16),
+                new THREE.IcosahedronGeometry(1.2, 0)
+            ];
+            const geo = geometries[index % geometries.length];
+            const edges = new THREE.EdgesGeometry(geo);
+            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+                color: DOMAIN_COLORS[index % DOMAIN_COLORS.length],
+                transparent: true,
+                opacity: 0.6
+            }));
 
-        const initialColor = new THREE.Color(DOMAIN_COLORS[domainIndex % DOMAIN_COLORS.length]);
-        for (let i = 0; i < particleCount; i++) {
-            colorsRef.current[i * 3] = initialColor.r;
-            colorsRef.current[i * 3 + 1] = initialColor.g;
-            colorsRef.current[i * 3 + 2] = initialColor.b;
-        }
-        geometry.setAttribute('color', new THREE.BufferAttribute(colorsRef.current, 3));
-        geometryRef.current = geometry;
+            // Add glowing nodes at vertices
+            const nodesGeo = new THREE.BufferGeometry().setFromPoints(geo.getAttribute('position').array as any);
+            const nodesMat = new THREE.PointsMaterial({
+                color: DOMAIN_COLORS[index % DOMAIN_COLORS.length],
+                size: 0.03,
+                transparent: true,
+                opacity: 0.8
+            });
+            const nodes = new THREE.Points(geo, nodesMat);
+            line.add(nodes);
 
-        // SHARP Material (using a circular texture would be better, but we'll use size & alpha for now)
-        const material = new THREE.PointsMaterial({
-            size: 0.008,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.7,
-            blending: THREE.AdditiveBlending
-        });
+            return line;
+        };
 
-        const points = new THREE.Points(geometry, material);
-        scene.add(points);
-        pointsRef.current = points;
+        const lattice = createLattice(domainIndex);
+        coreGroup.add(lattice);
+        latticeRef.current = lattice;
 
+        // --- Orbital Rings (Ascension Style) ---
+        const ringsGroup = new THREE.Group();
+        scene.add(ringsGroup);
+        ringsRef.current = ringsGroup;
+
+        const addRing = (radius: number, rotationX: number, speed: number) => {
+            const ringGeo = new THREE.TorusGeometry(radius, 0.005, 16, 100);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: DOMAIN_COLORS[0],
+                transparent: true,
+                opacity: 0.2
+            });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = rotationX;
+            (ring as any).userData = { speed };
+            ringsGroup.add(ring);
+        };
+
+        addRing(1.6, Math.PI / 2.5, 0.005);
+        addRing(1.9, -Math.PI / 4, -0.003);
+        addRing(2.2, Math.PI / 6, 0.002);
+
+        // --- Animation Loop ---
         let mouseX = 0, mouseY = 0;
         const onMouseMove = (e: MouseEvent) => {
             mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -135,33 +137,23 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
         const clock = new THREE.Clock();
         const animate = () => {
-            requestAnimationFrame(animate);
+            const requestID = requestAnimationFrame(animate);
             const delta = clock.getDelta();
+            const time = clock.getElapsedTime();
 
-            if (geometryRef.current && pointsRef.current) {
-                const posAttr = geometryRef.current.getAttribute('position');
-                const colAttr = geometryRef.current.getAttribute('color');
-                const targetColor = new THREE.Color(DOMAIN_COLORS[domainIndex % DOMAIN_COLORS.length]);
+            if (coreGroupRef.current) {
+                coreGroupRef.current.rotation.y += delta * 0.15;
+                coreGroupRef.current.rotation.x += delta * 0.05;
+                coreGroupRef.current.position.x += (mouseX * 0.2 - coreGroupRef.current.position.x) * 0.1;
+                coreGroupRef.current.position.y += (-mouseY * 0.2 - coreGroupRef.current.position.y) * 0.1;
+            }
 
-                for (let i = 0; i < particleCount; i++) {
-                    const ix = i * 3, iy = i * 3 + 1, iz = i * 3 + 2;
-                    positionsRef.current[ix] += (targetPositionsRef.current[ix] - positionsRef.current[ix]) * 0.08;
-                    positionsRef.current[iy] += (targetPositionsRef.current[iy] - positionsRef.current[iy]) * 0.08;
-                    positionsRef.current[iz] += (targetPositionsRef.current[iz] - positionsRef.current[iz]) * 0.08;
-                    posAttr.setXYZ(i, positionsRef.current[ix], positionsRef.current[iy], positionsRef.current[iz]);
-
-                    colorsRef.current[ix] += (targetColor.r - colorsRef.current[ix]) * 0.08;
-                    colorsRef.current[iy] += (targetColor.g - colorsRef.current[iy]) * 0.08;
-                    colorsRef.current[iz] += (targetColor.b - colorsRef.current[iz]) * 0.08;
-                    colAttr.setXYZ(i, colorsRef.current[ix], colorsRef.current[iy], colorsRef.current[iz]);
-                }
-                posAttr.needsUpdate = true;
-                colAttr.needsUpdate = true;
-
-                pointsRef.current.rotation.y += delta * 0.1;
-                pointsRef.current.rotation.x += delta * 0.05;
-                pointsRef.current.position.x += (mouseX * 0.15 - pointsRef.current.position.x) * 0.1;
-                pointsRef.current.position.y += (-mouseY * 0.15 - pointsRef.current.position.y) * 0.1;
+            if (ringsRef.current) {
+                ringsRef.current.children.forEach((child) => {
+                    child.rotation.z += (child as any).userData.speed;
+                });
+                ringsRef.current.rotation.y = mouseX * 0.1;
+                ringsRef.current.rotation.x = -mouseY * 0.1;
             }
 
             composerRef.current?.render();
@@ -169,12 +161,12 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         animate();
 
         const onResize = () => {
-            if (!containerRef.current || !cameraRef.current || !rendererRef.current || !composerRef.current) return;
+            if (!containerRef.current || !cameraRef.current || !composerRef.current) return;
             const w = containerRef.current.clientWidth;
             const h = containerRef.current.clientHeight;
             cameraRef.current.aspect = w / h;
             cameraRef.current.updateProjectionMatrix();
-            rendererRef.current.setSize(w, h);
+            renderer.setSize(w, h);
             composerRef.current.setSize(w, h);
         };
         window.addEventListener('resize', onResize);
@@ -184,15 +176,49 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
             window.removeEventListener('resize', onResize);
             container.removeChild(renderer.domElement);
             renderer.dispose();
-            geometry.dispose();
-            material.dispose();
         };
     }, []);
 
-    // Handle domain/video changes
+    // Handle domain/video changes with clean morphs
     useEffect(() => {
-        if (domainIndex !== undefined) {
-            targetPositionsRef.current.set(getShapePoints(domainIndex));
+        if (coreGroupRef.current && latticeRef.current) {
+            coreGroupRef.current.remove(latticeRef.current);
+            latticeRef.current.geometry.dispose();
+            (latticeRef.current.material as THREE.Material).dispose();
+
+            // Re-create geometric lattice for new domain
+            const createLattice = (index: number) => {
+                const geometries = [
+                    new THREE.IcosahedronGeometry(1.2, 2),
+                    new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
+                    new THREE.OctahedronGeometry(1.3, 1),
+                    new THREE.TorusGeometry(1, 0.4, 16, 50),
+                    new THREE.BoxGeometry(1.5, 1.5, 1.5, 2, 2, 2),
+                    new THREE.DodecahedronGeometry(1.2, 0),
+                    new THREE.SphereGeometry(1.2, 16, 16),
+                    new THREE.IcosahedronGeometry(1.2, 0)
+                ];
+                const geo = geometries[index % geometries.length];
+                const edges = new THREE.EdgesGeometry(geo);
+                const color = DOMAIN_COLORS[index % DOMAIN_COLORS.length];
+                const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+                    color: color,
+                    transparent: true,
+                    opacity: 0.6
+                }));
+                const nodes = new THREE.Points(geo, new THREE.PointsMaterial({
+                    color: color,
+                    size: 0.02,
+                    transparent: true,
+                    opacity: 0.8
+                }));
+                line.add(nodes);
+                return line;
+            };
+
+            const nextLattice = createLattice(domainIndex);
+            coreGroupRef.current.add(nextLattice);
+            latticeRef.current = nextLattice;
         }
 
         if (videoUrl !== prevVideoUrl.current) {
@@ -200,7 +226,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
             const timeout = setTimeout(() => {
                 if (videoRef.current) {
                     videoRef.current.src = videoUrl;
-                    videoRef.current.play();
+                    videoRef.current.play().catch(() => { });
                 }
                 setFade(false);
                 prevVideoUrl.current = videoUrl;
@@ -210,27 +236,44 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     }, [domainIndex, videoUrl]);
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#0a0f1e]">
-            {/* Background Video Layer - SUBTLE SUBTLE (v8) */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-black">
+            {/* Background Video Layer - Subtle Texture */}
             <video
                 ref={videoRef}
                 autoPlay
                 muted
                 loop
                 playsInline
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${fade ? 'opacity-0' : 'opacity-20'}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${fade ? 'opacity-0' : 'opacity-25'}`}
                 src={videoUrl}
             />
 
-            {/* CLEAN OVERLAYS - No Blur (v8) */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0f1e] via-transparent to-[#0a0f1e] z-10 opacity-60" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,15,30,0.4)_100%)] z-10" />
+            {/* 3D PERSPECTIVE GRID (Ascension Style) */}
+            <div className="absolute inset-0 z-10 opacity-20 pointer-events-none"
+                style={{
+                    backgroundImage: `linear-gradient(rgba(94, 98, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(94, 98, 255, 0.1) 1px, transparent 1px)`,
+                    backgroundSize: '60px 60px',
+                    perspective: '1000px',
+                    transform: 'rotateX(60deg) scale(2)',
+                    transformOrigin: 'center bottom',
+                    maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
+                }}
+            />
 
-            {/* 3D Particle Layer */}
+            {/* NEBULA AMBIENT LIGHTS */}
+            <div className="absolute top-[20%] right-[10%] w-[40%] h-[40%] bg-[#5E62FF]/10 blur-[120px] rounded-full z-10" />
+            <div className="absolute bottom-[10%] left-[5%] w-[30%] h-[30%] bg-[#9966FF]/10 blur-[100px] rounded-full z-10" />
+
+            {/* MAIN 3D CANVAS LAYER */}
             <div ref={containerRef} className="w-full h-full relative z-20" />
 
-            {/* Pure Black Bottom Mask for Section Transition */}
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0f1e] to-transparent z-25" />
+            {/* SCIFI SCANLINES */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-30 pointer-events-none"
+                style={{
+                    background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #fff 3px)',
+                    backgroundSize: '100% 4px'
+                }}
+            />
         </div>
     );
 };

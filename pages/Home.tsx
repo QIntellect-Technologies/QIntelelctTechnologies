@@ -89,9 +89,9 @@ const TypewriterHeadline: React.FC<{ index: number }> = React.memo(({ index }) =
   }, [subIndex, index, reverse]);
 
   return (
-    <span className="relative inline-block text-cyan-400">
+    <span className="relative inline-block bg-gradient-to-r from-[#5E62FF] to-[#9966FF] bg-clip-text text-transparent">
       {words[index].substring(0, subIndex)}
-      <span className="inline-block w-[3px] h-[0.9em] bg-cyan-400 ml-1 animate-pulse align-middle" />
+      <span className="inline-block w-[3px] h-[0.9em] bg-[#9966FF] ml-1 animate-pulse align-middle" />
     </span>
   );
 });
@@ -1481,8 +1481,8 @@ const Home: React.FC = () => {
     <div className="bg-transparent text-slate-900 font-light selection:bg-blue-100 selection:text-blue-700 overflow-x-hidden">
 
       {/* 1. HERO SECTION */}
-      <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-[#0a0f1e]">
-        {/* Minimalist Hybrid Background (Subtle Video + Sharp 3D Particles) */}
+      <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-black">
+        {/* Hyper-Futuristic Visual Engine (Lattice Globe + Orbital Rings) */}
         <QuantumNetwork domainIndex={domainIndex} videoUrl={domainVideos[domainIndex]} />
 
         {/* Floating Modern Shapes (Optimized: Removed expensive blur animation) */}
@@ -1535,11 +1535,9 @@ const Home: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center space-x-4 px-5 py-2.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400"
+                className="inline-block mb-6 px-4 py-1.5 rounded-full border border-indigo-500/50 text-[10px] uppercase tracking-[0.3em] font-bold text-white/80"
               >
-                <span className="text-[12px] font-black uppercase tracking-[0.4em]">Enterprise Intelligence</span>
-                <div className="w-10 h-px bg-cyan-500/20" />
-                <ArrowRight className="w-3.5 h-3.5" />
+                Creative Innovation Studio
               </motion.div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -1547,11 +1545,11 @@ const Home: React.FC = () => {
                   <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-black text-white tracking-tighter leading-[0.85] font-heading uppercase"
+                    transition={{ duration: 1 }}
+                    className="text-6xl md:text-8xl lg:text-[7.2rem] font-bold text-white tracking-tighter leading-[0.9] font-['Outfit']"
                   >
-                    We Engineer <br />
-                    Your Enterprise <br />
+                    Build <span className="bg-gradient-to-r from-[#5E62FF] to-[#9966FF] bg-clip-text text-transparent">Immersive Worlds</span> <br />
+                    that inspire <br />
                     <TypewriterHeadline index={domainIndex} />
                   </motion.h1>
                 </div>
@@ -1573,8 +1571,9 @@ const Home: React.FC = () => {
                       </motion.div>
                     ))}
                   </div>
-                  <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-relaxed">
-                    Trusted by <span className="text-white">500+</span> <br /> Global Enterprises.
+                  <p className="text-[12px] font-bold text-white/40 font-['Orbitron'] uppercase tracking-[0.3em] leading-relaxed">
+                    PROJECT <span className="text-[#5E62FF]">ZERO-G</span> <br />
+                    EST. 2012 / HQ: NYC
                   </p>
                 </div>
 
@@ -1598,22 +1597,39 @@ const Home: React.FC = () => {
                 </motion.div>
               </div>
 
-              {/* Right Group: Description & Button */}
-              <div className="flex flex-col space-y-10">
+              {/* Right Group: Description & Stat Cards */}
+              <div className="flex flex-col space-y-12">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 1 }}
-                  className="text-base md:text-xl text-white/80 leading-relaxed font-medium max-w-lg"
+                  className="text-lg md:text-xl text-white/60 leading-relaxed font-light max-w-lg font-['Outfit']"
                 >
-                  From Artificial Intelligence and Customized Chatbots to Dynamics 365, ERP, EDI, Web & Mobile Development — QIntellect delivers end-to-end enterprise technology solutions that transform how you operate.
+                  Pioneering digital experiences that fuse art with technology to transform brands and create meaning. Defy gravity, reimagine life with Ascension Dynamics.
                 </motion.p>
 
-                <div className="flex items-center">
-                  <MagneticButton to="/contact" className="px-12 py-5 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-[0.4em] hover:bg-blue-600 transition-all shadow-2xl group flex items-center">
-                    Lets Talk
-                    <ArrowRight className="w-4 h-4 ml-4 group-hover:translate-x-2 transition-transform" />
-                  </MagneticButton>
+                <div className="grid grid-cols-2 gap-6 w-full max-w-md">
+                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#5E62FF]/50 transition-all duration-500">
+                    <div className="text-[#5E62FF] text-3xl font-black mb-1 font-['Orbitron'] group-hover:scale-110 transition-transform">12+</div>
+                    <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Years of Innovation</div>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#9966FF]/50 transition-all duration-500">
+                    <div className="text-[#9966FF] text-3xl font-black mb-1 font-['Orbitron'] group-hover:scale-110 transition-transform">200+</div>
+                    <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Solutions Delivered</div>
+                  </div>
+                </div>
+
+                <div className="btn-group flex items-center space-x-6">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-10 py-4 bg-gradient-to-r from-[#5E62FF] to-[#9966FF] rounded-full text-white font-black text-xs uppercase tracking-widest shadow-[0_0_30px_rgba(94,98,255,0.4)]"
+                  >
+                    View Portfolio
+                  </motion.button>
+                  <button className="px-10 py-4 bg-transparent border border-white/20 rounded-full text-white font-black text-xs uppercase tracking-widest hover:bg-white/5 transition-all">
+                    Reach Out
+                  </button>
                 </div>
               </div>
             </div>

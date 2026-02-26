@@ -1458,6 +1458,18 @@ const Home: React.FC = () => {
 
   const [domainIndex, setDomainIndex] = useState(0);
 
+  // Curated Cinematic Video Showreel
+  const domainVideos = [
+    "https://player.vimeo.com/external/494254718.sd.mp4?s=6a9787e91d6467468814777cd3c109c13b28b789&profile_id=164&oauth2_token_id=57447761", // AI: Abstract Data
+    "https://player.vimeo.com/external/371433846.sd.mp4?s=231da65c1926639d6c76192f1f4f81023c9603e6&profile_id=164&oauth2_token_id=57447761", // Chatbots: Network
+    "https://player.vimeo.com/external/494248558.sd.mp4?s=a62c12c75a4073a38890989f5bc3a7d25e011f07&profile_id=164&oauth2_token_id=57447761", // AI Reps: Particles
+    "https://player.vimeo.com/external/517618580.sd.mp4?s=e7804961502f438c3e800366432657e2bd7e30d7&profile_id=164&oauth2_token_id=57447761", // AX: Global Grid
+    "https://player.vimeo.com/external/368700584.sd.mp4?s=59461d331163013b8214227c9d9d300e84b7f8c0&profile_id=164&oauth2_token_id=57447761", // D365: Tech City
+    "https://player.vimeo.com/external/459389133.sd.mp4?s=1289196307B6C8C7F7D2B6661F032B2B3A7B3B3B&profile_id=164&oauth2_token_id=57447761", // Web: Code Wave
+    "https://player.vimeo.com/external/517618214.sd.mp4?s=0e2cd33a0C3B7E393F3C6D6E6A6F6C6A6C6A6A6A&profile_id=164&oauth2_token_id=57447761", // ERP: Supply Chain
+    "https://player.vimeo.com/external/368694709.sd.mp4?s=229d494a8f9361623A3B6F6A6F6C6A6C6A6A6A6A&profile_id=164&oauth2_token_id=57447761", // Mobile: Connection
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setDomainIndex((prev) => (prev + 1) % 8);
@@ -1469,9 +1481,9 @@ const Home: React.FC = () => {
     <div className="bg-transparent text-slate-900 font-light selection:bg-blue-100 selection:text-blue-700 overflow-x-hidden">
 
       {/* 1. HERO SECTION */}
-      <section ref={heroRef} className="relative min-h-[95vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-slate-50">
-        {/* Animated Background */}
-        <QuantumNetwork domainIndex={domainIndex} />
+      <section ref={heroRef} className="relative min-h-[96vh] flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-white">
+        {/* Hybrid Animated Background (Video + 3D Particles) */}
+        <QuantumNetwork domainIndex={domainIndex} videoUrl={domainVideos[domainIndex]} />
 
         {/* Floating Modern Shapes (Optimized: Removed expensive blur animation) */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -1523,11 +1535,11 @@ const Home: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center space-x-4 px-4 py-2 rounded-full bg-blue-600 text-white shadow-xl shadow-blue-500/20"
+                className="inline-flex items-center space-x-4 px-5 py-2.5 rounded-full bg-[#2563eb] text-white shadow-2xl shadow-blue-500/30"
               >
-                <span className="text-[11px] font-black uppercase tracking-[0.3em]">QIntellect Technologies</span>
-                <div className="w-8 h-px bg-white/30" />
-                <ArrowRight className="w-3 h-3" />
+                <span className="text-[12px] font-black uppercase tracking-[0.4em]">Enterprise Intelligence</span>
+                <div className="w-10 h-px bg-white/40" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </motion.div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">

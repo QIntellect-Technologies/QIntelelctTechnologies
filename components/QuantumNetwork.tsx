@@ -293,6 +293,8 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
     const modelOpacityRef = useRef(1);
     const fadingInRef = useRef(false);
     const cameraAngleRef = useRef(0);
+    // Text-to-3D sync: when domain changes, trigger a pulse (1.0 → 0.0 decay)
+    const syncPulseRef = useRef(0);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -300,6 +302,8 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         const width = container.clientWidth, height = container.clientHeight;
 
         const scene = new THREE.Scene();
+        // Upgrade 1: Cinematic dark fog — creates depth and atmosphere
+        scene.fog = new THREE.FogExp2(0x020410, 0.18);
         sceneRef.current = scene;
 
         const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
@@ -327,7 +331,20 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         const fillLight = new THREE.PointLight(0xffffff, 0.4, 15);
         fillLight.position.set(-3, -2, 3); scene.add(fillLight); fillLightRef.current = fillLight;
 
-        // Global ambient particle star-field
+        // Upgrade 4: Depth layering — background nebula planes at z=-3
+        const bgGroup = new THREE.Group();
+        bgGroup.position.z = -3;
+        for (let i = 0; i < 5; i++) {
+            const bGeo = new THREE.PlaneGeometry(3 + Math.random() * 3, 3 + Math.random() * 3);
+            const bMat = new THREE.MeshBasicMaterial({ color: DOMAIN_COLORS[i % DOMAIN_COLORS.length], transparent: true, opacity: 0.012, side: THREE.DoubleSide });
+            const bMesh = new THREE.Mesh(bGeo, bMat);
+            bMesh.position.set((Math.random() - 0.5) * 4, (Math.random() - 0.5) * 3, Math.random() * 1.5);
+            bMesh.rotation.z = Math.random() * Math.PI;
+            bgGroup.add(bMesh);
+        }
+        scene.add(bgGroup);
+
+        // Global ambient particle star-field (mid-ground z=-1.5)
         const starGeo = new THREE.BufferGeometry();
         const starPos: number[] = [];
         for (let i = 0; i < 300; i++) starPos.push((Math.random() - 0.5) * 6, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 4 - 1.5);
@@ -372,6 +389,18 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
                 cameraRef.current.position.y += (orbitY - my * 0.06 - cameraRef.current.position.y) * 0.04;
                 cameraRef.current.position.z = camRadius;
                 cameraRef.current.lookAt(0, 0, 0);
+            }
+
+            // Upgrade 3: Text-to-3D sync pulse — decay over ~1.5 seconds
+            if (syncPulseRef.current > 0) {
+                syncPulseRef.current = Math.max(0, syncPulseRef.current - delta * 0.7);
+                if (model && coreGroupRef.current) {
+                    const pScale = 1 + syncPulseRef.current * 0.18;
+                    coreGroupRef.current.scale.setScalar(pScale);
+                }
+            } else if (coreGroupRef.current) {
+                const s = coreGroupRef.current.scale.x;
+                if (s !== 1) coreGroupRef.current.scale.setScalar(THREE.MathUtils.lerp(s, 1, 0.08));
             }
 
             // ── Dynamic light: keep lights neutral, do NOT colorize them
@@ -493,6 +522,7 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
 
         coreGroupRef.current.rotation.set(0, 0, 0);
         coreGroupRef.current.position.set(0, 0, 0);
+        coreGroupRef.current.scale.setScalar(1);
 
         const newModel = createDomainModel(domainIndex);
         // Start transparent for fade-in
@@ -501,6 +531,8 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         currentModelRef.current = newModel;
         modelOpacityRef.current = 0;
         fadingInRef.current = true;
+        // Text-to-3D sync: trigger a scale+brightness pulse
+        syncPulseRef.current = 1.0;
     }, [domainIndex]);
 
     // Video swap

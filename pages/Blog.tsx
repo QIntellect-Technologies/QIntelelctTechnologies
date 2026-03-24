@@ -43,16 +43,16 @@ const TypewriterText: React.FC = React.memo(() => {
 const Blog: React.FC = () => {
   useSEO({
     title: 'Blog | AI & Enterprise Technology Insights by QIntellect',
-    description: 'Read QIntellect Technologies blog for expert insights on artificial intelligence, chatbots, Microsoft Dynamics 365, ERP systems, web development trends, and digital transformation strategies.',
-    keywords: 'AI blog, artificial intelligence insights, chatbot trends, Dynamics 365 blog, ERP technology, digital transformation, enterprise software blog, tech insights',
+    description: 'Read the QIntellect blog for expert insights on AI automation platforms, industry-specific AI solutions, chatbots, ERP systems, and business transformation strategies.',
+    keywords: 'QIntellect blog, AI blog, artificial intelligence insights, AI automation platform news, business automation, enterprise AI, QIntellect tech insights',
     canonical: 'https://www.qintellecttechnologies.com/blog',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'Blog',
-      name: 'QIntellect Technologies Blog',
+      name: 'QIntellect Tech Blog',
       url: 'https://www.qintellecttechnologies.com/blog',
-      description: 'Expert insights on AI, chatbots, ERP, Dynamics 365, and enterprise technology.',
-      publisher: { '@type': 'Organization', name: 'QIntellect Technologies' }
+      description: 'Expert insights on AI automation, industry-specific AI, and enterprise tech.',
+      publisher: { '@type': 'Organization', name: 'QIntellect' }
     }
   });
 

@@ -6,16 +6,16 @@ import useSEO from '../hooks/useSEO';
 
 const Contact: React.FC = () => {
   useSEO({
-    title: 'Contact QIntellect Technologies | Get a Free AI Consultation',
-    description: 'Contact QIntellect Technologies for a free consultation on AI solutions, chatbots, Microsoft Dynamics 365, ERP, EDI, and web development. Our experts are ready to help your business grow.',
-    keywords: 'contact QIntellect Technologies, hire AI developers, AI consultation, Dynamics 365 experts, ERP consultants, chatbot development company',
+    title: 'Contact QIntellect | Get Started with AI Automation',
+    description: 'Ready to transform your business with AI automation? Contact QIntellect today to get a customized, industry-specific AI solution.',
+    keywords: 'contact QIntellect, hire AI developers, AI consultation, QIntellect support, ERP consultants, QIntellect buy, QIntellect ready to purchase',
     canonical: 'https://www.qintellecttechnologies.com/contact',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'ContactPage',
-      name: 'Contact QIntellect Technologies',
+      name: 'Contact QIntellect',
       url: 'https://www.qintellecttechnologies.com/contact',
-      description: 'Get in touch with QIntellect Technologies for AI, chatbot, ERP, and Dynamics 365 solutions.',
+      description: 'Get in touch with QIntellect for AI automation workflows and scalable tech solutions.',
     }
   });
   return (

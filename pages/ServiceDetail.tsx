@@ -62,6 +62,7 @@ import {
   Banknote
 } from 'lucide-react';
 import { SERVICES } from '../constants';
+import useSEO from '../hooks/useSEO';
 
 // ========== SERVICE IMAGES (Features, Process, etc.) ==========
 const serviceImages: Record<string, { overview: string; features: string[]; cta: string }> = {
@@ -867,6 +868,13 @@ const ServiceDetail: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  useSEO({
+    title: service ? `${service.title} | QIntellect - AI Automation Platform` : 'Service Detail | QIntellect',
+    description: service ? `Learn about our ${service.title} services. QIntellect offers industry-specific solutions including ${service.description}. Accelerate your business with our prebuilt AI workflows.` : 'QIntellect AI Platform Service Details.',
+    keywords: service ? `QIntellect ${service.title}, ${service.title} AI, ${service.title} solutions, QIntellect services, QIntalect, ${service.title} platform` : 'QIntellect services',
+    canonical: `https://www.qintellecttechnologies.com/services/${id}`,
+  });
 
   if (!service) {
     return (

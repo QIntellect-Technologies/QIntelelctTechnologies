@@ -110,16 +110,16 @@ const AnimatedCounter: React.FC<{ target: number; suffix?: string; duration?: nu
 
 const Services: React.FC = () => {
   useSEO({
-    title: 'Our Services | AI, Chatbots, ERP, Dynamics 365 & Web Development',
-    description: 'Explore QIntellect Technologies services: AI solutions, custom chatbots, Microsoft Dynamics 365, ERP & EDI systems, web development, and mobile apps. Enterprise-grade technology for your business.',
-    keywords: 'AI services, chatbot development, Microsoft Dynamics 365 implementation, ERP solutions, EDI integration, web development services, mobile app development, enterprise software services',
+    title: 'QIntellect Services | AI Automation, Prebuilt Workflows & White-Label Solutions',
+    description: 'Explore QIntellect Services: Our platform offers 60-70% prebuilt AI workflows, customizable white-label solutions, and industry-specific automation for rapid implementation and scaling.',
+    keywords: 'QIntellect services, AI automation platform, prebuilt AI workflows, white-label AI solutions, industry-specific automation, enterprise AI services, QIntellect ERP, QIntalect services, QIntellect typo',
     canonical: 'https://www.qintellecttechnologies.com/services',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'Service',
-      name: 'QIntellect Technologies Services',
-      provider: { '@type': 'Organization', name: 'QIntellect Technologies' },
-      description: 'AI solutions, chatbots, ERP, Dynamics 365, web and mobile development services.',
+      name: 'QIntellect AI Automation Services',
+      provider: { '@type': 'Organization', name: 'QIntellect' },
+      description: 'QIntellect provides scalable AI solutions, prebuilt business workflows, and customized automation services.',
       url: 'https://www.qintellecttechnologies.com/services',
     }
   });

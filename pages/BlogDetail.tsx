@@ -23,6 +23,7 @@ import {
   Search,
   Star
 } from 'lucide-react';
+import useSEO from '../hooks/useSEO';
 
 const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,6 +32,13 @@ const BlogDetail: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  useSEO({
+    title: post ? `${post.title} | QIntellect Blog` : 'Blog Detail | QIntellect',
+    description: post ? post.excerpt : 'QIntellect AI Platform Blog post details.',
+    keywords: post ? `QIntellect blog, ${post.category}, AI, QIntellect AI, business automation` : 'QIntellect blog',
+    canonical: `https://www.qintellecttechnologies.com/blog/${id}`,
+  });
 
   if (!post) {
     return (

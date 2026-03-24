@@ -40,6 +40,7 @@ import {
   Laptop
 } from 'lucide-react';
 import { INDUSTRIES } from '../constants';
+import useSEO from '../hooks/useSEO';
 
 const IndustryBlueprint = ({ type }: { type: string }) => {
   // Sector-specific abstract visualizations
@@ -122,6 +123,13 @@ const IndustryBlueprint = ({ type }: { type: string }) => {
 };
 
 const Industries: React.FC = () => {
+  useSEO({
+    title: 'Industries We Serve | QIntellect - AI Automation Platform',
+    description: 'QIntellect provides industry-specific AI automation solutions for Healthcare, Finance, SaaS, Manufacturing, and more. Deploy prebuilt workflows rapidly.',
+    keywords: 'QIntellect industries, AI in healthcare, AI in finance, AI in manufacturing, AI SaaS, AI automation platform, prebuilt AI workflows, industry AI',
+    canonical: 'https://www.qintellecttechnologies.com/industries',
+  });
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,

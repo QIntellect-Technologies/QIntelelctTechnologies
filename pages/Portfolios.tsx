@@ -22,16 +22,16 @@ import useSEO from '../hooks/useSEO';
 
 const Portfolios: React.FC = () => {
   useSEO({
-    title: 'Portfolio | QIntellect Technologies — AI, ERP & Web Projects',
-    description: 'Explore QIntellect Technologies portfolio of enterprise projects: AI deployments, custom chatbots, Microsoft Dynamics 365 implementations, ERP migrations, EDI integrations, and web platforms.',
-    keywords: 'AI portfolio, enterprise projects, Dynamics 365 case studies, ERP implementation portfolio, chatbot projects, web development portfolio, QIntellect Technologies work',
+    title: 'Portfolio | QIntellect - AI Automation Platform Projects',
+    description: 'Explore our portfolio of enterprise projects powered by QIntellect: AI deployments, industry-specific prebuilt workflows, manufacturing automation, and SaaS scaling.',
+    keywords: 'AI portfolio, enterprise AI projects, QIntellect case studies, automation portfolio, prebuilt workflows, QIntellect work, business AI deployment',
     canonical: 'https://www.qintellecttechnologies.com/portfolios',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'QIntellect Technologies Portfolio',
+      name: 'QIntellect AI Portfolio',
       url: 'https://www.qintellecttechnologies.com/portfolios',
-      description: 'Enterprise AI, ERP, chatbot, and web development project portfolio.',
+      description: 'Enterprise AI and automation project portfolio by QIntellect.',
     }
   });
 

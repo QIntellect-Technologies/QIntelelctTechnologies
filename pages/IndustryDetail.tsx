@@ -33,6 +33,7 @@ import {
   Laptop
 } from 'lucide-react';
 import { INDUSTRIES } from '../constants';
+import useSEO from '../hooks/useSEO';
 
 // ========== INDUSTRY IMAGES ==========
 const industryImages: Record<string, { overview: string; features: string[]; cta: string }> = {
@@ -177,6 +178,13 @@ const IndustryDetail: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useSEO({
+    title: industry ? `${industry.name} AI Solutions | QIntellect` : 'Industry Detail | QIntellect',
+    description: industry ? `QIntellect provides tailored AI automation solutions for ${industry.name}. Optimize operations with our prebuilt ${industry.name} workflows.` : 'QIntellect AI Platform Industry Details.',
+    keywords: industry ? `QIntellect ${industry.name}, ${industry.name} AI, ${industry.name} automation, QIntellect industries, QIntalect, ${industry.name} platform` : 'QIntellect industries',
+    canonical: `https://www.qintellecttechnologies.com/industries/${id}`,
+  });
 
   if (isLoading) {
     return (

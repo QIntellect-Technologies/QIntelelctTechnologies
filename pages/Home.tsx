@@ -1443,6 +1443,13 @@ const LatestBlogSection: React.FC = () => {
 };
 
 const Home: React.FC = () => {
+  useSEO({
+    title: 'QIntellect - AI Automation Platform for Business | QIntellect Technologies',
+    description: 'QIntellect is an AI-powered automation platform designed to accelerate business operations across finance, healthcare, SaaS, and manufacturing industries. The platform offers industry-specific, prebuilt AI workflows for rapid deployment, white-label solutions, and scalable automation.',
+    keywords: 'QIntellect, QIntellect Technologies, AI automation, AI platform, business automation, industry AI, finance AI, healthcare AI, SaaS AI, manufacturing AI, white-label AI, AI solutions, QIntalect, QIntilect, QIntellect Tech, QInteligent, QIntellect AI',
+    canonical: 'https://www.qintellecttechnologies.com/',
+  });
+
   // Parallax Setup
   const heroRef = useRef(null);
   const philosophyRef = useRef(null);

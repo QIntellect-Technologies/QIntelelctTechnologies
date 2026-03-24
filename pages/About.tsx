@@ -217,16 +217,16 @@ const TimelineItem = ({ year, title, desc, index }: any) => {
 
 const About: React.FC = () => {
   useSEO({
-    title: 'About QIntellect Technologies | AI & Enterprise Software Experts',
-    description: 'Learn about QIntellect Technologies — a leading AI solutions company delivering custom chatbots, Microsoft Dynamics 365, ERP, EDI, and web development services to enterprises worldwide.',
-    keywords: 'about QIntellect Technologies, AI company, enterprise software company, Microsoft Dynamics 365 partner, ERP experts, chatbot development team',
+    title: 'About QIntellect - AI Automation Platform | QIntellect Technologies',
+    description: 'Learn about QIntellect — an advanced AI automation platform built to accelerate and optimize business operations across finance, healthcare, SaaS, and manufacturing. Discover our industry-specific, prebuilt AI workflows.',
+    keywords: 'about QIntellect, QIntellect Technologies, AI company, AI automation platform, enterprise software company, Microsoft Dynamics 365 partner, ERP experts, chatbot development team, QIntellect about, QIntalect, QIntilect, QInteligent',
     canonical: 'https://www.qintellecttechnologies.com/about',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'AboutPage',
       name: 'About QIntellect Technologies',
       url: 'https://www.qintellecttechnologies.com/about',
-      description: 'QIntellect Technologies is a leading AI and enterprise software company delivering innovative solutions worldwide.',
+      description: 'QIntellect is an advanced AI automation platform built to accelerate and optimize business operations across multiple industries.',
     }
   });
 

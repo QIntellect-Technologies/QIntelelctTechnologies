@@ -419,7 +419,7 @@ const About: React.FC = () => {
                     className="rounded-3xl overflow-hidden shadow-xl h-[480px]"
                   >
                     <img loading="lazy"
-                      src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1470&auto=format&fit=crop"
+                      src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=60&w=800&auto=format&fit=crop&auto=format,compress"
                       alt="AI Development Team"
                       className="w-full h-full object-cover"
                     />
@@ -434,7 +434,7 @@ const About: React.FC = () => {
                     className="rounded-3xl overflow-hidden shadow-xl h-[232px]"
                   >
                     <img loading="lazy"
-                      src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop"
+                      src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=60&w=800&auto=format&fit=crop&auto=format,compress"
                       alt="AI Team Meeting"
                       className="w-full h-full object-cover"
                     />
@@ -446,7 +446,7 @@ const About: React.FC = () => {
                     className="rounded-3xl overflow-hidden shadow-xl h-[232px]"
                   >
                     <img loading="lazy"
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop"
+                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=60&w=800&auto=format&fit=crop&auto=format,compress"
                       alt="AI Innovation Team"
                       className="w-full h-full object-cover"
                     />
@@ -554,7 +554,7 @@ const About: React.FC = () => {
       <section className="py-24 px-4 md:px-8 bg-slate-900 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center" />
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=60&w=800&auto=format&fit=crop&auto=format,compress')] bg-cover bg-center" />
         </div>
         <div className="absolute top-20 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/10 rounded-full blur-[120px]" />
@@ -626,7 +626,7 @@ const About: React.FC = () => {
               {/* Main Image */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img loading="lazy"
-                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1470&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=60&w=800&auto=format&fit=crop&auto=format,compress"
                   alt="AI Innovation"
                   className="w-full h-[500px] object-cover"
                 />
@@ -681,7 +681,7 @@ const About: React.FC = () => {
                 {/* Main Image */}
                 <div className="rounded-3xl overflow-hidden shadow-2xl">
                   <img loading="lazy"
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=60&w=800&auto=format&fit=crop&auto=format,compress"
                     alt="Future Technology"
                     className="w-full h-[480px] object-cover"
                   />
@@ -1131,7 +1131,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Imran Khalid",
       role: "Chief AI Architect",
-      image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "We value curiosity, collaboration, and a can do attitude. Oh, and coffee lots of coffee. Come join a team celebrates your unique skills and helps you",
       skills: [
         { name: "Artificial Intelligence", level: 90 },
@@ -1148,7 +1148,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Hooria Shahdi",
       role: "Lead Data Scientist",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "Passionate about transforming raw data into actionable insights that drive business growth. With expertise in deep learning and neural networks, I help organizations unlock the power of AI.",
       skills: [
         { name: "Data Science", level: 95 },
@@ -1165,7 +1165,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Malaika",
       role: "Robotics & AI Specialist",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "We value curiosity, collaboration, and a can do attitude. Oh, and coffee lots of coffee. Come join a team celebrates your unique skills and helps you",
       skills: [
         { name: "Artificial Intelligence", level: 90 },
@@ -1182,7 +1182,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Ubaid",
       role: "Computer Vision Engineer",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "Specializing in computer vision and image processing technologies. My work focuses on building intelligent systems that can see, understand, and interact with the visual world.",
       skills: [
         { name: "Computer Vision", level: 92 },

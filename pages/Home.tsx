@@ -292,7 +292,7 @@ const WhyChooseUs: React.FC = () => {
               className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-10"
             >
               <img loading="lazy"
-                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=60&w=800&auto=format&fit=crop&auto=format,compress"
                 alt="Digital Agency Expertise"
                 className="w-full aspect-square object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
               />
@@ -875,7 +875,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Imran Khalid",
       role: "Chief AI Architect",
-      image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "We value curiosity, collaboration, and a can do attitude. Oh, and coffee lots of coffee. Come join a team celebrates your unique skills and helps you",
       skills: [
         { name: "Artificial Intelligence", level: 90 },
@@ -892,7 +892,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Hooria Shahdi",
       role: "Lead Data Scientist",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "Passionate about transforming raw data into actionable insights that drive business growth. With expertise in deep learning and neural networks, I help organizations unlock the power of AI.",
       skills: [
         { name: "Data Science", level: 95 },
@@ -909,7 +909,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Malaika",
       role: "Robotics & AI Specialist",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "We value curiosity, collaboration, and a can do attitude. Oh, and coffee lots of coffee. Come join a team celebrates your unique skills and helps you",
       skills: [
         { name: "Artificial Intelligence", level: 90 },
@@ -926,7 +926,7 @@ const TeamSection: React.FC = () => {
     {
       name: "Ubaid",
       role: "Computer Vision Engineer",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress",
       description: "Specializing in computer vision and image processing technologies. My work focuses on building intelligent systems that can see, understand, and interact with the visual world.",
       skills: [
         { name: "Computer Vision", level: 92 },
@@ -1710,7 +1710,7 @@ const Home: React.FC = () => {
                 className="relative rounded-[3rem] overflow-hidden shadow-3xl z-10 will-change-transform"
               >
                 <img loading="lazy"
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=60&w=800&auto=format&fit=crop&auto=format,compress"
                   alt="Team Collaboration"
                   className="w-full aspect-square object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                 />
@@ -1773,7 +1773,7 @@ const Home: React.FC = () => {
                 icon: Activity,
                 color: 'text-blue-500',
                 bg: 'bg-blue-50',
-                img: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=80&w=2070&auto=format&fit=crop',
+                img: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
                 desc: 'AI Customer Representatives providing 24/7 support, voice-enabled service agents, and intelligent chatbots for seamless guest experiences.'
               },
               {
@@ -1781,7 +1781,7 @@ const Home: React.FC = () => {
                 icon: ShoppingCart,
                 color: 'text-purple-500',
                 bg: 'bg-purple-50',
-                img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop',
+                img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=60&w=800&auto=format&fit=crop&auto=format,compress',
                 desc: 'Customized Chatbots for customer engagement, Dynamics 365 Commerce, and intelligent web platforms that drive conversions.'
               },
               {
@@ -1789,7 +1789,7 @@ const Home: React.FC = () => {
                 icon: Factory,
                 color: 'text-orange-500',
                 bg: 'bg-orange-50',
-                img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop',
+                img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=60&w=800&auto=format&fit=crop&auto=format,compress',
                 desc: 'AI-driven predictive maintenance, ERP-unified production lines, and EDI-powered supply chain automation for Industry 4.0.'
               }
             ].map(ind => (

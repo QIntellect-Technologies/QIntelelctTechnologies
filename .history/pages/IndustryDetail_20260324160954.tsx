@@ -691,9 +691,9 @@ const IndustryDetail: React.FC = () => {
                   Start Your Project
                   <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                 </Link>
-
+                
                 <a
-                  href="tel:+923061239025"
+                  href="tel:+1234567890"
                   className="group bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center gap-3 justify-center"
                 >
                   <Phone className="w-6 h-6" />

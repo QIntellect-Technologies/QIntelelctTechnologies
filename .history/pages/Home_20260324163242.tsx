@@ -1206,7 +1206,7 @@ const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Phone number</p>
-                  <p className="text-lg font-medium text-slate-900">+92 306 1239025</p>
+                  <p className="text-lg font-medium text-slate-900">+1 (647) 867-5309</p>
                 </div>
               </motion.div>
             </div>

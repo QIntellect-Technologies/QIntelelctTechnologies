@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
               <h3 className="text-lg font-bold mb-6 font-heading">Global Headquarters</h3>
               <div className="flex items-start space-x-4 mb-6">
                 <MapPin className="w-6 h-6 text-blue-500 flex-shrink-0" />
-                <p className="text-slate-400 text-sm">Old Khan Pur Adda, Near Mian Wali Hotel<br />RYK</p>
+                <p className="text-slate-400 text-sm">1200 Innovation Way, Suite 500<br />Silicon Valley, CA 94025, USA</p>
               </div>
               <div className="aspect-video w-full rounded-2xl bg-slate-800 flex items-center justify-center overflow-hidden">
                 <span className="text-slate-600 text-xs">Interactive Map Loading...</span>

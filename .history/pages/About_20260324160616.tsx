@@ -541,7 +541,7 @@ const About: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs text-slate-500 font-medium">Call Anytime</div>
-                    <div className="text-base font-bold text-slate-900">+92 306 1239025</div>
+                    <div className="text-base font-bold text-slate-900">+1 (555) 123-4567</div>
                   </div>
                 </div>
               </div>

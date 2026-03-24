@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npx esbuild constants.tsx --bundle --external:lucide-react --external:react --format=esm --outfile=dist/constants.js && vite build",
     "preview": "vite preview",
     "start": "node server.js"
   },

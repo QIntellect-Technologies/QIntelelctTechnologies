@@ -1,21 +1,23 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import ChatBot from './components/ChatBot';
 import CustomCursor from './components/CustomCursor';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import ServiceDetail from './pages/ServiceDetail';
-import Industries from './pages/Industries';
-import IndustryDetail from './pages/IndustryDetail';
-import Portfolios from './pages/Portfolios';
-import Contact from './pages/Contact';
-import Blog from './pages/Blog';
-import BlogDetail from './pages/BlogDetail';
 import { AnimatePresence, useScroll, useTransform, motion } from 'framer-motion';
+
+// Lazy loaded routes and heavy components for Core Web Vitals Optimization
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const Industries = lazy(() => import('./pages/Industries'));
+const IndustryDetail = lazy(() => import('./pages/IndustryDetail'));
+const Portfolios = lazy(() => import('./pages/Portfolios'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogDetail = lazy(() => import('./pages/BlogDetail'));
+const ChatBot = lazy(() => import('./components/ChatBot'));
 
 // --- Global Neural Background with Parallax ---
 const GlobalNeuralBackground: React.FC = () => {
@@ -98,22 +100,26 @@ const App: React.FC = () => {
         <Navbar />
         <main className="flex-grow">
           <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/service/:id" element={<ServiceDetail />} />
-              <Route path="/industries" element={<Industries />} />
-              <Route path="/industries/:id" element={<IndustryDetail />} />
-              <Route path="/portfolios" element={<Portfolios />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogDetail />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
+            <Suspense fallback={<div className="h-screen w-full flex items-center justify-center"><div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/service/:id" element={<ServiceDetail />} />
+                <Route path="/industries" element={<Industries />} />
+                <Route path="/industries/:id" element={<IndustryDetail />} />
+                <Route path="/portfolios" element={<Portfolios />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogDetail />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </Suspense>
           </AnimatePresence>
         </main>
         <Footer />
-        <ChatBot />
+        <Suspense fallback={null}>
+          <ChatBot />
+        </Suspense>
       </div>
     </Router>
   );

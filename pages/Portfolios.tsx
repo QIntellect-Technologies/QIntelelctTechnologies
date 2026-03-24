@@ -120,7 +120,7 @@ const Portfolios: React.FC = () => {
               >
                 {/* Visual Frame with Parallax-ish Hover */}
                 <div className="relative rounded-2xl overflow-hidden aspect-[16/10] shadow-3xl bg-slate-900 border border-slate-100">
-                  <img
+                  <img loading="lazy"
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 opacity-90 group-hover:opacity-100"

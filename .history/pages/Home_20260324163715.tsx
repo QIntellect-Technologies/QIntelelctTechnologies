@@ -291,7 +291,7 @@ const WhyChooseUs: React.FC = () => {
               viewport={{ once: true }}
               className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-10"
             >
-              <img loading="lazy"
+              <img
                 src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
                 alt="Digital Agency Expertise"
                 className="w-full aspect-square object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
@@ -752,7 +752,7 @@ const TestimonialSection: React.FC = () => {
                       {/* Author Info */}
                       <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                         <div className="flex items-center gap-3">
-                          <img loading="lazy"
+                          <img
                             src={t.avatar}
                             alt={t.name}
                             className="w-11 h-11 rounded-full object-cover"
@@ -976,7 +976,7 @@ const TeamSection: React.FC = () => {
                   }`}
               >
                 <div className="relative flex-shrink-0">
-                  <img loading="lazy"
+                  <img
                     src={member.image}
                     alt={member.name}
                     className="w-16 h-16 rounded-xl object-cover ring-2 ring-white"
@@ -1003,7 +1003,7 @@ const TeamSection: React.FC = () => {
               className="relative"
             >
               <div className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 p-2 shadow-2xl">
-                <img loading="lazy"
+                <img
                   src={currentMember.image}
                   alt={currentMember.name}
                   className="w-full aspect-[3/4] object-cover rounded-[2.7rem]"
@@ -1396,7 +1396,7 @@ const LatestBlogSection: React.FC = () => {
             >
               {/* Image Container */}
               <div className="relative h-56 overflow-hidden bg-slate-900">
-                <img loading="lazy"
+                <img
                   src={blog.image}
                   alt={blog.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -1574,7 +1574,7 @@ const Home: React.FC = () => {
                         whileHover={{ y: -5, scale: 1.1 }}
                         className="w-12 h-12 rounded-full border-4 border-white overflow-hidden bg-slate-200 shadow-lg"
                       >
-                        <img loading="lazy" src={`https://i.pravatar.cc/150?u=qintellect_${i}`} alt="user" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
+                        <img src={`https://i.pravatar.cc/150?u=qintellect_${i}`} alt="user" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
                       </motion.div>
                     ))}
                   </div>
@@ -1709,7 +1709,7 @@ const Home: React.FC = () => {
                 transition={{ duration: 1 }}
                 className="relative rounded-[3rem] overflow-hidden shadow-3xl z-10 will-change-transform"
               >
-                <img loading="lazy"
+                <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
                   alt="Team Collaboration"
                   className="w-full aspect-square object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
@@ -1801,7 +1801,7 @@ const Home: React.FC = () => {
                 className="group rounded-2xl overflow-hidden glass-card border border-white hover:shadow-2xl transition-all duration-1000 flex flex-col"
               >
                 <div className="h-48 overflow-hidden relative bg-slate-900">
-                  <img loading="lazy" src={ind.img} alt={ind.name} className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-90" />
+                  <img src={ind.img} alt={ind.name} className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-90" />
                   <div className="absolute inset-0 bg-blue-900/10" />
                 </div>
                 <div className="p-6 space-y-4">

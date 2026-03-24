@@ -1066,7 +1066,7 @@ const ServiceDetail: React.FC = () => {
               className="relative"
             >
               <div className="rounded-3xl overflow-hidden shadow-2xl">
-                <img loading="lazy" src={images.overview} alt={service.title} className="w-full h-[500px] object-cover" />
+                <img src={images.overview} alt={service.title} className="w-full h-[500px] object-cover" />
               </div>
               {/* Experience Badge */}
               <motion.div
@@ -1293,7 +1293,7 @@ const ServiceDetail: React.FC = () => {
               viewport={{ once: true }}
               className="rounded-3xl overflow-hidden shadow-2xl h-[500px]"
             >
-              <img loading="lazy" src={images.features[0]} alt="Feature" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={images.features[0]} alt="Feature" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </motion.div>
 
             {/* Right - Two Stacked Images */}
@@ -1304,7 +1304,7 @@ const ServiceDetail: React.FC = () => {
                 viewport={{ once: true }}
                 className="rounded-3xl overflow-hidden shadow-2xl h-[240px]"
               >
-                <img loading="lazy" src={images.features[1]} alt="Feature" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={images.features[1]} alt="Feature" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
@@ -1313,7 +1313,7 @@ const ServiceDetail: React.FC = () => {
                 viewport={{ once: true }}
                 className="rounded-3xl overflow-hidden shadow-2xl h-[240px]"
               >
-                <img loading="lazy" src={images.features[2]} alt="Feature" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={images.features[2]} alt="Feature" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </motion.div>
             </div>
           </div>
@@ -1497,7 +1497,7 @@ const ServiceDetail: React.FC = () => {
               className="relative"
             >
               <div className="rounded-3xl overflow-hidden shadow-2xl">
-                <img loading="lazy" src={images.cta} alt="Industries" className="w-full h-[500px] object-cover" />
+                <img src={images.cta} alt="Industries" className="w-full h-[500px] object-cover" />
               </div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

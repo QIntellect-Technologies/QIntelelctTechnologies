@@ -217,7 +217,7 @@ const IndustryDetail: React.FC = () => {
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img loading="lazy"
+          <img
             src={images.overview}
             alt={industry.title}
             className="w-full h-full object-cover"
@@ -354,7 +354,7 @@ const IndustryDetail: React.FC = () => {
               className="relative"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img loading="lazy"
+                <img
                   src={images.features[0]}
                   alt={`${industry.title} solutions`}
                   className="w-full h-96 object-cover"
@@ -467,7 +467,7 @@ const IndustryDetail: React.FC = () => {
               >
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
                   <div className="relative">
-                    <img loading="lazy"
+                    <img
                       src={images.features[index] || images.features[0]}
                       alt={solution.title}
                       className="w-full h-80 object-cover rounded-3xl shadow-xl"
@@ -655,7 +655,7 @@ const IndustryDetail: React.FC = () => {
           >
             {/* Background */}
             <div className="absolute inset-0">
-              <img loading="lazy"
+              <img
                 src={images.cta}
                 alt="Get started"
                 className="w-full h-full object-cover"

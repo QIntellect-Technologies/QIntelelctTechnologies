@@ -221,7 +221,7 @@ const Blog: React.FC = () => {
                   >
                     {/* Image Section */}
                     <div className="relative h-64 overflow-hidden">
-                      <img
+                      <img loading="lazy"
                         src={post.image}
                         alt={post.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
         <div className={`relative transition-all duration-300 rounded-2xl px-6 py-3 flex items-center justify-between ${scrolled || needsSolidNavbar || location.pathname === '/' ? 'bg-white/80 backdrop-blur-lg shadow-xl shadow-slate-200/20 border border-white/40' : 'bg-transparent'}`}>
           <div className="flex items-center space-x-12">
             <Link to="/" className="flex items-center space-x-3 group">
-              <img src="/images/logo.png" alt="QIntellect Technologies" className="h-10 w-auto" />
+              <img loading="lazy" src="/images/logo.png" alt="QIntellect Technologies" className="h-10 w-auto" />
             </Link>
 
             <div className="hidden xl:block">

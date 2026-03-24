@@ -160,7 +160,7 @@ const BlogDetail: React.FC = () => {
 
               {/* Featured Image */}
               <div className="mb-12">
-                <img loading="lazy" 
+                <img 
                   src={post.image} 
                   alt={post.title}
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
@@ -244,7 +244,7 @@ const BlogDetail: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {post.galleryImages.map((image, index) => (
                       <div key={index} className="rounded-xl overflow-hidden shadow-lg">
-                        <img loading="lazy" 
+                        <img 
                           src={image} 
                           alt={`Gallery image ${index + 1}`}
                           className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
@@ -288,7 +288,7 @@ const BlogDetail: React.FC = () => {
               {/* Author Info */}
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12">
                 <div className="flex items-start gap-6">
-                  <img loading="lazy" 
+                  <img 
                     src={post.authorImage} 
                     alt={post.author}
                     className="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-lg"
@@ -335,7 +335,7 @@ const BlogDetail: React.FC = () => {
               {/* Author Card */}
               <div className="bg-white rounded-xl shadow-lg p-6 border">
                 <div className="text-center">
-                  <img loading="lazy" 
+                  <img 
                     src={post.authorImage} 
                     alt={post.author}
                     className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
@@ -362,7 +362,7 @@ const BlogDetail: React.FC = () => {
                       className="group block hover:bg-gray-50 rounded-lg p-3 transition-colors -mx-3"
                     >
                       <div className="flex gap-3">
-                        <img loading="lazy" 
+                        <img 
                           src={relatedPost.image} 
                           alt={relatedPost.title}
                           className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
@@ -436,7 +436,7 @@ const BlogDetail: React.FC = () => {
                   className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border"
                 >
                   <div className="aspect-video overflow-hidden">
-                    <img loading="lazy" 
+                    <img 
                       src={relatedPost.image} 
                       alt={relatedPost.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

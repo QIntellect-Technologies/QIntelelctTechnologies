@@ -616,7 +616,7 @@ const Services: React.FC = () => {
                 className="group relative rounded-3xl overflow-hidden shadow-xl h-72 cursor-pointer"
               >
                 {/* Background Image */}
-                <img
+                <img loading="lazy"
                   src={industry.image}
                   alt={industry.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -663,7 +663,7 @@ const Services: React.FC = () => {
           >
             {/* Background */}
             <div className="absolute inset-0">
-              <img
+              <img loading="lazy"
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
                 alt="Office"
                 className="w-full h-full object-cover"

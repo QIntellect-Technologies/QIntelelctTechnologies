@@ -418,7 +418,7 @@ const About: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     className="rounded-3xl overflow-hidden shadow-xl h-[480px]"
                   >
-                    <img loading="lazy"
+                    <img
                       src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1470&auto=format&fit=crop"
                       alt="AI Development Team"
                       className="w-full h-full object-cover"
@@ -433,7 +433,7 @@ const About: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     className="rounded-3xl overflow-hidden shadow-xl h-[232px]"
                   >
-                    <img loading="lazy"
+                    <img
                       src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop"
                       alt="AI Team Meeting"
                       className="w-full h-full object-cover"
@@ -445,7 +445,7 @@ const About: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     className="rounded-3xl overflow-hidden shadow-xl h-[232px]"
                   >
-                    <img loading="lazy"
+                    <img
                       src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop"
                       alt="AI Innovation Team"
                       className="w-full h-full object-cover"
@@ -625,7 +625,7 @@ const About: React.FC = () => {
             >
               {/* Main Image */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img loading="lazy"
+                <img
                   src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1470&auto=format&fit=crop"
                   alt="AI Innovation"
                   className="w-full h-[500px] object-cover"
@@ -680,7 +680,7 @@ const About: React.FC = () => {
               <div className="relative">
                 {/* Main Image */}
                 <div className="rounded-3xl overflow-hidden shadow-2xl">
-                  <img loading="lazy"
+                  <img
                     src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop"
                     alt="Future Technology"
                     className="w-full h-[480px] object-cover"
@@ -960,7 +960,7 @@ const About: React.FC = () => {
                     transition={{ duration: 0.6 }}
                     className={`w-14 h-14 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-lg p-2`}
                   >
-                    <img loading="lazy"
+                    <img
                       src={service.logo}
                       alt={`${service.name.line1} ${service.name.line2}`}
                       className="w-8 h-8 object-contain"
@@ -1232,7 +1232,7 @@ const TeamSection: React.FC = () => {
                   }`}
               >
                 <div className="relative flex-shrink-0">
-                  <img loading="lazy"
+                  <img
                     src={member.image}
                     alt={member.name}
                     className="w-16 h-16 rounded-xl object-cover ring-2 ring-white"
@@ -1259,7 +1259,7 @@ const TeamSection: React.FC = () => {
               className="relative"
             >
               <div className="relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 p-2 shadow-2xl">
-                <img loading="lazy"
+                <img
                   src={currentMember.image}
                   alt={currentMember.name}
                   className="w-full aspect-[3/4] object-cover rounded-[2.7rem]"
@@ -1470,7 +1470,7 @@ const TestimonialSection: React.FC = () => {
                       {/* Author Info */}
                       <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                         <div className="flex items-center gap-3">
-                          <img loading="lazy"
+                          <img
                             src={t.avatar}
                             alt={t.name}
                             className="w-11 h-11 rounded-full object-cover"

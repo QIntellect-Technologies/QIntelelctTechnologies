@@ -2,7 +2,6 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
-import compression from 'compression';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -10,9 +9,6 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 const distPath = join(__dirname, 'dist');
-
-// Enable Gzip Compression for all responses (Huge Core Web Vitals boost)
-app.use(compression());
 
 // Middleware for aggressive caching of immutable assets (Core Web Vitals Optimization)
 app.use((req, res, next) => {
@@ -33,9 +29,6 @@ try {
     console.warn('Could not load dist/constants.js for SEO generation. Make sure you run build script first.');
 }
 
-// Allowed static frontend routes
-const staticRoutes = ['/', '/about', '/services', '/industries', '/portfolios', '/blog', '/contact'];
-
 // SPA fallback & Server-Side Meta Injection for Social platforms
 app.get('*', (req, res) => {
     // If the request is for a known static file (that wasn't caught by express.static), handle it safely
@@ -53,7 +46,7 @@ app.get('*', (req, res) => {
     let html = fs.readFileSync(indexPath, 'utf8');
     
     // Default fallback metadata
-    let title = 'QIntellect Technologies | AI Automation Platform for Business';
+    let title = 'QIntellect - AI Automation Platform for Business | QIntellect Technologies';
     let description = 'QIntellect is an AI-powered automation platform offering industry-specific solutions for finance, healthcare, SaaS, and manufacturing. Accelerate operations with smart AI workflows.';
     let image = 'https://www.qintellecttechnologies.com/og-image.png';
     let url = 'https://www.qintellecttechnologies.com' + req.path;
@@ -63,16 +56,11 @@ app.get('*', (req, res) => {
     const blogMatch = req.path.match(/^\/blog\/([^/]+)/);
     const industryMatch = req.path.match(/^\/industries\/([^/]+)/);
 
-    let routeIsValid = false;
-
-    if (staticRoutes.includes(req.path) || req.path === '') {
-        routeIsValid = true;
-    } else if (serviceMatch) {
+    if (serviceMatch) {
         const item = siteData.SERVICES?.find(s => s.id === serviceMatch[1]);
         if (item) {
             title = `${item.title} | QIntellect Services`;
             description = item.shortDescription || description;
-            routeIsValid = true;
         }
     } else if (blogMatch) {
         const item = siteData.BLOGS?.find(b => b.id === blogMatch[1]);
@@ -80,25 +68,13 @@ app.get('*', (req, res) => {
             title = `${item.title} | QIntellect Blog`;
             description = item.excerpt || description;
             image = item.image || image;
-            routeIsValid = true;
         }
     } else if (industryMatch) {
         const item = siteData.INDUSTRIES?.find(i => i.id === industryMatch[1]);
         if (item) {
             title = `${item.title} | QIntellect Industries`;
             description = item.shortDescription || description;
-            routeIsValid = true;
         }
-    }
-
-    // Set proper HTTP Status Code
-    // If not a valid route, return a 404 status (Soft 404 Prevention for Google)
-    if (!routeIsValid) {
-        res.status(404);
-        title = 'Page Not Found | QIntellect Technologies';
-        description = 'The page you are looking for does not exist.';
-    } else {
-        res.status(200);
     }
 
     // Inject Meta Tags directly into the HTML string before sending to client
@@ -117,7 +93,7 @@ app.get('*', (req, res) => {
     html = html.replace(/<meta name="twitter:description" content="[^"]*"/gi, `<meta name="twitter:description" content="${description}"`);
     html = html.replace(/<meta name="twitter:image" content="[^"]*"/gi, `<meta name="twitter:image" content="${image}"`);
 
-    // Disable caching for the HTML document so dynamic injections and 404s are always fresh
+    // Disable caching for the HTML document so dynamic injections are always fresh
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.send(html);
 });

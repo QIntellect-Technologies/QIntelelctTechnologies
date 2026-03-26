@@ -53,7 +53,7 @@ app.get('*', (req, res) => {
     let html = fs.readFileSync(indexPath, 'utf8');
     
     // Default fallback metadata
-    let title = 'QIntellect Technologies | AI Automation Platform for Business';
+    let title = 'QIntellect - AI Automation Platform for Business | QIntellect Technologies';
     let description = 'QIntellect is an AI-powered automation platform offering industry-specific solutions for finance, healthcare, SaaS, and manufacturing. Accelerate operations with smart AI workflows.';
     let image = 'https://www.qintellecttechnologies.com/og-image.png';
     let url = 'https://www.qintellecttechnologies.com' + req.path;

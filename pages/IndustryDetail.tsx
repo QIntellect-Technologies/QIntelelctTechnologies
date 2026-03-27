@@ -184,6 +184,28 @@ const IndustryDetail: React.FC = () => {
     description: industry ? `QIntellect Technologies provides tailored AI and software solutions for the ${industry.title} industry. Optimize operations and grow your enterprise.` : 'QIntellect Technologies AI Platform Industry Details.',
     keywords: industry ? `QIntellect Technologies ${industry.title}, Q Intellect Technologies, ${industry.title} AI, ${industry.title} automation, QIntellect industries, QIntalect, ${industry.title} platform` : 'QIntellect Technologies industries, Q Intellect Technologies',
     canonical: `https://www.qintellecttechnologies.com/industries/${id}`,
+    structuredData: industry ? [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        serviceType: `${industry.title} Software Solutions`,
+        provider: {
+          '@type': 'Organization',
+          name: 'QIntellect Technologies',
+          url: 'https://www.qintellecttechnologies.com'
+        },
+        description: industry.longDescription
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.qintellecttechnologies.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Industries', item: 'https://www.qintellecttechnologies.com/industries' },
+          { '@type': 'ListItem', position: 3, name: industry.title, item: `https://www.qintellecttechnologies.com/industries/${id}` }
+        ]
+      }
+    ] : undefined
   });
 
   if (isLoading) {

@@ -894,6 +894,18 @@ const ServiceDetail: React.FC = () => {
           { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.qintellecttechnologies.com/services' },
           { '@type': 'ListItem', position: 3, name: service.title, item: `https://www.qintellecttechnologies.com/services/${id}` }
         ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: (serviceImages[id as keyof typeof serviceImages]?.faqs || []).map(faq => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer
+          }
+        }))
       }
     ] : undefined
   });

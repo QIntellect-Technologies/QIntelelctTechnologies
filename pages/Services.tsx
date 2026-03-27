@@ -110,9 +110,9 @@ const AnimatedCounter: React.FC<{ target: number; suffix?: string; duration?: nu
 
 const Services: React.FC = () => {
   useSEO({
-    title: 'QIntellect Technologies | AI Services & Prebuilt Workflows',
-    description: 'Explore QIntellect Services: Our platform offers 60-70% prebuilt AI workflows, customizable white-label solutions, and industry-specific automation for rapid implementation and scaling.',
-    keywords: 'QIntellect Technologies, Q Intellect Technologies, QIntellect services, AI automation platform, prebuilt AI workflows, white-label AI solutions, industry-specific automation, enterprise AI services',
+    title: 'Our Services | AI, Chatbots & Enterprise Software | QIntellect Technologies',
+    description: 'Explore QIntellect Technologies Services: Custom AI development, intelligent chatbots, Dynamics 365, ERP integrations, and enterprise web solutions.',
+    keywords: 'QIntellect Technologies services, Q Intellect Technologies, AI development company, custom chatbots, enterprise software, Dynamics 365 experts, ERP services',
     canonical: 'https://www.qintellecttechnologies.com/services',
     structuredData: {
       '@context': 'https://schema.org',

@@ -42,9 +42,9 @@ const TypewriterText: React.FC = React.memo(() => {
 
 const Blog: React.FC = () => {
   useSEO({
-    title: 'QIntellect Technologies | Blog & AI Enterprise Insights',
-    description: 'Read the Q Intellect Technologies blog for expert insights on AI automation platforms, industry-specific AI solutions, chatbots, ERP systems, and business transformation strategies.',
-    keywords: 'QIntellect Technologies blog, Q Intellect Technologies, AI blog, artificial intelligence insights, AI automation platform news, business automation, enterprise AI, QIntellect tech insights',
+    title: 'Blog | Enterprise AI & Software Insights | QIntellect Technologies',
+    description: 'Read the QIntellect Technologies blog for expert insights on AI automation, industry-specific software solutions, custom chatbots, ERP systems, and business transformation.',
+    keywords: 'QIntellect Technologies blog, Q Intellect Technologies, AI blog, artificial intelligence insights, enterprise software insights, business automation, enterprise AI, QIntellect tech insights',
     canonical: 'https://www.qintellecttechnologies.com/blog',
     structuredData: {
       '@context': 'https://schema.org',

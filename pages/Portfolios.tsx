@@ -22,9 +22,9 @@ import useSEO from '../hooks/useSEO';
 
 const Portfolios: React.FC = () => {
   useSEO({
-    title: 'QIntellect Technologies | AI Automation Projects Portfolio',
-    description: 'Explore our portfolio of enterprise projects powered by QIntellect Technologies: AI deployments, industry-specific prebuilt workflows, manufacturing automation, and SaaS scaling.',
-    keywords: 'QIntellect Technologies portfolio, Q Intellect Technologies projects, AI portfolio, enterprise AI projects, QIntellect case studies, automation portfolio, prebuilt workflows, QIntellect work, business AI deployment',
+    title: 'Our Work & Case Studies | QIntellect Technologies',
+    description: 'Explore our portfolio of enterprise projects powered by QIntellect Technologies: AI deployments, custom software, chatbots, and enterprise workflows.',
+    keywords: 'QIntellect Technologies portfolio, Q Intellect Technologies projects, AI portfolio, enterprise AI projects, QIntellect case studies, software development portfolio',
     canonical: 'https://www.qintellecttechnologies.com/portfolios',
     structuredData: {
       '@context': 'https://schema.org',

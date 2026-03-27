@@ -6,9 +6,9 @@ import useSEO from '../hooks/useSEO';
 
 const Contact: React.FC = () => {
   useSEO({
-    title: 'QIntellect Technologies | Contact Us for AI Automation',
-    description: 'Ready to transform your business with AI automation? Contact Q Intellect Technologies today to get a customized, industry-specific AI solution.',
-    keywords: 'contact QIntellect Technologies, contact Q Intellect Technologies, hire AI developers, AI consultation, QIntellect support, ERP consultants, QIntellect buy, QIntellect ready to purchase',
+    title: 'Contact Us | QIntellect Technologies',
+    description: 'Ready to transform your business with AI and custom software? Contact QIntellect Technologies today to get a tailored enterprise solution.',
+    keywords: 'contact QIntellect Technologies, contact Q Intellect Technologies, hire AI developers, AI consultation, QIntellect support, ERP consultants',
     canonical: 'https://www.qintellecttechnologies.com/contact',
     structuredData: {
       '@context': 'https://schema.org',

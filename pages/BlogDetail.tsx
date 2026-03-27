@@ -34,8 +34,8 @@ const BlogDetail: React.FC = () => {
   }, [id]);
 
   useSEO({
-    title: post ? `${post.title} | QIntellect Technologies Blog` : 'QIntellect Technologies | Blog Detail',
-    description: post ? post.excerpt : 'QIntellect Technologies AI Platform Blog post details.',
+    title: post ? `${post.title} | QIntellect Technologies Blog` : 'Blog | QIntellect Technologies',
+    description: post ? post.excerpt : 'QIntellect Technologies AI & Software Blog post details.',
     keywords: post ? `QIntellect Technologies blog, Q Intellect Technologies, ${post.category}, ${post.tags ? post.tags.join(', ') : ''}, AI, QIntellect AI, business automation` : 'QIntellect Technologies blog, Q Intellect Technologies',
     canonical: `https://www.qintellecttechnologies.com/blog/${id}`,
     ogType: 'article',

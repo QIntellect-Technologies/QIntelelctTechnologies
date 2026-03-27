@@ -870,9 +870,9 @@ const ServiceDetail: React.FC = () => {
   }, [id]);
 
   useSEO({
-    title: service ? `QIntellect Technologies | ${service.title} Services` : 'QIntellect Technologies | Service Detail',
-    description: service ? `Learn about our ${service.title} services. QIntellect Technologies offers industry-specific solutions including ${service.description}. Accelerate your business with our prebuilt AI workflows.` : 'QIntellect Technologies AI Platform Service Details.',
-    keywords: service ? `QIntellect Technologies ${service.title}, Q Intellect Technologies, ${service.title} AI, ${service.title} solutions, QIntellect services, QIntalect, ${service.title} platform` : 'QIntellect Technologies services, Q Intellect Technologies',
+    title: service ? `${service.title} Services | QIntellect Technologies` : 'Service Detail | QIntellect Technologies',
+    description: service ? `Learn about our ${service.title} services. QIntellect Technologies offers industry-specific solutions including ${service.description}.` : 'QIntellect Technologies AI & Software Service Details.',
+    keywords: service ? `QIntellect Technologies ${service.title}, Q Intellect Technologies, ${service.title} AI, ${service.title} software solutions, QIntellect services` : 'QIntellect Technologies services, Q Intellect Technologies',
     canonical: `https://www.qintellecttechnologies.com/services/${id}`,
     structuredData: service ? [
       {

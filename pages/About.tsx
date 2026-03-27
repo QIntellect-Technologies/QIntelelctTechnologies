@@ -217,9 +217,9 @@ const TimelineItem = ({ year, title, desc, index }: any) => {
 
 const About: React.FC = () => {
   useSEO({
-    title: 'QIntellect Technologies | About Our AI Automation Platform',
-    description: 'Learn about QIntellect — an advanced AI automation platform built to accelerate and optimize business operations across finance, healthcare, SaaS, and manufacturing. Discover our industry-specific, prebuilt AI workflows.',
-    keywords: 'QIntellect Technologies, Q Intellect Technologies, about QIntellect, AI company, AI automation platform, enterprise software company, Microsoft Dynamics 365 partner, ERP experts, chatbot development team',
+    title: 'About Us | QIntellect Technologies - AI & Software Experts',
+    description: 'Learn about QIntellect Technologies — an advanced AI automation and software development company. We build industry-specific AI solutions, custom chatbots, and ERP systems.',
+    keywords: 'QIntellect Technologies, Q Intellect Technologies, about QIntellect, AI company, AI software experts, enterprise software company, Microsoft Dynamics 365 partner, ERP experts, chatbot development team',
     canonical: 'https://www.qintellecttechnologies.com/about',
     structuredData: {
       '@context': 'https://schema.org',

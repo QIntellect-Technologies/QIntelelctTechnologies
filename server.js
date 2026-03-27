@@ -53,8 +53,9 @@ app.get('*', (req, res) => {
     let html = fs.readFileSync(indexPath, 'utf8');
     
     // Default fallback metadata
-    let title = 'QIntellect Technologies | AI Automation Platform for Business';
-    let description = 'QIntellect is an AI-powered automation platform offering industry-specific solutions for finance, healthcare, SaaS, and manufacturing. Accelerate operations with smart AI workflows.';
+    let title = 'QIntellect Technologies | Custom AI & Enterprise Software Solutions';
+    let description = 'QIntellect Technologies delivers cutting-edge AI solutions, custom chatbots, Microsoft Dynamics 365, ERP & EDI systems, and web development for enterprises worldwide.';
+
     let image = 'https://www.qintellecttechnologies.com/og-image.png';
     let url = 'https://www.qintellecttechnologies.com' + req.path;
 
@@ -70,14 +71,14 @@ app.get('*', (req, res) => {
     } else if (serviceMatch) {
         const item = siteData.SERVICES?.find(s => s.id === serviceMatch[1]);
         if (item) {
-            title = `${item.title} | QIntellect Services`;
+            title = `${item.title} Services | QIntellect Technologies`;
             description = item.shortDescription || description;
             routeIsValid = true;
         }
     } else if (blogMatch) {
         const item = siteData.BLOGS?.find(b => b.id === blogMatch[1]);
         if (item) {
-            title = `${item.title} | QIntellect Blog`;
+            title = `${item.title} | QIntellect Technologies Blog`;
             description = item.excerpt || description;
             image = item.image || image;
             routeIsValid = true;
@@ -85,7 +86,7 @@ app.get('*', (req, res) => {
     } else if (industryMatch) {
         const item = siteData.INDUSTRIES?.find(i => i.id === industryMatch[1]);
         if (item) {
-            title = `${item.title} | QIntellect Industries`;
+            title = `${item.title} AI Solutions | QIntellect Technologies`;
             description = item.shortDescription || description;
             routeIsValid = true;
         }

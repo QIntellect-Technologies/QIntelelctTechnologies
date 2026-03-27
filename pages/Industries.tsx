@@ -124,8 +124,8 @@ const IndustryBlueprint = ({ type }: { type: string }) => {
 
 const Industries: React.FC = () => {
   useSEO({
-    title: 'QIntellect Technologies | Industries We Serve with AI Automation',
-    description: 'QIntellect Technologies provides industry-specific AI automation solutions for Healthcare, Finance, SaaS, Manufacturing, and more. Deploy prebuilt workflows rapidly.',
+    title: 'Industries We Serve | AI Solutions | QIntellect Technologies',
+    description: 'QIntellect Technologies provides industry-specific AI automation and software solutions for Healthcare, Finance, SaaS, Manufacturing, and Logistics.',
     keywords: 'QIntellect Technologies industries, Q Intellect Technologies, AI in healthcare, AI in finance, AI in manufacturing, AI SaaS, AI automation platform, prebuilt AI workflows, industry AI',
     canonical: 'https://www.qintellecttechnologies.com/industries',
   });

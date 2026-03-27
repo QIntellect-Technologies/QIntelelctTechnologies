@@ -1444,8 +1444,8 @@ const LatestBlogSection: React.FC = () => {
 
 const Home: React.FC = () => {
   useSEO({
-    title: 'QIntellect Technologies | AI Automation Platform & Enterprise Solutions',
-    description: 'QIntellect is an AI-powered automation platform designed to accelerate business operations across finance, healthcare, SaaS, and manufacturing industries. The platform offers industry-specific, prebuilt AI workflows for rapid deployment, white-label solutions, and scalable automation.',
+    title: 'QIntellect Technologies | Custom AI & Enterprise Software Solutions',
+    description: 'QIntellect Technologies delivers cutting-edge AI solutions, custom chatbots, Microsoft Dynamics 365, ERP & EDI systems, and web development for enterprises worldwide.',
     keywords: 'QIntellect Technologies, Q Intellect Technologies, QIntellect, Q Intellect, AI automation, AI platform, business automation, industry AI, finance AI, healthcare AI, SaaS AI, manufacturing AI, white-label AI, AI solutions',
     canonical: 'https://www.qintellecttechnologies.com/',
   });

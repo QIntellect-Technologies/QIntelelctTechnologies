@@ -180,9 +180,9 @@ const IndustryDetail: React.FC = () => {
   }, []);
 
   useSEO({
-    title: industry ? `QIntellect Technologies | ${industry.name} AI Solutions` : 'QIntellect Technologies | Industry Detail',
-    description: industry ? `QIntellect Technologies provides tailored AI automation solutions for ${industry.name}. Optimize operations with our prebuilt ${industry.name} workflows.` : 'QIntellect Technologies AI Platform Industry Details.',
-    keywords: industry ? `QIntellect Technologies ${industry.name}, Q Intellect Technologies, ${industry.name} AI, ${industry.name} automation, QIntellect industries, QIntalect, ${industry.name} platform` : 'QIntellect Technologies industries, Q Intellect Technologies',
+    title: industry ? `${industry.title} AI Solutions | QIntellect Technologies` : 'Industry Solutions | QIntellect Technologies',
+    description: industry ? `QIntellect Technologies provides tailored AI and software solutions for the ${industry.title} industry. Optimize operations and grow your enterprise.` : 'QIntellect Technologies AI Platform Industry Details.',
+    keywords: industry ? `QIntellect Technologies ${industry.title}, Q Intellect Technologies, ${industry.title} AI, ${industry.title} automation, QIntellect industries, QIntalect, ${industry.title} platform` : 'QIntellect Technologies industries, Q Intellect Technologies',
     canonical: `https://www.qintellecttechnologies.com/industries/${id}`,
   });
 

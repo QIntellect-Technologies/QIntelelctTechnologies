@@ -345,42 +345,80 @@ export const SERVICES: Service[] = [
         details: ['Data Cleansing', 'Migration Testing', 'User Training Programs']
       }
     ]
+  },
+  {
+    id: 'iot-solutions',
+    title: 'IoT Solutions',
+    shortDescription: 'Connecting devices and unlocking data for actionable insights.',
+    longDescription: 'The Internet of Things (IoT) means connecting physical devices to the internet so they can collect data, communicate, and be controlled remotely. We help businesses turn \"dumb\" equipment into smart, connected assets that provide unprecedented visibility and control.',
+    features: ['Device Management', 'Real-Time Monitoring', 'Predictive Maintenance', 'Data Analytics'],
+    benefits: ['Increased Operational Efficiency', 'Reduced Downtime', 'Data-Driven Decision Making', 'New Revenue Streams'],
+    industries: ['Manufacturing', 'Logistics', 'Healthcare'],
+    icon: 'Radio',
+    technologies: ['Azure IoT', 'AWS IoT Core', 'MQTT', 'Edge Computing'],
+    approach: 'We design scalable IoT architectures from edge devices to cloud analytics, ensuring secure and reliable data flow.',
+    implementationSteps: [
+      {
+        title: 'Hardware Selection & Integration',
+        description: 'Choosing the right sensors and gateways for your specific environment and connecting them securely.',
+        details: ['Sensor Evaluation', 'Protocol Selection (MQTT, CoAP)', 'Firmware Development']
+      },
+      {
+        title: 'Edge Architecture Design',
+        description: 'Implementing edge computing solutions to process data locally, reducing latency and bandwidth costs.',
+        details: ['Edge Gateway Configuration', 'Local Analytics', 'Offline Capabilities']
+      },
+      {
+        title: 'Cloud Platform Deployment',
+        description: 'Setting up the central cloud infrastructure to ingest, store, and analyze massive volumes of IoT data.',
+        details: ['Data Lake Setup', 'Stream Processing', 'Security & Authentication']
+      },
+      {
+        title: 'Visualization & Action',
+        description: 'Building custom dashboards and integrating with your existing enterprise systems (ERP, CRM) to drive action.',
+        details: ['Dashboard Development', 'Alerting Rules', 'API Integration']
+      }
+    ],
+    deepTechnicalDetail: 'Our IoT solutions utilize a robust publish-subscribe model via MQTT, combined with edge-level filtering and cloud-native stream processing to handle millions of events per second with millisecond latency and end-to-end TLS encryption.'
   }
 ];
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
-    id: 'project-neural-shift',
-    title: 'Project Neural-Shift',
-    category: 'AI',
-    domain: 'Autonomous Supply Chain Optimization',
-    client: 'Global Logistics Corp',
-    summary: 'A proprietary deep-learning framework that predicts mechanical failure across 15,000+ fleet assets with 98% accuracy.',
-    metrics: [{ label: 'Failure Reduction', value: '42%' }, { label: 'ROI Yield', value: '11.4M' }],
-    stack: ['PyTorch', 'FastAPI', 'Azure AI'],
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&auto=format,compress&q=60&w=800'
+    id: 'swift-sales',
+    title: 'Swift Sales',
+    category: 'Web',
+    domain: 'Medicine Distribution',
+    client: 'Swift Sales',
+    summary: 'A robust web platform with an integrated chatbot designed to streamline medicine distribution and handle customer queries effortlessly.',
+    fullDescription: 'Swift Sales required a reliable, scalable platform to manage their medicine distribution network. We developed a custom web application using React for a dynamic frontend and Express for a secure, fast backend API. Additionally, we integrated a smart chatbot directly into the website to assist users with product inquiries, order tracking, and general support, reducing the manual support load significantly.',
+    roadmap: [
+      { phase: 'Phase 1', title: 'Architecture & Design', description: 'Designing the database schema and React component hierarchy for medicine inventory.' },
+      { phase: 'Phase 2', title: 'Express API Development', description: 'Building secure RESTful endpoints for distribution management.' },
+      { phase: 'Phase 3', title: 'Chatbot Integration', description: 'Developing the conversational agent to handle user queries and product FAQs.' },
+      { phase: 'Phase 4', title: 'Deployment & Scaling', description: 'Deploying the React and Express apps to high-availability cloud infrastructure.' }
+    ],
+    metrics: [{ label: 'Query Automation', value: '75%' }, { label: 'Platform Uptime', value: '99.9%' }],
+    stack: ['React', 'Express', 'Node.js', 'AI Chatbot'],
+    image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&auto=format,compress&q=60&w=800'
   },
   {
-    id: 'omni-rep-v4',
-    title: 'Omni-Rep v4',
+    id: 'johana-restaurant',
+    title: 'Johana Restaurant',
     category: 'Chatbot',
-    domain: 'Enterprise AI Representation',
-    client: 'Apex Financial Services',
-    summary: 'Deploying multi-lingual, multimodal customer agents that handle complex account reconciliation with human-level prosody.',
-    metrics: [{ label: 'Support Load', value: '-65%' }, { label: 'Resolution Rate', value: '89%' }],
-    stack: ['Gemini 2.5', 'Node.js', 'React'],
-    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&auto=format,compress&q=60&w=800'
-  },
-  {
-    id: 'axon-bridge',
-    title: 'Axon Bridge',
-    category: 'Dynamics',
-    domain: 'D365 Enterprise Sync',
-    client: 'Titan Manufacturing',
-    summary: 'A complete modernization of Dynamics 365, unifying CRM and ERP data silos into a single high-performance data plane.',
-    metrics: [{ label: 'Sync Latency', value: '< 1s' }, { label: 'Ops Velocity', value: '+30%' }],
-    stack: ['Dynamics 365', 'C#', 'Power Platform'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&auto=format,compress&q=60&w=800'
+    domain: 'Hospitality & Food Service',
+    client: 'Johana Restaurant',
+    summary: 'A multilingual WhatsApp chatbot that automates ordering and automatically generates payable invoices upon checkout.',
+    fullDescription: 'To modernize the customer experience at Johana Restaurant, we built a highly intelligent WhatsApp chatbot. It offers two convenient ordering methods: customers can tap interactive buttons for a quick checkout, or simply type their order in natural language. The bot is fully multilingual, capable of understanding and responding to queries in any language. Once a user finalizes their order, the chatbot automatically generates a dynamic invoice/bill that can be paid instantly using any banking app or payment gateway of their choice, ensuring a completely frictionless checkout experience.',
+    roadmap: [
+      { phase: 'Phase 1', title: 'WhatsApp Business Setup', description: 'Configuring the WhatsApp API and webhooks for the restaurant.' },
+      { phase: 'Phase 2', title: 'Button & NLP Ordering', description: 'Implementing interactive button logic and training the AI to understand typed, multilingual orders.' },
+      { phase: 'Phase 3', title: 'Automated Invoicing & Payments', description: 'Building the billing engine to instantly generate cross-platform payable invoices the moment an order is finalized.' },
+      { phase: 'Phase 4', title: 'Kitchen POS Integration', description: 'Seamlessly routing the confirmed WhatsApp orders directly to the kitchen display system.' }
+    ],
+    metrics: [{ label: 'Order Speed', value: '+40%' }, { label: 'Payment Friction', value: '0%' }],
+    stack: ['WhatsApp API', 'NLP', 'Payment Gateway Integration'],
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&auto=format,compress&q=60&w=800'
   }
 ];
 
@@ -389,272 +427,272 @@ export const TEAM: TeamMember[] = [
     name: 'Dr. Sarah Chen',
     role: 'Chief AI Architect',
     bio: 'Pioneer in distributed neural networks and sovereign intelligence architectures.',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=60&w=800&auto=format&fit=crop&auto=format,compress'
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=60&w=800&auto=format&fit=crop&auto=format,compress'
   }
 ];
 
 export const BLOGS: BlogPost[] = [
-    {
-      id: 'ai-automation-platform-enterprise-guide',
-      title: 'What is an AI Automation Platform? A Guide for Enterprises',
-      excerpt: 'Discover why an AI automation platform is the key to scaling business operations. Learn about prebuilt workflows, deep learning integrations, and process optimization.',
-      category: 'Artificial Intelligence',
-      author: 'Imran Q.',
-      authorRole: 'CEO & Founder',
-      authorImage: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=256',
-      date: 'March 26, 2026',
-      readTime: '18 min read',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [
-        'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'
-      ],
-      tags: ['AI automation platform', 'Enterprise AI solutions', 'Business process automation', 'What is AI automation'],
-      sections: [
-        {
-          heading: 'Defining the Modern AI Automation Platform',
-          content: [
-            'An AI automation platform is a central nervous system for enterprise software. Unlike standalone SaaS tools, it weaves artificial intelligence directly into the fabric of your daily operations. This means connecting CRM, ERP, and localized databases into a single, intelligent matrix.',
-            'For C-level executives wondering how to reduce overhead, a robust AI automation platform handles repetitive data entry, predictive analytics, and semantic search at scale.'
-          ]
-        },
-        {
-          heading: 'Why QIntellect Technologies Leads in AI Automation',
-          content: [
-            'QIntellect Technologies specifically designs AI automation platforms that arrive 60-70% prebuilt. For an enterprise, this translates to faster go-to-market strategies.',
-            'Whether tracking financial anomalies or analyzing healthcare compliance, relying on a unified platform ensures high fidelity and air-tight security for confidential data.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'custom-ai-chatbots-healthcare-customer-service',
-      title: 'Deploying Custom AI Chatbots for Healthcare & Customer Service',
-      excerpt: 'How highly specialized, HIPAA-compliant custom AI chatbots are revolutionizing patient care and customer service pipelines.',
-      category: 'Smart Chatbots',
-      author: 'Elena R.',
-      authorRole: 'Lead Delivery Manager',
-      authorImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=256',
-      date: 'March 27, 2026',
-      readTime: '12 min read',
-      image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [
-        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800'
-      ],
-      tags: ['Custom AI chatbots', 'Healthcare AI chatbots', 'Customer service bot', 'HIPAA compliant AI'],
-      sections: [
-        {
-          heading: 'Beyond Traditional Decision Trees',
-          content: [
-            'Older chatbots relied on strict, frustrating decision trees. Today, custom AI chatbots utilize Large Language Models (LLMs) and natural language processing to understand intent, sentiment, and complex medical or service queries.',
-            'Particularly in healthcare, custom AI chatbots streamline appointment scheduling, triage common symptoms, and retrieve medical histories without exposing PHI (Protected Health Information).'
-          ]
-        },
-        {
-          heading: 'Implementation Methodology',
-          content: [
-            'When QIntellect Technologies deploys custom AI chatbots, we embed a Retrieval-Augmented Generation (RAG) framework. The bot only pulls answers from verified, approved clinical or enterprise documents, ensuring 0% hallucination rates.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'microsoft-dynamics-365-ai-integration-guide',
-      title: 'The Ultimate Guide to Microsoft Dynamics 365 AI Integration',
-      excerpt: 'Maximize your CRM capabilities by integrating modern machine learning models with Microsoft Dynamics 365. Automate sales forecasting and lead scoring.',
-      category: 'Dynamics 365',
-      author: 'David L.',
-      authorRole: 'ERP Integration Specialist',
-      authorImage: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=256',
-      date: 'March 28, 2026',
-      readTime: '15 min read',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['Microsoft Dynamics 365 integration', 'Dynamics 365 AI', 'CRM AI integration', 'Lead automation'],
-      sections: [
-        {
-          heading: 'Why Connect AI to Dynamics 365?',
-          content: [
-            'Microsoft Dynamics 365 is a powerhouse, but native capabilities can only take you so far. A custom Microsoft Dynamics 365 AI integration unlocks real-time sentiment analysis on customer emails and predictive lead scoring.',
-            'Sales teams save up to 15 hours a week when the CRM automatically writes outreach drafts and updates pipeline statuses based on conversational data.'
-          ]
-        },
-        {
-          heading: 'Seamless Connectivity with QIntellect',
-          content: [
-            'QIntellect Technologies bridges Azure APIs and independent vector databases into Dynamics 365. The result? A fully augmented sales framework that knows exactly when to pitch, when to wait, and how to price.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'erp-implementation-strategies-machine-learning',
-      title: 'Next-Gen ERP Systems: Implementation Strategies with AI',
-      excerpt: 'Migrating to a new ERP? Discover how integrating Machine Learning from day one ensures cleaner data migration and smarter resource planning.',
-      category: 'ERP Systems',
-      author: 'Marcus V.',
-      authorRole: 'Senior Solutions Architect',
-      authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256',
-      date: 'March 30, 2026',
-      readTime: '20 min read',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['ERP Implementation', 'Machine learning in ERP', 'Enterprise Resource Planning software', 'AI data migration'],
-      sections: [
-        {
-          heading: 'The Modern ERP Landscape',
-          content: [
-            'Traditional Enterprise Resource Planning (ERP) systems act as passive ledgers. By injecting Machine Learning during the ERP implementation phase, companies turn their ledger into an active financial advisor.',
-            'Predictive inventory, dynamic pricing optimization, and automated vendor communication become standard out-of-the-box features.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'edi-solutions-logistics-supply-chain',
-      title: 'Next-Gen EDI Solutions for Modern Logistics & Supply Chains',
-      excerpt: 'Electronic Data Interchange (EDI) is evolving. Read how AI-augmented EDI routing minimizes supply chain delays and lost invoices.',
-      category: 'EDI Solutions',
-      author: 'Sophia W.',
-      authorRole: 'Operations Analyst',
-      authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=256',
-      date: 'April 02, 2026',
-      readTime: '11 min read',
-      image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7e66a5a?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['EDI Solutions', 'Logistics AI', 'Supply chain automation', 'Electronic Data Interchange software'],
-      sections: [
-        {
-          heading: 'Fixing the Supply Chain Disconnect',
-          content: [
-            'Legacy EDI systems rely on rigid formats and brittle FTP pipelines. Modern EDI Solutions powered by AI can autonomously map unstructured purchase orders into standardized formats.',
-            'At QIntellect Technologies, our cloud-based EDI connectors handle thousands of transactions per minute, drastically reducing error rates for 3PLs and manufacturing giants.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'prebuilt-ai-workflows-saas-scaling',
-      title: 'How Prebuilt AI Workflows Cut SaaS Development Time by 70%',
-      excerpt: 'Are you building a SaaS product? Discover why using prebuilt AI workflows allows startups and scale-ups to launch predictive features in weeks, not years.',
-      category: 'Web Development',
-      author: 'Imran Q.',
-      authorRole: 'CEO & Founder',
-      authorImage: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=256',
-      date: 'April 05, 2026',
-      readTime: '16 min read',
-      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['Prebuilt AI workflows', 'SaaS scaling', 'AI web development', 'Fast AI implementation'],
-      sections: [
-        {
-          heading: 'The Cost of Building from Scratch',
-          content: [
-            'Training bespoke AI models requires immense compute and elite ML engineers. Instead, leveraging prebuilt AI workflows designed for document parsing, image recognition, and chatbot connectivity bypassing heavy R&D costs.',
-            'QIntellect provides robust API skeletons and pre-trained model hooks perfect for B2B SaaS integration.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'white-label-ai-software-agencies',
-      title: 'Launch Your Offerings Using White-Label AI Software',
-      excerpt: 'Marketing and development agencies can now sell cutting-edge artificial intelligence solutions under their own brand using white-label AI software frameworks.',
-      category: 'AI Solutions',
-      author: 'Rachel M.',
-      authorRole: 'Partnerships Director',
-      authorImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=256',
-      date: 'April 08, 2026',
-      readTime: '13 min read',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['White-label AI software', 'Resell AI', 'AI for agencies', 'Whitelabel SaaS'],
-      sections: [
-        {
-          heading: 'Expanding Agency Capabilities',
-          content: [
-            'Clients expect their agencies to offer AI text generation, SEO automation, and custom conversational bots. White-label AI software allows agencies to license a mature platform and slap their logo on it.',
-            'QIntellect Technologies offers scalable white-label architectures that look, feel, and function as your proprietary software.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'generative-ai-finance-accounting',
-      title: 'Generative AI for Finance and Accounting Automation',
-      excerpt: 'How financial institutions use LLMs to audit contracts, generate compliance reports, and automate tedious accounting workflows securely.',
-      category: 'Artificial Intelligence',
-      author: 'James T.',
-      authorRole: 'Finance Systems Lead',
-      authorImage: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=256',
-      date: 'April 12, 2026',
-      readTime: '14 min read',
-      image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['Generative AI in finance', 'Accounting automation', 'Fintech AI', 'Automated financial reports'],
-      sections: [
-        {
-          heading: 'Beyond Simple Calculators',
-          content: [
-            'Accounting automation has moved past OCR receipt scanning. Generative AI reads 50-page vendor contracts and automatically highlights liability clauses and non-standard net payment terms.',
-            'Deploying these tools in an isolated, secure cloud ensures that global banks and regional credit unions remain compliant while drastically reducing manual audit hours.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'manufacturing-ai-computer-vision',
-      title: 'Transforming Manufacturing Quality Control with Computer Vision AI',
-      excerpt: 'Eliminate production line errors and reduce waste by implementing real-time computer vision AI systems on the manufacturing floor.',
-      category: 'AI Solutions',
-      author: 'Dr. Sarah Chen',
-      authorRole: 'Chief AI Architect',
-      authorImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=256',
-      date: 'April 15, 2026',
-      readTime: '17 min read',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['Manufacturing AI', 'Computer vision', 'Quality control AI', 'Industry 4.0 automation'],
-      sections: [
-        {
-          heading: 'Seeing the Unseen on the Assembly Line',
-          content: [
-            'Using sub-millimeter computer vision models, factories monitor assembly blocks for micro-fractures before the product is finalized. This level of precision saves millions in potential recall liabilities.',
-            'Coupled with QIntellect Technologies backend processing, edge devices on the factory floor can process high-framerate video without throttling factory bandwidth.'
-          ]
-        }
-      ]
-    },
-    {
-      id: 'enterprise-rag-architecture-secure-llms',
-      title: 'Building Secure Enterprise RAG Architectures for Internal Data',
-      excerpt: 'Retrieval-Augmented Generation (RAG) is the only reliable way to make an LLM talk to your SQL databases without exposing data to the public internet.',
-      category: 'Web Development',
-      author: 'Alex Rivers',
-      authorRole: 'Lead LLM Engineer',
-      authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=256',
-      date: 'April 20, 2026',
-      readTime: '22 min read',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200',
-      galleryImages: [],
-      tags: ['Enterprise RAG', 'Secure LLM integration', 'Private AI databases', 'Retrieval Augmented Generation architecture'],
-      sections: [
-        {
-          heading: 'Why Prompt Engineering Is Not Enough',
-          content: [
-            'If you want a chatbot to accurately quote next quarters projected sales, prompt engineering is useless. You need an Enterprise RAG Architecture. It creates vector embeddings of your dynamic databases and feeds precise data chunks directly to the models working memory.',
-            'Because the processing happens locally via QIntellect pipelines, your proprietary architecture never leaks into the public training data pool.'
-          ]
-        }
-      ]
-    },
+  {
+    id: 'ai-automation-platform-enterprise-guide',
+    title: 'What is an AI Automation Platform? A Guide for Enterprises',
+    excerpt: 'Discover why an AI automation platform is the key to scaling business operations. Learn about prebuilt workflows, deep learning integrations, and process optimization.',
+    category: 'Artificial Intelligence',
+    author: 'Imran Q.',
+    authorRole: 'CEO & Founder',
+    authorImage: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=256',
+    date: 'March 26, 2026',
+    readTime: '18 min read',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'
+    ],
+    tags: ['AI automation platform', 'Enterprise AI solutions', 'Business process automation', 'What is AI automation'],
+    sections: [
+      {
+        heading: 'Defining the Modern AI Automation Platform',
+        content: [
+          'An AI automation platform is a central nervous system for enterprise software. Unlike standalone SaaS tools, it weaves artificial intelligence directly into the fabric of your daily operations. This means connecting CRM, ERP, and localized databases into a single, intelligent matrix.',
+          'For C-level executives wondering how to reduce overhead, a robust AI automation platform handles repetitive data entry, predictive analytics, and semantic search at scale.'
+        ]
+      },
+      {
+        heading: 'Why QIntellect Technologies Leads in AI Automation',
+        content: [
+          'QIntellect Technologies specifically designs AI automation platforms that arrive 60-70% prebuilt. For an enterprise, this translates to faster go-to-market strategies.',
+          'Whether tracking financial anomalies or analyzing healthcare compliance, relying on a unified platform ensures high fidelity and air-tight security for confidential data.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'custom-ai-chatbots-healthcare-customer-service',
+    title: 'Deploying Custom AI Chatbots for Healthcare & Customer Service',
+    excerpt: 'How highly specialized, HIPAA-compliant custom AI chatbots are revolutionizing patient care and customer service pipelines.',
+    category: 'Smart Chatbots',
+    author: 'Elena R.',
+    authorRole: 'Lead Delivery Manager',
+    authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256',
+    date: 'March 27, 2026',
+    readTime: '12 min read',
+    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800'
+    ],
+    tags: ['Custom AI chatbots', 'Healthcare AI chatbots', 'Customer service bot', 'HIPAA compliant AI'],
+    sections: [
+      {
+        heading: 'Beyond Traditional Decision Trees',
+        content: [
+          'Older chatbots relied on strict, frustrating decision trees. Today, custom AI chatbots utilize Large Language Models (LLMs) and natural language processing to understand intent, sentiment, and complex medical or service queries.',
+          'Particularly in healthcare, custom AI chatbots streamline appointment scheduling, triage common symptoms, and retrieve medical histories without exposing PHI (Protected Health Information).'
+        ]
+      },
+      {
+        heading: 'Implementation Methodology',
+        content: [
+          'When QIntellect Technologies deploys custom AI chatbots, we embed a Retrieval-Augmented Generation (RAG) framework. The bot only pulls answers from verified, approved clinical or enterprise documents, ensuring 0% hallucination rates.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'microsoft-dynamics-365-ai-integration-guide',
+    title: 'The Ultimate Guide to Microsoft Dynamics 365 AI Integration',
+    excerpt: 'Maximize your CRM capabilities by integrating modern machine learning models with Microsoft Dynamics 365. Automate sales forecasting and lead scoring.',
+    category: 'Dynamics 365',
+    author: 'David L.',
+    authorRole: 'ERP Integration Specialist',
+    authorImage: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=256',
+    date: 'March 28, 2026',
+    readTime: '15 min read',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['Microsoft Dynamics 365 integration', 'Dynamics 365 AI', 'CRM AI integration', 'Lead automation'],
+    sections: [
+      {
+        heading: 'Why Connect AI to Dynamics 365?',
+        content: [
+          'Microsoft Dynamics 365 is a powerhouse, but native capabilities can only take you so far. A custom Microsoft Dynamics 365 AI integration unlocks real-time sentiment analysis on customer emails and predictive lead scoring.',
+          'Sales teams save up to 15 hours a week when the CRM automatically writes outreach drafts and updates pipeline statuses based on conversational data.'
+        ]
+      },
+      {
+        heading: 'Seamless Connectivity with QIntellect',
+        content: [
+          'QIntellect Technologies bridges Azure APIs and independent vector databases into Dynamics 365. The result? A fully augmented sales framework that knows exactly when to pitch, when to wait, and how to price.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'erp-implementation-strategies-machine-learning',
+    title: 'Next-Gen ERP Systems: Implementation Strategies with AI',
+    excerpt: 'Migrating to a new ERP? Discover how integrating Machine Learning from day one ensures cleaner data migration and smarter resource planning.',
+    category: 'ERP Systems',
+    author: 'Marcus V.',
+    authorRole: 'Senior Solutions Architect',
+    authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256',
+    date: 'March 30, 2026',
+    readTime: '20 min read',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['ERP Implementation', 'Machine learning in ERP', 'Enterprise Resource Planning software', 'AI data migration'],
+    sections: [
+      {
+        heading: 'The Modern ERP Landscape',
+        content: [
+          'Traditional Enterprise Resource Planning (ERP) systems act as passive ledgers. By injecting Machine Learning during the ERP implementation phase, companies turn their ledger into an active financial advisor.',
+          'Predictive inventory, dynamic pricing optimization, and automated vendor communication become standard out-of-the-box features.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'edi-solutions-logistics-supply-chain',
+    title: 'Next-Gen EDI Solutions for Modern Logistics & Supply Chains',
+    excerpt: 'Electronic Data Interchange (EDI) is evolving. Read how AI-augmented EDI routing minimizes supply chain delays and lost invoices.',
+    category: 'EDI Solutions',
+    author: 'Sophia W.',
+    authorRole: 'Operations Analyst',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=256',
+    date: 'April 02, 2026',
+    readTime: '11 min read',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7e66a5a?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['EDI Solutions', 'Logistics AI', 'Supply chain automation', 'Electronic Data Interchange software'],
+    sections: [
+      {
+        heading: 'Fixing the Supply Chain Disconnect',
+        content: [
+          'Legacy EDI systems rely on rigid formats and brittle FTP pipelines. Modern EDI Solutions powered by AI can autonomously map unstructured purchase orders into standardized formats.',
+          'At QIntellect Technologies, our cloud-based EDI connectors handle thousands of transactions per minute, drastically reducing error rates for 3PLs and manufacturing giants.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'prebuilt-ai-workflows-saas-scaling',
+    title: 'How Prebuilt AI Workflows Cut SaaS Development Time by 70%',
+    excerpt: 'Are you building a SaaS product? Discover why using prebuilt AI workflows allows startups and scale-ups to launch predictive features in weeks, not years.',
+    category: 'Web Development',
+    author: 'Imran Q.',
+    authorRole: 'CEO & Founder',
+    authorImage: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=256',
+    date: 'April 05, 2026',
+    readTime: '16 min read',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['Prebuilt AI workflows', 'SaaS scaling', 'AI web development', 'Fast AI implementation'],
+    sections: [
+      {
+        heading: 'The Cost of Building from Scratch',
+        content: [
+          'Training bespoke AI models requires immense compute and elite ML engineers. Instead, leveraging prebuilt AI workflows designed for document parsing, image recognition, and chatbot connectivity bypassing heavy R&D costs.',
+          'QIntellect provides robust API skeletons and pre-trained model hooks perfect for B2B SaaS integration.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'white-label-ai-software-agencies',
+    title: 'Launch Your Offerings Using White-Label AI Software',
+    excerpt: 'Marketing and development agencies can now sell cutting-edge artificial intelligence solutions under their own brand using white-label AI software frameworks.',
+    category: 'AI Solutions',
+    author: 'Rachel M.',
+    authorRole: 'Partnerships Director',
+    authorImage: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=256',
+    date: 'April 08, 2026',
+    readTime: '13 min read',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['White-label AI software', 'Resell AI', 'AI for agencies', 'Whitelabel SaaS'],
+    sections: [
+      {
+        heading: 'Expanding Agency Capabilities',
+        content: [
+          'Clients expect their agencies to offer AI text generation, SEO automation, and custom conversational bots. White-label AI software allows agencies to license a mature platform and slap their logo on it.',
+          'QIntellect Technologies offers scalable white-label architectures that look, feel, and function as your proprietary software.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'generative-ai-finance-accounting',
+    title: 'Generative AI for Finance and Accounting Automation',
+    excerpt: 'How financial institutions use LLMs to audit contracts, generate compliance reports, and automate tedious accounting workflows securely.',
+    category: 'Artificial Intelligence',
+    author: 'James T.',
+    authorRole: 'Finance Systems Lead',
+    authorImage: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=256',
+    date: 'April 12, 2026',
+    readTime: '14 min read',
+    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['Generative AI in finance', 'Accounting automation', 'Fintech AI', 'Automated financial reports'],
+    sections: [
+      {
+        heading: 'Beyond Simple Calculators',
+        content: [
+          'Accounting automation has moved past OCR receipt scanning. Generative AI reads 50-page vendor contracts and automatically highlights liability clauses and non-standard net payment terms.',
+          'Deploying these tools in an isolated, secure cloud ensures that global banks and regional credit unions remain compliant while drastically reducing manual audit hours.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'manufacturing-ai-computer-vision',
+    title: 'Transforming Manufacturing Quality Control with Computer Vision AI',
+    excerpt: 'Eliminate production line errors and reduce waste by implementing real-time computer vision AI systems on the manufacturing floor.',
+    category: 'AI Solutions',
+    author: 'Dr. Sarah Chen',
+    authorRole: 'Chief AI Architect',
+    authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256',
+    date: 'April 15, 2026',
+    readTime: '17 min read',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['Manufacturing AI', 'Computer vision', 'Quality control AI', 'Industry 4.0 automation'],
+    sections: [
+      {
+        heading: 'Seeing the Unseen on the Assembly Line',
+        content: [
+          'Using sub-millimeter computer vision models, factories monitor assembly blocks for micro-fractures before the product is finalized. This level of precision saves millions in potential recall liabilities.',
+          'Coupled with QIntellect Technologies backend processing, edge devices on the factory floor can process high-framerate video without throttling factory bandwidth.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'enterprise-rag-architecture-secure-llms',
+    title: 'Building Secure Enterprise RAG Architectures for Internal Data',
+    excerpt: 'Retrieval-Augmented Generation (RAG) is the only reliable way to make an LLM talk to your SQL databases without exposing data to the public internet.',
+    category: 'Web Development',
+    author: 'Alex Rivers',
+    authorRole: 'Lead LLM Engineer',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=256',
+    date: 'April 20, 2026',
+    readTime: '22 min read',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200',
+    galleryImages: [],
+    tags: ['Enterprise RAG', 'Secure LLM integration', 'Private AI databases', 'Retrieval Augmented Generation architecture'],
+    sections: [
+      {
+        heading: 'Why Prompt Engineering Is Not Enough',
+        content: [
+          'If you want a chatbot to accurately quote next quarters projected sales, prompt engineering is useless. You need an Enterprise RAG Architecture. It creates vector embeddings of your dynamic databases and feeds precise data chunks directly to the models working memory.',
+          'Because the processing happens locally via QIntellect pipelines, your proprietary architecture never leaks into the public training data pool.'
+        ]
+      }
+    ]
+  },
   {
     id: 'ai-sovereignty-2025',
     title: 'Technical Sovereignty: The Rise of Private LLM Infrastructure',
     excerpt: 'Enterprises are shifting from public cloud APIs to local, high-fidelity neural clusters to protect proprietary logic.',
     author: 'Dr. Sarah Chen',
     authorRole: 'Chief AI Architect',
-    authorImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'March 12, 2024',
     readTime: '12 min read',
     category: 'Artificial Intelligence',
@@ -695,12 +733,12 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Synthesizing voice and sentiment for human-level autonomous customer support agents.',
     author: 'Maya Sato',
     authorRole: 'UX Research Director',
-    authorImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'April 20, 2024',
     readTime: '10 min read',
     category: 'AI Customer Representative',
     image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1531482615713-2afd69097998?q=60&w=800'],
+    galleryImages: ['https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=60&w=800'],
     tags: ['TTS', 'NLP', 'CustomerService'],
     sections: [
       { heading: 'Beyond the Script', content: ['Customers can smell a bot within seconds. We focus on emotional inflection and prosody to bridge the uncanny valley.'] }
@@ -746,7 +784,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Migrating from on-premise VANs to secure, cloud-native AS2 interchanges for global supply chain transparency.',
     author: 'Jane Doe',
     authorRole: 'EDI Integration Lead',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'June 01, 2024',
     readTime: '20 min read',
     category: 'Electronic Data Interchange (EDI)',
@@ -797,12 +835,12 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Deploying quantized neural models to low-power edge devices for instant anomaly detection in manufacturing.',
     author: 'Aria Rodriguez',
     authorRole: 'VP of Digital Transformation',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'August 05, 2024',
     readTime: '15 min read',
     category: 'Artificial Intelligence',
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=60&w=800'],
+    galleryImages: ['https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800'],
     tags: ['IoT', 'EdgeAI', 'MLOps'],
     sections: [
       { heading: 'Distributed Inference', content: ['Cloud latency is too slow for assembly lines. We push logic to the sensory organs of the enterprise.'] }
@@ -814,7 +852,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Building high-volume trade portals that offer real-time pricing and inventory directly from the ERP core.',
     author: 'Jane Doe',
     authorRole: 'Commerce Architect',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'August 22, 2024',
     readTime: '11 min read',
     category: 'Dynamics 365',
@@ -831,7 +869,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'How to build transparent, audit-ready neural systems that satisfy global regulatory standards.',
     author: 'Dr. Sarah Chen',
     authorRole: 'Chief AI Architect',
-    authorImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'September 12, 2024',
     readTime: '13 min read',
     category: 'Artificial Intelligence',
@@ -848,7 +886,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Implementing high-fidelity voice bots for complex order management and support in retail environments.',
     author: 'Maya Sato',
     authorRole: 'UX Research Director',
-    authorImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'September 28, 2024',
     readTime: '9 min read',
     category: 'Customized Chatbots',
@@ -865,7 +903,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Reducing partner onboarding time from weeks to hours using automated connectivity testing and map verification.',
     author: 'Jane Doe',
     authorRole: 'EDI Integration Lead',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'October 15, 2024',
     readTime: '16 min read',
     category: 'Electronic Data Interchange (EDI)',
@@ -916,7 +954,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'A comprehensive guide to designing and implementing neural networks for complex enterprise applications.',
     author: 'Dr. Sarah Chen',
     authorRole: 'Chief AI Architect',
-    authorImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'October 08, 2024',
     readTime: '16 min read',
     category: 'Artificial Intelligence',
@@ -938,12 +976,12 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'How AI transforms traditional maintenance schedules into intelligent, data-driven asset management systems.',
     author: 'Aria Rodriguez',
     authorRole: 'VP of Digital Transformation',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'October 25, 2024',
     readTime: '14 min read',
     category: 'Artificial Intelligence',
     image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=60&w=800'],
+    galleryImages: ['https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800'],
     tags: ['Predictive Maintenance', 'IoT', 'Asset Management'],
     sections: [
       { heading: 'The Maintenance Revolution', content: ['Moving from reactive to predictive maintenance using AI and sensor data.'] },
@@ -978,8 +1016,8 @@ export const BLOGS: BlogPost[] = [
     date: 'August 10, 2024',
     readTime: '15 min read',
     category: 'Customized Chatbots',
-    image: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1552664730-d307ca884978?q=60&w=800'],
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    galleryImages: ['https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800'],
     tags: ['Integration', 'API', 'Enterprise Systems'],
     sections: [
       { heading: 'API-First Architecture', content: ['Designing chatbots that integrate seamlessly with existing enterprise APIs.'] },
@@ -997,7 +1035,7 @@ export const BLOGS: BlogPost[] = [
     readTime: '12 min read',
     category: 'Customized Chatbots',
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=60&w=800'],
+    galleryImages: ['https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=60&w=800'],
     tags: ['Security', 'Privacy', 'GDPR'],
     sections: [
       { heading: 'Data Protection', content: ['Ensuring user data is protected and compliant with privacy regulations.'] },
@@ -1010,12 +1048,12 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Deploying AI customer representatives across phone, chat, email, and social media channels.',
     author: 'Maya Sato',
     authorRole: 'UX Research Director',
-    authorImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'May 10, 2024',
     readTime: '11 min read',
     category: 'AI Customer Representative',
     image: 'https://images.unsplash.com/photo-1560472355-536de3962603?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=60&w=800'],
+    galleryImages: ['https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=60&w=800'],
     tags: ['Multichannel', 'Omnichannel', 'Customer Service'],
     sections: [
       { heading: 'Unified Customer Experience', content: ['Creating consistent experiences across all communication channels.'] },
@@ -1028,7 +1066,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Using emotion recognition and sentiment analysis to improve customer interactions.',
     author: 'Maya Sato',
     authorRole: 'UX Research Director',
-    authorImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'May 25, 2024',
     readTime: '10 min read',
     category: 'AI Customer Representative',
@@ -1046,12 +1084,12 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Measuring and optimizing the performance of AI-powered customer service agents.',
     author: 'Maya Sato',
     authorRole: 'UX Research Director',
-    authorImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'June 08, 2024',
     readTime: '13 min read',
     category: 'AI Customer Representative',
     image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1552664730-d307ca884978?q=60&w=800'],
+    galleryImages: ['https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800'],
     tags: ['Analytics', 'Performance', 'Optimization'],
     sections: [
       { heading: 'Key Metrics', content: ['Important metrics for measuring AI representative performance.'] },
@@ -1064,11 +1102,11 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Strategies for deploying AI customer service agents at scale across large organizations.',
     author: 'Maya Sato',
     authorRole: 'UX Research Director',
-    authorImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'June 22, 2024',
     readTime: '14 min read',
     category: 'AI Customer Representative',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     galleryImages: ['https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=800'],
     tags: ['Scalability', 'Enterprise', 'Deployment'],
     sections: [
@@ -1082,7 +1120,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Emerging trends and technologies shaping the future of AI-powered customer service.',
     author: 'Maya Sato',
     authorRole: 'UX Research Director',
-    authorImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'July 05, 2024',
     readTime: '12 min read',
     category: 'AI Customer Representative',
@@ -1177,7 +1215,7 @@ export const BLOGS: BlogPost[] = [
     readTime: '14 min read',
     category: 'Web Development',
     image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=60&w=800&auto=format&fit=crop&auto=format,compress',
-    galleryImages: ['https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=60&w=800'],
+    galleryImages: ['https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=60&w=800'],
     tags: ['Security', 'Web Development', 'Best Practices'],
     sections: [
       { heading: 'Authentication and Authorization', content: ['Implementing secure authentication systems.'] },
@@ -1190,7 +1228,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Exploring how blockchain technology can enhance EDI security and transparency.',
     author: 'Jane Doe',
     authorRole: 'EDI Integration Lead',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'October 02, 2024',
     readTime: '18 min read',
     category: 'Electronic Data Interchange (EDI)',
@@ -1208,7 +1246,7 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Strategies and best practices for moving EDI infrastructure to cloud platforms.',
     author: 'Jane Doe',
     authorRole: 'EDI Integration Lead',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'October 18, 2024',
     readTime: '16 min read',
     category: 'Electronic Data Interchange (EDI)',
@@ -1226,11 +1264,11 @@ export const BLOGS: BlogPost[] = [
     excerpt: 'Moving beyond traditional EDI to modern API-based integration for real-time business processes.',
     author: 'Jane Doe',
     authorRole: 'EDI Integration Lead',
-    authorImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     date: 'November 02, 2024',
     readTime: '15 min read',
     category: 'Electronic Data Interchange (EDI)',
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     galleryImages: ['https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800'],
     tags: ['API Integration', 'Real-time', 'Modern EDI'],
     sections: [
@@ -1284,7 +1322,7 @@ export const BLOGS: BlogPost[] = [
     date: 'December 10, 2024',
     readTime: '14 min read',
     category: 'Enterprise Resource Planning (ERP)',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800&auto=format&fit=crop&auto=format,compress',
     galleryImages: ['https://images.unsplash.com/photo-1556761175-4b46a572b786?q=60&w=800'],
     tags: ['Mobile', 'Remote Work', 'ERP'],
     sections: [
@@ -1336,7 +1374,7 @@ export const INDUSTRIES: Industry[] = [
     longDescription: 'Revolutionize healthcare delivery with AI-powered diagnostic tools, smart patient management systems, and secure digital platforms that enhance both patient outcomes and operational efficiency.',
     features: ['Patient Management Systems', 'Medical AI', 'Secure Data Handling', 'Telemedicine Platforms'],
     benefits: ['Better Patient Care', 'Reduced Costs', 'Improved Efficiency', 'Regulatory Compliance'],
-    services: ['Artificial Intelligence', 'ERP Solutions', 'Web Development', 'EDI Solutions'],
+    services: ['Artificial Intelligence', 'ERP Solutions', 'Web Development', 'EDI Solutions', 'IoT Solutions'],
     icon: 'Stethoscope',
     technologies: ['AI/ML', 'HIPAA Compliance', 'Cloud Systems', 'Mobile Apps'],
     challenges: [
@@ -1438,7 +1476,7 @@ export const INDUSTRIES: Industry[] = [
     longDescription: 'Optimize your operations with AI-driven manufacturing automation, intelligent inventory management, and powerful e-commerce platforms that drive growth.',
     features: ['Production Automation', 'Inventory Management', 'E-commerce Platforms', 'Quality Control'],
     benefits: ['Increased Efficiency', 'Reduced Costs', 'Better Quality', 'Higher Sales'],
-    services: ['Artificial Intelligence', 'ERP Solutions', 'Web Development', 'EDI Solutions'],
+    services: ['Artificial Intelligence', 'ERP Solutions', 'Web Development', 'EDI Solutions', 'IoT Solutions'],
     icon: 'Factory',
     technologies: ['IoT', 'AI/ML', 'Automation', 'E-commerce'],
     challenges: [
@@ -1472,7 +1510,7 @@ export const INDUSTRIES: Industry[] = [
     longDescription: 'Revolutionize your logistics operations with AI-powered route optimization, real-time tracking systems, and automated delivery management.',
     features: ['Route Optimization', 'Real-time Tracking', 'Fleet Management', 'Delivery Automation'],
     benefits: ['Faster Deliveries', 'Lower Costs', 'Better Visibility', 'Improved Efficiency'],
-    services: ['Artificial Intelligence', 'EDI Solutions', 'Web Development', 'ERP Solutions'],
+    services: ['Artificial Intelligence', 'EDI Solutions', 'Web Development', 'ERP Solutions', 'IoT Solutions'],
     icon: 'Truck',
     technologies: ['GPS', 'AI/ML', 'IoT', 'Mobile Apps'],
     challenges: [
@@ -1540,7 +1578,7 @@ export const INDUSTRIES: Industry[] = [
     longDescription: 'Optimize your entire supply chain with AI-powered demand forecasting, automated procurement, and real-time visibility across all suppliers and partners.',
     features: ['Demand Forecasting', 'Supplier Management', 'Procurement Automation', 'Supply Chain Visibility'],
     benefits: ['Reduced Costs', 'Better Planning', 'Risk Mitigation', 'Improved Efficiency'],
-    services: ['Artificial Intelligence', 'EDI Solutions', 'ERP Solutions', 'Web Development'],
+    services: ['Artificial Intelligence', 'EDI Solutions', 'ERP Solutions', 'Web Development', 'IoT Solutions'],
     icon: 'Package',
     technologies: ['AI/ML', 'EDI', 'APIs', 'Analytics'],
     challenges: [

@@ -499,14 +499,18 @@ const QuantumNetwork: React.FC<QuantumNetworkProps> = ({ domainIndex, videoUrl }
         const onMouseMove = (e: MouseEvent) => { mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2; mouseRef.current.y = (e.clientY / window.innerHeight - 0.5) * 2; };
         window.addEventListener('mousemove', onMouseMove);
 
-        const clock = new THREE.Clock();
+        let lastTime = performance.now();
+        let totalTime = 0;
         const targetLightColor = new THREE.Color(DOMAIN_COLORS[0]);
         const currentLightColor = new THREE.Color(DOMAIN_COLORS[0]);
 
         const animate = () => {
             requestAnimationFrame(animate);
-            const delta = clock.getDelta();
-            const time = clock.getElapsedTime();
+            const now = performance.now();
+            const delta = (now - lastTime) / 1000;
+            lastTime = now;
+            totalTime += delta;
+            const time = totalTime;
             const { x: mx, y: my } = mouseRef.current;
             const dIdx = domainIndexRef.current;
             const model = currentModelRef.current;

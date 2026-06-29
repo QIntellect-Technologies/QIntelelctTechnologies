@@ -29,15 +29,15 @@ const TalkingHead: React.FC<{ isTalking: boolean, isThinking: boolean, amplitude
   return (
     <div className="relative w-40 h-40 mx-auto flex items-center justify-center">
       {/* Outer Neural Pulse */}
-      <motion.div 
-        animate={{ 
+      <motion.div
+        animate={{
           scale: isThinking ? [1, 1.2, 1] : isTalking ? (1 + amplitude * 0.5) : 1,
           opacity: isThinking || isTalking ? 0.3 : 0.1
         }}
         transition={{ duration: 0.8, repeat: Infinity }}
-        className="absolute inset-0 rounded-full bg-blue-500 blur-2xl" 
+        className="absolute inset-0 rounded-full bg-blue-500 blur-2xl"
       />
-      
+
       {/* Robot Face SVG */}
       <svg viewBox="0 0 200 200" className="w-full h-full relative z-10 drop-shadow-[0_0_15px_rgba(37,99,235,0.4)]">
         <defs>
@@ -47,7 +47,7 @@ const TalkingHead: React.FC<{ isTalking: boolean, isThinking: boolean, amplitude
           </linearGradient>
         </defs>
         <path d="M50,40 Q100,20 150,40 L160,130 Q160,170 100,180 Q40,170 40,130 Z" fill="url(#headGrad)" stroke="#3b82f6" strokeWidth="2" />
-        
+
         {/* Eyes */}
         <g>
           <circle cx="70" cy="85" r="8" fill={isThinking ? "#3b82f6" : "#60a5fa"}>
@@ -59,14 +59,14 @@ const TalkingHead: React.FC<{ isTalking: boolean, isThinking: boolean, amplitude
           <circle cx="70" cy="85" r="12" fill="#3b82f6" fillOpacity="0.2" />
           <circle cx="130" cy="85" r="12" fill="#3b82f6" fillOpacity="0.2" />
         </g>
-        
+
         {/* Mouth Assembly (Talking Animation) */}
-        <motion.rect 
-          x="75" y="140" 
-          width="50" 
-          height={isTalking ? (4 + amplitude * 25) : 4} 
-          rx="2" 
-          fill="#3b82f6" 
+        <motion.rect
+          x="75" y="140"
+          width="50"
+          height={isTalking ? (4 + amplitude * 25) : 4}
+          rx="2"
+          fill="#3b82f6"
           animate={{
             fill: isTalking ? ["#3b82f6", "#a855f7", "#3b82f6"] : "#3b82f6"
           }}
@@ -75,18 +75,18 @@ const TalkingHead: React.FC<{ isTalking: boolean, isThinking: boolean, amplitude
         <rect x="75" y="140" width="50" height="4" rx="2" fill="#3b82f6" fillOpacity="0.4" />
         <path d="M40,100 L20,100 M160,100 L180,100 M100,20 L100,10" stroke="#3b82f6" strokeWidth="1" strokeDasharray="4 2" opacity="0.5" />
       </svg>
-      
+
       {/* Waveform Visualization Overlay */}
       {isTalking && (
         <div className="absolute -bottom-4 left-0 right-0 flex justify-center space-x-1 h-8 items-end">
-           {[...Array(8)].map((_, i) => (
-             <motion.div 
-               key={i}
-               animate={{ height: [4, (Math.random() * 20 + 5), 4] }}
-               transition={{ duration: 0.2, repeat: Infinity, delay: i * 0.05 }}
-               className="w-1 bg-blue-400 rounded-full"
-             />
-           ))}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{ height: [4, (Math.random() * 20 + 5), 4] }}
+              transition={{ duration: 0.2, repeat: Infinity, delay: i * 0.05 }}
+              className="w-1 bg-blue-400 rounded-full"
+            />
+          ))}
         </div>
       )}
     </div>
@@ -95,7 +95,7 @@ const TalkingHead: React.FC<{ isTalking: boolean, isThinking: boolean, amplitude
 
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{role: 'bot' | 'user', text: string}[]>([
+  const [messages, setMessages] = useState<{ role: 'bot' | 'user', text: string }[]>([
     { role: 'bot', text: 'Operational sequence initialized. I am QIntelligence, your technical architecture liaison. How can I assist with your enterprise modernization today?' }
   ]);
   const [input, setInput] = useState('');
@@ -104,7 +104,7 @@ const ChatBot: React.FC = () => {
   const [isTalking, setIsTalking] = useState(false);
   const [amplitude, setAmplitude] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
-  
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -166,7 +166,7 @@ const ChatBot: React.FC = () => {
 
   const handleSend = async () => {
     if (!input.trim() || isThinking || isTalking) return;
-    
+
     const userMessage = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
@@ -174,17 +174,17 @@ const ChatBot: React.FC = () => {
 
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      
+
       // Step 1: Deep Reasoning with Pro model
       setIsReasoning(true);
       const reasoningResponse = await ai.models.generateContent({
         model: 'gemini-2.0-pro-exp-02-05',
-        contents: [{ 
-          parts: [{ 
+        contents: [{
+          parts: [{
             text: `System Context: You are the deep reasoning core of QIntelligence.
             Analyze this technical query and provide a high-level strategy for a response.
-            Query: ${userMessage}` 
-          }] 
+            Query: ${userMessage}`
+          }]
         }]
       });
       const reasoningStrategy = reasoningResponse.text || "Standard architectural protocols apply.";
@@ -193,17 +193,17 @@ const ChatBot: React.FC = () => {
       // Step 2: Generate Final User Response with standard model
       const textResponse = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: [{ 
-          parts: [{ 
+        contents: [{
+          parts: [{
             text: `You are QIntelligence, the highly advanced AI spokesperson for QIntellect Technologies. 
             Services: AI, ERP, IoT, EDI, Web Architecture. 
             Deep Reasoning Strategy: ${reasoningStrategy}
             User asks: ${userMessage}. 
-            Provide a professional, concise technical response based on the strategy.` 
-          }] 
+            Provide a professional, concise technical response based on the strategy.`
+          }]
         }]
       });
-      
+
       const botText = textResponse.text || "Architecture nominal. Synchronizing protocols.";
       setMessages(prev => [...prev, { role: 'bot', text: botText }]);
       setIsThinking(false);
@@ -212,8 +212,8 @@ const ChatBot: React.FC = () => {
       if (!isMuted) {
         const audioResponse = await ai.models.generateContent({
           model: 'gemini-2.5-flash-preview-tts',
-          contents: [{ 
-            parts: [{ text: botText }] 
+          contents: [{
+            parts: [{ text: botText }]
           }],
           config: {
             responseModalities: [Modality.AUDIO],
@@ -224,7 +224,7 @@ const ChatBot: React.FC = () => {
             }
           },
         });
-        
+
         const base64Audio = audioResponse.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
         if (base64Audio) {
           await playBotAudio(base64Audio);
@@ -284,7 +284,7 @@ const ChatBot: React.FC = () => {
             {/* Header / Visualization */}
             <div className="bg-slate-900 p-8 border-b border-white/5 relative overflow-hidden" style={{ transform: "translateZ(30px)" }}>
               <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-              
+
               <div className="flex justify-between items-start mb-6 relative z-10">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-xl shadow-blue-500/20">
@@ -343,19 +343,19 @@ const ChatBot: React.FC = () => {
             {/* Input Footer */}
             <div className="p-8 bg-slate-900 border-t border-white/5 flex flex-col space-y-4" style={{ transform: "translateZ(20px)" }}>
               <div className="flex items-center space-x-2 text-slate-500 mb-1">
-                 <Terminal className="w-3 h-3" />
-                 <span className="text-[10px] font-mono uppercase tracking-widest">Secure_Protocol_Input</span>
+                <Terminal className="w-3 h-3" />
+                <span className="text-[10px] font-mono uppercase tracking-widest">Secure_Protocol_Input</span>
               </div>
               <div className="flex space-x-3">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Direct query to sovereign core..."
                   className="flex-1 bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-xs font-mono text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-600"
                 />
-                <button 
+                <button
                   onClick={handleSend}
                   disabled={isThinking || isTalking}
                   className="bg-blue-600 text-white px-6 rounded-2xl hover:bg-blue-700 transition-all disabled:opacity-50 shadow-lg shadow-blue-500/20"

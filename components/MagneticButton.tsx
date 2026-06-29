@@ -1,15 +1,17 @@
+"use client";
 
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 interface MagneticButtonProps {
   children: React.ReactNode;
   className?: string;
-  to: string;
+  to?: string;
+  href?: string;
 }
 
-const MagneticButton: React.FC<MagneticButtonProps> = ({ children, className, to }) => {
+const MagneticButton: React.FC<MagneticButtonProps> = ({ children, className, to, href }) => {
   const ref = useRef<HTMLDivElement>(null);
   
   const x = useMotionValue(0);
@@ -42,7 +44,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, className, to
       style={{ x: springX, y: springY }}
       className="relative"
     >
-      <Link to={to} className={className}>
+      <Link href={href || to || '#'} className={className}>
         {children}
       </Link>
     </motion.div>

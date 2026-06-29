@@ -1,7 +1,8 @@
+"use client";
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import Link from 'next/link';
+import { Globe as Facebook, MessageCircle as Twitter, Briefcase as Linkedin, Camera as Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
@@ -10,10 +11,10 @@ const Footer: React.FC = () => {
   };
 
   const socialLinks = [
-    { name: 'Twitter / X', icon: Twitter, color: 'hover:bg-slate-900' },
-    { name: 'Facebook', icon: Facebook, color: 'hover:bg-slate-900' },
-    { name: 'Instagram', icon: Instagram, color: 'hover:bg-slate-900' },
-    { name: 'LinkedIn', icon: Linkedin, color: 'hover:bg-slate-900' },
+    { name: 'X as Twitter / X', icon: Twitter, url: '#', color: 'hover:bg-slate-900' },
+    { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/share/1DxPczJJwq/', color: 'hover:bg-slate-900' },
+    { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/qintellect_technologies?igsh=OHR0dnkwZGZyYnFt', color: 'hover:bg-slate-900' },
+    { name: 'LinkedIn', icon: Linkedin, url: '#', color: 'hover:bg-slate-900' },
   ];
 
   const navLinks = [
@@ -78,7 +79,9 @@ const Footer: React.FC = () => {
               return (
                 <motion.a
                   key={index}
-                  href="#"
+                  href={social.url}
+                  target="_blank"
+                  rel="noreferrer"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-3 px-6 py-3 bg-white border-2 border-slate-900 rounded-full font-semibold text-slate-900 transition-all shadow-md hover:shadow-lg group"
@@ -109,7 +112,7 @@ const Footer: React.FC = () => {
             {navLinks.map((link, index) => (
               <Link
                 key={index}
-                to={link.href}
+                href={link.href}
                 className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors border-b-2 border-transparent hover:border-slate-900 pb-1"
               >
                 {link.name}

@@ -1,7 +1,0 @@
-[build]
-builder = "nixpacks"
-buildCommand = "rm -f postcss.config.js tailwind.config.js && npm install && npm run build"
-
-[deploy]
-startCommand = "npm start"
-restartPolicyType = "on_failure"

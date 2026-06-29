@@ -49,6 +49,12 @@ export interface PortfolioProject {
   domain: string;
   client: string;
   summary: string;
+  fullDescription?: string;
+  roadmap?: {
+    phase: string;
+    title: string;
+    description: string;
+  }[];
   metrics: { label: string; value: string }[];
   stack: string[];
   image: string;

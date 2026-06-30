@@ -6,6 +6,11 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'QIntellect Technologies',
   description: 'Pioneering digital experiences that fuse art with technology.',
+  verification: {
+    other: {
+      'msvalidate.01': '63E38E1A0A890CA1A600AD2A61D2A034',
+    },
+  },
 };
 
 export default function RootLayout({

@@ -19,7 +19,7 @@ export async function POST(req: Request) {
         rejectUnauthorized: false
       },
       family: 4 // strictly force IPv4
-    });
+    } as any);
 
     const mailOptions = {
       from: process.env.EMAIL_USER,

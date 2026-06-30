@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Force Node.js to strictly resolve IPv4 over IPv6 natively
+dns.setDefaultResultOrder('ipv4first');
 
 export async function POST(req: Request) {
   try {

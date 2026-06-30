@@ -7,11 +7,18 @@ export async function POST(req: Request) {
 
     // Requires EMAIL_USER and EMAIL_PASS environment variables
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      // Force IPv4 because Railway sometimes blocks outbound IPv6 SMTP
+      tls: {
+        rejectUnauthorized: false
+      },
+      family: 4 // strictly force IPv4
     });
 
     const mailOptions = {

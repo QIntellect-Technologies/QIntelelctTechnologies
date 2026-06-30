@@ -153,7 +153,7 @@ const serviceImages: Record<string, { overview: string; features: string[]; cta:
 };
 
 // ========== DETAILED SERVICE CONTENT ==========
-const serviceContent: Record<string, {
+export const serviceContent: Record<string, {
   tagline: string;
   headline: string;
   subheadline: string;

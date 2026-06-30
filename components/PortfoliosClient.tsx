@@ -189,7 +189,7 @@ const Portfolios: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
               <Link href="/contact" className="px-8 py-4 bg-blue-600 text-white rounded-xl font-black hover:bg-blue-700 transition-all shadow-4xl tracking-widest uppercase text-[10px]">Request Strategy Session</Link>
-              <button className="px-8 py-4 border-2 border-white/10 text-white rounded-xl font-black hover:bg-white hover:text-slate-900 transition-all tracking-widest uppercase text-[10px]">Technical Docs</button>
+              <Link href="/faq" className="px-8 py-4 border-2 border-white/10 text-white rounded-xl font-black hover:bg-white hover:text-slate-900 transition-all tracking-widest uppercase text-[10px]">Technical Docs</Link>
             </div>
           </div>
         </section>

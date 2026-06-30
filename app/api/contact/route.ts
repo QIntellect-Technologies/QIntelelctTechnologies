@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const transporter = nodemailer.createTransport({
       host: ipv4Address,       // literal IPv4 address, not hostname
       port: 587,
-      secure: true,
+      secure: false,           // port 587 uses STARTTLS (not SSL), so secure must be false
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,

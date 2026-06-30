@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     const transporter = nodemailer.createTransport({
       host: ipv4Address,       // literal IPv4 address, not hostname
-      port: 465,
+      port: 587,
       secure: true,
       auth: {
         user: process.env.EMAIL_USER,
@@ -22,6 +22,9 @@ export async function POST(req: Request) {
         servername: 'smtp.gmail.com', // required so TLS cert validation still works against the real hostname
         rejectUnauthorized: false,
       },
+      connectionTimeout: 5000, // time to establish the TCP connection
+      greetingTimeout: 5000,   // time to wait for the SMTP greeting after connecting
+      socketTimeout: 5000,     // time to wait on an idle socket once connected
     } as any);
 
     const mailOptions = {

@@ -581,15 +581,14 @@ const Services: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { name: 'Customer Care & Hospitality', slug: 'customer-care-hospitality', icon: Hotel, image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop', desc: 'Guest management and booking systems' },
-              { name: 'Healthcare', slug: 'healthcare', icon: Stethoscope, image: 'https://images.unsplash.com/photo-1530497610245-768937708c52?q=80&w=2091&auto=format&fit=crop', desc: 'Smart systems for hospitals and clinics' },
-
-              { name: 'Marketing', slug: 'marketing', icon: Megaphone, image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop', desc: 'Campaign management and CRM solutions' },
-              { name: 'Finance & Banking', slug: 'finance-banking', icon: Banknote, image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop', desc: 'Secure financial systems and solutions' },
-              { name: 'Manufacturing & Retail', slug: 'manufacturing-retail', icon: Factory, image: 'https://images.unsplash.com/photo-1565034946487-077d23d7f4f1?q=80&w=2070&auto=format&fit=crop', desc: 'Automation and e-commerce solutions' },
+              { name: 'Healthcare', slug: 'healthcare', icon: Stethoscope, image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhlYWx0aGNhcmV8ZW58MHx8MHx8fDA%3D', desc: 'Smart systems for hospitals and clinics' },
+              { name: 'Marketing', slug: 'marketing', icon: Megaphone, image: 'https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1hcmtldGluZ3xlbnwwfHwwfHx8MA%3D%3D', desc: 'Campaign management and CRM solutions' },
+              { name: 'Finance & Banking', slug: 'finance-banking', icon: Banknote, image: 'https://images.unsplash.com/photo-1725258080098-727051947997?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGZpbmFuY2UlMjBiYW5raW5nfGVufDB8fDB8fHww', desc: 'Secure financial systems and solutions' },
+              { name: 'Manufacturing & Retail', slug: 'manufacturing-retail', icon: Factory, image: 'https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWFudWZhY3R1cmluZ3xlbnwwfHwwfHx8MA%3D%3D', desc: 'Automation and e-commerce solutions' },
               { name: 'Logistics', slug: 'logistics', icon: Truck, image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=2070&auto=format&fit=crop', desc: 'Tracking and delivery systems' },
               { name: 'Education', slug: 'education', icon: GraduationCap, image: 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=2070&auto=format&fit=crop', desc: 'Learning platforms and tools' },
               { name: 'Supply Chain', slug: 'supply-chain', icon: Package, image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2125&auto=format&fit=crop', desc: 'End-to-end supply chain optimization' },
-              { name: 'Technology', slug: 'technology', icon: Laptop, image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=2125&auto=format&fit=crop', desc: 'Software development and IT solutions' },
+              { name: 'Technology', slug: 'technology', icon: Laptop, image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dGVjaG5vbG9neXxlbnwwfHwwfHx8MA%3D%3D', desc: 'Software development and IT solutions' },
               { name: 'Real Estate', slug: 'real-estate', icon: Home, image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop', desc: 'Property management and sales platforms' }
             ].map((industry, i) => (
               <Link href={`/industries/${industry.slug}`} key={i}>

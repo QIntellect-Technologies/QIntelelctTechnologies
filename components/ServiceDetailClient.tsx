@@ -137,7 +137,7 @@ const serviceImages: Record<string, { overview: string; features: string[]; cta:
     features: [
       'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2870&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=2870&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1491336477066-31156b5e4f35?q=80&w=2870&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1553341640-6b28ff92098a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGlvdHxlbnwwfHwwfHx8MA%3D%3D'
     ],
     cta: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2870&auto=format&fit=crop'
   },

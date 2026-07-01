@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Globe as Facebook, MessageCircle as Twitter, Briefcase as Linkedin, Camera as Instagram } from 'lucide-react';
+import { Globe as Facebook, MessageCircle as WhatsApp, Briefcase as Linkedin, Camera as Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   };
 
   const socialLinks = [
-    { name: 'X as Twitter / X', icon: Twitter, url: '#', color: 'hover:bg-slate-900' },
+    { name: 'WhatsApp', icon: WhatsApp, url: 'https://wa.me/923029633999', color: 'hover:bg-slate-900' },
     { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/share/1DxPczJJwq/', color: 'hover:bg-slate-900' },
     { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/qintellect_technologies?igsh=OHR0dnkwZGZyYnFt', color: 'hover:bg-slate-900' },
     { name: 'LinkedIn', icon: Linkedin, url: '#', color: 'hover:bg-slate-900' },
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-heading">
               Get connected with QIntellect <br /> Technologies on social
             </h2>
-            <p className="text-slate-600 text-lg">Don't miss our new updates!</p>
+
           </motion.div>
 
           {/* Social Buttons */}

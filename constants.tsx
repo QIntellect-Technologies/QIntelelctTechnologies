@@ -442,7 +442,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=256',
     date: 'March 26, 2026',
     readTime: '18 min read',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8QWl8ZW58MHx8MHx8fDA%3D',
     galleryImages: [
       'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800',
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'
@@ -475,7 +475,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256',
     date: 'March 27, 2026',
     readTime: '12 min read',
-    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1684369175809-f9642140a1bd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hhdGJvdHN8ZW58MHx8MHx8fDA%3D',
     galleryImages: [
       'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800'
     ],
@@ -506,7 +506,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=256',
     date: 'March 28, 2026',
     readTime: '15 min read',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1660032356057-efd3e1eb045c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWljcm9zb2Z0JTIwMzY1fGVufDB8fDB8fHww',
     galleryImages: [],
     tags: ['Microsoft Dynamics 365 integration', 'Dynamics 365 AI', 'CRM AI integration', 'Lead automation'],
     sections: [
@@ -558,7 +558,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=256',
     date: 'April 02, 2026',
     readTime: '11 min read',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7e66a5a?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1675627453084-505806a00406?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGVsZWN0cm9uaWMlMjBkYXRhJTIwaW1pZ3JhdGlvbnxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: [],
     tags: ['EDI Solutions', 'Logistics AI', 'Supply chain automation', 'Electronic Data Interchange software'],
     sections: [
@@ -581,7 +581,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=256',
     date: 'April 05, 2026',
     readTime: '16 min read',
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1602265568624-29e8dc535bd6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fFNBQVN8ZW58MHx8MHx8fDA%3D',
     galleryImages: [],
     tags: ['Prebuilt AI workflows', 'SaaS scaling', 'AI web development', 'Fast AI implementation'],
     sections: [
@@ -604,7 +604,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=256',
     date: 'April 08, 2026',
     readTime: '13 min read',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1739036868260-c26b292cd85d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8QWklMjBzb2Z0d2FyZSUyMGZyYW1ld29ya3xlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: [],
     tags: ['White-label AI software', 'Resell AI', 'AI for agencies', 'Whitelabel SaaS'],
     sections: [
@@ -627,7 +627,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=256',
     date: 'April 12, 2026',
     readTime: '14 min read',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1623681143855-e1d48cf03ca1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fEFpJTIwZm9yJTIwZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: [],
     tags: ['Generative AI in finance', 'Accounting automation', 'Fintech AI', 'Automated financial reports'],
     sections: [
@@ -650,7 +650,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256',
     date: 'April 15, 2026',
     readTime: '17 min read',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1563968743333-044cef800494?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWFudWZhY3R1cmluZyUyMHdpdGglMjBhaXxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: [],
     tags: ['Manufacturing AI', 'Computer vision', 'Quality control AI', 'Industry 4.0 automation'],
     sections: [
@@ -673,7 +673,7 @@ export const BLOGS: BlogPost[] = [
     authorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=256',
     date: 'April 20, 2026',
     readTime: '22 min read',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1686061593213-98dad7c599b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YXJjaGl0aWN0dXJlJTIwZm9yJTIwZW50ZXJuYWwlMjBkYXRhfGVufDB8fDB8fHww',
     galleryImages: [],
     tags: ['Enterprise RAG', 'Secure LLM integration', 'Private AI databases', 'Retrieval Augmented Generation architecture'],
     sections: [
@@ -696,7 +696,7 @@ export const BLOGS: BlogPost[] = [
     date: 'March 12, 2024',
     readTime: '12 min read',
     category: 'Artificial Intelligence',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1645839057098-5ea8761a6b09?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bGxtfGVufDB8fDB8fHww',
     galleryImages: [
       'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800',
       'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=60&w=800'
@@ -718,7 +718,7 @@ export const BLOGS: BlogPost[] = [
     date: 'April 05, 2024',
     readTime: '15 min read',
     category: 'Customized Chatbots',
-    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1676287571987-2f98ced3e6c4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UmV0cmlldmFsLUF1Z21lbnRlZCUyMEdlbmVyYXRpb258ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1518770660439-4636190af475?q=60&w=800'],
     tags: ['RAG', 'VectorDB', 'SemanticSearch'],
     technicalSpecs: [{ label: 'Vector Engine', value: 'Pinecone / Milvus' }, { label: 'Embeddings', value: 'text-embedding-v3' }],
@@ -737,7 +737,7 @@ export const BLOGS: BlogPost[] = [
     date: 'April 20, 2024',
     readTime: '10 min read',
     category: 'AI Customer Representative',
-    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1737505599159-5ffc1dcbc08f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8RW1vdGlvbmFsJTIwSW50ZWxsaWdlbmNlJTIwaW4lMjBBSXxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=60&w=800'],
     tags: ['TTS', 'NLP', 'CustomerService'],
     sections: [
@@ -754,7 +754,7 @@ export const BLOGS: BlogPost[] = [
     date: 'May 02, 2024',
     readTime: '18 min read',
     category: 'Dynamics 365',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1658203897415-3cad6cfad5c0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTF8fG1pY3Jvc29mdHxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=60&w=800'],
     tags: ['D365', 'Dataverse', 'PowerPlatform'],
     sections: [
@@ -771,7 +771,7 @@ export const BLOGS: BlogPost[] = [
     date: 'May 15, 2024',
     readTime: '14 min read',
     category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=60&w=800'],
     tags: ['React', 'MicroFrontends', 'Performance'],
     sections: [
@@ -788,7 +788,7 @@ export const BLOGS: BlogPost[] = [
     date: 'June 01, 2024',
     readTime: '20 min read',
     category: 'Electronic Data Interchange (EDI)',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1719255416760-344c9faf072f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTF8fGVsZWN0cm9uaWMlMjBkYXRhJTIwZW1pZ3JhdGlvbnxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800'],
     tags: ['EDI', 'SupplyChain', 'AS2'],
     sections: [
@@ -805,7 +805,7 @@ export const BLOGS: BlogPost[] = [
     date: 'June 18, 2024',
     readTime: '25 min read',
     category: 'Enterprise Resource Planning (ERP)',
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1667984390538-3dea7a3fe33d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdWQlMjBtaWdyYXRpb258ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=60&w=800'],
     tags: ['SAP', 'Azure', 'Migration'],
     sections: [
@@ -822,7 +822,7 @@ export const BLOGS: BlogPost[] = [
     date: 'July 10, 2024',
     readTime: '12 min read',
     category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1550439062-609e1531270e?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1565106430482-8f6e74349ca1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fHdlYiUyMGRldmVsb3BtZW50fGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=60&w=800'],
     tags: ['GenerativeUI', 'AI', 'React'],
     sections: [
@@ -856,7 +856,7 @@ export const BLOGS: BlogPost[] = [
     date: 'August 22, 2024',
     readTime: '11 min read',
     category: 'Dynamics 365',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1649433391420-542fcd3835ea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWljcm9zb2Z0JTIwMzY1fGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=60&w=800'],
     tags: ['B2B', 'Ecommerce', 'D365'],
     sections: [
@@ -873,7 +873,7 @@ export const BLOGS: BlogPost[] = [
     date: 'September 12, 2024',
     readTime: '13 min read',
     category: 'Artificial Intelligence',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1696272440000-0808a203c852?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTJ8fGFpfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=60&w=800'],
     tags: ['Ethics', 'AI', 'Governance'],
     sections: [
@@ -890,7 +890,7 @@ export const BLOGS: BlogPost[] = [
     date: 'September 28, 2024',
     readTime: '9 min read',
     category: 'Customized Chatbots',
-    image: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1767955006100-cf73d990599f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTZ8fGJvdHN8ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=60&w=800'],
     tags: ['VoiceBots', 'Retail', 'NLP'],
     sections: [
@@ -907,7 +907,7 @@ export const BLOGS: BlogPost[] = [
     date: 'October 15, 2024',
     readTime: '16 min read',
     category: 'Electronic Data Interchange (EDI)',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1650327034581-1711a15a5430?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGVsZWN0cm9uaWMlMjBkYXRhfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800'],
     tags: ['EDI', 'Onboarding', 'Automation'],
     sections: [
@@ -924,7 +924,7 @@ export const BLOGS: BlogPost[] = [
     date: 'November 05, 2024',
     readTime: '22 min read',
     category: 'Enterprise Resource Planning (ERP)',
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1581091877018-dac6a371d50f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fEVScHxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=60&w=800'],
     tags: ['PostgreSQL', 'Oracle', 'ERP'],
     sections: [
@@ -941,7 +941,7 @@ export const BLOGS: BlogPost[] = [
     date: 'November 20, 2024',
     readTime: '17 min read',
     category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1635372722656-389f87a941b7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FsY3VsYXRpb25zfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1518770660439-4636190af475?q=60&w=800'],
     tags: ['WASM', 'Performance', 'Rust'],
     sections: [
@@ -958,7 +958,7 @@ export const BLOGS: BlogPost[] = [
     date: 'October 08, 2024',
     readTime: '16 min read',
     category: 'Artificial Intelligence',
-    image: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmV1cmFsJTIwbmV0d29ya3xlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: [
       'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=60&w=800',
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=60&w=800'
@@ -998,7 +998,7 @@ export const BLOGS: BlogPost[] = [
     date: 'July 25, 2024',
     readTime: '13 min read',
     category: 'Customized Chatbots',
-    image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1659018966820-de07c94e0d01?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2hhdGJvdHN8ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=800'],
     tags: ['NLP', 'Chatbots', 'Conversational AI'],
     sections: [
@@ -1016,7 +1016,7 @@ export const BLOGS: BlogPost[] = [
     date: 'August 10, 2024',
     readTime: '15 min read',
     category: 'Customized Chatbots',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1707651020095-6dbf323a02b2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIyfHxjaGF0Ym90c3xlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800'],
     tags: ['Integration', 'API', 'Enterprise Systems'],
     sections: [
@@ -1034,7 +1034,7 @@ export const BLOGS: BlogPost[] = [
     date: 'August 28, 2024',
     readTime: '12 min read',
     category: 'Customized Chatbots',
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c2VjdXJpdHl8ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=60&w=800'],
     tags: ['Security', 'Privacy', 'GDPR'],
     sections: [
@@ -1052,7 +1052,7 @@ export const BLOGS: BlogPost[] = [
     date: 'May 10, 2024',
     readTime: '11 min read',
     category: 'AI Customer Representative',
-    image: 'https://images.unsplash.com/photo-1560472355-536de3962603?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGFpJTIwcmVwcmVzZW50YXRpdmV8ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=60&w=800'],
     tags: ['Multichannel', 'Omnichannel', 'Customer Service'],
     sections: [
@@ -1070,7 +1070,7 @@ export const BLOGS: BlogPost[] = [
     date: 'May 25, 2024',
     readTime: '10 min read',
     category: 'AI Customer Representative',
-    image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW5hbHlzaXN8ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=800'],
     tags: ['Sentiment Analysis', 'Emotion AI', 'Customer Experience'],
     sections: [
@@ -1088,7 +1088,7 @@ export const BLOGS: BlogPost[] = [
     date: 'June 08, 2024',
     readTime: '13 min read',
     category: 'AI Customer Representative',
-    image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFuYWx5c2lzfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800'],
     tags: ['Analytics', 'Performance', 'Optimization'],
     sections: [
@@ -1142,7 +1142,7 @@ export const BLOGS: BlogPost[] = [
     date: 'July 18, 2024',
     readTime: '19 min read',
     category: 'Dynamics 365',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1665395937592-d485b12c1898?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fG1pY3Jvc29mdHxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=60&w=800'],
     tags: ['Customization', 'D365', 'Business Logic'],
     sections: [
@@ -1160,7 +1160,7 @@ export const BLOGS: BlogPost[] = [
     date: 'August 02, 2024',
     readTime: '17 min read',
     category: 'Dynamics 365',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1624571409108-e9a41746af53?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODB8fG1pY3Jvc29mdHxlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=60&w=800'],
     tags: ['Integration', 'APIs', 'Connectors'],
     sections: [
@@ -1178,7 +1178,7 @@ export const BLOGS: BlogPost[] = [
     date: 'August 15, 2024',
     readTime: '16 min read',
     category: 'Dynamics 365',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1707157281599-d155d1da5b4c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFuYWx5dGljc3xlbnwwfHwwfHx8MA%3D%3D',
     galleryImages: ['https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=60&w=800'],
     tags: ['Reporting', 'Power BI', 'Analytics'],
     sections: [
@@ -1250,7 +1250,7 @@ export const BLOGS: BlogPost[] = [
     date: 'October 18, 2024',
     readTime: '16 min read',
     category: 'Electronic Data Interchange (EDI)',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1736196073961-877792084e15?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTl8fGVsZWN0cm9uaWMlMjBkYXRhfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=60&w=800'],
     tags: ['Cloud Migration', 'EDI', 'Infrastructure'],
     sections: [
@@ -1268,7 +1268,7 @@ export const BLOGS: BlogPost[] = [
     date: 'November 02, 2024',
     readTime: '15 min read',
     category: 'Electronic Data Interchange (EDI)',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1561233835-f937539b95b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGVsZWN0cm9uaWMlMjBkYXRhfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=60&w=800'],
     tags: ['API Integration', 'Real-time', 'Modern EDI'],
     sections: [
@@ -1286,7 +1286,7 @@ export const BLOGS: BlogPost[] = [
     date: 'November 15, 2024',
     readTime: '20 min read',
     category: 'Enterprise Resource Planning (ERP)',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1571573680328-f20cbb17e7ba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGVudGVycHJpc2UlMjByZXNvdXJjZSUyMHBsYW5uaW5nfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=800'],
     tags: ['Digital Transformation', 'ERP', 'Innovation'],
     sections: [
@@ -1304,7 +1304,7 @@ export const BLOGS: BlogPost[] = [
     date: 'November 28, 2024',
     readTime: '18 min read',
     category: 'Enterprise Resource Planning (ERP)',
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1586936893354-362ad6ae47ba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZW50ZXJwcmlzZSUyMHJlc291cmNlJTIwcGxhbm5pbmd8ZW58MHx8MHx8fDA%3D',
     galleryImages: ['https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=60&w=800'],
     tags: ['AI', 'ERP', 'Automation'],
     sections: [
@@ -1322,7 +1322,7 @@ export const BLOGS: BlogPost[] = [
     date: 'December 10, 2024',
     readTime: '14 min read',
     category: 'Enterprise Resource Planning (ERP)',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+    image: 'https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGVudGVycHJpc2UlMjByZXNvdXJjZSUyMHBsYW5uaW5nfGVufDB8fDB8fHww',
     galleryImages: ['https://images.unsplash.com/photo-1556761175-4b46a572b786?q=60&w=800'],
     tags: ['Mobile', 'Remote Work', 'ERP'],
     sections: [

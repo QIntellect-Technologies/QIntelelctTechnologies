@@ -485,12 +485,20 @@ const FeatureEcosystem: React.FC = () => {
       color: "indigo"
     },
     {
-      id: "edi-erp",
-      title: "EDI & ERP Solutions",
-      desc: "Modern EDI interchange with AS2/SFTP, plus end-to-end ERP implementation to unify finance, HR, and supply chain.",
-      icon: Database,
+      id: "edi",
+      title: "EDI Solutions",
+      desc: "Modern EDI interchange with AS2/SFTP for seamless business document exchange.",
+      icon: RefreshCw,
       side: "right",
       color: "slate"
+    },
+    {
+      id: "erp",
+      title: "ERP Solutions",
+      desc: "End-to-end ERP implementation to unify finance, HR, and supply chain.",
+      icon: Database,
+      side: "right",
+      color: "emerald"
     },
     {
       id: "mobile",
@@ -530,16 +538,16 @@ const FeatureEcosystem: React.FC = () => {
         <div className="relative max-w-7xl mx-auto">
           {/* Desktop Central Hub & Lines Overlay */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none">
-            <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
+            <svg className="w-full h-full" viewBox="0 0 1000 1056" fill="none" preserveAspectRatio="none">
               {/* Connecting Lines */}
               {features.map((f, i) => {
                 const isLeft = f.side === 'left';
                 const sideIndex = isLeft ? features.filter(feat => feat.side === 'left').findIndex(feat => feat.id === f.id) : features.filter(feat => feat.side === 'right').findIndex(feat => feat.id === f.id);
-                // Points are calibrated for a 1000x600 viewBox with 4 cards per side
+                // Points are calibrated for a 1000x1056 viewBox with 5 cards per side (h-48 each)
                 const x1 = isLeft ? 400 : 600;
-                const y1 = 300;
+                const y1 = 528;
                 const x2 = isLeft ? 300 : 700;
-                const y2 = sideIndex * 135 + 90;
+                const y2 = sideIndex * 216 + 96;
 
                 return (
                   <motion.path
@@ -559,14 +567,14 @@ const FeatureEcosystem: React.FC = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-0 items-center">
             {/* Left Column */}
-            <div className="space-y-6 z-20">
+            <div className="space-y-6 z-20 relative">
               {features.filter(f => f.side === 'left').map((f) => (
                 <motion.div
                   key={f.id}
                   onMouseEnter={() => setHoveredId(f.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   whileHover={{ x: 10, scale: 1.02 }}
-                  className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:mr-12"
+                  className="h-48 bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:mr-12"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:rotate-6 transition-all duration-500 shadow-lg">
@@ -582,7 +590,7 @@ const FeatureEcosystem: React.FC = () => {
             </div>
 
             {/* Center Hub */}
-            <div className="flex justify-center z-10">
+            <div className="flex justify-center z-10 relative">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -609,14 +617,14 @@ const FeatureEcosystem: React.FC = () => {
             </div>
 
             {/* Right Column */}
-            <div className="space-y-6 z-20">
+            <div className="space-y-6 z-20 relative">
               {features.filter(f => f.side === 'right').map((f) => (
                 <motion.div
                   key={f.id}
                   onMouseEnter={() => setHoveredId(f.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   whileHover={{ x: -10, scale: 1.02 }}
-                  className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:ml-12"
+                  className="h-48 bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:ml-12"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:-rotate-6 transition-all duration-500 shadow-lg">
@@ -1777,7 +1785,7 @@ const Home: React.FC = () => {
                 icon: ShoppingCart,
                 color: 'text-purple-500',
                 bg: 'bg-purple-50',
-                img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+                img: 'https://images.unsplash.com/photo-1674027392838-d85710a5121d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fFJldGFpbCUyMCUyNiUyMEUtQ29tbWVyY2V8ZW58MHx8MHx8fDA%3D',
                 desc: 'Customized Chatbots for customer engagement, Dynamics 365 Commerce, and intelligent web platforms that drive conversions.'
               },
               {
@@ -1785,7 +1793,7 @@ const Home: React.FC = () => {
                 icon: Factory,
                 color: 'text-orange-500',
                 bg: 'bg-orange-50',
-                img: 'https://images.unsplash.com/photo-1565034946487-077d23d7f4f1?q=60&w=800&auto=format&fit=crop&auto=format,compress',
+                img: 'https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3VwcGx5JTIwY2hhaW58ZW58MHx8MHx8fDA%3D',
                 desc: 'AI-driven predictive maintenance, ERP-unified production lines, and EDI-powered supply chain automation for Industry 4.0.'
               }
             ].map(ind => (

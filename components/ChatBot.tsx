@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { MessageCircle, X, Send, Bot, User, Volume2, VolumeX, Activity, Terminal, BrainCircuit, Monitor } from 'lucide-react';
-import { GoogleGenAI, Modality } from "@google/genai";
 
 // --- Audio Decoding Helper ---
 function decodeBase64(base64: string) {
@@ -173,65 +172,37 @@ const ChatBot: React.FC = () => {
     setIsThinking(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
-      // Step 1: Deep Reasoning with Pro model
       setIsReasoning(true);
-      const reasoningResponse = await ai.models.generateContent({
-        model: 'gemini-2.0-pro-exp-02-05',
-        contents: [{
-          parts: [{
-            text: `System Context: You are the deep reasoning core of QIntelligence.
-            Analyze this technical query and provide a high-level strategy for a response.
-            Query: ${userMessage}`
-          }]
-        }]
+      
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          isMuted: isMuted
+        }),
       });
-      const reasoningStrategy = reasoningResponse.text || "Standard architectural protocols apply.";
+
       setIsReasoning(false);
 
-      // Step 2: Generate Final User Response with standard model
-      const textResponse = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: [{
-          parts: [{
-            text: `You are QIntelligence, the highly advanced AI spokesperson for QIntellect Technologies. 
-            Services: AI, ERP, IoT, EDI, Web Architecture. 
-            Deep Reasoning Strategy: ${reasoningStrategy}
-            User asks: ${userMessage}. 
-            Provide a professional, concise technical response based on the strategy.`
-          }]
-        }]
-      });
+      if (!response.ok) {
+        throw new Error('Failed to communicate with sovereign core.');
+      }
 
-      const botText = textResponse.text || "Architecture nominal. Synchronizing protocols.";
+      const data = await response.json();
+      
+      const botText = data.text || "Architecture nominal. Synchronizing protocols.";
       setMessages(prev => [...prev, { role: 'bot', text: botText }]);
       setIsThinking(false);
 
-      // Step 2: Generate Audio from the resulting text
-      if (!isMuted) {
-        const audioResponse = await ai.models.generateContent({
-          model: 'gemini-2.5-flash-preview-tts',
-          contents: [{
-            parts: [{ text: botText }]
-          }],
-          config: {
-            responseModalities: [Modality.AUDIO],
-            speechConfig: {
-              voiceConfig: {
-                prebuiltVoiceConfig: { voiceName: 'Kore' }
-              }
-            }
-          },
-        });
-
-        const base64Audio = audioResponse.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-        if (base64Audio) {
-          await playBotAudio(base64Audio);
-        }
+      if (data.audio && !isMuted) {
+        await playBotAudio(data.audio);
       }
     } catch (error) {
       console.error(error);
+      setIsReasoning(false);
       setIsThinking(false);
       setMessages(prev => [...prev, { role: 'bot', text: "Logic interrupt. Re-establishing link..." }]);
     }

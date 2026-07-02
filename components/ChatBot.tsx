@@ -1,39 +1,18 @@
-
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { MessageCircle, X, Send, Bot, User, Volume2, VolumeX, Activity, Terminal, BrainCircuit, Monitor } from 'lucide-react';
-
-// --- Audio Decoding Helper ---
-function decodeBase64(base64: string) {
-  const binaryString = atob(base64);
-  const bytes = new Uint8Array(binaryString.length);
-  for (let i = 0; i < binaryString.length; i++) {
-    bytes[i] = binaryString.charCodeAt(i);
-  }
-  return bytes;
-}
-
-async function decodeAudioData(data: Uint8Array, ctx: AudioContext): Promise<AudioBuffer> {
-  const dataInt16 = new Int16Array(data.buffer);
-  const buffer = ctx.createBuffer(1, dataInt16.length, 24000);
-  const channelData = buffer.getChannelData(0);
-  for (let i = 0; i < dataInt16.length; i++) {
-    channelData[i] = dataInt16[i] / 32768.0;
-  }
-  return buffer;
-}
+import { MessageCircle, X, Send, Bot, User, Terminal, BrainCircuit } from 'lucide-react';
 
 // --- Talking Head Visualization Component ---
-const TalkingHead: React.FC<{ isTalking: boolean, isThinking: boolean, amplitude: number }> = ({ isTalking, isThinking, amplitude }) => {
+const TalkingHead: React.FC<{ isThinking: boolean }> = ({ isThinking }) => {
   return (
     <div className="relative w-40 h-40 mx-auto flex items-center justify-center">
       {/* Outer Neural Pulse */}
       <motion.div
         animate={{
-          scale: isThinking ? [1, 1.2, 1] : isTalking ? (1 + amplitude * 0.5) : 1,
-          opacity: isThinking || isTalking ? 0.3 : 0.1
+          scale: isThinking ? [1, 1.2, 1] : 1,
+          opacity: isThinking ? 0.3 : 0.1
         }}
         transition={{ duration: 0.8, repeat: Infinity }}
         className="absolute inset-0 rounded-full bg-blue-500 blur-2xl"
@@ -61,35 +40,21 @@ const TalkingHead: React.FC<{ isTalking: boolean, isThinking: boolean, amplitude
           <circle cx="130" cy="85" r="12" fill="#3b82f6" fillOpacity="0.2" />
         </g>
 
-        {/* Mouth Assembly (Talking Animation) */}
+        {/* Mouth Assembly (Static/Pulsing) */}
         <motion.rect
           x="75" y="140"
           width="50"
-          height={isTalking ? (4 + amplitude * 25) : 4}
+          height="4"
           rx="2"
           fill="#3b82f6"
           animate={{
-            fill: isTalking ? ["#3b82f6", "#a855f7", "#3b82f6"] : "#3b82f6"
+            fill: isThinking ? ["#3b82f6", "#a855f7", "#3b82f6"] : "#3b82f6"
           }}
-          transition={{ duration: 0.1, repeat: Infinity }}
+          transition={{ duration: 1.5, repeat: Infinity }}
         />
         <rect x="75" y="140" width="50" height="4" rx="2" fill="#3b82f6" fillOpacity="0.4" />
         <path d="M40,100 L20,100 M160,100 L180,100 M100,20 L100,10" stroke="#3b82f6" strokeWidth="1" strokeDasharray="4 2" opacity="0.5" />
       </svg>
-
-      {/* Waveform Visualization Overlay */}
-      {isTalking && (
-        <div className="absolute -bottom-4 left-0 right-0 flex justify-center space-x-1 h-8 items-end">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{ height: [4, (Math.random() * 20 + 5), 4] }}
-              transition={{ duration: 0.2, repeat: Infinity, delay: i * 0.05 }}
-              className="w-1 bg-blue-400 rounded-full"
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 };
@@ -102,14 +67,8 @@ const ChatBot: React.FC = () => {
   const [input, setInput] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const [isReasoning, setIsReasoning] = useState(false);
-  const [isTalking, setIsTalking] = useState(false);
-  const [amplitude, setAmplitude] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const activeAudioRef = useRef<AudioBufferSourceNode | null>(null);
   const botWindowRef = useRef<HTMLDivElement>(null);
 
   // 3D Tilt Values
@@ -142,42 +101,10 @@ const ChatBot: React.FC = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages, isThinking, isTalking]);
-
-  useEffect(() => {
-    let animationFrame: number;
-    const analyze = () => {
-      if (analyserRef.current && isTalking) {
-        const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
-        analyserRef.current.getByteTimeDomainData(dataArray);
-        let sum = 0;
-        for (let i = 0; i < dataArray.length; i++) {
-          const val = (dataArray[i] - 128) / 128;
-          sum += val * val;
-        }
-        const rms = Math.sqrt(sum / dataArray.length);
-        setAmplitude(rms * 3.5);
-      } else {
-        setAmplitude(0);
-      }
-      animationFrame = requestAnimationFrame(analyze);
-    };
-    analyze();
-    return () => cancelAnimationFrame(animationFrame);
-  }, [isTalking]);
+  }, [messages, isThinking]);
 
   const handleSend = async () => {
     if (!input.trim() || isThinking) return;
-
-    // Interrupt current talking if any
-    if (activeAudioRef.current) {
-      try {
-        activeAudioRef.current.stop();
-      } catch (e) {}
-      activeAudioRef.current = null;
-      setIsTalking(false);
-      setAmplitude(0);
-    }
 
     const userMessage = input.trim();
     setInput('');
@@ -193,8 +120,7 @@ const ChatBot: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: userMessage,
-          isMuted: isMuted
+          message: userMessage
         }),
       });
 
@@ -210,46 +136,12 @@ const ChatBot: React.FC = () => {
       setMessages(prev => [...prev, { role: 'bot', text: botText }]);
       setIsThinking(false);
 
-      if (data.audio && !isMuted) {
-        await playBotAudio(data.audio);
-      }
     } catch (error) {
       console.error(error);
       setIsReasoning(false);
       setIsThinking(false);
       setMessages(prev => [...prev, { role: 'bot', text: "Logic interrupt. Re-establishing link..." }]);
     }
-  };
-
-  const playBotAudio = async (base64: string) => {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
-      analyserRef.current = audioContextRef.current.createAnalyser();
-      analyserRef.current.fftSize = 256;
-    }
-    const ctx = audioContextRef.current;
-    if (ctx.state === 'suspended') await ctx.resume();
-    const audioData = decodeBase64(base64);
-    const audioBuffer = await decodeAudioData(audioData, ctx);
-    const source = ctx.createBufferSource();
-    source.buffer = audioBuffer;
-    if (analyserRef.current) {
-      source.connect(analyserRef.current);
-      analyserRef.current.connect(ctx.destination);
-    } else {
-      source.connect(ctx.destination);
-    }
-    // Store ref to allow interruption
-    activeAudioRef.current = source;
-    setIsTalking(true);
-    source.start(0);
-    source.onended = () => {
-      if (activeAudioRef.current === source) {
-        activeAudioRef.current = null;
-        setIsTalking(false);
-        setAmplitude(0);
-      }
-    };
   };
 
   return (
@@ -282,21 +174,18 @@ const ChatBot: React.FC = () => {
                   <div>
                     <h3 className="font-heading font-medium text-sm">QINTELLIGENCE AI</h3>
                     <div className="flex items-center space-x-2">
-                      <div className={`w-1.5 h-1.5 rounded-full ${isTalking ? 'bg-green-400 animate-pulse' : 'bg-blue-400'} shadow-sm`} />
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-sm" />
                       <span className="text-[10px] text-slate-400 uppercase font-mono tracking-widest">Link: Sovereign_Logic</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex space-x-2">
-                  <button onClick={() => setIsMuted(!isMuted)} className="p-2 hover:bg-white/5 rounded-lg text-slate-400 transition-colors">
-                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                  </button>
                   <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/5 rounded-lg text-slate-400 transition-colors">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
-              <TalkingHead isTalking={isTalking} isThinking={isThinking} amplitude={amplitude} />
+              <TalkingHead isThinking={isThinking} />
             </div>
 
             {/* Messages Area */}

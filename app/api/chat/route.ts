@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
-import { GoogleGenAI, Modality } from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 import { SERVICES, PORTFOLIO_PROJECTS, TEAM, BLOGS } from '@/constants';
 
 export async function POST(req: Request) {
   try {
-    const { message, isMuted } = await req.json();
+    const { message } = await req.json();
 
     if (!message) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
@@ -66,40 +66,11 @@ export async function POST(req: Request) {
     });
 
     const botText = textResponse.text || "Architecture nominal. Synchronizing protocols.";
-    let base64Audio = null;
     console.log('Step 2: Text generation complete.');
-
-    // Step 3: Generate Audio from the resulting text
-    if (!isMuted) {
-      console.log('Step 3: Starting audio generation...');
-      try {
-        const audioResponse = await ai.models.generateContent({
-          model: 'gemini-2.5-flash-preview-tts',
-          contents: [{
-            parts: [{ text: botText }]
-          }],
-          config: {
-            responseModalities: [Modality.AUDIO],
-            speechConfig: {
-              voiceConfig: {
-                prebuiltVoiceConfig: { voiceName: 'Kore' }
-              }
-            }
-          },
-        });
-
-        base64Audio = audioResponse.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-        console.log('Step 3: Audio generation complete.');
-      } catch (audioError) {
-        console.error('Audio generation failed:', audioError);
-        // Continue even if audio fails
-      }
-    }
 
     console.log('All steps complete, returning response.');
     return NextResponse.json({
-      text: botText,
-      audio: base64Audio
+      text: botText
     }, { status: 200 });
 
   } catch (error) {

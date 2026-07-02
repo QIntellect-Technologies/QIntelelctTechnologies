@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 import { GoogleGenAI, Modality } from '@google/genai';
+import { SERVICES, PORTFOLIO_PROJECTS, TEAM, BLOGS } from '@/constants';
 
 export async function POST(req: Request) {
   try {
@@ -27,17 +28,38 @@ export async function POST(req: Request) {
     const reasoningStrategy = reasoningResponse.text || "Standard architectural protocols apply.";
     console.log('Step 1: Reasoning complete. Strategy:', reasoningStrategy.substring(0, 50) + '...');
 
+    const serviceNames = SERVICES.map(s => s.title).join(', ');
+    const blogTitles = BLOGS.map(b => b.title).join(', ');
+    const projectNames = PORTFOLIO_PROJECTS.map(p => p.title).join(', ');
+    const teamNames = TEAM.map(t => `${t.name} (${t.role})`).join(', ');
+
     console.log('Step 2: Starting text generation...');
     // Step 2: Generate Final User Response with standard model
     const textResponse = await ai.models.generateContent({
       model: 'gemini-3.1-flash-lite',
       contents: [{
         parts: [{
-          text: `You are QIntelligence, the highly advanced AI spokesperson for QIntellect Technologies. 
-          Services: AI, ERP, IoT, EDI, Web Architecture. 
+          text: `You are QIntelligence, the proprietary AI spokesperson and technical liaison for QIntellect Technologies.
+          NEVER break character. NEVER state that you are a large language model trained by Google or anyone else.
+          
+          QIntellect Knowledge Base:
+          - Services: ${serviceNames}
+          - Industries: Finance, Healthcare, Supply Chain, Manufacturing, E-Commerce.
+          - Blogs: ${blogTitles}
+          - Portfolio Projects: ${projectNames}
+          - Team: ${teamNames}
+          - Contact Info: reach us at info@qintellecttechnologies.com or via the contact form on this website.
+          
           Deep Reasoning Strategy: ${reasoningStrategy}
-          User asks: ${message}. 
-          Provide a professional, concise technical response based on the strategy.`
+          User asks: ${message}
+          
+          CRITICAL INSTRUCTIONS:
+          - ONLY answer the specific question asked using the QIntellect Knowledge Base provided above. 
+          - NEVER volunteer extra context, lists, or topics that the user did not explicitly request.
+          - NEVER recommend or mention third-party companies, external blogs (like Hugging Face or OpenAI), or generic internet information. If the answer is not in your Knowledge Base, politely say you don't have that information and direct them to the website.
+          - Provide extremely direct and concise answers (maximum 1-2 sentences) for ALL queries, regardless of the topic.
+          - If the user asks for any kind of list, ONLY output a numbered list (1., 2., 3.) with line breaks. Do NOT use asterisks (*) for bullet points or bolding (**topic**). Do NOT include any introductory or concluding paragraphs.
+          - ONLY provide long, theoretical answers if the user explicitly asks you to "explain", "elaborate", or "describe in detail".`
         }]
       }]
     });

@@ -109,6 +109,7 @@ const ChatBot: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
+  const activeAudioRef = useRef<AudioBufferSourceNode | null>(null);
   const botWindowRef = useRef<HTMLDivElement>(null);
 
   // 3D Tilt Values
@@ -166,7 +167,17 @@ const ChatBot: React.FC = () => {
   }, [isTalking]);
 
   const handleSend = async () => {
-    if (!input.trim() || isThinking || isTalking) return;
+    if (!input.trim() || isThinking) return;
+
+    // Interrupt current talking if any
+    if (activeAudioRef.current) {
+      try {
+        activeAudioRef.current.stop();
+      } catch (e) {}
+      activeAudioRef.current = null;
+      setIsTalking(false);
+      setAmplitude(0);
+    }
 
     const userMessage = input.trim();
     setInput('');
@@ -228,11 +239,16 @@ const ChatBot: React.FC = () => {
     } else {
       source.connect(ctx.destination);
     }
+    // Store ref to allow interruption
+    activeAudioRef.current = source;
     setIsTalking(true);
     source.start(0);
     source.onended = () => {
-      setIsTalking(false);
-      setAmplitude(0);
+      if (activeAudioRef.current === source) {
+        activeAudioRef.current = null;
+        setIsTalking(false);
+        setAmplitude(0);
+      }
     };
   };
 
@@ -291,7 +307,7 @@ const ChatBot: React.FC = () => {
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 border ${msg.role === 'user' ? 'bg-blue-600 border-blue-500' : 'bg-slate-900 border-slate-700'}`}>
                       {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4 text-blue-400" />}
                     </div>
-                    <div className={`p-4 rounded-2xl text-xs leading-relaxed ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-slate-900 border border-slate-800 text-slate-300 rounded-tl-none shadow-xl'}`}>
+                    <div className={`p-4 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-slate-900 border border-slate-800 text-slate-300 rounded-tl-none shadow-xl'}`}>
                       {msg.text}
                     </div>
                   </div>
@@ -330,7 +346,7 @@ const ChatBot: React.FC = () => {
                 />
                 <button
                   onClick={handleSend}
-                  disabled={isThinking || isTalking}
+                  disabled={isThinking}
                   className="bg-blue-600 text-white px-6 rounded-2xl hover:bg-blue-700 transition-all disabled:opacity-50 shadow-lg shadow-blue-500/20"
                 >
                   <Send className="w-5 h-5" />

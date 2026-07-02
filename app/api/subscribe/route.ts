@@ -18,6 +18,29 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to send email: Configuration error' }, { status: 500 });
     }
 
+    // 1. ADD SUBSCRIBER TO BREVO CONTACTS LIST
+    // This allows you to log into Brevo and see all your subscribers in one place
+    const contactResponse = await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        updateEnabled: true // If they already exist, just update them without throwing an error
+      })
+    });
+
+    if (!contactResponse.ok) {
+      const errorData = await contactResponse.text();
+      console.error('Brevo Contacts API Error:', errorData);
+      // We don't necessarily want to fail the whole process if they are already in the list, 
+      // but you can monitor this log if needed.
+    }
+
+    // 2. SEND THE WELCOME / THANK YOU EMAIL
     const emailPayload = {
       sender: {
         name: 'QIntellect Technologies',
@@ -54,7 +77,7 @@ The QIntellect Team
       `
     };
 
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+    const emailResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
         'accept': 'application/json',
@@ -64,9 +87,9 @@ The QIntellect Team
       body: JSON.stringify(emailPayload)
     });
 
-    if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Brevo API Error:', errorData);
+    if (!emailResponse.ok) {
+      const errorData = await emailResponse.text();
+      console.error('Brevo Email API Error:', errorData);
       return NextResponse.json({ error: 'Failed to send subscription email' }, { status: 500 });
     }
 

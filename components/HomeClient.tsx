@@ -33,7 +33,7 @@ import {
   Cpu as ProcessorIcon,
   Activity as PulseIcon,
   Briefcase as Linkedin,
-  MessageCircle as Twitter,
+  MessageCircle as WhatsApp,
   Camera as Instagram,
   BarChart3,
   Users,
@@ -1526,8 +1526,8 @@ const Home: React.FC = () => {
             </div>
             <div className="flex flex-col space-y-6">
               <a href="https://www.facebook.com/share/1DxPczJJwq/" target="_blank" rel="noreferrer" className="text-white/60 hover:text-cyan-400 transition-colors"><Globe className="w-4 h-4" /></a>
-              <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors"><Linkedin className="w-4 h-4" /></a>
-              <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors"><Twitter className="w-4 h-4" /></a>
+              <a href="https://www.linkedin.com/posts/qintellect-technologies_businessautomation-aiautomation-digitaltransformation-activity-7477750513720291328-ToOL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEULbH0B1E3WY7xlh-J_g3BKI6fTO60Rjlo" target="_blank" rel="noreferrer" className="text-white/60 hover:text-cyan-400 transition-colors"><Linkedin className="w-4 h-4" /></a>
+              <a href="https://wa.me/923029633999" target="_blank" rel="noreferrer" className="text-white/60 hover:text-cyan-400 transition-colors"><WhatsApp className="w-4 h-4" /></a>
               <a href="https://www.instagram.com/qintellect_technologies?igsh=OHR0dnkwZGZyYnFt" target="_blank" rel="noreferrer" className="text-white/60 hover:text-cyan-400 transition-colors"><Instagram className="w-4 h-4" /></a>
             </div>
           </div>

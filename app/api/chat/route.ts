@@ -71,8 +71,8 @@ export async function POST(req: Request) {
       audio: base64Audio
     }, { status: 200 });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Chat API Error:', error);
-    return NextResponse.json({ error: error.message || 'Logic interrupt. Re-establishing link...' }, { status: 500 });
+    return NextResponse.json({ error: 'Logic interrupt. Re-establishing link...' }, { status: 500 });
   }
 }

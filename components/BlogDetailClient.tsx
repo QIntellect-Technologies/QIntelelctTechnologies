@@ -70,11 +70,11 @@ const BlogDetail: React.FC = () => {
       {/* Breadcrumb */}
       <div className="bg-gray-50 pt-32 pb-8 border-b">
         <div className="container mx-auto px-4 md:px-8">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600">
+          <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-600">
             <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-4 h-4 flex-shrink-0" />
             <Link href="/blog" className="hover:text-blue-600 transition-colors">Blog</Link>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-4 h-4 flex-shrink-0" />
             <span className="text-blue-600 font-medium">{post.category}</span>
           </nav>
         </div>
@@ -267,18 +267,20 @@ const BlogDetail: React.FC = () => {
 
               {/* Share Buttons */}
               <div className="border-t border-gray-200 pt-8">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <h3 className="text-lg font-semibold text-gray-900">Share this article</h3>
-                  <div className="flex items-center gap-4">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <button 
+                      onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    >
                       <Facebook className="w-4 h-4" />
                       <span>Facebook</span>
                     </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors">
-                      <Twitter className="w-4 h-4" />
-                      <span>X as Twitter</span>
-                    </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors">
+                    <button 
+                      onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
+                    >
                       <Linkedin className="w-4 h-4" />
                       <span>LinkedIn</span>
                     </button>
@@ -353,13 +355,55 @@ const BlogDetail: React.FC = () => {
               <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
                 <div className="text-center">
                   <Mail className="w-8 h-8 mx-auto mb-4 opacity-90" />
-                  <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
-                  <p className="text-blue-100 text-sm mb-4 leading-relaxed">
-                    Get the latest insights and industry trends delivered to your inbox.
+                  <h3 className="text-xl font-bold mb-2">Monthly Tech Digest</h3>
+                  <p className="text-blue-100 text-sm mb-6 leading-relaxed">
+                    Join our newsletter to get a monthly roundup of our best insights on AI, ERP, and EDI solutions.
                   </p>
-                  <button className="w-full py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-50 transition-colors font-medium">
-                    Subscribe Now
-                  </button>
+                  <form 
+                    onSubmit={async (e) => { 
+                      e.preventDefault(); 
+                      const form = e.currentTarget;
+                      const emailInput = form.elements.namedItem('email') as HTMLInputElement;
+                      const submitBtn = form.elements.namedItem('submitBtn') as HTMLButtonElement;
+                      
+                      try {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Subscribing...';
+                        
+                        const res = await fetch('/api/subscribe', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ email: emailInput.value }),
+                        });
+                        
+                        if (res.ok) {
+                          alert("Thanks for subscribing to our Monthly Tech Digest!"); 
+                          form.reset();
+                        } else {
+                          const data = await res.json();
+                          alert(data.error || "An error occurred. Please try again.");
+                        }
+                      } catch (err) {
+                        alert("An error occurred. Please try again.");
+                      } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Subscribe Now';
+                      }
+                    }} 
+                    className="space-y-3"
+                  >
+                    <input 
+                      name="email"
+                      type="email" 
+                      placeholder="Enter your email" 
+                      required
+                      className="w-full px-4 py-3 bg-white rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 border-none"
+                    />
+                    <button name="submitBtn" type="submit" className="w-full py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-50 transition-colors font-bold shadow-lg disabled:opacity-75">
+                      Subscribe Now
+                    </button>
+                  </form>
+                  <p className="text-xs text-blue-200 mt-4">We respect your privacy. Unsubscribe at any time.</p>
                 </div>
               </div>
 

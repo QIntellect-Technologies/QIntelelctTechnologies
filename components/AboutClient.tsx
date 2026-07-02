@@ -508,16 +508,18 @@ const About: React.FC = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pt-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-slate-900 text-white font-bold rounded-full flex items-center space-x-3 shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all"
-                >
-                  <span className="uppercase text-sm tracking-wider">Discover More</span>
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                    <ArrowRight className="w-4 h-4 text-white" />
-                  </div>
-                </motion.button>
+                <Link href="/services">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-4 bg-slate-900 text-white font-bold rounded-full flex items-center space-x-3 shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all"
+                  >
+                    <span className="uppercase text-sm tracking-wider">Discover More</span>
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </div>
+                  </motion.button>
+                </Link>
 
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white shadow-lg">

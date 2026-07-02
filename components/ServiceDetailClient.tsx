@@ -974,7 +974,7 @@ const ServiceDetail: React.FC = () => {
     <div className="bg-white min-h-screen font-light selection:bg-blue-100 selection:text-blue-700">
 
       {/* ===== HERO SECTION (Same as Services Page) ===== */}
-      <section className="relative h-[80vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100vh] pt-32 pb-20 md:min-h-[90vh] md:pt-0 md:pb-0 h-auto flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div
           className="absolute inset-0 bg-no-repeat"
@@ -1053,12 +1053,12 @@ const ServiceDetail: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-8 mb-10"
+            className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-6 md:gap-8 mb-10"
           >
             {content.stats.map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-blue-400">{stat.value}</div>
-                <div className="text-slate-400 text-sm mt-1">{stat.label}</div>
+                <div className="text-3xl md:text-5xl font-bold text-blue-400">{stat.value}</div>
+                <div className="text-slate-400 text-xs md:text-sm mt-1">{stat.label}</div>
               </div>
             ))}
           </motion.div>

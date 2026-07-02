@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ChatBot from '@/components/ChatBot';
 
 export const metadata: Metadata = {
   title: 'QIntellect Technologies',
@@ -26,6 +27,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ChatBot />
       </body>
     </html>
   );

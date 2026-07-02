@@ -1,4 +1,6 @@
 
+"use client";
+
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { MessageCircle, X, Send, Bot, User, Volume2, VolumeX, Activity, Terminal, BrainCircuit, Monitor } from 'lucide-react';

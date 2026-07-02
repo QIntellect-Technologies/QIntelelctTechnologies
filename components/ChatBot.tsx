@@ -190,7 +190,12 @@ const ChatBot: React.FC = () => {
       setIsReasoning(false);
 
       if (!response.ok) {
-        throw new Error('Failed to communicate with sovereign core.');
+        let errMessage = 'Failed to communicate with sovereign core.';
+        try {
+          const errData = await response.json();
+          if (errData.error) errMessage = errData.error;
+        } catch (e) {}
+        throw new Error(errMessage);
       }
 
       const data = await response.json();
@@ -202,11 +207,11 @@ const ChatBot: React.FC = () => {
       if (data.audio && !isMuted) {
         await playBotAudio(data.audio);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       setIsReasoning(false);
       setIsThinking(false);
-      setMessages(prev => [...prev, { role: 'bot', text: "Logic interrupt. Re-establishing link..." }]);
+      setMessages(prev => [...prev, { role: 'bot', text: `Logic interrupt: ${error.message}` }]);
     }
   };
 

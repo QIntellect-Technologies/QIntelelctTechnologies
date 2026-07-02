@@ -1088,7 +1088,7 @@ const TeamSection: React.FC = () => {
                   <Globe className="w-4 h-4" />
                 </a>
                 <a href={currentMember.socials.twitter} className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#FF5722] hover:text-white flex items-center justify-center transition-all">
-                  <Twitter className="w-4 h-4" />
+                  <WhatsApp className="w-4 h-4" />
                 </a>
                 <a href={currentMember.socials.linkedin} className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#FF5722] hover:text-white flex items-center justify-center transition-all">
                   <Linkedin className="w-4 h-4" />

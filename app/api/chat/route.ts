@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     console.log('Step 1: Reasoning complete. Strategy:', reasoningStrategy.substring(0, 50) + '...');
 
     const serviceNames = SERVICES.map(s => s.title).join(', ');
-    const blogTitles = BLOGS.map(b => b.title).join(', ');
+    const blogData = BLOGS.map(b => `"${b.title}" (Category: ${b.category})`).join(' | ');
     const projectNames = PORTFOLIO_PROJECTS.map(p => p.title).join(', ');
     const teamNames = TEAM.map(t => `${t.name} (${t.role})`).join(', ');
 
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
           QIntellect Knowledge Base:
           - Services: ${serviceNames}
           - Industries: Finance, Healthcare, Supply Chain, Manufacturing, E-Commerce.
-          - Blogs: ${blogTitles}
+          - Blogs: ${blogData}
           - Portfolio Projects: ${projectNames}
           - Team: ${teamNames}
           - Contact Info: reach us at info@qintellecttechnologies.com or via the contact form on this website.
@@ -57,7 +57,8 @@ export async function POST(req: Request) {
           - ONLY answer the specific question asked using the QIntellect Knowledge Base provided above. 
           - NEVER volunteer extra context, lists, or topics that the user did not explicitly request.
           - NEVER recommend or mention third-party companies, external blogs (like Hugging Face or OpenAI), or generic internet information. If the answer is not in your Knowledge Base, politely say you don't have that information and direct them to the website.
-          - Provide extremely direct and concise answers (maximum 1-2 sentences) for ALL queries, regardless of the topic.
+          - Provide extremely direct and concise answers (maximum 1-2 sentences) for ALL queries, except when providing lists.
+          - If the user asks for a filtered list (e.g., "blogs about AI"), use the categories provided to give an accurate, exhaustive list. Do not guess.
           - If the user asks for any kind of list, ONLY output a numbered list (1., 2., 3.) with line breaks. Do NOT use asterisks (*) for bullet points or bolding (**topic**). Do NOT include any introductory or concluding paragraphs.
           - ONLY provide long, theoretical answers if the user explicitly asks you to "explain", "elaborate", or "describe in detail".`
         }]

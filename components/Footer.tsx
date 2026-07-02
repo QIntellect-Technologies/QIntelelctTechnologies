@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
     { name: 'WhatsApp', icon: WhatsApp, url: 'https://wa.me/923029633999', color: 'hover:bg-slate-900' },
     { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/share/1DxPczJJwq/', color: 'hover:bg-slate-900' },
     { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/qintellect_technologies?igsh=OHR0dnkwZGZyYnFt', color: 'hover:bg-slate-900' },
-    { name: 'LinkedIn', icon: Linkedin, url: '#', color: 'hover:bg-slate-900' },
+    { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/posts/qintellect-technologies_businessautomation-aiautomation-digitaltransformation-activity-7477750513720291328-ToOL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEULbH0B1E3WY7xlh-J_g3BKI6fTO60Rjlo', color: 'hover:bg-slate-900' },
   ];
 
   const navLinks = [

@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemaps
-Sitemap: https://www.qintellecttechnologies.com/sitemap.xml
-
-# Disallow admin/private paths
-Disallow: /node_modules/
-Disallow: /.git/

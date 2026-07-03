@@ -574,7 +574,7 @@ const FeatureEcosystem: React.FC = () => {
                   onMouseEnter={() => setHoveredId(f.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   whileHover={{ x: 10, scale: 1.02 }}
-                  className="h-48 bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:mr-12"
+                  className="h-auto min-h-[12rem] bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:mr-12"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:rotate-6 transition-all duration-500 shadow-lg">
@@ -624,7 +624,7 @@ const FeatureEcosystem: React.FC = () => {
                   onMouseEnter={() => setHoveredId(f.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   whileHover={{ x: -10, scale: 1.02 }}
-                  className="h-48 bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:ml-12"
+                  className="h-auto min-h-[12rem] bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-500 group cursor-pointer lg:ml-12"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:-rotate-6 transition-all duration-500 shadow-lg">

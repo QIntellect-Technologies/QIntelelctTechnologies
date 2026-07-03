@@ -107,7 +107,7 @@ const Portfolios: React.FC = () => {
                 className="group flex flex-col space-y-8"
               >
                 {/* Visual Frame with Parallax-ish Hover */}
-                <div className="relative rounded-2xl overflow-hidden aspect-[16/10] shadow-3xl bg-slate-900 border border-slate-100">
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[16/10] shadow-3xl bg-slate-900 border border-slate-100">
                   <img loading="lazy"
                     src={project.image}
                     alt={project.title}
@@ -116,22 +116,22 @@ const Portfolios: React.FC = () => {
                   <div className="absolute inset-0 bg-blue-900/10 pointer-events-none" />
 
                   {/* Floating Tech Tag */}
-                  <div className="absolute top-6 left-6 p-4 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-white/60 flex items-center space-x-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white">
+                  <div className="absolute top-4 left-4 md:top-6 md:left-6 p-3 md:p-4 bg-white/90 backdrop-blur-xl rounded-xl md:rounded-2xl shadow-xl border border-white/60 flex items-center space-x-3 md:space-x-4 max-w-[85%] md:max-w-none">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-blue-600 flex-shrink-0 flex items-center justify-center text-white">
                       {getIcon(project.category)}
                     </div>
-                    <div className="flex flex-col">
-                      <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Architectural Domain</span>
-                      <span className="text-xs font-bold text-slate-900">{project.domain}</span>
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-[8px] md:text-[9px] font-black text-slate-400 uppercase tracking-widest truncate">Architectural Domain</span>
+                      <span className="text-xs md:text-sm font-bold text-slate-900 truncate leading-tight mt-0.5">{project.domain}</span>
                     </div>
                   </div>
 
                   {/* Metrics Badge */}
-                  <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 flex gap-2 md:gap-4">
+                  <div className="absolute bottom-4 left-4 right-4 md:left-auto md:bottom-6 md:right-6 flex flex-wrap justify-start md:justify-end gap-2 md:gap-4">
                     {project.metrics.slice(0, 3).map((m, idx) => (
-                      <div key={idx} className={`p-3 md:p-4 bg-slate-900/90 backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 text-white shadow-xl ${idx === 2 ? 'hidden xl:block' : ''}`}>
+                      <div key={idx} className={`p-3 md:p-4 bg-slate-900/90 backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 text-white shadow-xl flex-1 md:flex-none min-w-[100px] ${idx === 2 ? 'hidden xl:block' : ''}`}>
                         <div className="text-xl md:text-2xl font-heading font-medium tracking-tighter text-blue-400 whitespace-nowrap">{m.value}</div>
-                        <div className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-slate-400 mt-1 line-clamp-2 md:line-clamp-none leading-relaxed">{m.label}</div>
+                        <div className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-slate-400 mt-1 line-clamp-2 leading-relaxed">{m.label}</div>
                       </div>
                     ))}
                   </div>

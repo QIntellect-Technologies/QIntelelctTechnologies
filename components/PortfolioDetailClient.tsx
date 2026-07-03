@@ -78,7 +78,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
   }, [project.roadmap]);
 
   return (
-    <div className="bg-white min-h-screen font-light selection:bg-blue-100 selection:text-blue-700">
+    <div className="bg-white min-h-screen font-light selection:bg-blue-100 selection:text-blue-700 overflow-x-hidden">
 
       {/* ===== HERO SECTION ===== */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
@@ -224,7 +224,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 }}
                 viewport={{ once: true }}
-                className="absolute -bottom-8 -right-8 bg-blue-600 text-white p-6 rounded-2xl shadow-xl"
+                className="absolute -bottom-4 right-0 md:-bottom-8 md:-right-8 bg-blue-600 text-white p-4 md:p-6 rounded-2xl shadow-xl"
               >
                 <div className="text-4xl font-bold">∞</div>
                 <div className="text-blue-100 text-sm mt-1">Continuous Uptime</div>
@@ -521,7 +521,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute -top-6 -right-6 w-20 h-20 bg-blue-500 rounded-2xl shadow-xl flex items-center justify-center"
+                  className="absolute -top-6 right-0 md:-right-6 w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-2xl shadow-xl flex items-center justify-center"
                 >
                   <span className="text-2xl font-bold text-white">
                     {String(activeStep + 1).padStart(2, '0')}

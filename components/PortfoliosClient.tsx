@@ -127,11 +127,11 @@ const Portfolios: React.FC = () => {
                   </div>
 
                   {/* Metrics Badge */}
-                  <div className="absolute bottom-6 right-6 flex space-x-4">
-                    {project.metrics.map((m, idx) => (
-                      <div key={idx} className="p-4 bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-white/10 text-white shadow-xl">
-                        <div className="text-2xl font-heading font-medium tracking-tighter text-blue-400">{m.value}</div>
-                        <div className="text-[8px] font-black uppercase tracking-[0.3em] text-slate-400 mt-1">{m.label}</div>
+                  <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 flex gap-2 md:gap-4">
+                    {project.metrics.slice(0, 3).map((m, idx) => (
+                      <div key={idx} className={`p-3 md:p-4 bg-slate-900/90 backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 text-white shadow-xl ${idx === 2 ? 'hidden xl:block' : ''}`}>
+                        <div className="text-xl md:text-2xl font-heading font-medium tracking-tighter text-blue-400 whitespace-nowrap">{m.value}</div>
+                        <div className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-slate-400 mt-1 line-clamp-2 md:line-clamp-none leading-relaxed">{m.label}</div>
                       </div>
                     ))}
                   </div>

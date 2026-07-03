@@ -100,7 +100,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
           <motion.nav
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center space-x-2 mb-8"
+            className="flex flex-wrap items-center justify-center gap-2 mb-8"
           >
             <Link href="/" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Home</Link>
             <ChevronRight className="w-4 h-4 text-slate-500" />
@@ -127,7 +127,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 font-heading"
+            className="text-4xl md:text-6xl lg:text-8xl font-bold text-white mb-6 font-heading leading-tight"
           >
             {project.title}
           </motion.h1>
@@ -202,9 +202,9 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
       </section>
 
       {/* ===== OVERVIEW SECTION ===== */}
-      <section className="py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -216,7 +216,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
                   loading="lazy"
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-64 md:h-[500px] object-cover"
                 />
               </div>
               <motion.div
@@ -274,7 +274,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
               <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider rounded-full mb-6">
                 What You Get
               </span>
-              <h2 className="text-4xl md:text-6xl font-bold text-slate-900 font-heading mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading mb-6">
                 Key <span className="text-blue-600">Features</span>
               </h2>
               <p className="text-xl text-slate-500 max-w-2xl mx-auto">
@@ -341,7 +341,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
               <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider rounded-full mb-6">
                 Flexible Deployment
               </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 font-heading mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading mb-6">
                 Choose Your <span className="text-blue-600">Hardware</span> Option
               </h2>
               <p className="text-xl text-slate-500 max-w-3xl mx-auto">
@@ -485,7 +485,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
                       transition={{ duration: 0.5 }}
                       src={project.roadmapImages?.[activeStep % project.roadmapImages.length] || roadmapImages[activeStep % roadmapImages.length]}
                       alt={project.roadmap[activeStep]?.title}
-                      className="w-full h-[500px] object-cover"
+                      className="w-full h-64 md:h-[500px] object-cover"
                     />
                   </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent" />
@@ -540,7 +540,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-16 text-center relative overflow-hidden"
+            className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden"
           >
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0" style={{
@@ -558,7 +558,7 @@ export default function PortfolioDetailClient({ project }: { project: PortfolioP
                 <div className="w-2.5 h-2.5 bg-blue-400 rounded-full animate-pulse" />
                 <span className="text-white/95 text-sm font-medium uppercase tracking-wider">Ready to deploy?</span>
               </motion.div>
-              <h2 className="text-4xl md:text-6xl font-bold text-white font-heading mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold text-white font-heading mb-6">
                 Want This System<br />
                 <span className="text-blue-400">For Your Business?</span>
               </h2>

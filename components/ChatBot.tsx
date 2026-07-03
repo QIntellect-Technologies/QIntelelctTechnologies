@@ -146,12 +146,14 @@ const ChatBot: React.FC = () => {
             ref={botWindowRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            style={isMobile ? {} : { rotateX, rotateY, transformStyle: "preserve-3d" }}
+            style={isMobile
+              ? { height: 'calc(100svh - 7rem)' }
+              : { height: '700px', rotateX, rotateY, transformStyle: 'preserve-3d' } as React.CSSProperties
+            }
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
             className="mb-4 md:mb-6 w-[calc(100vw-2rem)] sm:w-96 md:w-[450px] flex flex-col rounded-2xl shadow-2xl overflow-hidden bg-slate-900 border border-slate-800 text-white"
-            style={isMobile ? { height: 'calc(100svh - 7rem)' } : { height: '700px', rotateX, rotateY, transformStyle: 'preserve-3d' } as React.CSSProperties}
           >
             {/* Header / Visualization */}
             <div className="bg-slate-900 px-5 py-4 md:p-8 border-b border-white/5 relative overflow-hidden flex-shrink-0">

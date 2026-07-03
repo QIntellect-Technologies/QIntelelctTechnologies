@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { BLOGS } from '../constants';
-import { ArrowRight, MessageCircle, User, Search, Filter } from 'lucide-react';
+import { ArrowRight, User, Search } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 
 // Animated Typewriter Component for Blog Page
@@ -243,7 +243,7 @@ const Blog: React.FC = () => {
                       </p>
 
                       {/* Footer */}
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center">
                         <Link
                           href={`/blog/${post.id}`}
                           className="inline-flex items-center gap-2 text-blue-600 font-medium text-sm hover:text-blue-700 transition-colors"
@@ -251,10 +251,6 @@ const Blog: React.FC = () => {
                           READ MORE
                           <ArrowRight className="w-4 h-4" />
                         </Link>
-                        <div className="flex items-center gap-1 text-gray-400 text-sm">
-                          <MessageCircle className="w-4 h-4" />
-                          <span>No Comments</span>
-                        </div>
                       </div>
                     </div>
                   </motion.article>

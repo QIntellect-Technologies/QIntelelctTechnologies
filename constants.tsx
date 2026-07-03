@@ -390,16 +390,37 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     category: 'Web',
     domain: 'Medicine Distribution',
     client: 'Swift Sales',
-    summary: 'A robust web platform with an integrated chatbot designed to streamline medicine distribution and handle customer queries effortlessly.',
-    fullDescription: 'Swift Sales required a reliable, scalable platform to manage their medicine distribution network. We developed a custom web application using React for a dynamic frontend and Express for a secure, fast backend API. Additionally, we integrated a smart chatbot directly into the website to assist users with product inquiries, order tracking, and general support, reducing the manual support load significantly.',
-    roadmap: [
-      { phase: 'Phase 1', title: 'Architecture & Design', description: 'Designing the database schema and React component hierarchy for medicine inventory.' },
-      { phase: 'Phase 2', title: 'Express API Development', description: 'Building secure RESTful endpoints for distribution management.' },
-      { phase: 'Phase 3', title: 'Chatbot Integration', description: 'Developing the conversational agent to handle user queries and product FAQs.' },
-      { phase: 'Phase 4', title: 'Deployment & Scaling', description: 'Deploying the React and Express apps to high-availability cloud infrastructure.' }
+    summary: 'A robust, scalable web platform with an integrated AI chatbot that streamlines medicine distribution, automates customer support, and manages inventory across Swift Sales\' entire network.',
+    fullDescription: 'Swift Sales operates a large medicine distribution network that demanded a reliable, high-performance digital backbone. We delivered a custom full-stack web application built with React on the frontend for a fast, dynamic experience and Express.js on the backend for a secure, scalable API layer. The platform gives Swift Sales complete control over their product catalogue, orders, deliveries, and distribution partners from a single dashboard. To handle the heavy volume of customer queries — ranging from product availability and pricing to order tracking and returns — we integrated a smart AI chatbot directly into the platform. The chatbot resolves 75% of all incoming queries without any human involvement, dramatically reducing the support workload. The system is built for scale, deployed on cloud infrastructure with automated failover and 99.9% guaranteed uptime.',
+    features: [
+      { icon: '🌐', title: 'Full-Stack Web Platform', description: 'A custom-built React frontend and Express.js backend that delivers a fast, intuitive interface for managing the entire medicine distribution operation.' },
+      { icon: '🤖', title: 'Integrated AI Chatbot', description: 'A smart chatbot embedded directly into the website that answers product queries, tracks orders, and handles customer support — 24 hours a day, 7 days a week.' },
+      { icon: '📦', title: 'Inventory & Order Management', description: 'Real-time inventory tracking, order placement, and delivery status management across the full distribution network from a single dashboard.' },
+      { icon: '🔒', title: 'Secure API Layer', description: 'RESTful Express.js endpoints protected with authentication and role-based access control, keeping business data and customer information safe.' },
+      { icon: '📊', title: 'Distribution Analytics', description: 'Live dashboards showing order volumes, top-selling products, delivery performance, and customer query trends to support data-driven decisions.' },
+      { icon: '☁️', title: 'High-Availability Cloud Deployment', description: 'The platform runs on cloud infrastructure with automated failover, load balancing, and 99.9% uptime SLA — so the business never goes offline.' }
     ],
-    metrics: [{ label: 'Query Automation', value: '75%' }, { label: 'Platform Uptime', value: '99.9%' }],
-    stack: ['React', 'Express', 'Node.js', 'AI Chatbot'],
+    roadmap: [
+      { phase: 'Phase 1', title: 'Architecture & Design', description: 'Designing the database schema, API structure, and React component hierarchy for the medicine inventory and distribution system.' },
+      { phase: 'Phase 2', title: 'Express API Development', description: 'Building secure RESTful endpoints for product catalogue management, order processing, and distribution partner access.' },
+      { phase: 'Phase 3', title: 'Frontend & Dashboard Build', description: 'Developing the React frontend with real-time data visualisation, inventory controls, and an intuitive admin dashboard.' },
+      { phase: 'Phase 4', title: 'AI Chatbot Integration', description: 'Training and embedding the conversational AI agent to handle product FAQs, order tracking, and customer support queries automatically.' },
+      { phase: 'Phase 5', title: 'Deployment & Scaling', description: 'Deploying the full platform to cloud infrastructure with automated scaling, failover, and continuous monitoring.' }
+    ],
+    roadmapImages: [
+      'https://images.unsplash.com/photo-1683803055067-1ca1c17cb2b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHBlb3BsZSUyMGRlc2lnbmluZyUyMHNvbWV0aGluZyUyMG9uJTIwbGFwdG9wfGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1648134859211-4a1b57575f4e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGZyb250ZW5kJTIwZGVzaWdufGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1561409992-40604a3debb5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI1fHxjaGF0Ym90fGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNsb3VkJTIwY29tcHV0aW5nfGVufDB8fDB8fHww'
+    ],
+    metrics: [
+      { label: 'Query Automation', value: '75%' },
+      { label: 'Platform Uptime', value: '99.9%' },
+      { label: 'Support Load Reduced', value: '3x' },
+      { label: 'Response Time', value: '<2 sec' }
+    ],
+    stack: ['React', 'Express.js', 'Node.js', 'MongoDB', 'AI Chatbot', 'REST API', 'Cloud Hosting'],
     image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&auto=format,compress&q=60&w=800'
   },
   {
@@ -408,17 +429,87 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     category: 'Chatbot',
     domain: 'Hospitality & Food Service',
     client: 'Johana Restaurant',
-    summary: 'A multilingual WhatsApp chatbot that automates ordering and automatically generates payable invoices upon checkout.',
-    fullDescription: 'To modernize the customer experience at Johana Restaurant, we built a highly intelligent WhatsApp chatbot. It offers two convenient ordering methods: customers can tap interactive buttons for a quick checkout, or simply type their order in natural language. The bot is fully multilingual, capable of understanding and responding to queries in any language. Once a user finalizes their order, the chatbot automatically generates a dynamic invoice/bill that can be paid instantly using any banking app or payment gateway of their choice, ensuring a completely frictionless checkout experience.',
-    roadmap: [
-      { phase: 'Phase 1', title: 'WhatsApp Business Setup', description: 'Configuring the WhatsApp API and webhooks for the restaurant.' },
-      { phase: 'Phase 2', title: 'Button & NLP Ordering', description: 'Implementing interactive button logic and training the AI to understand typed, multilingual orders.' },
-      { phase: 'Phase 3', title: 'Automated Invoicing & Payments', description: 'Building the billing engine to instantly generate cross-platform payable invoices the moment an order is finalized.' },
-      { phase: 'Phase 4', title: 'Kitchen POS Integration', description: 'Seamlessly routing the confirmed WhatsApp orders directly to the kitchen display system.' }
+    summary: 'A multilingual WhatsApp chatbot that lets customers order by button tap or natural language, auto-generates payable invoices at checkout, and routes confirmed orders straight to the kitchen.',
+    fullDescription: 'Johana Restaurant wanted to bring their ordering experience into the modern era without requiring customers to download an app or visit a website. We built a fully intelligent WhatsApp chatbot that works directly in the messaging app every customer already uses. The bot offers two ordering modes: customers can tap through a structured button menu for speed, or simply type their order in plain text — even in their native language. The multilingual NLP engine understands orders in any language, ensuring no customer is ever left confused. Once an order is placed, the chatbot instantly generates a professional, itemised invoice that the customer can pay with any banking app or payment gateway — no cash handling, no waiting at a till. Confirmed orders flow directly to the kitchen display system in real time, slashing preparation errors and speeding up service. The result: faster orders, zero payment friction, and a dining experience customers talk about.',
+    features: [
+      { icon: '💬', title: 'WhatsApp-Native Ordering', description: 'Customers place orders directly inside WhatsApp — no app download, no website visit, no friction. The experience lives where they already are.' },
+      { icon: '🖱️', title: 'Button & Natural Language Ordering', description: 'Two ordering modes in one: tap structured menu buttons for speed, or type your order naturally in any language — the AI understands both perfectly.' },
+      { icon: '🌍', title: 'Fully Multilingual', description: 'The chatbot understands and responds in any language, ensuring every customer — regardless of their native tongue — can order with complete ease.' },
+      { icon: '🧾', title: 'Instant Auto-Generated Invoices', description: 'The moment an order is confirmed, a professional, itemised invoice is generated and sent to the customer — ready to be paid via any banking app or payment gateway.' },
+      { icon: '💳', title: 'Zero-Friction Payments', description: 'Customers pay instantly through any banking app or payment gateway of their choice. No cash, no card terminal, no queuing — completely contactless.' },
+      { icon: '🍽️', title: 'Kitchen POS Integration', description: 'Confirmed orders are routed directly to the kitchen display system in real time, eliminating order slips, reducing errors, and speeding up preparation.' }
     ],
-    metrics: [{ label: 'Order Speed', value: '+40%' }, { label: 'Payment Friction', value: '0%' }],
-    stack: ['WhatsApp API', 'NLP', 'Payment Gateway Integration'],
+    roadmap: [
+      { phase: 'Phase 1', title: 'WhatsApp Business Setup', description: 'Configuring the WhatsApp Business API, webhooks, and secure message routing infrastructure for the restaurant.' },
+      { phase: 'Phase 2', title: 'Menu & Button Flow', description: 'Building the interactive button menu with the full food catalogue, categories, and customisation options.' },
+      { phase: 'Phase 3', title: 'Multilingual NLP Engine', description: 'Training the natural language model to understand typed orders in any language and map them accurately to menu items.' },
+      { phase: 'Phase 4', title: 'Automated Invoicing & Payments', description: 'Building the billing engine to instantly generate cross-platform payable invoices the moment an order is finalised.' },
+      { phase: 'Phase 5', title: 'Kitchen POS Integration', description: 'Seamlessly routing confirmed WhatsApp orders directly to the kitchen display system for real-time preparation.' }
+    ],
+    roadmapImages: [
+      'https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2hhdHNhcHAlMjBpY29ufGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1522125670776-3c7abb882bc2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGVyc29uJTIwdHlwaW5nJTIwb24lMjBwaG9uZXxlbnwwfHwwfHx8MA%3D%3D',
+      'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29uJTIwcGF5aW5nJTIwb25saW5lJTIwcGF5bWVudHxlbnwwfHwwfHx8MA%3D%3D',
+      'https://images.unsplash.com/photo-1778792447408-b22ad88daa37?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29uJTIwZ2V0dGluZyUyMGFuJTIwb3JkZXIlMjBzbGlwJTIwZnJvbSUyMGElMjBkZXZpY2UlMjBpbiUyMGtpdGNoZW58ZW58MHx8MHx8fDA%3D'
+    ],
+    metrics: [
+      { label: 'Order Speed', value: '+40%' },
+      { label: 'Payment Friction', value: '0%' },
+      { label: 'Languages Supported', value: '∞' },
+      { label: 'Order Errors Reduced', value: '90%' }
+    ],
+    stack: ['WhatsApp Business API', 'NLP / AI', 'Payment Gateway Integration', 'Kitchen POS', 'Node.js', 'Webhook Automation'],
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&auto=format,compress&q=60&w=800'
+  },
+  {
+    id: 'ai-attendance-system',
+    title: 'AI Attendance System',
+    category: 'AI',
+    domain: 'Security & Workforce Management',
+    client: 'QIntellect Technologies',
+    summary: 'A fully automated, camera-based AI attendance system with live GPS tracking, offline capability, HR automation, intruder detection, and complete workforce management — no biometrics or manual entries required.',
+    fullDescription: 'Our AI Attendance System is a fully automated, end-to-end workforce management platform that replaces traditional biometric devices and manual registers entirely. Powered by real-time facial recognition on live camera feeds, the system logs attendance the instant a recognised face enters the premises — no tapping, swiping, or typing needed. If the cloud server goes down, the local on-premise system continues running seamlessly, ensuring zero data loss at all times. For field staff, live GPS tracking notifies the HR manager or team lead the moment an employee is detected outside their designated location. A complete daily report — including late arrivals, absences, and overtime — is automatically delivered to the HR inbox via both Email and WhatsApp. The built-in HR chatbot handles employee queries round the clock, covering leave applications, payslips, and policy questions. The managing person retains full control over leave approvals, overtime calculations, and salary disbursement directly from the dashboard. The system runs fully offline, so connectivity interruptions never interrupt operations. We offer extremely flexible deployment: whether you want to use a high-end NVR System, a cost-effective DVR System, standalone IP Cameras, or a budget-friendly Local Webcam, we integrate seamlessly to deliver the same enterprise-grade AI attendance without requiring expensive new hardware.',
+    features: [
+      { icon: '🎯', title: 'Zero Manual Entry', description: 'Attendance is marked automatically via facial recognition — no biometric scanners, punch cards, or hand-written registers needed.' },
+      { icon: '☁️', title: 'Cloud + Local Backup', description: 'If the cloud system goes down, the local on-premise system takes over instantly. No attendance data is ever lost.' },
+      { icon: '📍', title: 'Live GPS Tracking for Field Staff', description: 'Field employees are tracked in real time. The HR manager or team lead is notified immediately if a staff member is not at their assigned location.' },
+      { icon: '📊', title: 'Automated Attendance Reports', description: 'A full daily report — late arrivals, absences, early departures — is sent automatically to HR via both Email and WhatsApp every day.' },
+      { icon: '🤖', title: 'Built-in HR Chatbot', description: 'A 24/7 HR assistant chatbot helps staff with leave requests, payslip queries, policy questions, and any HR-related queries instantly.' },
+      { icon: '📶', title: 'Works Fully Offline', description: 'The system functions without an internet connection. All data is synced to the cloud once connectivity is restored.' },
+      { icon: '⏱️', title: 'Overtime, Leave & Salary Management', description: 'The managing person can approve leave, calculate overtime, and process salary payments directly from a single unified dashboard.' },
+      { icon: '🚨', title: 'Intruder Detection & Alerts', description: 'Any unrecognised person attempting to enter alongside staff is flagged instantly, triggering a real-time security alert.' },
+      { icon: '📷', title: 'Use Your Existing Cameras', description: 'Already have cameras installed? We integrate directly with your current setup — no need to replace or add new hardware.' }
+    ],
+    hardwareOptions: [
+      { name: 'NVR System', description: 'Network Video Recorder setup utilizing modern IP cameras. Provides the highest quality digital video streams, advanced analytics capabilities, and scalability for large enterprise deployments.', recommended: true },
+      { name: 'DVR System', description: 'Digital Video Recorder setup leveraging analog cameras. A robust and cost-effective solution for facilities with existing coaxial cable infrastructure while still delivering reliable AI attendance.' },
+      { name: 'IP Cameras', description: 'Direct integration with standalone IP cameras over your network. Ideal for targeted deployments where full recording infrastructure is not required but high-resolution AI processing is essential.' },
+      { name: 'Local Webcam Solution', description: 'For businesses looking for a budget-friendly entry point, we offer the same complete AI attendance system running on standard local webcams — significantly cheaper and just as effective for smaller spaces.' }
+    ],
+    roadmap: [
+      { phase: 'Phase 1', title: 'Site Assessment & Camera Setup', description: 'Evaluating existing infrastructure, selecting the right hardware tier (CCTV NVR or webcam), and configuring secure live video feeds.' },
+      { phase: 'Phase 2', title: 'Employee Enrolment & Model Training', description: 'Registering employee facial profiles and training the recognition model for high accuracy across varied lighting and angles.' },
+      { phase: 'Phase 3', title: 'Attendance Engine & GPS Integration', description: 'Deploying the real-time attendance logging pipeline and activating GPS tracking for field staff with instant HR notifications.' },
+      { phase: 'Phase 4', title: 'HR Dashboard, Chatbot & Reporting', description: 'Setting up the HR management dashboard, automated Email/WhatsApp reports, salary & leave management, and the HR chatbot.' },
+      { phase: 'Phase 5', title: 'Offline Mode & Cloud Sync', description: 'Configuring the local fallback system to operate independently during outages, with automatic data sync when connectivity is restored.' }
+    ],
+    roadmapImages: [
+      'https://images.unsplash.com/photo-1581094488379-6a10d04c0f04?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHNpdGUlMjBhc3Nlc21lbnR8ZW58MHx8MHx8fDA%3D',
+      '/images/Attendance phase 2.png',
+      'https://images.unsplash.com/photo-1579616043939-95d87a6e8512?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z3BzJTIwdHJhY2tpbmd8ZW58MHx8MHx8fDA%3D',
+      'https://images.unsplash.com/photo-1556155092-490a1ba16284?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxhcHRvcCUyMHNob3dpbmclMjBociUyMGRhc2hib2FyZHxlbnwwfHwwfHx8MA%3D%3D',
+      'https://images.unsplash.com/photo-1667984390533-64bdefe719ea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdWQlMjBzeW5jfGVufDB8fDB8fHww'
+    ],
+    metrics: [
+      { label: 'Attendance Accuracy', value: '99.2%' },
+      { label: 'Manual Check-ins Eliminated', value: '100%' },
+      { label: 'Intruder Alert Time', value: '<2 sec' },
+      { label: 'Field Staff GPS Alerts', value: 'Live' },
+      { label: 'Works Offline', value: 'Yes' }
+    ],
+    stack: ['Computer Vision', 'Deep Learning', 'Face Recognition', 'Live GPS Tracking', 'HR Chatbot', 'WhatsApp API', 'Python', 'CCTV NVR / Webcam', 'Offline-First Architecture'],
+    image: 'https://images.unsplash.com/photo-1660597163680-483f0c4f9103?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHBlcnNvbiUyMG1vbml0cmluZyUyMGNhbWVyYXN8ZW58MHx8MHx8fDA%3D'
   }
 ];
 

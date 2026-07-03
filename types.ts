@@ -50,11 +50,14 @@ export interface PortfolioProject {
   client: string;
   summary: string;
   fullDescription?: string;
+  features?: { icon: string; title: string; description: string }[];
+  hardwareOptions?: { name: string; description: string; recommended?: boolean }[];
   roadmap?: {
     phase: string;
     title: string;
     description: string;
   }[];
+  roadmapImages?: string[];
   metrics: { label: string; value: string }[];
   stack: string[];
   image: string;

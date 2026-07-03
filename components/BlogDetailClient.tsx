@@ -68,7 +68,7 @@ const BlogDetail: React.FC = () => {
     <div className="bg-white min-h-screen">
       
       {/* Breadcrumb */}
-      <div className="bg-gray-50 pt-32 pb-8 border-b">
+      <div className="bg-gray-50 pt-32 pb-8">
         <div className="container mx-auto px-4 md:px-8">
           <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-600">
             <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
@@ -296,7 +296,7 @@ const BlogDetail: React.FC = () => {
             <div className="sticky top-8 space-y-8">
               
               {/* Author Card */}
-              <div className="bg-white rounded-xl shadow-lg p-6 border">
+              <div className="bg-white rounded-xl p-6">
                 <div className="text-center">
                   <img loading="lazy" 
                     src={post.authorImage} 
@@ -312,7 +312,7 @@ const BlogDetail: React.FC = () => {
               </div>
 
               {/* Recent/Related Posts */}
-              <div className="bg-white rounded-xl shadow-lg p-6 border">
+              <div className="bg-white rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-blue-600" />
                   {relatedPosts.length >= 3 ? 'Related Articles' : 'Recent Articles'}
@@ -408,7 +408,7 @@ const BlogDetail: React.FC = () => {
               </div>
 
               {/* Popular Tags */}
-              <div className="bg-white rounded-xl shadow-lg p-6 border">
+              <div className="bg-white rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {['AI', 'Machine Learning', 'Automation', 'Cloud', 'Security', 'Integration', 'Analytics', 'Innovation'].map(tag => (
@@ -428,17 +428,17 @@ const BlogDetail: React.FC = () => {
         </div>
 
         {/* Related Articles Section */}
-        {relatedPosts.length > 0 && (
-          <div className="mt-16 pt-16 border-t border-gray-200">
+        {sidebarPosts.length > 0 && (
+          <div className="mt-16 pt-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-              Related Articles
+              {relatedPosts.length >= 3 ? 'Related Articles' : 'More Articles'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {relatedPosts.slice(0, 3).map(relatedPost => (
+              {sidebarPosts.slice(0, 3).map(relatedPost => (
                 <Link 
                   key={relatedPost.id}
                   href={`/blog/${relatedPost.id}`}
-                  className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border"
+                  className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="aspect-video overflow-hidden">
                     <img loading="lazy" 

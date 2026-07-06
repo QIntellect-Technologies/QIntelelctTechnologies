@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'QIntellect Technologies',
   description: 'Pioneering digital experiences that fuse art with technology.',
   verification: {
+    google: 'heBowOsfjrAuTDDDLP8p8D5teRQgSE5O9li7ZX0HOgw',
     other: {
       'msvalidate.01': '63E38E1A0A890CA1A600AD2A61D2A034',
     },

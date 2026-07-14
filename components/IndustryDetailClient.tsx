@@ -637,13 +637,13 @@ const IndustryDetail: React.FC = () => {
                   href={
                     (() => {
                       // Try to find a blog whose category matches the service name
-                      const match = BLOGS.find(blog => 
+                      const match = BLOGS.find(blog =>
                         blog.category.toLowerCase() === serviceName.toLowerCase() ||
                         blog.category.toLowerCase().includes(serviceName.split(' ')[0].toLowerCase()) ||
                         serviceName.toLowerCase().includes(blog.category.split(' ')[0].toLowerCase())
                       );
                       if (match) return `/blog/${match.id}`;
-                      
+
                       // Fallback to service page if no blog matches
                       return `/services/${serviceName.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace('&', '')}`;
                     })()

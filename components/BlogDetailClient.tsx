@@ -5,15 +5,15 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { BLOGS } from '../constants';
-import { 
-  Calendar, 
-  User, 
-  Clock, 
-  ArrowLeft, 
-  Share2, 
-  ChevronRight, 
-  Tag, 
-  Mail, 
+import {
+  Calendar,
+  User,
+  Clock,
+  ArrowLeft,
+  Share2,
+  ChevronRight,
+  Tag,
+  Mail,
   TrendingUp,
   ArrowRight,
   Bookmark,
@@ -57,16 +57,16 @@ const BlogDetail: React.FC = () => {
   // Format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
 
   return (
     <div className="bg-white min-h-screen">
-      
+
       {/* Breadcrumb */}
       <div className="bg-gray-50 pt-32 pb-8">
         <div className="container mx-auto px-4 md:px-8">
@@ -82,11 +82,11 @@ const BlogDetail: React.FC = () => {
 
       <div className="container mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          
+
           {/* Main Content */}
           <div className="lg:col-span-3">
             <article className="bg-white">
-              
+
               {/* Article Header */}
               <header className="mb-8">
                 <div className="mb-4">
@@ -94,11 +94,11 @@ const BlogDetail: React.FC = () => {
                     {post.category}
                   </span>
                 </div>
-                
+
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                   {post.title}
                 </h1>
-                
+
                 <div className="flex items-center gap-6 text-sm text-gray-600 mb-6">
                   <div className="flex items-center gap-2">
                     <User className="w-4 h-4" />
@@ -121,8 +121,8 @@ const BlogDetail: React.FC = () => {
 
               {/* Featured Image */}
               <div className="mb-12">
-                <img loading="lazy" 
-                  src={post.image} 
+                <img loading="lazy"
+                  src={post.image}
                   alt={post.title}
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
                 />
@@ -205,8 +205,8 @@ const BlogDetail: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {post.galleryImages.map((image, index) => (
                       <div key={index} className="rounded-xl overflow-hidden shadow-lg">
-                        <img loading="lazy" 
-                          src={image} 
+                        <img loading="lazy"
+                          src={image}
                           alt={`Gallery image ${index + 1}`}
                           className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
                         />
@@ -236,8 +236,8 @@ const BlogDetail: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map(tag => (
-                    <span 
-                      key={tag} 
+                    <span
+                      key={tag}
                       className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-600 transition-colors cursor-pointer"
                     >
                       #{tag}
@@ -249,8 +249,8 @@ const BlogDetail: React.FC = () => {
               {/* Author Info */}
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12">
                 <div className="flex items-start gap-6">
-                  <img loading="lazy" 
-                    src={post.authorImage} 
+                  <img loading="lazy"
+                    src={post.authorImage}
                     alt={post.author}
                     className="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-lg"
                   />
@@ -258,7 +258,7 @@ const BlogDetail: React.FC = () => {
                     <h3 className="text-xl font-bold text-gray-900 mb-2">{post.author}</h3>
                     <p className="text-blue-600 font-medium mb-3">{post.authorRole}</p>
                     <p className="text-gray-600 leading-relaxed">
-                      {post.author} is a seasoned expert in {post.category.toLowerCase()} with extensive experience in enterprise solutions and digital transformation. 
+                      {post.author} is a seasoned expert in {post.category.toLowerCase()} with extensive experience in enterprise solutions and digital transformation.
                       They regularly contribute insights on cutting-edge technologies and industry best practices.
                     </p>
                   </div>
@@ -270,14 +270,14 @@ const BlogDetail: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <h3 className="text-lg font-semibold text-gray-900">Share this article</h3>
                   <div className="flex flex-wrap items-center gap-4">
-                    <button 
+                    <button
                       onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
                       className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                     >
                       <Facebook className="w-4 h-4" />
                       <span>Facebook</span>
                     </button>
-                    <button 
+                    <button
                       onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
                       className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
                     >
@@ -294,12 +294,12 @@ const BlogDetail: React.FC = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-8 space-y-8">
-              
+
               {/* Author Card */}
               <div className="bg-white rounded-xl p-6">
                 <div className="text-center">
-                  <img loading="lazy" 
-                    src={post.authorImage} 
+                  <img loading="lazy"
+                    src={post.authorImage}
                     alt={post.author}
                     className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
                   />
@@ -319,14 +319,14 @@ const BlogDetail: React.FC = () => {
                 </h3>
                 <div className="space-y-4">
                   {sidebarPosts.slice(0, 4).map(relatedPost => (
-                    <Link 
-                      key={relatedPost.id} 
+                    <Link
+                      key={relatedPost.id}
                       href={`/blog/${relatedPost.id}`}
                       className="group block hover:bg-gray-50 rounded-lg p-3 transition-colors -mx-3"
                     >
                       <div className="flex gap-3">
-                        <img loading="lazy" 
-                          src={relatedPost.image} 
+                        <img loading="lazy"
+                          src={relatedPost.image}
                           alt={relatedPost.title}
                           className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
                         />
@@ -341,7 +341,7 @@ const BlogDetail: React.FC = () => {
                   ))}
                 </div>
                 <div className="mt-6 pt-6 border-t">
-                  <Link 
+                  <Link
                     href="/blog"
                     className="flex items-center justify-center gap-2 w-full py-2 text-blue-600 hover:text-blue-700 transition-colors font-medium text-sm"
                   >
@@ -359,25 +359,25 @@ const BlogDetail: React.FC = () => {
                   <p className="text-blue-100 text-sm mb-6 leading-relaxed">
                     Join our newsletter to get a monthly roundup of our best insights on AI, ERP, and EDI solutions.
                   </p>
-                  <form 
-                    onSubmit={async (e) => { 
-                      e.preventDefault(); 
+                  <form
+                    onSubmit={async (e) => {
+                      e.preventDefault();
                       const form = e.currentTarget;
                       const emailInput = form.elements.namedItem('email') as HTMLInputElement;
                       const submitBtn = form.elements.namedItem('submitBtn') as HTMLButtonElement;
-                      
+
                       try {
                         submitBtn.disabled = true;
                         submitBtn.textContent = 'Subscribing...';
-                        
+
                         const res = await fetch('/api/subscribe', {
                           method: 'POST',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify({ email: emailInput.value }),
                         });
-                        
+
                         if (res.ok) {
-                          alert("Thanks for subscribing to our Monthly Tech Digest!"); 
+                          alert("Thanks for subscribing to our Monthly Tech Digest!");
                           form.reset();
                         } else {
                           const data = await res.json();
@@ -389,13 +389,13 @@ const BlogDetail: React.FC = () => {
                         submitBtn.disabled = false;
                         submitBtn.textContent = 'Subscribe Now';
                       }
-                    }} 
+                    }}
                     className="space-y-3"
                   >
-                    <input 
+                    <input
                       name="email"
-                      type="email" 
-                      placeholder="Enter your email" 
+                      type="email"
+                      placeholder="Enter your email"
                       required
                       className="w-full px-4 py-3 bg-white rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 border-none"
                     />
@@ -412,7 +412,7 @@ const BlogDetail: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {['AI', 'Machine Learning', 'Automation', 'Cloud', 'Security', 'Integration', 'Analytics', 'Innovation'].map(tag => (
-                    <span 
+                    <span
                       key={tag}
                       className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-600 transition-colors cursor-pointer"
                     >
@@ -435,14 +435,14 @@ const BlogDetail: React.FC = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {sidebarPosts.slice(0, 3).map(relatedPost => (
-                <Link 
+                <Link
                   key={relatedPost.id}
                   href={`/blog/${relatedPost.id}`}
                   className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="aspect-video overflow-hidden">
-                    <img loading="lazy" 
-                      src={relatedPost.image} 
+                    <img loading="lazy"
+                      src={relatedPost.image}
                       alt={relatedPost.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />

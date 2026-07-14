@@ -36,7 +36,7 @@ import {
   CheckCircle,
   Award
 } from 'lucide-react';
-import { Service, Industry, TeamMember, PortfolioProject, BlogPost } from './types';
+import { Service, Industry, PortfolioProject, BlogPost } from './types';
 
 export const SERVICES: Service[] = [
   {
@@ -513,14 +513,6 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   }
 ];
 
-export const TEAM: TeamMember[] = [
-  {
-    name: 'Dr. Sarah Chen',
-    role: 'Chief AI Architect',
-    bio: 'Pioneer in distributed neural networks and sovereign intelligence architectures.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=60&w=800&auto=format&fit=crop&auto=format,compress'
-  }
-];
 
 export const BLOGS: BlogPost[] = [
   {

@@ -36,12 +36,7 @@ export interface Industry {
   }[];
 }
 
-export interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  image: string;
-}
+
 
 export interface PortfolioProject {
   id: string;

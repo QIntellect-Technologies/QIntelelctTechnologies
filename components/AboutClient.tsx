@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import Link from 'next/link';
-import { TEAM } from '../constants';
+
 import {
   Shield,
   Trophy,

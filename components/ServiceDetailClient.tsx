@@ -993,7 +993,7 @@ const ServiceDetail: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-6 text-center">
+        <div className="relative z-10 w-full container mx-auto px-6 text-center">
           {/* Breadcrumb */}
           <motion.nav
             initial={{ opacity: 0, y: -10 }}
@@ -1033,7 +1033,7 @@ const ServiceDetail: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-blue-100 mb-6 font-light"
+            className="text-xl md:text-2xl text-blue-100 mb-6 font-light text-center mx-auto max-w-4xl"
           >
             {content.subheadline}
           </motion.p>
@@ -1043,7 +1043,7 @@ const ServiceDetail: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10 font-light"
+            className="text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10 font-light text-center"
           >
             {content.heroDescription}
           </motion.p>

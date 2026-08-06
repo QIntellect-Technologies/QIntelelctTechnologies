@@ -1624,13 +1624,25 @@ const Home: React.FC = () => {
 
 
                 <div className="grid grid-cols-2 gap-6 w-full max-w-md">
-                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#5E62FF]/50 transition-all duration-500">
-                    <div className="text-[#5E62FF] text-3xl font-black mb-1 font-['Orbitron'] group-hover:scale-110 transition-transform">12+</div>
-                    <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Years of Innovation</div>
+                  {/* Badge 1: AI Solutions */}
+                  <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#5E62FF]/50 transition-all duration-500 flex flex-col gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5E62FF]/30 to-[#5E62FF]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <BrainCircuit className="w-5 h-5 text-[#5E62FF]" />
+                    </div>
+                    <div>
+                      <div className="text-white text-sm font-bold leading-tight">AI Solutions</div>
+                      <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold mt-0.5">Machine Learning & LLMs</div>
+                    </div>
                   </div>
-                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#9966FF]/50 transition-all duration-500">
-                    <div className="text-[#9966FF] text-3xl font-black mb-1 font-['Orbitron'] group-hover:scale-110 transition-transform">200+</div>
-                    <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Solutions Delivered</div>
+                  {/* Badge 2: ERP Systems */}
+                  <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#9966FF]/50 transition-all duration-500 flex flex-col gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#9966FF]/30 to-[#9966FF]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Database className="w-5 h-5 text-[#9966FF]" />
+                    </div>
+                    <div>
+                      <div className="text-white text-sm font-bold leading-tight">ERP Systems</div>
+                      <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold mt-0.5">Dynamics 365 & EDI</div>
+                    </div>
                   </div>
                 </div>
 

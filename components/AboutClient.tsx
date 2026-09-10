@@ -538,6 +538,38 @@ const About: React.FC = () => {
         </div>
       </section>
 
+      {/* 2.5 ACCREDITATIONS & COMPLIANCE BANNER */}
+      <section className="py-12 px-4 md:px-8 bg-blue-600 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+           <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.3) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+        </div>
+        <div className="container mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-2">
+             <h3 className="text-2xl md:text-3xl font-bold text-white font-heading">Recognized & Compliant Tech Entity</h3>
+             <p className="text-blue-100 font-light">Officially registered and authorized by the Government of Pakistan.</p>
+          </div>
+          <div className="flex items-center gap-6 bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/20">
+             <div className="flex items-center gap-4">
+               {/* TODO: Replace with PSEB Logo <img src="/pseb-logo.png" alt="PSEB" className="h-12 w-auto object-contain bg-white rounded-lg p-1" /> */}
+               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-blue-600 font-bold text-xs">PSEB</div>
+               <div className="hidden md:block">
+                 <div className="text-white font-bold text-sm">PSEB Registered</div>
+                 <div className="text-blue-200 text-xs">Software Export Board</div>
+               </div>
+             </div>
+             <div className="w-px h-12 bg-white/20" />
+             <div className="flex items-center gap-4">
+               {/* TODO: Replace with SECP Logo <img src="/secp-logo.png" alt="SECP" className="h-12 w-auto object-contain bg-white rounded-lg p-1" /> */}
+               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-blue-600 font-bold text-xs">SECP</div>
+               <div className="hidden md:block">
+                 <div className="text-white font-bold text-sm">SECP Registered</div>
+                 <div className="text-blue-200 text-xs">Securities & Exchange</div>
+               </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
       {/* 3. OUR MISSION SECTION - Different Design */}
       <section className="py-24 px-4 md:px-8 bg-slate-900 relative overflow-hidden">
         {/* Background Elements */}

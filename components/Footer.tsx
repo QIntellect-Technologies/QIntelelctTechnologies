@@ -96,6 +96,34 @@ const Footer: React.FC = () => {
           </motion.div>
         </div>
 
+        {/* Accreditations */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="flex flex-col items-center justify-center space-y-4 pt-8"
+        >
+          <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest">Officially Registered & Recognized By</p>
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-3">
+              {/* TODO: Replace with PSEB Logo <img src="/pseb-logo.png" alt="PSEB" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all" /> */}
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-slate-900">PSEB</span>
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider">Software Export Board</span>
+              </div>
+            </div>
+            <div className="w-px h-8 bg-slate-300" />
+            <div className="flex items-center gap-3">
+               {/* TODO: Replace with SECP Logo <img src="/secp-logo.png" alt="SECP" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all" /> */}
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-slate-900">SECP</span>
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider">Securities & Exchange</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Divider */}
         <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent my-16" />
 

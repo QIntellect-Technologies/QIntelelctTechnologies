@@ -1624,24 +1624,26 @@ const Home: React.FC = () => {
 
 
                 <div className="grid grid-cols-2 gap-6 w-full max-w-md">
-                  {/* Badge 1: AI Solutions */}
+                  {/* Badge 1: PSEB Registration */}
                   <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#5E62FF]/50 transition-all duration-500 flex flex-col gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5E62FF]/30 to-[#5E62FF]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <BrainCircuit className="w-5 h-5 text-[#5E62FF]" />
+                      {/* TODO: Replace ShieldCheck with PSEB Logo <img src="/pseb-logo.png" alt="PSEB" className="w-6 h-6 object-contain" /> */}
+                      <ShieldCheck className="w-5 h-5 text-[#5E62FF]" />
                     </div>
                     <div>
-                      <div className="text-white text-sm font-bold leading-tight">AI Solutions</div>
-                      <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold mt-0.5">Machine Learning & LLMs</div>
+                      <div className="text-white text-sm font-bold leading-tight">PSEB Registered</div>
+                      <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold mt-0.5">Software Export Board</div>
                     </div>
                   </div>
-                  {/* Badge 2: ERP Systems */}
+                  {/* Badge 2: SECP Registration */}
                   <div className="p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group hover:border-[#9966FF]/50 transition-all duration-500 flex flex-col gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#9966FF]/30 to-[#9966FF]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Database className="w-5 h-5 text-[#9966FF]" />
+                      {/* TODO: Replace ShieldCheck with SECP Logo <img src="/secp-logo.png" alt="SECP" className="w-6 h-6 object-contain" /> */}
+                      <ShieldCheck className="w-5 h-5 text-[#9966FF]" />
                     </div>
                     <div>
-                      <div className="text-white text-sm font-bold leading-tight">ERP Systems</div>
-                      <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold mt-0.5">Dynamics 365 & EDI</div>
+                      <div className="text-white text-sm font-bold leading-tight">SECP Registered</div>
+                      <div className="text-[10px] text-white/40 uppercase tracking-widest font-bold mt-0.5">Securities & Exchange</div>
                     </div>
                   </div>
                 </div>

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Clock, ShieldCheck } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -98,6 +98,20 @@ const Contact: React.FC = () => {
                 <h3 className="font-bold text-slate-900 mb-1 text-sm">Response Time</h3>
                 <p className="text-slate-500 text-xs">Enterprise Inquiry: &lt; 2 Hours</p>
                 <p className="text-slate-500 text-xs">General Inquiry: &lt; 12 Hours</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start space-x-6">
+              <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-bold text-slate-900 mb-1 text-sm">Official Entity</h3>
+                <p className="text-slate-500 text-xs">SECP & PSEB Registered</p>
+                {/* <div className="flex gap-2 mt-2">
+                   <img src="/pseb-logo.png" alt="PSEB" className="h-6 object-contain" />
+                   <img src="/secp-logo.png" alt="SECP" className="h-6 object-contain" />
+                </div> */}
               </div>
             </div>
 

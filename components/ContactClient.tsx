@@ -115,26 +115,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-slate-900 p-6 rounded-2xl text-white">
-              <h3 className="text-lg font-bold mb-4 font-heading">Our Office</h3>
-              <div className="flex items-start space-x-3 mb-4">
-                <MapPin className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-                <p className="text-slate-400 text-sm">Old Khan Pur Adda, Near Mian Wali Hotel<br />Rahim Yar Khan, Punjab, Pakistan</p>
-              </div>
-              {/* Embedded Google Maps */}
-              <div className="aspect-video w-full rounded-xl overflow-hidden">
-                <iframe
-                  title="QIntellect Technologies Office Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3342.3601428493835!2d70.3000373211345!3d28.41156093621841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39375b7a76599567%3A0xfce513951ca5dc51!2sQIntellect+Technologies!5e0!3m2!1sen!2s!4v1750736315870!5m2!1sen!2s"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-            </div>
+
           </div>
 
           <div className="lg:col-span-2">
